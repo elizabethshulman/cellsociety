@@ -3,12 +3,14 @@ package cellsociety_team10;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -28,12 +30,12 @@ public class ControlPanel {
 	private Text iteration_count;
 	private Timeline animation;
 
-	public ControlPanel(Timeline curr_animation) {
+	public ControlPanel(Timeline curr_animation, EventHandler<MouseEvent> play_event, EventHandler<MouseEvent> pause_event) {
 		animation = curr_animation;
 		
 		control_panel = new VBox();
 		HBox hb_top = topHBox();
-		HBox hb_bottom = bottomHBox();
+		HBox hb_bottom = bottomHBox(play_event, pause_event);
 		control_panel.getChildren().add(hb_top);
 		control_panel.getChildren().add(hb_bottom);
 		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
@@ -41,13 +43,13 @@ public class ControlPanel {
 		control_panel.setAlignment(Pos.CENTER);
 	}
 	
-	private HBox bottomHBox() {
+	private HBox bottomHBox(EventHandler<MouseEvent> play_event, EventHandler<MouseEvent> pause_event) {
 		HBox hb_bottom = new HBox();
 		
-		hb_bottom.getChildren().add(makeButton(PLAY));
-		hb_bottom.getChildren().add(makeButton(PAUSE));
-		hb_bottom.getChildren().add(makeButton(STOP));
-		hb_bottom.getChildren().add(makeButton(NEXT));
+		hb_bottom.getChildren().add(makeButton(PLAY, play_event));
+		hb_bottom.getChildren().add(makeButton(PAUSE, pause_event));
+//		hb_bottom.getChildren().add(makeButton(STOP));
+//		hb_bottom.getChildren().add(makeButton(NEXT));
 		
 		hb_bottom.setSpacing(30);
 		hb_bottom.setAlignment(Pos.CENTER);
@@ -118,7 +120,7 @@ public class ControlPanel {
 		return hb_top;
 	}
 	
-	private Button makeButton(String filename) {
+	private Button makeButton(String filename, EventHandler<MouseEvent> click_action) {
 		Button temp = new Button();
 		temp.getStyleClass().add("button");
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(filename));
@@ -126,6 +128,8 @@ public class ControlPanel {
 		image_view.setPreserveRatio(true);
 		image_view.setFitHeight(20);
 		temp.setGraphic(image_view);
+		
+		temp.setOnMouseClicked(click_action);
 		return temp;
 	}
 	

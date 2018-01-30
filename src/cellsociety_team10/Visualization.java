@@ -15,6 +15,7 @@ public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
 	private static final double SCREEN_WIDTH = 700;
 	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
+	private static final Color BACKGROUND_COLOR = Color.rgb(249, 249, 249);
 	
 	private Stage stage;
 	private int iteration = 0;
@@ -37,7 +38,7 @@ public class Visualization {
 		border_pane.setTop(bar.getHBox());
 		border_pane.setCenter(graph_visual.getVBox());
 		border_pane.setBottom(control_panel.getVBox());
-		BackgroundFill myBF = new BackgroundFill(Color.rgb(249, 249, 249), new CornerRadii(0), null);
+		BackgroundFill myBF = new BackgroundFill(BACKGROUND_COLOR, new CornerRadii(0), null);
 		border_pane.setBackground(new Background(myBF));
 		
 		stage.setTitle("Cell Society");

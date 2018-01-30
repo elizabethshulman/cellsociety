@@ -1,5 +1,7 @@
 package cellsociety_team10;
 
+import java.util.Random;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -24,12 +26,13 @@ public class GridContainer {
 	public GridContainer() {
 		VBox grid = new VBox();
 		
-		ImageView[][] images = generateTestGrid();
-		
-		for (int r=0; r < images.length; r++) {
+		for (int r=0; r < n; r++) {
 			grid.getChildren().add(buildGridRow(r));
 		}
 		
+		BorderStroke myB = new BorderStroke(Color.GREY, BorderStrokeStyle.SOLID,
+				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
+		grid.setBorder(new Border(myB));
 		grid.setPadding(new Insets(0));
 		grid.setMaxWidth(0);
 		
@@ -39,40 +42,15 @@ public class GridContainer {
 	}
 	
 	private HBox buildGridRow(int r) {
-		String[] even = new String[] {"red.png", "blue.png"};
-		String[] odd = new String[] {"blue.png", "red.png"};
+		String[] arr = new String[] {"yellow.png", "orange.png"};
 		HBox hbox = new HBox();
-		if (r % 2 == 0) {
-			for (int c=0; c < n; c++) {
-				hbox.getChildren().add(generateTile(even[c % even.length]));
-			}
-		} else {
-			for (int c=0; c < n; c++) {
-				hbox.getChildren().add(generateTile(odd[c % odd.length]));
-			}
+		for (int c=0; c < n; c++) {
+			hbox.getChildren().add(generateTile(arr[new Random().nextInt(arr.length)]));
 		}
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setMaxWidth(0);
 		
 		return hbox;
-	}
-	
-	private ImageView[][] generateTestGrid() {
-		ImageView[][] images = new ImageView[n][n];
-		for (int r=0; r < n; r++) {
-			for (int c=0; c < n; c++) {
-				if ((r % 2 == 0) && (c % 2 == 1)) {
-					images[r][c] = generateTile("blue.png");
-				} else if ((r % 2 == 0) && (c % 2 == 0)) {
-					images[r][c] = generateTile("red.png");
-				} else if ((r % 2 == 1) && (c % 2 == 1)) {
-					images[r][c] = generateTile("red.png");
-				} else {
-					images[r][c] = generateTile("blue.png");
-				}
-			}
-		}
-		return images;
 	}
 	
 	private ImageView generateTile(String filename) {

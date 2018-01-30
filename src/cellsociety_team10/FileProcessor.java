@@ -50,7 +50,7 @@ public abstract class FileProcessor {
 		readHeader(myParser);
 		readCells(myParser);
 	}
-	public abstract void readCells(XMLStreamReader parser);
+	public abstract void readCells(XMLStreamReader parser) throws XMLStreamException;
 	public void readHeader(XMLStreamReader parser) throws XMLStreamException {
 		int xmlEvent;
 		do
@@ -61,12 +61,14 @@ public abstract class FileProcessor {
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
 				  switch(parser.getLocalName())
 				  {
-				  	case "author": setAuthor(parser.getText()); break;
-				  	case "title": setTitle(parser.getText()); break;
+				  	case "author": parser.next(); 
+				  		setAuthor(parser.getText()); break;
+				  	case "title": parser.next();
+				  		setTitle(parser.getText()); break;
 				  }
 			  }
 		}
-		while(!parser.getLocalName().equals("header") || !(xmlEvent == XMLStreamConstants.END_DOCUMENT) );
+		while(!(xmlEvent == XMLStreamConstants.END_ELEMENT) || !parser.getLocalName().equals("header"));
 		
 	}
 

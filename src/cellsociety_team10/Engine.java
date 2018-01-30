@@ -13,9 +13,7 @@ public class Engine extends Application {
 	private Visualization myVis;
     private static final int FRAMES_PER_SECOND = 60;
 	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
-    private static final double SCREEN_WIDTH = 800;
-    private static final double SCREEN_HEIGHT = 800;
+    private static final double SECOND_DELAY = 300.0 / FRAMES_PER_SECOND;
 	
 	public static void main (String[] args) {
         launch(args);
@@ -36,23 +34,24 @@ public class Engine extends Application {
 		 * 
 		 */
 		
-		myVis = new Visualization(stage, new ControlPanel(SCREEN_WIDTH, SCREEN_HEIGHT));
+//		myVis = new Visualization(stage, new ControlPanel(SCREEN_WIDTH, SCREEN_HEIGHT));
+		myVis = new Visualization(stage, null);
  		simulationToTimeline();
 	}
 	
 	private void simulationToTimeline() {
-		//code from ExampleBounce.java, @author Robert C. Duvall
+		step(10);
 		
-        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-                                      e -> step(SECOND_DELAY));
-        animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(frame);
-        animation.play();
+//        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+//                                      e -> step(SECOND_DELAY));
+//        animation = new Timeline();
+//        animation.setCycleCount(Timeline.INDEFINITE);
+//        animation.getKeyFrames().add(frame);
+//        animation.play();
 	}
 	
 	private void step (double elapsedTime) {
-		
+		myVis.visualizeGrid();
 	}
 
 }

@@ -6,7 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Visualization {
-	private static final double SCREEN_HEIGHT = 500;
+	private static final double SCREEN_HEIGHT = 750;
 	private static final double SCREEN_WIDTH = 700;
 	
 	

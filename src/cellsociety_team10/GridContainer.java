@@ -1,5 +1,6 @@
 package cellsociety_team10;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,26 +15,30 @@ import javafx.scene.paint.Color;
 
 public class GridContainer {
 	private static final double GRID_SIZE = 500;
-	private static final double BORDER_WIDTH = 5;
+	private static final double BORDER_WIDTH = 4;
 	private static final double CORNER_RADII = 5;
 	private static final int n = 17;
 	
 	private VBox vb;
 	
 	public GridContainer() {
-		vb = new VBox();
+		VBox grid = new VBox();
 		
 		ImageView[][] images = generateTestGrid();
 		
 		for (int r=0; r < images.length; r++) {
-			vb.getChildren().add(buildGridRow(r));
+			grid.getChildren().add(buildGridRow(r));
 		}
-		
-		vb.setAlignment(Pos.CENTER);
 		
 		BorderStroke myB = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
 				new CornerRadii(CORNER_RADII), new BorderWidths(BORDER_WIDTH), null);
-		vb.setBorder(new Border(myB));
+		grid.setBorder(new Border(myB));
+		grid.setPadding(new Insets(0));
+		grid.setMaxWidth(0);
+		
+		vb = new VBox();
+		vb.getChildren().add(grid);
+		vb.setAlignment(Pos.CENTER);
 	}
 	
 	private HBox buildGridRow(int r) {
@@ -51,6 +56,7 @@ public class GridContainer {
 		}
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setMaxWidth(0);
+		
 		return hbox;
 	}
 	

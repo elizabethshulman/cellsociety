@@ -26,9 +26,14 @@
 	-fx-text-fill: #24282b;
 }
 
-#header-text {
+#main-text {
 	-fx-font-family: 'Roboto', sans-serif;
-	-fx-font-size: 22;
+	-fx-font-size: 18;
+}
+
+#title-text {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 40;
 	-fx-text-fill: #c1c1c1;
 }
 

@@ -30,9 +30,6 @@ public class GridContainer {
 			grid.getChildren().add(buildGridRow(r));
 		}
 		
-//		BorderStroke myB = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
-//				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
-//		grid.setBorder(new Border(myB));
 		grid.setPadding(new Insets(0));
 		grid.setMaxWidth(0);
 		

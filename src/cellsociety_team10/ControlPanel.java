@@ -5,7 +5,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,7 +12,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 public class ControlPanel {
@@ -22,16 +23,53 @@ public class ControlPanel {
 	private static final String STOP = "stop.png";
 	private static final String NEXT = "next.png";
 	
-	private HBox hb;
+	private VBox control_panel;
+	private Text iteration_count;
 
 	public ControlPanel() {
-		hb = new HBox();
-		
-		hb.getChildren().add(makeButton(PLAY));
-		hb.getChildren().add(makeButton(PAUSE));
-		hb.getChildren().add(makeButton(STOP));
-		hb.getChildren().add(makeButton(NEXT));
+		control_panel = new VBox();
+		 
+		HBox hb_top = topHBox();
+		HBox hb_bottom = bottomHBox();
 
+		control_panel.getChildren().add(hb_top);
+		control_panel.getChildren().add(hb_bottom);
+		
+		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
+		control_panel.setBackground(new Background(myBF));
+		
+		control_panel.setAlignment(Pos.CENTER);
+	}
+	
+	private HBox bottomHBox() {
+		HBox hb_bottom = new HBox();
+		
+		hb_bottom.getChildren().add(makeButton(PLAY));
+		hb_bottom.getChildren().add(makeButton(PAUSE));
+		hb_bottom.getChildren().add(makeButton(STOP));
+		hb_bottom.getChildren().add(makeButton(NEXT));
+		
+		hb_bottom.setSpacing(30);
+		hb_bottom.setAlignment(Pos.CENTER);
+		hb_bottom.setPadding(new Insets(30,0,30,0));
+		
+		return hb_bottom;
+	}
+	
+	private HBox topHBox() {
+		HBox hb_top = new HBox();
+		
+		iteration_count = new Text("Iteration Count: 0");
+		iteration_count.setId("main-text");
+		iteration_count.setFill(Color.rgb(214, 214, 214));
+		hb_top.getChildren().add(iteration_count);
+		
+		HBox slider_hbox = new HBox();
+		Text animation_speed = new Text("Animation Speed:");
+		animation_speed.setId("main-text");
+		animation_speed.setFill(Color.rgb(214, 214, 214));
+		hb_top.getChildren().add(animation_speed);
+		
 		Slider slider = new Slider(0, 100, 50);
 		slider.setShowTickLabels(true);
 		slider.setLabelFormatter(new StringConverter<Double>() {
@@ -65,15 +103,20 @@ public class ControlPanel {
             }
         });
 		slider.getStyleClass().add("axis");
+		slider.setPadding(new Insets(0,0,-20,0));
 		
-		hb.getChildren().add(slider);
-
-		hb.setSpacing(30);
-		hb.setAlignment(Pos.CENTER);
-		hb.setPadding(new Insets(20,0,25,0));
+		slider_hbox.getChildren().add(animation_speed);
+		slider_hbox.getChildren().add(slider);
+		slider_hbox.setAlignment(Pos.CENTER);
+		slider_hbox.setSpacing(20);
 		
-		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
-		hb.setBackground(new Background(myBF));
+		hb_top.getChildren().add(slider_hbox);
+		
+		hb_top.setAlignment(Pos.CENTER);
+		hb_top.setSpacing(40);
+		hb_top.setPadding(new Insets(20,0,0,0));
+		
+		return hb_top;
 	}
 	
 	private Button makeButton(String filename) {
@@ -87,7 +130,7 @@ public class ControlPanel {
 		return temp;
 	}
 	
-	public HBox getHBox() {
-		return hb;
+	public VBox getVBox() {
+		return control_panel;
 	}
 }

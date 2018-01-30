@@ -50,21 +50,10 @@ public class StatusBar {
 
 		hbox = new HBox();
 		hbox.setPrefHeight(BAR_HEIGHT);
-
-		Text level_text = new Text ("Iteration Count: " + Integer.toString(0));
-		level_text.setFill(Color.rgb(229, 229, 229));
-		level_text.setId("header-text");
-		hbox.getChildren().add(level_text);
 		
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(sim_type + ".png"));
-		ImageView image_view = new ImageView(image);
-		image_view.setPreserveRatio(true);
-		image_view.setFitHeight(20);
-		hbox.getChildren().add(image_view);
-		
-		score_text = new Text ("Grid Size: 30x30");
+		score_text = new Text(sim_type);
 		score_text.setFill(Color.rgb(229, 229, 229));
-		score_text.setId("header-text");
+		score_text.setId("title-text");
 		hbox.getChildren().add(score_text);
 
 		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);

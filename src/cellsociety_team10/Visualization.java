@@ -37,7 +37,7 @@ public class Visualization {
 		
 		border_pane.setTop(bar.getHBox());
 		border_pane.setCenter(new GridContainer().getVBox());
-		border_pane.setBottom(new ControlPanel().getHBox());
+		border_pane.setBottom(new ControlPanel().getVBox());
 		
 		BackgroundFill myBF = new BackgroundFill(Color.rgb(249, 249, 249), new CornerRadii(0), null);
 		border_pane.setBackground(new Background(myBF));

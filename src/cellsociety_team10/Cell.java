@@ -11,4 +11,8 @@ public class Cell {
 	public int getState() {
 		return state;
 	}
+	
+	public void setState(int st) {
+		state = st;
+	}
 }

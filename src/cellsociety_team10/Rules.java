@@ -30,7 +30,7 @@ public class Rules {
 	/**
 	 * takes in grid, returns grid with updated cells per rules set
 	 */
-	public Grid applyGridRules(Grid g) {
+	public Graph applyGridRules(Graph g) {
 		
 		for(Cell c : g.getCells()) {
 			if(dissatisfied(c.getState(), g.getNeighbors(c))) {

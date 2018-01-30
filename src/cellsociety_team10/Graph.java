@@ -11,12 +11,12 @@ import java.util.Set;
  *	Stores cell/neighbor map
  *
  */
-public class Grid {
+public class Graph {
 
 	HashMap<Cell, ArrayList<Cell>> currentGrid;
 	Rules myRules;
 	
-	public Grid(Rules rules) {
+	public Graph(Rules rules) {
 		myRules = rules;
 		instantiate();
 	}
@@ -31,7 +31,6 @@ public class Grid {
 	
 	
 	//GETTERS
-	
 	public Set<Cell> getCells(){
 		return currentGrid.keySet();
 	}

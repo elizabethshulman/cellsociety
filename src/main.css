@@ -1,0 +1,27 @@
+.button {
+     -fx-background-color: #759EB8;
+     -fx-border-radius: 2px;
+     -fx-cursor: pointer;
+     -fx-display: flex;
+     -fx-align-self: center;
+     -fx-font-size: 15;
+     -fx-line-height: 1;
+     -fx-padding: 10px 30px;
+     -fx-text-decoration: none;
+     -fx-text-align: center;
+     -fx-text-transform: uppercase;
+     -fx-font-weight: 700;
+     -fx-border-width: 2px;
+     -fx-text-fill: #F3F7F0;
+}
+.button:hover {
+	-fx-background-color: #626777;
+}
+.button_disabled {
+	-fx-background-color: #9DA09C;
+	-fx-text-fill: #24282b;
+}
+.button_disabled:hover {
+	-fx-background-color: #9DA09C;
+	-fx-text-fill: #24282b;
+}

@@ -7,19 +7,17 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Engine extends Application {
+	private static final int MILLISECOND_DELAY = 500;
+    private static final double SECOND_DELAY = 50.0;
+    private static final double START_RATE = 2.5;
 	
-	private Timeline animation;
+	private Timeline animation;        
 	private Grid myGrid;
 	private Visualization myVis;
-    private static final int FRAMES_PER_SECOND = 60;
-	private static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-    private static final double SECOND_DELAY = 300.0 / FRAMES_PER_SECOND;
 	
 	public static void main (String[] args) {
         launch(args);
     }
-	
-	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -33,25 +31,24 @@ public class Engine extends Application {
 		 * initialize Visualization myVis
 		 * 
 		 */
-		
-//		myVis = new Visualization(stage, new ControlPanel(SCREEN_WIDTH, SCREEN_HEIGHT));
-		myVis = new Visualization(stage, null);
+		animation = new Timeline();
  		simulationToTimeline();
+ 		myVis = new Visualization(stage, new ControlPanel(animation));	
 	}
 	
 	private void simulationToTimeline() {
-		step(10);
-		
-//        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-//                                      e -> step(SECOND_DELAY));
-//        animation = new Timeline();
-//        animation.setCycleCount(Timeline.INDEFINITE);
-//        animation.getKeyFrames().add(frame);
-//        animation.play();
+        KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+                                      e -> step(SECOND_DELAY));
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.getKeyFrames().add(frame);
+        animation.play();
+        animation.setRate(START_RATE);
 	}
 	
 	private void step (double elapsedTime) {
-		myVis.visualizeGrid();
+		// get new hashmap here from Graph which we can pass as the 
+		// argument to visualizeGrid		
+		myVis.visualizeGrid(null);
 	}
 
 }

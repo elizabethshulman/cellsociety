@@ -1,5 +1,7 @@
 package cellsociety_team10;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javafx.geometry.Insets;
@@ -15,37 +17,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class GridContainer {
+public class SquareContainer implements IContainer {
 	private static final double GRID_SIZE = 400;
 	private static final double BORDER_WIDTH = 2;
 	private static final double CORNER_RADII = 5;
-	private static final int n = 17;
+	private static final int n = 8;
 	
 	private VBox vb;
+	private VBox graph;
 	
-	public GridContainer() {
-		VBox grid = new VBox();
+	public SquareContainer() {
+		graph = new VBox();
 		
-		for (int r=0; r < n; r++) {
-			grid.getChildren().add(buildGridRow(r));
-		}
+		setGraphDisplay(null);
 		
 		BorderStroke myB = new BorderStroke(Color.GREY, BorderStrokeStyle.SOLID,
 				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
-		grid.setBorder(new Border(myB));
-		grid.setPadding(new Insets(0));
-		grid.setMaxWidth(0);
+		graph.setBorder(new Border(myB));
+		graph.setPadding(new Insets(0));
+		graph.setMaxWidth(0);
 		
 		vb = new VBox();
-		vb.getChildren().add(grid);
+		vb.getChildren().add(graph);
 		vb.setAlignment(Pos.CENTER);
 	}
 	
-	private HBox buildGridRow(int r) {
+	private HBox buildGraphRow(int r) {
 		String[] arr = new String[] {"yellow.png", "orange.png"};
 		HBox hbox = new HBox();
 		for (int c=0; c < n; c++) {
-			hbox.getChildren().add(generateTile(arr[new Random().nextInt(arr.length)]));
+			int dex = new Random().nextInt(arr.length);
+			hbox.getChildren().add(generateTile(arr[dex]));
 		}
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setMaxWidth(0);
@@ -63,5 +65,12 @@ public class GridContainer {
 	
 	public VBox getVBox() {
 		return vb;
+	}
+	
+	public void setGraphDisplay(HashMap<Cell, ArrayList<Cell>> cell_map) {
+		graph.getChildren().clear();
+		for (int r=0; r < n; r++) {
+			graph.getChildren().add(buildGraphRow(r));
+		}
 	}
 }

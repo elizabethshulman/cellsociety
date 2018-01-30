@@ -1,5 +1,6 @@
 package cellsociety_team10;
 
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -25,19 +26,18 @@ public class ControlPanel {
 	
 	private VBox control_panel;
 	private Text iteration_count;
+	private Timeline animation;
 
-	public ControlPanel() {
+	public ControlPanel(Timeline curr_animation) {
+		animation = curr_animation;
+		
 		control_panel = new VBox();
-		 
 		HBox hb_top = topHBox();
 		HBox hb_bottom = bottomHBox();
-
 		control_panel.getChildren().add(hb_top);
 		control_panel.getChildren().add(hb_bottom);
-		
 		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
 		control_panel.setBackground(new Background(myBF));
-		
 		control_panel.setAlignment(Pos.CENTER);
 	}
 	
@@ -98,8 +98,7 @@ public class ControlPanel {
 		slider.valueProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> ov,
                 Number old_val, Number new_val) {
-//                    System.out.println(old_val);
-//                    System.out.println(new_val);
+            		animation.setRate(new_val.doubleValue() / 20);
             }
         });
 		slider.getStyleClass().add("axis");
@@ -132,5 +131,9 @@ public class ControlPanel {
 	
 	public VBox getVBox() {
 		return control_panel;
+	}
+	
+	public void setIteration(int iteration) {
+		iteration_count.setText("Iteration Count: " + Integer.toString(iteration));
 	}
 }

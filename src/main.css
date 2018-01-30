@@ -1,5 +1,5 @@
 .button {
-     -fx-background-color: #759EB8;
+     -fx-background-color: #00BF9A;
      -fx-border-radius: 2px;
      -fx-cursor: pointer;
      -fx-display: flex;
@@ -15,7 +15,7 @@
      -fx-text-fill: #F3F7F0;
 }
 .button:hover {
-	-fx-background-color: #626777;
+	-fx-background-color: #005b49;
 }
 .button_disabled {
 	-fx-background-color: #9DA09C;
@@ -24,4 +24,16 @@
 .button_disabled:hover {
 	-fx-background-color: #9DA09C;
 	-fx-text-fill: #24282b;
+}
+
+#header-text {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 22;
+	-fx-text-fill: #c1c1c1;
+}
+
+.axis { 
+	-fx-tick-label-fill: rgb(229, 229, 229);
+	-fx-tick-label-font: bold 12 "sans-serif";
+	-fx-control-inner-background: #00BF9A;
 }

@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class GridContainer {
-	private static final double GRID_SIZE = 500;
-	private static final double BORDER_WIDTH = 4;
+	private static final double GRID_SIZE = 400;
+	private static final double BORDER_WIDTH = 2;
 	private static final double CORNER_RADII = 5;
 	private static final int n = 17;
 	
@@ -30,9 +30,9 @@ public class GridContainer {
 			grid.getChildren().add(buildGridRow(r));
 		}
 		
-		BorderStroke myB = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
-				new CornerRadii(CORNER_RADII), new BorderWidths(BORDER_WIDTH), null);
-		grid.setBorder(new Border(myB));
+//		BorderStroke myB = new BorderStroke(Color.WHITE, BorderStrokeStyle.SOLID,
+//				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
+//		grid.setBorder(new Border(myB));
 		grid.setPadding(new Insets(0));
 		grid.setMaxWidth(0);
 		

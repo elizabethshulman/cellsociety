@@ -1,9 +1,9 @@
 package cellsociety_team10;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -26,14 +26,10 @@ import javafx.scene.text.Text;
  *
  */
 public class StatusBar {
-	private static final int BAR_HEIGHT = 75;
-	private double HORIZ_SPACING = 25;
-	private int BORDER_WIDTH = 3;
-	private String DIVIDER_COLOR = "rgb(236,238,237)";
-	private String TEXT_COLOR = "rgb(251,251,251)";
-	private String BACKGROUND_COLOR = "rgb(54,68,97)";
-	private String FONT_SIZE = "40";
-	private String START_LIVES = "3"; 
+	private static final int BAR_HEIGHT = 85;
+	private static final double BORDER_WIDTH = 1.5;
+	private static final Color BORDER_COLOR = Color.WHITE;
+	private static final double HEADER_SPACING = 30;
 
 	private HBox hbox;
 	private Text lives_text;
@@ -50,51 +46,38 @@ public class StatusBar {
 	 * @param score This is the score of the Level for the StatusBar to display. In 
 	 * this implementation, the initial score is always 0. 
 	 */
-	public StatusBar(String sim_tye) {
+	public StatusBar(String sim_type) {
 
 		hbox = new HBox();
 		hbox.setPrefHeight(BAR_HEIGHT);
-//		hbox.setPrefWidth(width);
 
-		Text level_text = new Text ("Level " + Integer.toString(0));
-		level_text.setFill(Color.web(TEXT_COLOR));
-		level_text.setStyle("-fx-font-family: 'Roboto Mono', monospace; -fx-font-size: " + FONT_SIZE + ";");
+		Text level_text = new Text ("Iteration Count: " + Integer.toString(0));
+		level_text.setFill(Color.rgb(229, 229, 229));
+		level_text.setId("header-text");
 		hbox.getChildren().add(level_text);
-
-
-		Separator separator = new Separator();
-		separator.setOrientation(Orientation.VERTICAL);
-		separator.setStyle("-fx-color: " + DIVIDER_COLOR);
-		separator.setPadding(new Insets(0, HORIZ_SPACING, 0, HORIZ_SPACING));
-		hbox.getChildren().add(separator);
-
-		lives_text = new Text ("Game of Life");
-		lives_text.setFill(Color.web(TEXT_COLOR));
-		lives_text.setStyle("-fx-font-family: 'Roboto Mono', monospace; -fx-font-size: " + FONT_SIZE + ";");
-		hbox.getChildren().add(lives_text);
-
-		Separator separator2 = new Separator();
-		separator2.setOrientation(Orientation.VERTICAL);
-		separator2.setStyle("-fx-color: " + DIVIDER_COLOR);
-		separator2.setPadding(new Insets(0, HORIZ_SPACING, 0, HORIZ_SPACING));
-		hbox.getChildren().add(separator2);
-
-		score_text = new Text ("Score: " + Integer.toString(1000));
-		score_text.setFill(Color.web(TEXT_COLOR));
-		score_text.setStyle("-fx-font-family: 'Roboto Mono', monospace; -fx-font-size: " + FONT_SIZE + ";");
+		
+		Image image = new Image(getClass().getClassLoader().getResourceAsStream(sim_type + ".png"));
+		ImageView image_view = new ImageView(image);
+		image_view.setPreserveRatio(true);
+		image_view.setFitHeight(20);
+		hbox.getChildren().add(image_view);
+		
+		score_text = new Text ("Grid Size: 30x30");
+		score_text.setFill(Color.rgb(229, 229, 229));
+		score_text.setId("header-text");
 		hbox.getChildren().add(score_text);
 
-		BackgroundFill myBF = new BackgroundFill(Color.web(BACKGROUND_COLOR), new CornerRadii(0), null);
-		// then you set to your node or container or layout
+		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
 		hbox.setBackground(new Background(myBF));
 
 
-		BorderStroke myB = new BorderStroke(null, null, Color.web(DIVIDER_COLOR), null, 
+		BorderStroke myB = new BorderStroke(null, null, BORDER_COLOR, null, 
 				null, null, BorderStrokeStyle.SOLID, null,
 				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
 		hbox.setBorder(new Border(myB));
 
 		hbox.setAlignment(Pos.CENTER);
+		hbox.setSpacing(HEADER_SPACING);
 	}
 
 	/**

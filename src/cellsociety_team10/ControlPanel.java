@@ -5,10 +5,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 
 public class ControlPanel {
@@ -59,12 +64,16 @@ public class ControlPanel {
 //                    System.out.println(new_val);
             }
         });
+		slider.getStyleClass().add("axis");
 		
 		hb.getChildren().add(slider);
 
-		hb.setSpacing(20);
+		hb.setSpacing(30);
 		hb.setAlignment(Pos.CENTER);
-		hb.setPadding(new Insets(0,0,20,0));
+		hb.setPadding(new Insets(20,0,25,0));
+		
+		BackgroundFill myBF = new BackgroundFill(Color.rgb(0, 137, 117), new CornerRadii(0), null);
+		hb.setBackground(new Background(myBF));
 	}
 	
 	private Button makeButton(String filename) {

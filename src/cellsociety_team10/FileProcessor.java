@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 public abstract class FileProcessor {
@@ -44,6 +45,29 @@ public abstract class FileProcessor {
 	{
 		return myParser;
 	}
-	public abstract void readFile() throws XMLStreamException;
+	public void readFile() throws XMLStreamException
+	{
+		readHeader(myParser);
+		readCells(myParser);
+	}
+	public abstract void readCells(XMLStreamReader parser);
+	public void readHeader(XMLStreamReader parser) throws XMLStreamException {
+		int xmlEvent;
+		do
+		{
+			 xmlEvent = parser.next();
+			 
+			  //Process start element.
+			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
+				  switch(parser.getLocalName())
+				  {
+				  	case "author": setAuthor(parser.getText()); break;
+				  	case "title": setTitle(parser.getText()); break;
+				  }
+			  }
+		}
+		while(!parser.getLocalName().equals("header") || !(xmlEvent == XMLStreamConstants.END_DOCUMENT) );
+		
+	}
 
 }

@@ -17,7 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class SquareContainer implements IContainer {
+public class SquareContainer extends Container {
 	private static final double GRID_SIZE = 400;
 	private static final double BORDER_WIDTH = 2;
 	private static final Color BORDER_COLOR = Color.DIMGREY;

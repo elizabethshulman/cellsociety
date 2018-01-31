@@ -17,40 +17,44 @@ public class Visualization {
 	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
 	private static final Color BACKGROUND_COLOR = Color.rgb(249, 249, 249);
 	
-	private Stage stage;
-	private int iteration = 0;
-	private BorderPane border_pane;
-	private SquareContainer graph_visual;
-	private ControlPanel control_panel;
+	private int myIteration = 0;
+	private BorderPane myBorderPane;
+	private Container myVisual;
+	private ControlPanel myControlPanel;
+	private Scene myScene;
 	
-	public Visualization(Stage primaryStage, ControlPanel cp) {
-		stage = primaryStage;
+	public Visualization(ControlPanel cp) {
 		
-		border_pane = new BorderPane();
+		myBorderPane = new BorderPane();
 		StatusBar bar = new StatusBar("Game of Life");
-		graph_visual = new SquareContainer();
-		control_panel = cp;
+		myVisual = new SquareContainer();
+		myControlPanel = cp;
 		
-		Scene scene = new Scene(border_pane, SCREEN_WIDTH, SCREEN_HEIGHT);
-		scene.getStylesheets().add(FONT_URL);
-		scene.getStylesheets().add("main.css");
+		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
+		myScene.getStylesheets().add(FONT_URL);
+		myScene.getStylesheets().add("main.css");
 		
-		border_pane.setTop(bar.getHBox());
-		border_pane.setCenter(graph_visual.getVBox());
-		border_pane.setBottom(control_panel.getVBox());
+		myBorderPane.setTop(bar.getHBox());
+		myBorderPane.setCenter(myVisual.getVBox());
+		myBorderPane.setBottom(myControlPanel.getVBox());
 		BackgroundFill myBF = new BackgroundFill(BACKGROUND_COLOR, new CornerRadii(0), null);
-		border_pane.setBackground(new Background(myBF));
-		
-		stage.setTitle("Cell Society");
-		stage.setScene(scene);
-		stage.show();
+		myBorderPane.setBackground(new Background(myBF));
 	}
 	
 	public void visualizeGrid(HashMap<Cell, ArrayList<Cell>> cell_map) {
-		iteration += 1;
-		control_panel.setIteration(iteration);
+		myIteration += 1;
+		myControlPanel.setIteration(myIteration);
 		
-		graph_visual.setGraphDisplay(cell_map);
+		myVisual.setGraphDisplay(cell_map);
 		
+	}
+	
+	public Scene getScene() {
+		return myScene;
+	}
+	
+	public void reset() {
+		myIteration = 0;
+		myControlPanel.resetSlider();
 	}
 }

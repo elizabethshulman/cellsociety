@@ -1,14 +1,14 @@
 package cellsociety_team10;
 
-import java.util.Collection;
 import java.util.HashMap;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -35,19 +35,18 @@ public class StartPage {
 
 
 	private HashMap<String, String> myNameMap = createNameMap();
-	private BorderPane border_pane;
+	private Scene myScene;
 
-	public StartPage() {
+	public StartPage(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
 		BorderPane border_pane = new BorderPane();
-		Scene scene = new Scene(border_pane, SCREEN_WIDTH, SCREEN_HEIGHT);
-		scene.getStylesheets().add(FONT_URL);
-		scene.getStylesheets().add("test.css");
+		myScene = new Scene(border_pane, SCREEN_WIDTH, SCREEN_HEIGHT);
+		myScene.getStylesheets().add(FONT_URL);
+		myScene.getStylesheets().add("main.css");
 
 		HBox hbox = new HBox();
 		hbox.setPrefHeight(BAR_HEIGHT);
 
 		Text title_text = new Text("Cell Society");
-		title_text.setFill(Color.rgb(229, 229, 229));
 		title_text.setId("title-text");
 		hbox.getChildren().add(title_text);
 
@@ -63,44 +62,40 @@ public class StartPage {
 		hbox.setSpacing(HEADER_SPACING);
 
 		border_pane.setTop(hbox);
-		border_pane.setCenter(buttonBonanza());
+		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler));
 
 		BackgroundFill myBF2 = new BackgroundFill(BACKGROUND_COLOR, new CornerRadii(0), null);
 		border_pane.setBackground(new Background(myBF2));
 	}
 
-	private VBox buttonBonanza() {
+	private VBox buttonBonanza(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
 		VBox vbox = new VBox();
 
-		Text pick_sim = new Text("Pick a simulation to run:");
+		Text pick_sim = new Text("Select a simulation:");
 		pick_sim.setId("pick-sim");
-
-		vbox.getChildren().addAll(pick_sim, 
-				createRowOfButtons(new String[] {"life", "fire"}), 
-				createRowOfButtons(new String[] {"predator", "segregation"}));
+		
+		HBox row_one = createRow(makeButton("life", life_handler), makeButton("fire", fire_handler));
+		HBox row_two = createRow(makeButton("predator", pred_handler), makeButton("segregation", seg_handler));
+		
+		vbox.getChildren().addAll(pick_sim, row_one, row_two);
 		vbox.setAlignment(Pos.CENTER);
 		vbox.setSpacing(BUTTON_SPACING);
-
 		return vbox;
 	}
 
-	private Button makeButton(String filename) {
+	private Button makeButton(String filename, EventHandler<MouseEvent> handler) {
 		ImageView image_view = Helper.generateImageView(filename + ".png", 150);
 		Button tester = new Button(myNameMap.get(filename), image_view);
-		
+		tester.setOnMouseClicked(handler);
 		tester.setContentDisplay(ContentDisplay.TOP);
 		tester.setId(filename);
 
 		return tester;
 	}
 	
-	private HBox createRowOfButtons(String[] names) {
+	private HBox createRow(Button one, Button two) {
 		HBox row = new HBox();
-		
-		for (String s : names) {
-			row.getChildren().add(makeButton(s));
-		}
-		
+		row.getChildren().addAll(one, two);
 		row.setSpacing(BUTTON_SPACING);
 		row.setAlignment(Pos.CENTER);
 		return row;
@@ -115,7 +110,7 @@ public class StartPage {
 		return name_map;
 	}
 	
-	public BorderPane getBorderPane() {
-		return border_pane;
+	public Scene getScene() {
+		return myScene;
 	}
 }

@@ -3,8 +3,7 @@ package cellsociety_team10;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -16,6 +15,8 @@ public class Engine extends Application {
 	private Timeline animation;        
 	private Grid myGrid;
 	private Visualization myVis;
+	private Scene myStartScene;
+	private Stage myStage;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -33,36 +34,32 @@ public class Engine extends Application {
 		 * initialize Visualization myVis
 		 * 
 		 */
+		myStage = stage;
+		myStartScene = new StartPage(e -> selectFile("predator"),
+									e -> selectFile("segregation"),
+									e -> selectFile("life"), 
+									e -> selectFile("fire")).getScene();
+		
+		myStage.setScene(myStartScene);
+		myStage.setTitle("Cell Society");
+		myStage.show();
+		
 		animation = new Timeline();
-		simulationToTimeline();
-		myVis = new Visualization(stage, new ControlPanel(animation, 
-				new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent e) {
-						play();
-					}
-				}, new EventHandler<MouseEvent>() {
-					@Override
-					public void handle(MouseEvent e) {
-						pause();
-					}
-				}
-				));	
+		myVis = new Visualization(new ControlPanel(animation, e -> play(), e -> pause(), e -> end(), e -> next()));
+		setupAnimation();
 	}
 
-	private void simulationToTimeline() {
+	private void setupAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step(SECOND_DELAY));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
-		animation.play();
 		animation.setRate(START_RATE);
 	}
 
-	private void step(double elapsedTime) {
-		// get new hashmap here from Graph which we can pass as the 
-		// argument to visualizeGrid		
+	private void step(double elapsedTime) {	
 		myVis.visualizeGrid(null);
+		myStage.setScene(myVis.getScene());
 	}
 
 	private void pause() {
@@ -71,5 +68,25 @@ public class Engine extends Application {
 
 	private void play() {
 		animation.play();
+	}
+	
+	// would be called stop, but stop can't be overwritten with a lower
+	// visibility since it's implemented in the Application class
+	private void end() {
+		animation.stop();
+		myVis.reset();
+		myStage.setScene(myStartScene);
+		
+	}
+	
+	private void next() {
+		animation.pause();
+		step(SECOND_DELAY);
+	}
+	
+	private void selectFile(String filename) {
+		//	sets up simulation to run with particular file specifications
+		System.out.println(filename);
+		play();
 	}
 }

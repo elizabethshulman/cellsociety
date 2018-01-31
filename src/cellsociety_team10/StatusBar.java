@@ -1,13 +1,9 @@
 package cellsociety_team10;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
@@ -34,7 +30,6 @@ public class StatusBar {
 	private HBox hbox;
 	private Text lives_text;
 	private Text score_text;
-	private BorderPane border_pane;
 
 	/**
 	 * This is the constructor for the StatusBar object.
@@ -86,13 +81,5 @@ public class StatusBar {
 	 */
 	public HBox getHBox() {
 		return hbox;
-	}
-
-	/**
-	 * This is a getter on the StatusBar's BorderPane property.
-	 * @return BorderPane This is the StatusBar's BorderPane property.
-	 */
-	public BorderPane getBorderPane() {
-		return border_pane;
 	}
 }

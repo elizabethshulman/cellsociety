@@ -1,4 +1,4 @@
-.button {
+#control {
      -fx-background-color: #00BF9A;
      -fx-border-radius: 2px;
      -fx-cursor: pointer;
@@ -14,14 +14,15 @@
      -fx-border-width: 2px;
      -fx-text-fill: #F3F7F0;
 }
-.button:hover {
+
+#control:hover {
 	-fx-background-color: #005b49;
 }
-.button_disabled {
+#disabled {
 	-fx-background-color: #9DA09C;
 	-fx-text-fill: #24282b;
 }
-.button_disabled:hover {
+#disabled {
 	-fx-background-color: #9DA09C;
 	-fx-text-fill: #24282b;
 }
@@ -34,10 +35,82 @@
 #title-text {
 	-fx-font-family: 'Roboto', sans-serif;
 	-fx-font-size: 40;
+	-fx-fill: rgb(229, 229, 229);
 }
 
 .axis { 
 	-fx-tick-label-fill: rgb(229, 229, 229);
 	-fx-tick-label-font: bold 12 "sans-serif";
 	-fx-control-inner-background: #00BF9A;
+}
+
+#predator {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+}
+
+#predator:hover {
+	-fx-background-color: rgb(114, 156, 255);
+	-fx-text-fill: rgb(229, 229, 229);
+}
+
+#fire {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+}
+
+#fire:hover {
+	-fx-background-color: rgb(255, 173, 86);
+}
+
+#life {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+}
+
+#life:hover {
+	-fx-background-color: rgb(163, 255, 112);
+}
+
+#segregation {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+}
+
+#segregation:hover {
+	-fx-background-color: rgb(99, 219, 255);
+}
+
+#pick-sim {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 25;
+	-fx-fill: rgb(105,105,105);
 }

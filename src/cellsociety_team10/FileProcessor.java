@@ -2,13 +2,15 @@ package cellsociety_team10;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-public abstract class FileProcessor {
-	protected String myClass;
+public class FileProcessor {
+	public static final String[] simTypes = new String[]{"Game Of Life","Fire","Segregation","Predator Prey"};
+	protected String myType;
 	private String filepath;
 	private String author;
 	private String title;
@@ -49,20 +51,8 @@ public abstract class FileProcessor {
 	}
 	public void readFile() throws XMLStreamException
 	{
-		checkValidity(myParser);
 		readHeader(myParser);
 		readCells(myParser);
-	}
-	protected void checkValidity(XMLStreamReader parser) throws XMLStreamException{
-		int xmlEvent;
-		do
-		{
-			xmlEvent = parser.next();
-		}
-		while(xmlEvent != XMLStreamConstants.START_ELEMENT || !parser.getLocalName().equals("simtype"));
-		parser.next();
-		if(!parser.getText().equals(myClass))
-			throw new XMLStreamException("Invalid file type");
 	}
 	protected void readHeader(XMLStreamReader parser) throws XMLStreamException {
 		int xmlEvent;
@@ -74,6 +64,12 @@ public abstract class FileProcessor {
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
 				  switch(parser.getLocalName())
 				  {
+				  	case "simtype": parser.next();
+				  		String simName = parser.getText();
+				  		if(Stream.of(simTypes).anyMatch(i -> i.equals(simName)))
+				  			myType = simName;
+				  		else throw new XMLStreamException("Invalid simulation type");
+				  		break;
 				  	case "author": parser.next(); 
 				  		setAuthor(parser.getText()); break;
 				  	case "title": parser.next();
@@ -113,6 +109,22 @@ public abstract class FileProcessor {
 			  }
 		}
 		
+	}
+	public static void main(String[] args)
+	{
+		try {
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/gameoflife2.xml");
+			fp.readFile();
+			Cell[][] g = fp.getGrid();
+			for(int a = 0; a < g.length; a++)
+			{
+				for(int b = 0; b < g[a].length; b++)
+					System.out.print(g[a][b].getState());
+				System.out.println();
+			}
+		} catch (FileNotFoundException | XMLStreamException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

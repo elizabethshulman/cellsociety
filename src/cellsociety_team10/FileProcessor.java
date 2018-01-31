@@ -9,7 +9,6 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 public class FileProcessor {
-	public static final String[] simTypes = new String[]{"Game Of Life","Fire","Segregation","Predator Prey"};
 	protected String myType;
 	private String filepath;
 	private String author;
@@ -17,6 +16,7 @@ public class FileProcessor {
 	private Cell[][] grid;
 	private XMLInputFactory xmlif;
 	private XMLStreamReader myParser;
+	private FileInfoExtractor helper;
 	public FileProcessor(String fpath) throws FileNotFoundException, XMLStreamException{
 		filepath = fpath;
 		xmlif = XMLInputFactory.newInstance();
@@ -51,55 +51,57 @@ public class FileProcessor {
 	}
 	public void readFile() throws XMLStreamException
 	{
-		readHeader(myParser);
-		readCells(myParser);
+		readHeader();
+		helper.getGlobalVars(myParser);
+		readCells();
 	}
-	protected void readHeader(XMLStreamReader parser) throws XMLStreamException {
+	protected void readHeader() throws XMLStreamException {
 		int xmlEvent;
 		do
 		{
-			 xmlEvent = parser.next();
-			 
+			 xmlEvent = myParser.next();
 			  //Process start element.
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
-				  switch(parser.getLocalName())
+				  switch(myParser.getLocalName())
 				  {
-				  	case "simtype": parser.next();
-				  		String simName = parser.getText();
-				  		if(Stream.of(simTypes).anyMatch(i -> i.equals(simName)))
-				  			myType = simName;
-				  		else throw new XMLStreamException("Invalid simulation type");
+				  	case "simtype": myParser.next();
+				  		String simName = myParser.getText();
+			  			myType = simName;
+			  			try {
+			  				String className = "cellsociety_team10." + simName + "FIE";
+							helper = (FileInfoExtractor) Class.forName(className).getConstructor().newInstance();
+						} catch (Exception e) {
+							throw new IllegalArgumentException("Simulation type argument is invalid");
+						}
 				  		break;
-				  	case "author": parser.next(); 
-				  		setAuthor(parser.getText()); break;
-				  	case "title": parser.next();
-				  		setTitle(parser.getText()); break;
+				  	case "author": myParser.next(); 
+				  		setAuthor(myParser.getText()); break;
+				  	case "title": myParser.next();
+				  		setTitle(myParser.getText()); break;
 				  }
 			  }
 		}
-		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !parser.getLocalName().equals("header"));
+		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
 		
 	}
-	public void readCells(XMLStreamReader parser) throws XMLStreamException {
+	public void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
 		ArrayList<Cell> newRow = new ArrayList<Cell>();
 		while(true)
 		{
-			 int xmlEvent = parser.next();
-			 
+			 int xmlEvent = myParser.next();
 			  //Process start element.
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
-				  switch(parser.getLocalName())
+				  switch(myParser.getLocalName())
 				  {
 				  	case "row":	newRow = new ArrayList<Cell>(); break;
-				  	case "cell": int state = Integer.parseInt(parser.getAttributeValue(0)); 
-				  		newRow.add(new Cell(state)); break;
+				  	case "cell": newRow.add(helper.getCell(myParser)); break;
 				  	
 				  }
 			  }
 			  if(xmlEvent == XMLStreamConstants.END_ELEMENT)
 			  {
-				  switch(parser.getLocalName())
+				  switch(myParser.getLocalName())
 				  {
 				  	case "row": newGrid.add(newRow); break;
 				  	case "grid":

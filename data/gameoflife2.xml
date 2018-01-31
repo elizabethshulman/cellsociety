@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simulation>
    <header>
-      <simtype>Game Of Life</simtype>
+      <simtype>GameOfLife</simtype>
       <author>Rick Astley</author>
       <title>Never Gonna Give You Up</title>
    </header>

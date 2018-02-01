@@ -3,19 +3,22 @@ package cellsociety_team10;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-public class GameOfLifeFIE extends FileInfoExtractor {
+public class PredatorPreyFIE extends FileInfoExtractor{
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
-		throw new XMLStreamException("Invalid global variables in file");
+		return 0.0;
 	}
 
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
-		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
-		if(val < 0 || val > 2)
-			throw new XMLStreamException("Invalid Cell cell type.");
-		return new Cell(val);
+		switch(xmlRead.getAttributeValue(0))
+		{
+			case "E": return new Cell(0);
+			case "F": return new Cell(1);
+			case "S": return new Cell(2);
+			default: throw new XMLStreamException("Invalid Predator-Prey cell type");
+		}
 	}
 
 }

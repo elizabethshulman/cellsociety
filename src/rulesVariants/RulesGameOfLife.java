@@ -1,30 +1,13 @@
-package cellsociety_team10;
+package rulesVariants;
 
 import java.util.ArrayList;
 
-public class GameOfLifeRules implements Rules{
+import cellsociety_team10.Cell;
+import cellsociety_team10.Rules;
 
-	ArrayList<Cell> needChange;	
-	
-	@Override
-	public Graph applyGridRules(Graph g) {
-		for(Cell c : g.getCells()) {
-			if(dissatisfied(c.getState(), g.getNeighbors(c))) {
-				needChange.add(c);
-			}
-		} for(Cell toAct : needChange) {
-			act(toAct);
-		}
-		return g;
-	}
-	
-	@Override
-	public void act(Cell c) {
-		if(c.getState()==0) c.setState(1);
-		else c.setState(0);
-	}
+public class RulesGameOfLife extends Rules{
 
-	@Override
+	
 	public Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {	
 		//assuming 0 for dead, 1 for alive
 		int livecount = 0;
@@ -37,5 +20,10 @@ public class GameOfLifeRules implements Rules{
 			if(livecount>3) return true; //more than 3 live neighbors dies
 		}
 		return false;
+	}
+	
+	public void act(Cell c) {
+		if(c.getState()==0) c.setState(1);
+		else c.setState(0);
 	}
 }

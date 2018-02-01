@@ -5,6 +5,8 @@
       <author>Rick Astley</author>
       <title>Never Gonna Give You Up</title>
    </header>
+   <global_vars>
+   </global_vars>
    <grid>
       <row>
          <cell state="0" />

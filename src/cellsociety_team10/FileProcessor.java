@@ -82,15 +82,15 @@ public class FileProcessor {
 		globalVars = new HashMap<String,Double>();
 		int xml;
 		myParser.next();
-		System.out.println(myParser.getText());
 		do {
 			xml = myParser.next();
-			if(xml == XMLStreamConstants.START_ELEMENT)
-				System.out.println(myParser.getLocalName());
+			if(xml == XMLStreamConstants.START_ELEMENT && !myParser.getLocalName().equals("global_vars")) {
 				globalVars.put(myParser.getLocalName(), helper.getGlobalVar(myParser));
+			}
 		}
 		while(xml != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("global_vars"));
 	}
+	
 	//Creates 2D array based on information from file
 	protected void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
@@ -120,10 +120,11 @@ public class FileProcessor {
 		}
 		
 	}
+	//temporary tester method
 	public static void main(String[] args)
 	{
 		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/fire2.xml");
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/fire1.xml");
 			fp.readFile();
 			Cell[][] g = fp.getGrid();
 			for(int a = 0; a < g.length; a++)
@@ -133,8 +134,8 @@ public class FileProcessor {
 				System.out.println();
 			}
 			System.out.println(fp.getGlobalVars().get("probCatchFire"));
-		} catch (FileNotFoundException | XMLStreamException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new IllegalArgumentException("You're stupid");
 		}
 	}
 

@@ -7,7 +7,11 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
-		return 0.0;
+		if(xmlRead.getLocalName().matches("fishBreedTime|sharkBreedTime|sharkStarveTime")) {
+			xmlRead.next();
+			return Double.parseDouble(xmlRead.getText());
+		}
+		else throw new XMLStreamException("Invalid global variables in file.");
 	}
 
 	@Override

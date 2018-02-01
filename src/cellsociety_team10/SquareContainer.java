@@ -4,42 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class SquareContainer extends Container {
 	private static final double GRID_SIZE = 400;
-	private static final double BORDER_WIDTH = 2;
-	private static final Color BORDER_COLOR = Color.DIMGREY;
-	private static final int n = 8;
+	private static final double n = 9;
 	
-	private VBox vb;
-	private VBox graph;
+	private VBox myVBox;
+	private VBox myGraph;
 	
 	public SquareContainer() {
-		graph = new VBox();
+		myGraph = new VBox();
+		myGraph.setId("container-display");
 		
-		setGraphDisplay(null);
-		
-		BorderStroke myB = new BorderStroke(BORDER_COLOR, BorderStrokeStyle.SOLID,
-				new CornerRadii(0), new BorderWidths(BORDER_WIDTH), null);
-		graph.setBorder(new Border(myB));
-		graph.setPadding(new Insets(0));
-		graph.setMaxWidth(0);
-		
-		vb = new VBox();
-		vb.getChildren().add(graph);
-		vb.setAlignment(Pos.CENTER);
+		myVBox = new VBox();
+		myVBox.getChildren().add(myGraph);
+		myVBox.setAlignment(Pos.CENTER);
 	}
 	
 	private HBox buildGraphRow(int r) {
@@ -47,7 +29,7 @@ public class SquareContainer extends Container {
 		HBox hbox = new HBox();
 		for (int c=0; c < n; c++) {
 			int dex = new Random().nextInt(arr.length);
-			hbox.getChildren().add(generateTile(arr[dex]));
+			hbox.getChildren().add(Helper.generateImageView(arr[dex], (GRID_SIZE - 2*2) / n));
 		}
 		hbox.setAlignment(Pos.CENTER);
 		hbox.setMaxWidth(0);
@@ -55,22 +37,36 @@ public class SquareContainer extends Container {
 		return hbox;
 	}
 	
-	private ImageView generateTile(String filename) {
-		Image image = new Image(getClass().getClassLoader().getResourceAsStream(filename));
-		ImageView temp = new ImageView(image);
-		temp.setPreserveRatio(true);
-		temp.setFitHeight((GRID_SIZE - 2 * BORDER_WIDTH) / n);
-		return temp;
-	}
-	
 	public VBox getVBox() {
-		return vb;
+		return myVBox;
 	}
 	
 	public void setGraphDisplay(HashMap<Cell, ArrayList<Cell>> cell_map) {
-		graph.getChildren().clear();
+		myGraph.getChildren().clear();
 		for (int r=0; r < n; r++) {
-			graph.getChildren().add(buildGraphRow(r));
+			myGraph.getChildren().add(buildGraphRow(r));
 		}
 	}
+	
+//	public void setGraphDisplay(HashMap<Cell, ArrayList<Cell>> cell_map) {
+//		myGraph.getChildren().clear();
+//		ImageView[][] graph_grid = mapToGrid(cell_map);
+//		for (int c=0; c < cell_map.size() / 4; c++) {
+//			HBox row = new HBox();
+//			row.setId("container-row");
+//			for (int r=0; r < cell_map.size() / 4; r++) {
+//				row.getChildren().add(graph_grid[r][c]);
+//			}
+//			myGraph.getChildren().add(row);
+//		}
+//	}
+//	
+//	private ImageView[][] mapToGrid(HashMap<Cell, ArrayList<Cell>> cell_map) {
+////		need to think about this line...what if it's not a perfect square?
+//		ImageView[][] curr_grid = new ImageView[cell_map.size() / 4][cell_map.size() / 4];
+//		for (Cell curr : cell_map.keySet()) {
+//			curr_grid[curr.getRow()][curr.getCol()] = curr.getImageView();
+//		}
+//		return curr_grid;
+//	}
 }

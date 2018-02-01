@@ -15,19 +15,19 @@ public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
 	private static final double SCREEN_WIDTH = 700;
 	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
-	private static final Color BACKGROUND_COLOR = Color.rgb(249, 249, 249);
 	
 	private int myIteration = 0;
 	private BorderPane myBorderPane;
-	private Container myVisual;
+	private Container myVisualContainer;
 	private ControlPanel myControlPanel;
 	private Scene myScene;
 	
 	public Visualization(ControlPanel cp) {
-		
 		myBorderPane = new BorderPane();
+		myBorderPane.setId("main-pane");
+		
 		StatusBar bar = new StatusBar("Game of Life");
-		myVisual = new SquareContainer();
+		myVisualContainer = new SquareContainer();
 		myControlPanel = cp;
 		
 		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -35,17 +35,15 @@ public class Visualization {
 		myScene.getStylesheets().add("main.css");
 		
 		myBorderPane.setTop(bar.getHBox());
-		myBorderPane.setCenter(myVisual.getVBox());
+		myBorderPane.setCenter(myVisualContainer.getVBox());
 		myBorderPane.setBottom(myControlPanel.getVBox());
-		BackgroundFill myBF = new BackgroundFill(BACKGROUND_COLOR, new CornerRadii(0), null);
-		myBorderPane.setBackground(new Background(myBF));
 	}
 	
-	public void visualizeGrid(HashMap<Cell, ArrayList<Cell>> cell_map) {
+	public void visualizeGraph(HashMap<Cell, ArrayList<Cell>> cell_map) {
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		
-		myVisual.setGraphDisplay(cell_map);
+		myVisualContainer.setGraphDisplay(cell_map);
 		
 	}
 	

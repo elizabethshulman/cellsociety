@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Engine extends Application {
+	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final double SECOND_DELAY = 50.0;
-	private static final double START_RATE = 2.5;
 
-	private Timeline animation;        
-	private Grid myGrid;
+	private Timeline myAnimation;        
+	private Grid myGraph;
 	private Visualization myVis;
 	private Scene myStartScene;
 	private Stage myStage;
@@ -44,49 +44,51 @@ public class Engine extends Application {
 		myStage.setTitle("Cell Society");
 		myStage.show();
 		
-		animation = new Timeline();
-		myVis = new Visualization(new ControlPanel(animation, e -> play(), e -> pause(), e -> end(), e -> next()));
+		myAnimation = new Timeline();
+		myVis = new Visualization(new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next()));
 		setupAnimation();
 	}
 
 	private void setupAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
 				e -> step(SECOND_DELAY));
-		animation.setCycleCount(Timeline.INDEFINITE);
-		animation.getKeyFrames().add(frame);
-		animation.setRate(START_RATE);
+		myAnimation.setCycleCount(Timeline.INDEFINITE);
+		myAnimation.getKeyFrames().add(frame);
+		myAnimation.setRate(ANIM_RATE);
 	}
 
-	private void step(double elapsedTime) {	
-		myVis.visualizeGrid(null);
+	private void step(double elapsedTime) {
+//		myGraph.buildNextGrid();
+//		myVis.visualizeGraph(myGraph.getGraph());
+		myVis.visualizeGraph(null);
 		myStage.setScene(myVis.getScene());
 	}
 
 	private void pause() {
-		animation.pause();
+		myAnimation.pause();
 	}
 
 	private void play() {
-		animation.play();
+		myAnimation.play();
 	}
 	
 	// would be called stop, but stop can't be overwritten with a lower
 	// visibility since it's implemented in the Application class
 	private void end() {
-		animation.stop();
+		myAnimation.stop();
 		myVis.reset();
 		myStage.setScene(myStartScene);
-		
 	}
 	
 	private void next() {
-		animation.pause();
+		myAnimation.pause();
 		step(SECOND_DELAY);
 	}
 	
 	private void selectFile(String filename) {
 		//	sets up simulation to run with particular file specifications
 		System.out.println(filename);
+//		myVis.setStatusBarTitle(filename)
 		play();
 	}
 }

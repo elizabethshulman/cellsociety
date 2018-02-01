@@ -18,9 +18,12 @@ import cellsociety_team10.Rules;
 public class SegregationRules extends Rules{
 
 	private FileProcessor segregationFP;
+	private final double satisfactionThreshold;
 	
 	public SegregationRules(FileProcessor fp) {
+		//UPDATE with new getSatisfactionThreshold()
 		segregationFP = fp;
+		satisfactionThreshold = fp.getSatisfactionThreshold();
 	}
 	
 	/**
@@ -55,16 +58,14 @@ public class SegregationRules extends Rules{
 			Cell currentEmpty = emptyCells.remove(emptyCells.size()-1);
 			Cell cellToChange = needChange.remove(needChange.size()-1);
 			
-			ArrayList<Cell> emptyNeighbors = g.getNeighbors(currentEmpty);
-			g.setNeighbors(currentEmpty, g.getNeighbors(cellToChange));
-			g.setNeighbors(cellToChange, emptyNeighbors);
+			currentEmpty.setState(cellToChange.getState());
+			cellToChange.setState(0);
 		}
-		
 		return g;
 	}
 
 	
-	//UPDATE with new getSatisfactionThreshold()
+	
 	/**
 	 * Returns true if cell needs to change position, as its neighbors are too different
 	 */
@@ -72,8 +73,9 @@ public class SegregationRules extends Rules{
 	public Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
 		int similarCount=0;
 		for(Cell c:neighbors) if(c.getState()==state) similarCount+=1;
-		if(similarCount/neighbors.size() < 
-				segregationFP.getSatisfactionThreshold()) return true; 
+		if(similarCount/neighbors.size() < satisfactionThreshold) {
+			return true; 
+		}
 		return false;
 	}
 

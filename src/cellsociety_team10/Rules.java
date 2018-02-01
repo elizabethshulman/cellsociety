@@ -13,7 +13,7 @@ public abstract class Rules {
 
 	
 	//return updated graph
-	Graph applyGraphRules(Graph g) {
+	protected Graph applyGraphRules(Graph g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();	
 		for(Cell c : g.getCells()) {
 			if(dissatisfied(c.getState(), g.getNeighbors(c))) {
@@ -26,11 +26,11 @@ public abstract class Rules {
 	}
 	
 	//true if cell needs to change state, false if otherwise
-	Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
 		return null;
 	}
 	
 	//change cell state accordingly
-	void act(Cell c) {
+	protected void act(Cell c) {
 	}
 }

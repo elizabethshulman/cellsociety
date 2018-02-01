@@ -1,6 +1,6 @@
 package cellsociety_team10;
 
-public class Cell {
+public abstract class Cell {
 
 	private int state;
 	

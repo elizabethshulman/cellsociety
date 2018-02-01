@@ -72,4 +72,7 @@ public abstract class FileProcessor {
 		
 	}
 
+	public int getSatisfactionThreshold() {
+		return -1;
+	}
 }

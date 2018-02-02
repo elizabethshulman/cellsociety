@@ -1,6 +1,7 @@
 package cellsociety_team10;
 
 import java.io.File;
+import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -14,8 +15,11 @@ public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final double SECOND_DELAY = 50.0;
-	private static final String SIM_FOLDER = "/simulations/";
+	private static final String SIM_FOLDER = "simulations/";
+	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private static final String LANGUAGE = "English";
 
+	private ResourceBundle myResources;
 	private Timeline myAnimation;        
 	private Grid myGraph;
 	private Visualization myVis;
@@ -48,6 +52,8 @@ public class Engine extends Application {
 		myStage.setScene(myStartScene);
 		myStage.setTitle("Cell Society");
 		myStage.show();
+		
+//		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE);
 		
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle("Cell Simulation File Chooser");
@@ -94,7 +100,7 @@ public class Engine extends Application {
 	}
 
 	private void buildFileChooser(String directory) {
-		String source = System.getProperty("user.dir") + SIM_FOLDER + directory;
+		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
 		selectFile(f);

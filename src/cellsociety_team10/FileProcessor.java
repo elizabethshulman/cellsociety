@@ -18,6 +18,7 @@ public class FileProcessor {
 	private HashMap<String,Double> globalVars;
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
+	private HashMap<Cell,ArrayList<Cell>> cellGrid;
 	
 	public FileProcessor(String fpath) throws FileNotFoundException, XMLStreamException{
 		filepath = fpath;
@@ -41,6 +42,9 @@ public class FileProcessor {
 	}
 	public HashMap<String,Double> getGlobalVars() {
 		return globalVars;
+	}
+	public HashMap<Cell,ArrayList<Cell>> getCellGrid() {
+		return cellGrid;
 	}
 	// Reads in the file and sets instance variables based on file information
 	public void readFile() throws XMLStreamException
@@ -123,7 +127,7 @@ public class FileProcessor {
 	public static void main(String[] args)
 	{
 		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/gameoflife1.xml");
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/segregation1.xml");
 			fp.readFile();
 			Cell[][] g = fp.getGrid();
 			for(int a = 0; a < g.length; a++)
@@ -137,7 +141,5 @@ public class FileProcessor {
 		}
 	}
 
-	public int getSatisfactionThreshold() {
-		return -1;
-	}
+
 }

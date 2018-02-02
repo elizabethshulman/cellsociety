@@ -22,8 +22,8 @@ public class SegregationFIE extends FileInfoExtractor {
 		switch(xmlRead.getAttributeValue(0))
 		{
 			case "E": return new Cell(0);
-			case "F": return new Cell(1);
-			case "S": return new Cell(2);
+			case "R": return new Cell(1);
+			case "B": return new Cell(2);
 			default: throw new XMLStreamException("Invalid Segregation cell type");
 		}
 	}

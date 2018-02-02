@@ -2,8 +2,7 @@ package rulesVariants;
 
 import java.util.ArrayList;
 
-import cellsociety_team10.Cell;
-import cellsociety_team10.Rules;
+import cellVariants.Cell;
 
 public class GameOfLifeRules extends Rules{
 

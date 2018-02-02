@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package cellVariants;
 
 public abstract class Cell {
 

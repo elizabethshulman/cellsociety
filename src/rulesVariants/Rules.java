@@ -1,6 +1,9 @@
-package cellsociety_team10;
+package rulesVariants;
 
 import java.util.ArrayList;
+
+import cellVariants.Cell;
+import cellsociety_team10.Graph;
 
 public abstract class Rules {
 	/**

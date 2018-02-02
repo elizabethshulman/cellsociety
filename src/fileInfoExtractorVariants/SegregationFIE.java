@@ -1,12 +1,15 @@
-package cellsociety_team10;
+package fileInfoExtractorVariants;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import cellsociety_team10.Cell;
+import cellsociety_team10.FileInfoExtractor;
+
 public class SegregationFIE extends FileInfoExtractor {
 
 	@Override
-	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
+	protected Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().equals("satisfactionThreshold")) {
 			xmlRead.next();
 			return Double.parseDouble(xmlRead.getText());
@@ -15,7 +18,7 @@ public class SegregationFIE extends FileInfoExtractor {
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	protected Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
 		{
 			case "E": return new Cell(0);

@@ -56,13 +56,12 @@ public class FileProcessor {
 		{
 			 xmlEvent = myParser.next();
 			 if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
-				  switch(myParser.getLocalName())
-				  {
+				  switch(myParser.getLocalName()) {
 				  	case "simtype": myParser.next();
 				  		String simName = myParser.getText();
 			  			myType = simName;
 			  			try {
-			  				String className = "cellsociety_team10." + simName + "FIE";
+			  				String className = "fileInfoExtractorVariants." + simName + "FIE";
 							helper = (FileInfoExtractor) Class.forName(className).getConstructor().newInstance();
 						} catch (Exception e) {
 							throw new IllegalArgumentException("Simulation type argument is invalid");
@@ -124,7 +123,7 @@ public class FileProcessor {
 	public static void main(String[] args)
 	{
 		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/fire1.xml");
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/gameoflife1.xml");
 			fp.readFile();
 			Cell[][] g = fp.getGrid();
 			for(int a = 0; a < g.length; a++)
@@ -133,7 +132,6 @@ public class FileProcessor {
 					System.out.print(g[a][b].getState());
 				System.out.println();
 			}
-			System.out.println(fp.getGlobalVars().get("probCatchFire"));
 		} catch (Exception e) {
 			throw new IllegalArgumentException("You're stupid");
 		}

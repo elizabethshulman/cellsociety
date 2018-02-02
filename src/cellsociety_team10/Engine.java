@@ -108,8 +108,7 @@ public class Engine extends Application {
 
 	private void selectFile(File filename) {
 		//	sets up simulation to run with particular file specifications
-		myVis.getHeaderBar().setSimType("Currently running: " + filename.getName());
-		//		myVis.setStatusBarTitle(filename)
+		myVis.ammendHeader("Currently running: " + filename.getName());
 		play();
 	}
 }

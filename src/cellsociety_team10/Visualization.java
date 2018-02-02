@@ -51,7 +51,7 @@ public class Visualization {
 		myControlPanel.resetSlider();
 	}
 	
-	public HeaderBar getHeaderBar() {
-		return myBar;
+	public void ammendHeader(String header_text) {
+		myBar.setSimType(header_text);;
 	}
 }

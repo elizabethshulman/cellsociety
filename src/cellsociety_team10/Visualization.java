@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
@@ -21,12 +16,13 @@ public class Visualization {
 	private Container myVisualContainer;
 	private ControlPanel myControlPanel;
 	private Scene myScene;
+	private HeaderBar myBar;
 	
 	public Visualization(ControlPanel cp) {
 		myBorderPane = new BorderPane();
 		myBorderPane.setId("main-pane");
 		
-		StatusBar bar = new StatusBar("Game of Life");
+		myBar = new HeaderBar("");
 		myVisualContainer = new SquareContainer();
 		myControlPanel = cp;
 		
@@ -34,7 +30,7 @@ public class Visualization {
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add("main.css");
 		
-		myBorderPane.setTop(bar.getHBox());
+		myBorderPane.setTop(myBar.getHBox());
 		myBorderPane.setCenter(myVisualContainer.getVBox());
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
@@ -44,7 +40,6 @@ public class Visualization {
 		myControlPanel.setIteration(myIteration);
 		
 		myVisualContainer.setGraphDisplay(cell_map);
-		
 	}
 	
 	public Scene getScene() {
@@ -54,5 +49,9 @@ public class Visualization {
 	public void reset() {
 		myIteration = 0;
 		myControlPanel.resetSlider();
+	}
+	
+	public HeaderBar getHeaderBar() {
+		return myBar;
 	}
 }

@@ -20,8 +20,8 @@ public class SquareContainer extends Container {
 		myGraph.setId("container-display");
 		
 		myVBox = new VBox();
+		myVBox.setId("container-vbox");
 		myVBox.getChildren().add(myGraph);
-		myVBox.setAlignment(Pos.CENTER);
 	}
 	
 	private HBox buildGraphRow(int r) {

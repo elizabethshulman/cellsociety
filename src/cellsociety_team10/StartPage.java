@@ -3,23 +3,14 @@ package cellsociety_team10;
 import java.util.HashMap;
 
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class StartPage {
@@ -40,14 +31,7 @@ public class StartPage {
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(STYLESHEET_NAME);
 
-		HBox hbox = new HBox();
-		hbox.setId("header-start");
-
-		Text title_text = new Text("Cell Society");
-		title_text.setId("title-text");
-		hbox.getChildren().add(title_text);
-
-		border_pane.setTop(hbox);
+		border_pane.setTop(new HeaderBar("Cell Society").getHBox());
 		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler));
 	}
 

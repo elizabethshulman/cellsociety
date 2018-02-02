@@ -153,6 +153,10 @@
 	-fx-max-width: 0px;
 }
 
+#container-vbox {
+	-fx-alignment: center;
+}
+
 /* This section deals with components from Visualization. */
 #main-pane {
 	-fx-background-color: rgb(249, 249, 249);
@@ -165,7 +169,7 @@
 	-fx-spacing: 30;
 }
 
-#header-start {
+#header {
 	-fx-pref-height: 85;
 	-fx-background-color: rgb(0, 137, 117);
 	-fx-alignment: center;
@@ -175,3 +179,6 @@
 #background-bp {
 	-fx-background-color: rgb(249, 249, 249);
 }
+
+/* This section deals with components from StatusBar. */
+

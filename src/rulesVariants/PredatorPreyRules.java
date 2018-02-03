@@ -19,7 +19,6 @@ public class PredatorPreyRules extends Rules{
 		ageToReproduce=fp.getGlobalVars().get("reproductionAge");
 	}
 	
-
 	@Override
 	protected Graph applyGraphRules(Graph g) {
 		
@@ -28,10 +27,6 @@ public class PredatorPreyRules extends Rules{
 		indicateReproduction(g);
 		return g;
 	}
-
-
-
-
 
 	private void reduceSharkEnergy(Graph g) {
 		for(Cell c:g.getCells()) {

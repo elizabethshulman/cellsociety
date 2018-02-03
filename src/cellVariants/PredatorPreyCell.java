@@ -1,41 +1,23 @@
 package cellVariants;
 
-public abstract class Cell {
+public class PredatorPreyCell extends Cell {
 
-	private int state;
-	//move
+	//can I set initial values here
 	private int reproductiveTime;
 	private int sharkEnergy;
 	private boolean reproduce;
 	
-	
-	
-	
-	public Cell(int st) {
-		state = st;
-		
-		//move
+	public PredatorPreyCell(int st) {
+		/*
+		 * 0: Empty
+		 * 1: Fish
+		 * 2: Shark
+		 */
+		super(st);
 		reproductiveTime=0;
 		sharkEnergy=3; //determine where to set initial shark energy
 		reproduce=false;
 	}
-	
-	public int getState() {
-		return state;
-	}
-	
-	public void setState(int st) {
-		state = st;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	//MOVE TO PREDATOR PREY CELL
 	
 	public void increaseSharkEnergy() {
 		sharkEnergy+=1;
@@ -76,4 +58,6 @@ public abstract class Cell {
 	public int getSharkEnergy() {
 		return sharkEnergy;
 	}
+	
+
 }

@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package graphVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;

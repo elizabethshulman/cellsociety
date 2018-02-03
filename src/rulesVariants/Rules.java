@@ -3,7 +3,8 @@ package rulesVariants;
 import java.util.ArrayList;
 
 import cellVariants.Cell;
-import cellsociety_team10.Graph;
+import graphVariants.Graph;
+import graphVariants.PredatorPreyGraph;
 
 public abstract class Rules {
 	/**

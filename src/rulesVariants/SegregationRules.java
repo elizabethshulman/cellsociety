@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
-import cellsociety_team10.Graph;
+import graphVariants.Graph;
 
 /**
  * 

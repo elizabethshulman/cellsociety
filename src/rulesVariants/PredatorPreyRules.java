@@ -22,7 +22,6 @@ public class PredatorPreyRules extends Rules{
 	}
 	
 	
-	//UPDATE GRAPH
 	@Override
 	protected Graph applyGraphRules(Graph g) {
 		initialCellMovement(g);
@@ -34,11 +33,11 @@ public class PredatorPreyRules extends Rules{
 
 	private void initialCellMovement(Graph g) {
 		for(Cell c:g.getCells()) {
-			//FISH
+			
 			if(c.getState()==1) {
 				moveFish(c, g.getNeighbors(c));
 			}
-			//SHARK
+			
 			else if(c.getState()==2) {
 				moveShark(c, g.getNeighbors(c));
 			}

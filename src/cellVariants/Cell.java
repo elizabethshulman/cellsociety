@@ -1,13 +1,19 @@
 package cellVariants;
 
+import java.util.HashMap;
+
+import cellsociety_team10.Helper;
+import javafx.scene.image.ImageView;
+
 public abstract class Cell {
 
 	private int state;
+	private HashMap<Integer, ImageView> statesAndColors;
 	//move
-	private int reproductiveTime;
-	private int sharkEnergy;
-	private boolean reproduce;
-	private boolean movedThisTurn;
+	private int reproductiveTime=0;
+	private int sharkEnergy=3; //determine where to set initial shark energy
+	private boolean reproduce=false;
+	private boolean movedThisTurn=false;
 	
 	private int row;
 	private int col;
@@ -16,13 +22,18 @@ public abstract class Cell {
 	
 	public Cell(int st) {
 		state = st;
-		
-		//move
-		reproductiveTime=0;
-		sharkEnergy=3; //determine where to set initial shark energy
-		reproduce=false;
-		movedThisTurn=false;
+		buildHashMap();
 	}
+
+
+
+	private void buildHashMap() {
+		statesAndColors.put(0, Helper.generateImageView("burgundy.png"));
+		statesAndColors.put(1, Helper.generateImageView("navy.png"));
+		statesAndColors.put(2, Helper.generateImageView("lightblue.png"));
+	}
+
+
 
 	public int getRow() {
 		return row;
@@ -48,7 +59,9 @@ public abstract class Cell {
 		state = st;
 	}
 	
-	
+	public ImageView getImageView() {
+		return statesAndColors.get(state);
+	}
 	
 	
 	

@@ -2,13 +2,12 @@ package rulesVariants;
 
 import java.util.ArrayList;
 
-import cellsociety_team10.Cell;
-import cellsociety_team10.Rules;
+import cellVariants.Cell;
 
-public class RulesGameOfLife extends Rules{
+public class GameOfLifeRules extends Rules{
 
-	
-	public Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {	
+	@Override
+	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {	
 		//assuming 0 for dead, 1 for alive
 		int livecount = 0;
 		for(Cell c:neighbors) if(c.getState()==1) livecount+=1;
@@ -22,6 +21,7 @@ public class RulesGameOfLife extends Rules{
 		return false;
 	}
 	
+	@Override
 	public void act(Cell c) {
 		if(c.getState()==0) c.setState(1);
 		else c.setState(0);

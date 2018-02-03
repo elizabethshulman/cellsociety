@@ -3,7 +3,7 @@ package fileInfoExtractorVariants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import cellsociety_team10.Cell;
+import cellVariants.*;
 import cellsociety_team10.FileInfoExtractor;
 
 public final class FireFIE extends FileInfoExtractor {
@@ -22,7 +22,7 @@ public final class FireFIE extends FileInfoExtractor {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 2)
 			throw new XMLStreamException("Invalid Fire cell type.");
-		return new Cell(val);
+		return new GameOfLifeCell(val);
 	}
 
 }

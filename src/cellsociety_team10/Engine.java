@@ -3,6 +3,7 @@ package cellsociety_team10;
 import java.io.File;
 import java.util.ResourceBundle;
 
+import graphVariants.Graph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;

@@ -3,7 +3,7 @@ package fileInfoExtractorVariants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import cellsociety_team10.Cell;
+import cellVariants.*;
 import cellsociety_team10.FileInfoExtractor;
 
 public class SegregationFIE extends FileInfoExtractor {
@@ -21,9 +21,9 @@ public class SegregationFIE extends FileInfoExtractor {
 	protected Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
 		{
-			case "E": return new Cell(0);
-			case "R": return new Cell(1);
-			case "B": return new Cell(2);
+			case "E": return new GameOfLifeCell(0);
+			case "R": return new GameOfLifeCell(1);
+			case "B": return new GameOfLifeCell(2);
 			default: throw new XMLStreamException("Invalid Segregation cell type");
 		}
 	}

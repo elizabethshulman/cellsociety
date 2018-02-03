@@ -7,6 +7,7 @@ import java.util.Random;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import cellVariants.Cell;
 
 public class SquareContainer extends Container {
 	private static final double GRID_SIZE = 400;

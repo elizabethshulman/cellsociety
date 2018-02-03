@@ -8,6 +8,8 @@ public abstract class Cell {
 	private int sharkEnergy;
 	private boolean reproduce;
 	
+	private int row;
+	private int col;
 	
 	
 	
@@ -18,6 +20,22 @@ public abstract class Cell {
 		reproductiveTime=0;
 		sharkEnergy=3; //determine where to set initial shark energy
 		reproduce=false;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int r) {
+		row = r;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int c) {
+		col = c;
 	}
 	
 	public int getState() {
@@ -76,4 +94,5 @@ public abstract class Cell {
 	public int getSharkEnergy() {
 		return sharkEnergy;
 	}
+
 }

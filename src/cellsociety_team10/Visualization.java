@@ -3,6 +3,7 @@ package cellsociety_team10;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import cellVariants.Cell;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 

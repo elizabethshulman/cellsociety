@@ -4,7 +4,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import cellVariants.GameOfLifeCell;
-import cellsociety_team10.Cell;
+import cellVariants.*;
 import cellsociety_team10.FileInfoExtractor;
 
 public class GameOfLifeFIE extends FileInfoExtractor {

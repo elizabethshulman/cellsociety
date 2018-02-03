@@ -16,6 +16,7 @@ public class PredatorPreyRules extends Rules{
 	Double sharkStarveTime;
 	
 	public PredatorPreyRules(FileProcessor fp) {
+		super(fp);
 		fishReproductionAge=fp.getGlobalVars().get("fishBreedTime");
 		sharkReproductionAge=fp.getGlobalVars().get("sharkBreedTime");
 		sharkStarveTime=fp.getGlobalVars().get("sharkStarveTime");

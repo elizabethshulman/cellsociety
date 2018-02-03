@@ -15,7 +15,6 @@ public class FileProcessor {
 	private String filepath;
 	private String author;
 	private String title;
-	private Cell[][] grid;
 	private HashMap<String,Double> globalVars;
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
@@ -38,9 +37,6 @@ public class FileProcessor {
 	public String getTitle() {
 		return title;
 	}
-	public Cell[][] getGrid() {
-		return grid;
-	}
 	public HashMap<String,Double> getGlobalVars() {
 		return globalVars;
 	}
@@ -55,7 +51,7 @@ public class FileProcessor {
 		readCells();
 	}
 	// Reads the header section of the file
-	protected void readHeader() throws XMLStreamException {
+	private void readHeader() throws XMLStreamException {
 		int xmlEvent;
 		do
 		{
@@ -82,7 +78,7 @@ public class FileProcessor {
 		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
 		
 	}
-	protected void readGlobalVars() throws XMLStreamException {
+	private void readGlobalVars() throws XMLStreamException {
 		globalVars = new HashMap<String,Double>();
 		int xml;
 		myParser.next();
@@ -96,7 +92,7 @@ public class FileProcessor {
 	}
 	
 	//Creates 2D array based on information from file
-	protected void readCells() throws XMLStreamException {
+	private void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
 		ArrayList<Cell> newRow = new ArrayList<Cell>();
 		while(true)
@@ -117,36 +113,55 @@ public class FileProcessor {
 				  {
 				  	case "row": newGrid.add(newRow); break;
 				  	case "grid":
-				  		grid = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
+				  		Cell[][] cellArray = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
+				  		createCellMap(cellArray);
 				  		return;
 				  }
 			  }
 		}
 		
 	}
+	//
 	//convert Cell grid to hashmap
-	public static void createCellMap()
+	private void createCellMap(Cell[][] cellArray)
 	{
-		
+		cellGrid = new HashMap<Cell, ArrayList<Cell>>();
+		ArrayList<Cell> neighbors;
+		for(int x = 0; x < cellArray.length; x++)
+			for(int y = 0; y < cellArray[x].length; y++)
+			{
+				neighbors = new ArrayList<Cell>();
+				Cell toAdd = cellArray[x][y];
+				toAdd.setRow(x);
+				toAdd.setCol(y);
+				ArrayList<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
+				for(int a = 0; a < neighborIndices.size(); a++)
+				{
+					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);
+				}
+				cellGrid.put(toAdd, neighbors);
+			}
 	}
-	//temporary tester method
+	// temporary tester method
 	public static void main(String[] args)
 	{
 		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/predatorprey1.xml");
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/simulations/segregation/segregation1.xml");
 			fp.readFile();
-			Cell[][] g = fp.getGrid();
-			for(int a = 0; a < g.length; a++)
-			{
-				for(int b = 0; b < g[a].length; b++)
-					System.out.print(g[a][b].getState());
-				System.out.println();
-			}
+			System.out.println(fp.getType());
 			HashMap<String,Double> globalVar = fp.getGlobalVars();
 			for(String s: globalVar.keySet())
 				System.out.println(s + ": " + globalVar.get(s));
+			for(Cell c : fp.getCellGrid().keySet())
+			{
+				System.out.print(c.getRow() + " " + c.getCol() + ": ");
+				ArrayList<Cell> neighboring = fp.getCellGrid().get(c);
+				for(int a = 0; a < neighboring.size(); a++)
+					System.out.print(neighboring.get(a).getRow() + " " + neighboring.get(a).getCol() + ", ");
+				System.out.println();
+			}
 		} catch (Exception e) {
-			throw new IllegalArgumentException("You're stupid");
+			throw new IllegalArgumentException("Invalid filepath");
 		}
 	}
 

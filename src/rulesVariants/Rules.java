@@ -3,8 +3,8 @@ package rulesVariants;
 import java.util.ArrayList;
 
 import cellVariants.Cell;
+import cellsociety_team10.FileProcessor;
 import graphVariants.Graph;
-import graphVariants.PredatorPreyGraph;
 
 public abstract class Rules {
 	/**
@@ -14,7 +14,12 @@ public abstract class Rules {
 	 * Methods:
 	 * 		applyGridRules() --> build and return an update array
 	 */
-
+	private FileProcessor fp;
+	
+	public Rules(FileProcessor fileRead)
+	{
+		fp = fileRead;
+	}
 	
 	//return updated graph
 	protected Graph applyGraphRules(Graph g) {
@@ -36,5 +41,9 @@ public abstract class Rules {
 	
 	//change cell state accordingly
 	protected void act(Cell c) {
+	}
+
+	public FileProcessor getFileProcessor() {
+		return fp;
 	}
 }

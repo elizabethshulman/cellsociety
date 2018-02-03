@@ -1,5 +1,7 @@
 package fileInfoExtractorVariants;
 
+import java.util.ArrayList;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
@@ -26,6 +28,19 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 			case "S": return new PredatorPreyCell(2);
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
 		}
+	}
+	@Override
+	public ArrayList<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
+		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
+		for(int a = row - 1; a <= row + 1; a++) {
+			for(int b = col - 1; b <= col + 1; b++) {
+				if(a == row ^ b == col)
+				if(isValidGridLocation(a,b,gridRowLength,gridColLength))
+					neighborCoordinates.add(new int[]{a,b});
+				else neighborCoordinates.add(new int[]{(a + gridRowLength) % gridRowLength,(b + gridColLength) % gridColLength});
+			}
+		}
+		return neighborCoordinates;
 	}
 
 }

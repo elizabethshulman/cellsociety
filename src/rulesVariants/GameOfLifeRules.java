@@ -3,8 +3,13 @@ package rulesVariants;
 import java.util.ArrayList;
 
 import cellVariants.Cell;
+import cellsociety_team10.FileProcessor;
 
 public class GameOfLifeRules extends Rules{
+	
+	public GameOfLifeRules(FileProcessor fileRead) {
+		super(fileRead);
+	}
 
 	@Override
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {	

@@ -7,6 +7,7 @@ public abstract class Cell {
 	private int reproductiveTime;
 	private int sharkEnergy;
 	private boolean reproduce;
+	private boolean movedThisTurn;
 	
 	private int row;
 	private int col;
@@ -20,6 +21,7 @@ public abstract class Cell {
 		reproductiveTime=0;
 		sharkEnergy=3; //determine where to set initial shark energy
 		reproduce=false;
+		movedThisTurn=false;
 	}
 
 	public int getRow() {
@@ -94,5 +96,15 @@ public abstract class Cell {
 	public int getSharkEnergy() {
 		return sharkEnergy;
 	}
+	
+
+	public boolean hasMovedThisTurn() {
+		return movedThisTurn;
+	}
+
+	public void setMovedThisTurn(boolean movedThisTurn) {
+		this.movedThisTurn = movedThisTurn;
+	}
+	
 
 }

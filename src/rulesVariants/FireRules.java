@@ -15,12 +15,13 @@ import cellsociety_team10.FileProcessor;
  * Tree: 1
  * Burning: 2
  */
-public class SpreadingOfFireRules extends Rules {
+public class FireRules extends Rules {
 	
 	private final double probCatch;
 	private Random randomGenerator = new Random();
 	
-	public SpreadingOfFireRules(FileProcessor fp) {
+	public FireRules(FileProcessor fp) {
+		super(fp);
 		probCatch = fp.getGlobalVars().get("probCatch"); //confirm with Andrew	
 	}
 	

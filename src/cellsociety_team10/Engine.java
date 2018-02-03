@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import rulesVariants.*;
 
 public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
@@ -108,6 +109,18 @@ public class Engine extends Application {
 	}
 
 	private void selectFile(File filename) {
+		try {
+			FileProcessor fp = new FileProcessor(filename.getAbsolutePath());
+			fp.readFile();
+			String className = "rulesVariants." + fp.getType() + "Rules";
+			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(FileProcessor.class).newInstance(fp);
+			myGraph = new Graph(ruleset);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(filename.getAbsolutePath());
+			throw new IllegalArgumentException("Invalid filepath");
+		}
 		//	sets up simulation to run with particular file specifications
 		myVis.ammendHeader("Currently running: " + filename.getName());
 		play();

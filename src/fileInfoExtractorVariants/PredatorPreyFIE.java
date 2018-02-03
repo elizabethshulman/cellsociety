@@ -34,7 +34,7 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
 		for(int a = row - 1; a <= row + 1; a++) {
 			for(int b = col - 1; b <= col + 1; b++) {
-				if(a == row && b == col)
+				if(a == row ^ b == col)
 				if(isValidGridLocation(a,b,gridRowLength,gridColLength))
 					neighborCoordinates.add(new int[]{a,b});
 				else neighborCoordinates.add(new int[]{(a + gridRowLength) % gridRowLength,(b + gridColLength) % gridColLength});

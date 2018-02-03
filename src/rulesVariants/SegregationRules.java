@@ -2,7 +2,6 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
@@ -18,6 +17,7 @@ public class SegregationRules extends Rules{
 	private final double satisfactionThreshold;
 	
 	public SegregationRules(FileProcessor fp) {
+		super(fp);
 		satisfactionThreshold = fp.getGlobalVars().get("satisfactionThreshold");
 	}
 	

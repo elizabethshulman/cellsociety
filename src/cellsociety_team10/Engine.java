@@ -21,7 +21,7 @@ public class Engine extends Application {
 
 	private ResourceBundle myResources;
 	private Timeline myAnimation;        
-	private Grid myGraph;
+	private Graph myGraph;
 	private Visualization myVis;
 	private Scene myStartScene;
 	private Stage myStage;

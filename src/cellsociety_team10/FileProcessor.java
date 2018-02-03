@@ -55,7 +55,7 @@ public class FileProcessor {
 		readCells();
 	}
 	// Reads the header section of the file
-	protected void readHeader() throws XMLStreamException {
+	private void readHeader() throws XMLStreamException {
 		int xmlEvent;
 		do
 		{
@@ -82,7 +82,7 @@ public class FileProcessor {
 		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
 		
 	}
-	protected void readGlobalVars() throws XMLStreamException {
+	private void readGlobalVars() throws XMLStreamException {
 		globalVars = new HashMap<String,Double>();
 		int xml;
 		myParser.next();
@@ -96,7 +96,7 @@ public class FileProcessor {
 	}
 	
 	//Creates 2D array based on information from file
-	protected void readCells() throws XMLStreamException {
+	private void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
 		ArrayList<Cell> newRow = new ArrayList<Cell>();
 		while(true)
@@ -117,17 +117,33 @@ public class FileProcessor {
 				  {
 				  	case "row": newGrid.add(newRow); break;
 				  	case "grid":
-				  		grid = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
+				  		Cell[][] cellArray = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
+				  		createCellMap(cellArray);
 				  		return;
 				  }
 			  }
 		}
 		
 	}
+	//
 	//convert Cell grid to hashmap
-	public static void createCellMap()
+	private void createCellMap(Cell[][] cellArray)
 	{
-		
+		ArrayList<Cell> neighbors;
+		for(int x = 0; x < cellArray.length; x++)
+			for(int y = 0; y < cellArray[x].length; y++)
+			{
+				neighbors = new ArrayList<Cell>();
+				Cell toAdd = cellArray[x][y];
+				toAdd.setRow(x);
+				toAdd.setRow(y);
+				ArrayList<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
+				for(int a = 0; a < neighborIndices.size(); a++)
+				{
+					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);
+				}
+				cellGrid.put(toAdd, neighbors);
+			}
 	}
 	//temporary tester method
 	public static void main(String[] args)

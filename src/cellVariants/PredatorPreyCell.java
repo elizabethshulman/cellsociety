@@ -2,10 +2,10 @@ package cellVariants;
 
 public class PredatorPreyCell extends Cell {
 
-	//can I set initial values here
 	private int reproductiveTime;
 	private int sharkEnergy;
 	private boolean reproduce;
+	private boolean movedThisTurn;
 	
 	public PredatorPreyCell(int st) {
 		/*
@@ -15,7 +15,7 @@ public class PredatorPreyCell extends Cell {
 		 */
 		super(st);
 		reproductiveTime=0;
-		sharkEnergy=3; //determine where to set initial shark energy
+		sharkEnergy=0; //determine where to set initial shark energy
 		reproduce=false;
 	}
 	
@@ -57,6 +57,14 @@ public class PredatorPreyCell extends Cell {
 	
 	public int getSharkEnergy() {
 		return sharkEnergy;
+	}
+
+	public boolean hasMovedThisTurn() {
+		return movedThisTurn;
+	}
+
+	public void setMovedThisTurn(boolean movedThisTurn) {
+		this.movedThisTurn = movedThisTurn;
 	}
 	
 

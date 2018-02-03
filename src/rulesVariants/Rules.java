@@ -1,9 +1,9 @@
 package rulesVariants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cellVariants.Cell;
-import cellsociety_team10.FileProcessor;
 import graphVariants.Graph;
 
 public abstract class Rules {
@@ -14,18 +14,16 @@ public abstract class Rules {
 	 * Methods:
 	 * 		applyGridRules() --> build and return an update array
 	 */
-	private FileProcessor fp;
 	
-	public Rules(FileProcessor fileRead)
-	{
-		fp = fileRead;
+	public Rules(){
+		
 	}
 	
 	//return updated graph
-	protected Graph applyGraphRules(Graph g) {
+	protected HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell,ArrayList<Cell>> g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();	
-		for(Cell c : g.getCells()) {
-			if(dissatisfied(c.getState(), g.getNeighbors(c))) {
+		for(Cell c : g.keySet()) {
+			if(dissatisfied(c.getState(), g.get(c))) {
 				needChange.add(c);
 			}
 		} for(Cell toAct : needChange) {
@@ -43,7 +41,4 @@ public abstract class Rules {
 	protected void act(Cell c) {
 	}
 
-	public FileProcessor getFileProcessor() {
-		return fp;
-	}
 }

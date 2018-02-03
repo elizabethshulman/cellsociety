@@ -21,7 +21,6 @@ public class FireRules extends Rules {
 	private Random randomGenerator = new Random();
 	
 	public FireRules(FileProcessor fp) {
-		super(fp);
 		probCatch = fp.getGlobalVars().get("probCatch"); //confirm with Andrew	
 	}
 	

@@ -2,6 +2,7 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
@@ -16,7 +17,6 @@ public class PredatorPreyRules extends Rules{
 	Double sharkStarveTime;
 	
 	public PredatorPreyRules(FileProcessor fp) {
-		super(fp);
 		fishReproductionAge=fp.getGlobalVars().get("fishBreedTime");
 		sharkReproductionAge=fp.getGlobalVars().get("sharkBreedTime");
 		sharkStarveTime=fp.getGlobalVars().get("sharkStarveTime");
@@ -24,7 +24,7 @@ public class PredatorPreyRules extends Rules{
 	
 	
 	@Override
-	protected Graph applyGraphRules(Graph g) {
+	protected HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
 		initialCellMovement(g);
 		updateSharkEnergy(g);
 		indicateReproduction(g);
@@ -32,21 +32,21 @@ public class PredatorPreyRules extends Rules{
 		return g;
 	}
 
-	private void initialCellMovement(Graph g) {
-		for(Cell c:g.getCells()) {
+	private void initialCellMovement(HashMap<Cell, ArrayList<Cell>> g) {
+		for(Cell c:g.keySet()) {
 			
 			if(c.getState()==1) {
-				moveFish(c, g.getNeighbors(c));
+				moveFish(c, g.get(c));
 			}
 			
 			else if(c.getState()==2) {
-				moveShark(c, g.getNeighbors(c));
+				moveShark(c, g.get(c));
 			}
 		}
 	}
 	
-	private void updateSharkEnergy(Graph g) {
-		for(Cell c:g.getCells()) {
+	private void updateSharkEnergy(HashMap<Cell, ArrayList<Cell>> g) {
+		for(Cell c:g.keySet()) {
 			if (c.getState()==2) {
 				c.increaseSharkEnergy();
 			} if(c.getSharkEnergy()>=sharkStarveTime) {
@@ -56,8 +56,8 @@ public class PredatorPreyRules extends Rules{
 		
 	}
 
-	private void indicateReproduction(Graph g) {
-		for(Cell c: g.getCells()) {
+	private void indicateReproduction(HashMap<Cell, ArrayList<Cell>> g) {
+		for(Cell c: g.keySet()) {
 			if((c.getState()==1 && (c.getReproductiveTime()>=fishReproductionAge)) ||
 					(c.getState()==2 && (c.getReproductiveTime()>=sharkReproductionAge))){
 				c.setReproduce(true);
@@ -67,8 +67,8 @@ public class PredatorPreyRules extends Rules{
 		}
 	}
 	
-	private void resetMovedThisTurn(Graph g) {
-		for(Cell c : g.getCells()) {
+	private void resetMovedThisTurn(HashMap<Cell, ArrayList<Cell>> g) {
+		for(Cell c : g.keySet()) {
 			c.setMovedThisTurn(false);
 		}
 	}

@@ -23,7 +23,7 @@ public class Graph {
 	
 	public Graph(Rules rules) {
 		myRules = rules;
-		fp = rules.getFileProcessor();
+//		fp = rules.getFileProcessor();
 		instantiate();
 	}
 	
@@ -33,7 +33,9 @@ public class Graph {
 		currentGrid = fp.getCellGrid();
 	}
 	
-	
+	private void buildNextGrid() {
+//		Graph g = myRules.applyGraphRules();
+	}
 	
 	
 	//GETTERS

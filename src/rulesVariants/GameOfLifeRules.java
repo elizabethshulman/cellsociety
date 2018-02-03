@@ -7,8 +7,7 @@ import cellsociety_team10.FileProcessor;
 
 public class GameOfLifeRules extends Rules{
 	
-	public GameOfLifeRules(FileProcessor fileRead) {
-		super(fileRead);
+	public GameOfLifeRules() {
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
@@ -17,7 +18,6 @@ public class SegregationRules extends Rules{
 	private final double satisfactionThreshold;
 	
 	public SegregationRules(FileProcessor fp) {
-		super(fp);
 		satisfactionThreshold = fp.getGlobalVars().get("satisfactionThreshold");
 	}
 	
@@ -27,16 +27,16 @@ public class SegregationRules extends Rules{
 	 * @return g, modified graph
 	 */
 	@Override
-	public Graph applyGraphRules(Graph g) {
+	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
 		
 		ArrayList<Cell> needChange = new ArrayList<Cell>();
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
 		
-		for(Cell c : g.getCells()) {
+		for(Cell c : g.keySet()) {
 			if(c.getState()==0) {
 				emptyCells.add(c);
 			} else {
-				if(dissatisfied(c.getState(), g.getNeighbors(c))) {
+				if(dissatisfied(c.getState(), g.get(c))) {
 					needChange.add(c);
 				}
 			}

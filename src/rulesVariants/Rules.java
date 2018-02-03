@@ -30,7 +30,7 @@ public abstract class Rules {
 	
 	//true if cell needs to change state, false if otherwise
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
-		return null;
+		return false;
 	}
 	
 	//change cell state accordingly

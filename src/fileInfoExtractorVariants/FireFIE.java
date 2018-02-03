@@ -22,7 +22,7 @@ public final class FireFIE extends FileInfoExtractor {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 2)
 			throw new XMLStreamException("Invalid Fire cell type.");
-		return new GameOfLifeCell(val);
+		return new FireCell(val);
 	}
 
 }

@@ -1,9 +1,6 @@
 package cellsociety_team10;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import cellVariants.Cell;
+import graphVariants.Graph;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -37,11 +34,11 @@ public class Visualization {
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	
-	public void visualizeGraph(HashMap<Cell, ArrayList<Cell>> cell_map) {
+	public void visualizeGraph(Graph g) {
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		
-		myVisualContainer.setGraphDisplay(cell_map);
+		myVisualContainer.setGraphDisplay(g);
 	}
 	
 	public Scene getScene() {

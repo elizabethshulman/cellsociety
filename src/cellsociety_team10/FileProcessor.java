@@ -123,11 +123,16 @@ public class FileProcessor {
 		}
 		
 	}
+	//convert Cell grid to hashmap
+	public static void createCellMap()
+	{
+		
+	}
 	//temporary tester method
 	public static void main(String[] args)
 	{
 		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/segregation1.xml");
+			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/predatorprey1.xml");
 			fp.readFile();
 			Cell[][] g = fp.getGrid();
 			for(int a = 0; a < g.length; a++)
@@ -136,6 +141,9 @@ public class FileProcessor {
 					System.out.print(g[a][b].getState());
 				System.out.println();
 			}
+			HashMap<String,Double> globalVar = fp.getGlobalVars();
+			for(String s: globalVar.keySet())
+				System.out.println(s + ": " + globalVar.get(s));
 		} catch (Exception e) {
 			throw new IllegalArgumentException("You're stupid");
 		}

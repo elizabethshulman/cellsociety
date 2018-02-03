@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation>
+   <header>
+      <simtype>PredatorPrey</simtype>
+      <author>Andrew Yeung</author>
+      <title>Wator World</title>
+   </header>
+   <global_vars>
+      <fishBreedTime>5</fishBreedTime>
+      <sharkBreedTime>20</sharkBreedTime>
+      <sharkStarveTime>5</sharkStarveTime>
+   </global_vars>
+   <grid>
+      <row>
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="E" />
+      </row>
+      <row >
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="S" />
+      </row>
+      <row>
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="S" />
+      </row>
+      <row>
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+      </row>
+      <row>
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="E" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+      </row>
+      <row>
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="F" />
+      </row>
+      <row>
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+      </row>
+      <row>
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="F" />
+      </row>
+      <row>
+         <cell state="F" />
+         <cell state="E" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="E" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+      </row>
+      <row>
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="F" />
+         <cell state="F" />
+         <cell state="S" />
+         <cell state="S" />
+         <cell state="S" />
+      </row>
+   </grid>
+</simulation>

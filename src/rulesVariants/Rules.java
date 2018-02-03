@@ -1,6 +1,10 @@
-package cellsociety_team10;
+package rulesVariants;
 
 import java.util.ArrayList;
+
+import cellVariants.Cell;
+import graphVariants.Graph;
+import graphVariants.PredatorPreyGraph;
 
 public abstract class Rules {
 	/**
@@ -13,7 +17,7 @@ public abstract class Rules {
 
 	
 	//return updated graph
-	Graph applyGraphRules(Graph g) {
+	protected Graph applyGraphRules(Graph g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();	
 		for(Cell c : g.getCells()) {
 			if(dissatisfied(c.getState(), g.getNeighbors(c))) {
@@ -26,11 +30,11 @@ public abstract class Rules {
 	}
 	
 	//true if cell needs to change state, false if otherwise
-	Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
-		return null;
+	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+		return false;
 	}
 	
 	//change cell state accordingly
-	void act(Cell c) {
+	protected void act(Cell c) {
 	}
 }

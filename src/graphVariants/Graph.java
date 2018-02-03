@@ -1,8 +1,11 @@
-package cellsociety_team10;
+package graphVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import cellVariants.Cell;
+import rulesVariants.Rules;
 
 
 /**
@@ -37,5 +40,11 @@ public class Graph {
 	
 	public ArrayList<Cell> getNeighbors(Cell c){
 		return currentGrid.get(c);
+	}
+	
+	
+	//SETTERS
+	public void setNeighbors(Cell c, ArrayList<Cell> newNeighbors) {
+		currentGrid.put(c, newNeighbors);
 	}
 }

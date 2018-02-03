@@ -16,7 +16,7 @@ public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final double SECOND_DELAY = 50.0;
-	private static final String SIM_FOLDER = "simulations/";
+	private static final String SIM_FOLDER = "data/simulations/";
 	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String LANGUAGE = "English";
 

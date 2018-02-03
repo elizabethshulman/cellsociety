@@ -10,7 +10,6 @@ import javafx.scene.layout.BorderPane;
 public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
 	private static final double SCREEN_WIDTH = 700;
-//	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
 	
 	private int myIteration = 0;
 	private BorderPane myBorderPane;
@@ -28,7 +27,6 @@ public class Visualization {
 		myControlPanel = cp;
 		
 		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
-//		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add("main.css");
 		
 		myBorderPane.setTop(myBar.getHBox());

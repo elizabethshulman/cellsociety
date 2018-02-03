@@ -41,10 +41,4 @@ public class Graph {
 	public ArrayList<Cell> getNeighbors(Cell c){
 		return currentGrid.get(c);
 	}
-	
-	
-	//SETTERS
-	public void setNeighbors(Cell c, ArrayList<Cell> newNeighbors) {
-		currentGrid.put(c, newNeighbors);
-	}
 }

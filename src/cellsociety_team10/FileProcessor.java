@@ -19,6 +19,8 @@ public class FileProcessor {
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
 	private HashMap<Cell,ArrayList<Cell>> cellGrid;
+	private int gridRowCount;
+	private int gridColCount;
 	
 	public FileProcessor(String fpath) throws FileNotFoundException, XMLStreamException{
 		filepath = fpath;
@@ -42,6 +44,12 @@ public class FileProcessor {
 	}
 	public HashMap<Cell,ArrayList<Cell>> getCellGrid() {
 		return cellGrid;
+	}
+	public int getRowCount(){
+		return gridRowCount;
+	}
+	public int getColCount() {
+		return gridColCount;
 	}
 	// Reads in the file and sets instance variables based on file information
 	public void readFile() throws XMLStreamException
@@ -125,6 +133,8 @@ public class FileProcessor {
 	//convert Cell grid to hashmap
 	private void createCellMap(Cell[][] cellArray)
 	{
+		gridRowCount = cellArray.length;
+		gridColCount = cellArray[0].length;
 		cellGrid = new HashMap<Cell, ArrayList<Cell>>();
 		ArrayList<Cell> neighbors;
 		for(int x = 0; x < cellArray.length; x++)

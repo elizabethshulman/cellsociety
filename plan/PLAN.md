@@ -129,6 +129,8 @@ There was discussion over whether to make grid instantiation a method within our
 
 There was a brief time in which we struggled to justify our Visualization class, primarily as we went back and forth on where we should implement the visualization aspects of the simulations. We needed to figure out how we were going to control the flow of information, wanting it to only flow downward (as opposed to having to pass our instance of the Engine class down to Visualization in order to handle button clicks properly). Ultimately we settled this by deciding on a ControlPanel class that would get passed into Visualization and include the necessary UI components.
 
+---
+
 ### Team Responsibilities
 
 * Andrew: In charge of the file reading capabilities and file formatting, e.g. all the FileProcessor classes and any relevant code in other classes. Backup: Elizabeth

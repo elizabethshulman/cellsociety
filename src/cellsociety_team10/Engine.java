@@ -12,14 +12,12 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import rulesVariants.*;
+import rulesVariants.Rules;
 
 public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
-	private static final double SECOND_DELAY = 50.0;
 	private static final String SIM_FOLDER = "data/simulations/";
-	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String LANGUAGE = "English";
 
 	private ResourceBundle myResources;
@@ -29,6 +27,8 @@ public class Engine extends Application {
 	private Scene myStartScene;
 	private Stage myStage;
 	private FileChooser myFileChooser;
+	private RulesFactory myRulesFactory;
+	private ControlPanel myControlPanel;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -40,45 +40,46 @@ public class Engine extends Application {
 	}
 
 	private void initializeSimulation(Stage stage) {
-		/**
-		 * read first line of file, determine simulation type
-		 * build appropriate fileProcessor, pass fp into grid
-		 * initialize Visualization myVis
-		 * 
-		 */
 		myStage = stage;
-		myStartScene = new StartPage(e -> buildFileChooser("predator"),
-									e -> buildFileChooser("segregation"),
-									e -> buildFileChooser("life"), 
-									e -> buildFileChooser("fire")).getScene();
-
-		myStage.setScene(myStartScene);
-		myStage.setTitle("Cell Society");
-		myStage.show();
 		
-//		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE);
+		myResources = ResourceBundle.getBundle(LANGUAGE);
+		
+		myStartScene = new StartPage(myResources,
+									e -> showFileChooser("predator"),
+									e -> showFileChooser("segregation"),
+									e -> showFileChooser("life"), 
+									e -> showFileChooser("fire")).getScene();
 		
 		myFileChooser = new FileChooser();
-		myFileChooser.setTitle("Cell Simulation File Chooser");
+		myFileChooser.setTitle(myResources.getString("FileTitle"));
+		
+		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
-		myVis = new Visualization(new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next()));
+		myControlPanel = new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next());
+		myVis = new Visualization(myControlPanel);
 		setupAnimation();
+		
+		myStage.setScene(myStartScene);
+		myStage.setTitle(myResources.getString("Title"));
+		myStage.show();
 	}
 
 	private void setupAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-				e -> step(SECOND_DELAY));
+				e -> step());
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
 		myAnimation.getKeyFrames().add(frame);
 		myAnimation.setRate(ANIM_RATE);
 	}
 
-	private void step(double elapsedTime) {
-//		if (myGraph.isDead()) {
-//			myAnimation.pause();
-//			myAnimation.setRate(0);
-//		}
+	private void step() {
+		if (myGraph.isDead()) {
+			myAnimation.pause();
+			myAnimation.setRate(0);
+			myControlPanel.disableButtons();
+			return;
+		}
 		myGraph.buildNextGrid();
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
@@ -95,36 +96,50 @@ public class Engine extends Application {
 	// would be called stop, but stop can't be overwritten with a lower
 	// visibility since it's implemented in the Application class
 	private void end() {
-		myAnimation.stop();
-		myVis.reset();
 		myStage.setScene(myStartScene);
 	}
 
 	private void next() {
 		myAnimation.pause();
-		step(SECOND_DELAY);
+		step();
 	}
 
-	private void buildFileChooser(String directory) {
+	private void showFileChooser(String directory) {
 		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
-		// need to handle if they hit cancel
 		File f = myFileChooser.showOpenDialog(myStage);
-		selectFile(f);
+		if (f != null) {
+			handleChosenFile(f);
+		}
 	}
 	
-	private void selectFile(File filename) {
+	private void resetEngine() {
+		myAnimation.setRate(ANIM_RATE);
+		myAnimation.stop();
+		
+		myVis.reset();
+	}
+	
+	private void handleChosenFile(File filename) {
+		FileProcessor fp;
 		try {
-			FileProcessor fp = new FileProcessor(filename.getAbsolutePath());
+			fp = new FileProcessor(filename.getAbsolutePath());
 			fp.readFile();
-			String className = "rulesVariants." + fp.getType() + "Rules";
-			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
-			myGraph = new Graph(ruleset,fp);
-			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
-			play();
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Invalid filepath");
+			throw new IllegalArgumentException("Invalid filepath.");
 		}
+		
+		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
+		myGraph = new Graph(curr_rules, fp);
+		
+		resetEngine();
+		
+		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
+		myVis.visualizeGraph(myGraph);
+		myStage.setScene(myVis.getScene());
+	}
+	
+	private String createHeaderText(String title, String author) {
+		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 }

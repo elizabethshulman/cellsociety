@@ -8,15 +8,9 @@ import cellVariants.Cell;
 public abstract class Rules {
 	/**
 	 * When given a grid, return a grid with updated cells per values stored in corresponding FileProcessor
-	 * Stores no data
-	 * 
-	 * Methods:
-	 * 		applyGridRules() --> build and return an update array
 	 */
 	
-	public Rules(){
-		
-	}
+	protected boolean dead=false;
 	
 	//return updated graph
 	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell,ArrayList<Cell>> g) {
@@ -28,9 +22,14 @@ public abstract class Rules {
 		} for(Cell toAct : needChange) {
 			act(toAct);
 		}
+		updateDeath(g);
 		return g;
 	}
 	
+	//check for simulation death & update boolean
+	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {		
+	}
+
 	//true if cell needs to change state, false if otherwise
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
 		return false;
@@ -38,6 +37,11 @@ public abstract class Rules {
 	
 	//change cell state accordingly
 	protected void act(Cell c) {
+	}
+
+	//true if simulation has run its course
+	public boolean simulationIsDead() {
+		return dead;
 	}
 
 }

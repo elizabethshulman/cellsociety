@@ -20,9 +20,11 @@ public class FireRules extends Rules {
 	private final double probCatchFire;
 	private Random randomGenerator = new Random();
 	
+	
 	public FireRules(HashMap<String,Double> globalVars) {
 		probCatchFire = globalVars.get("probCatchFire");	
 	}
+	
 	
 	@Override
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
@@ -31,6 +33,7 @@ public class FireRules extends Rules {
 				&& ((randomGenerator.nextInt(100)+1)/100.0<probCatchFire)));
 	}
 
+	
 	/**
 	 * @param neighbors		ArrayList of cells neighboring current cell
 	 * @return true if at least one neighbor is burning
@@ -43,10 +46,9 @@ public class FireRules extends Rules {
 		return false;
 	}
 	
+	
 	/**
-	 * A cell that acts must have state 1 or 2 (tree or burning, respectively)
-	 * If cell is burning, kill it
-	 * Otherwise, set tree on fire
+	 * A cell that acts must have state 1 or 2 (tree or burning, respectively). If cell is burning, kill it, otherwise set tree on fire
 	 */
 	@Override
 	protected void act(Cell c) {
@@ -54,6 +56,18 @@ public class FireRules extends Rules {
 			c.setState(0);
 		} else {
 			c.setState(2);
+		}
+	}
+	
+	
+	@Override
+	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+		dead=true;
+		for(Cell c:g.keySet()) {
+			if(c.getState()==2) {
+				dead=false;
+				break;
+			}
 		}
 	}
 }

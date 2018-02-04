@@ -23,6 +23,7 @@ public class Graph {
 	private int numCols;
 	private boolean dead=false;
 	
+	
 	public Graph(Rules rules, FileProcessor fp) {
 		myRules = rules;
 		currentGrid = fp.getCellGrid();
@@ -30,13 +31,14 @@ public class Graph {
 		numCols = fp.getColCount();
 	}
 	
+	
 	public void buildNextGrid() {
-		HashMap<Cell, ArrayList<Cell>> newgraph = myRules.applyGraphRules(currentGrid);
-		if(newgraph.equals(currentGrid)) {
+		currentGrid = myRules.applyGraphRules(currentGrid);
+		if(myRules.simulationIsDead()) {
 			dead=true;
-		} 
-		currentGrid=newgraph;
+		}
 	}
+	
 	
 	
 	//GETTERS

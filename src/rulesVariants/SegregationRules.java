@@ -14,10 +14,13 @@ import cellVariants.Cell;
 public class SegregationRules extends Rules{
 
 	private final double satisfactionThreshold;
+
 	
 	public SegregationRules(HashMap<String,Double> globalVars) {
 		satisfactionThreshold = globalVars.get("satisfactionThreshold");
 	}
+	
+	
 	
 	/**
 	 * Update graph according to two-party rules of segregation
@@ -41,13 +44,16 @@ public class SegregationRules extends Rules{
 		}
 		Collections.shuffle(needChange);
 		Collections.shuffle(emptyCells);
-		if(emptyCells.size()==0 || needChange.size()==0) {
+		if(emptyCells.isEmpty() || needChange.isEmpty()) {
+			updateDeath(g);
 			return g;
 		}
 		tradeCellStates(emptyCells, needChange);
 
 		return g;
 	}
+	
+	
 	
 	/**
 	 * Returns true if cell needs to change position, as its neighbors are too different
@@ -68,9 +74,12 @@ public class SegregationRules extends Rules{
 		if(notEmptyCount==0) {
 			return false;
 		}
-		return ((similarCount/notEmptyCount) < satisfactionThreshold);
+		return ((similarCount/(notEmptyCount*1.0)) < satisfactionThreshold);
 	}
 
+	
+	
+	
 	/**
 	 * Move dissatisfied cell to an empty cell
 	 * @param empty		ArrayList of empty cells
@@ -86,5 +95,12 @@ public class SegregationRules extends Rules{
 			cellToChange.setState(0);
 		}
 	}
-
+	
+	
+	
+	
+	@Override
+	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+		dead=true;  //why can't this be protected?
+	}
 }

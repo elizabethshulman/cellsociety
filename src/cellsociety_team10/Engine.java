@@ -121,7 +121,6 @@ public class Engine extends Application {
 			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
 			myGraph = new Graph(ruleset,fp);
 			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
-			play();
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Invalid filepath");
 		}

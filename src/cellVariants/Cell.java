@@ -18,23 +18,17 @@ public abstract class Cell {
 	private int row;
 	private int col;
 	
-	
-	
 	public Cell(int st) {
 		state = st;
 		statesAndColors = new HashMap<Integer, ImageView>();
 		buildHashMap();
 	}
 
-
-
 	private void buildHashMap() {
 		statesAndColors.put(0, Helper.generateImageView("lightblue.png"));
 		statesAndColors.put(1, Helper.generateImageView("burgundy.png"));
 		statesAndColors.put(2, Helper.generateImageView("navy.png"));
 	}
-
-
 
 	public int getRow() {
 		return row;

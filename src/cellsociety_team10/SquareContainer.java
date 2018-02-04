@@ -27,26 +27,6 @@ public class SquareContainer extends Container {
 		return myVBox;
 	}
 	
-//	private HBox buildGraphRow(int r) {
-//		String[] arr = new String[]{"yellow.png", "orange.png"};
-//		HBox hbox = new HBox();
-//		for (int c=0; c < n; c++) {
-//			int dex = new Random().nextInt(arr.length);
-//			hbox.getChildren().add(Helper.generateImageView(arr[dex], (GRID_SIZE - 2*2) / n));
-//		}
-//		hbox.setAlignment(Pos.CENTER);
-//		hbox.setMaxWidth(0);
-//		
-//		return hbox;
-//	}
-//	
-//	public void setGraphDisplay(Graph g) {
-//		myDisplay.getChildren().clear();
-//		for (int r=0; r < n; r++) {
-//			myDisplay.getChildren().add(buildGraphRow(r));
-//		}
-//	}
-	
 	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
 		HBox row = new HBox();
 		for (int c=0; c < num_cols; c++) {

@@ -16,7 +16,7 @@
          <cell state="R" />
          <cell state="B" />
          <cell state="R" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="R" />
          <cell state="B" />
          <cell state="E" />
@@ -51,7 +51,7 @@
          <cell state="R" />
          <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
+         <cell state="E" />
          <cell state="B" />
          <cell state="R" />
          <cell state="B" />
@@ -95,10 +95,10 @@
       </row>
       <row>
          <cell state="B" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="B" />
          <cell state="B" />
-         <cell state="B" />
+         <cell state="E" />
          <cell state="B" />
          <cell state="B" />
          <cell state="R" />
@@ -126,7 +126,7 @@
          <cell state="B" />
          <cell state="B" />
          <cell state="R" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="R" />
       </row>
    </grid>

@@ -20,6 +20,24 @@
 	-fx-background-color: #005b49;
 }
 
+#control_disabled {
+	-fx-background-color: #9DA09C;
+	-fx-text-fill: #24282b;
+	-fx-border-radius: 2px;
+    -fx-cursor: pointer;
+    -fx-display: flex;
+    -fx-align-self: center;
+    -fx-font-size: 15;
+    -fx-line-height: 1;
+    -fx-padding: 10px 30px;
+    -fx-text-decoration: none;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-font-weight: 700;
+    -fx-border-width: 2px;
+}
+
+
 #main-text {
 	-fx-font-family: 'Roboto', sans-serif;
 	-fx-font-size: 18;
@@ -78,6 +96,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #predator:hover {
@@ -95,6 +114,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #fire:hover {
@@ -111,6 +131,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #life:hover {
@@ -127,6 +148,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #segregation:hover {

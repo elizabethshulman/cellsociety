@@ -48,9 +48,10 @@ public class Visualization {
 	public void reset() {
 		myIteration = 0;
 		myControlPanel.resetSlider();
+		myControlPanel.enableButtons();
 	}
 	
 	public void amendHeader(String header) {
-		myBar.setSimType(header);
+		myBar.setSimHeader(header);
 	}
 }

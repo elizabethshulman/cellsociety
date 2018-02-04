@@ -75,7 +75,7 @@ public class Engine extends Application {
 	}
 
 	private void step(double elapsedTime) {
-		//		myGraph.buildNextGrid();
+		myGraph.buildNextGrid();
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}

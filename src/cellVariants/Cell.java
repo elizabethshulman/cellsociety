@@ -29,7 +29,7 @@ public abstract class Cell {
 
 
 	private void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("orange.png"));
+		statesAndColors.put(0, Helper.generateImageView("burgundy.png"));
 		statesAndColors.put(1, Helper.generateImageView("navy.png"));
 		statesAndColors.put(2, Helper.generateImageView("lightblue.png"));
 	}

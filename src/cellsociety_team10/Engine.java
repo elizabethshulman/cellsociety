@@ -134,12 +134,12 @@ public class Engine extends Application {
 		
 		reset();
 		
-		myVis.amendHeader(buildHeader(fp.getTitle(), fp.getAuthor()));
+		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}
 	
-	private String buildHeader(String title, String author) {
+	private String createHeaderText(String title, String author) {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 }

@@ -39,10 +39,12 @@ public class PredatorPreyRules extends Rules{
 
 	private void initialCellMovement(HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> temp) {
 		for(PredatorPreyCell c:temp.keySet()) {
-			if(c.getState()==1) {
-				moveFish(c, temp.get(c));
-			} else if(c.getState()==2) {
-				moveShark(c, temp.get(c));
+			if(!c.hasMovedThisTurn()) {
+				if(c.getState()==1) {
+					moveFish(c, temp.get(c));
+				} else if(c.getState()==2) {
+					moveShark(c, temp.get(c));
+				}
 			}
 		}
 	}
@@ -106,7 +108,7 @@ public class PredatorPreyRules extends Rules{
 		PredatorPreyCell cellToMoveTo = whereToMoveFish(c, neighbors);
 		if(c.equals(cellToMoveTo)) return;
 		cellToMoveTo.setState(1);
-		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
+		cellToMoveTo.setReproductiveTime(c.getReproductiveTime()+1);
 		handleReproduction(c);
 	}
 	
@@ -139,20 +141,29 @@ public class PredatorPreyRules extends Rules{
 		PredatorPreyCell cellToMoveTo = whereToMoveShark(c, neighbors);
 		
 		if(cellToMoveTo.equals(c)) {
+			c.setReproductiveTime(c.getReproductiveTime()+1); //potentially happening twice?
 			return; //indicates no possible movement options
 		}
-		
+		boolean movetofish=false;
+		if(cellToMoveTo.getState()==1) {
+			movetofish=true;
+		}
 		cellToMoveTo.setState(2);
-		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
-		cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
+		cellToMoveTo.setReproductiveTime(c.getReproductiveTime()+1);
+		if(movetofish) {
+			cellToMoveTo.setSharkEnergy(c.getSharkEnergy()-2);
+		} else {
+			cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
+		}
 		handleReproduction(c);
 	}
 	
 	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors){
 		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
 		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<PredatorPreyCell>();
-		
+
 		for(PredatorPreyCell n:neighbors) {
+
 			if(n.getState()==0 && (!n.hasMovedThisTurn())) {
 				emptyOptions.add(n);
 			} else if(n.getState()==1 && (!n.hasMovedThisTurn())) {
@@ -165,18 +176,17 @@ public class PredatorPreyRules extends Rules{
 			if(emptyOptions.isEmpty()) {
 				return c;
 			} else {
-//				Collections.shuffle(emptyOptions); //randomize fish movement
+				Collections.shuffle(emptyOptions); //randomize fish movement
 				cellToMoveTo = emptyOptions.remove(emptyOptions.size()-1);
 			}
 		} 
 		else {
-//			Collections.shuffle(fishOptions);
+			Collections.shuffle(fishOptions);
 			cellToMoveTo = fishOptions.remove(fishOptions.size()-1);
 		}
 		
 		cellToMoveTo.setMovedThisTurn(true);
 		c.setMovedThisTurn(true);
-		
 		return cellToMoveTo;
 	}
 	

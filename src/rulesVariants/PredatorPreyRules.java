@@ -101,24 +101,25 @@ public class PredatorPreyRules extends Rules{
 	
 	
 	//FISH MOVEMENT
-	private void moveFish(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList) {
+	private void moveFish(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
 
-		PredatorPreyCell cellToMoveTo = whereToMoveFish(c, arrayList);
+		PredatorPreyCell cellToMoveTo = whereToMoveFish(c, neighbors);
 		if(c.equals(cellToMoveTo)) return;
+		cellToMoveTo.setState(1);
 		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
 		handleReproduction(c);
 	}
 	
-	private PredatorPreyCell whereToMoveFish(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList) {
+	private PredatorPreyCell whereToMoveFish(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
 		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
-		for(PredatorPreyCell n:arrayList) {
+		for(PredatorPreyCell n:neighbors) {
 			if(n.getState()==0 && (!n.hasMovedThisTurn())) {
 				emptyOptions.add(n);
 			}
 		}
 		
 		if(emptyOptions.isEmpty()) return c;
-		Collections.shuffle(emptyOptions); //randomize fish movement
+//		Collections.shuffle(emptyOptions); //randomize fish movement
 		PredatorPreyCell cellToMoveTo = emptyOptions.remove(emptyOptions.size()-1);
 		
 		cellToMoveTo.setMovedThisTurn(true);
@@ -133,25 +134,25 @@ public class PredatorPreyRules extends Rules{
 	
 	//SHARK MOVEMENT
 	
-	private void moveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList) {
+	private void moveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
 		
-		PredatorPreyCell cellToMoveTo = whereToMoveShark(c, arrayList);
+		PredatorPreyCell cellToMoveTo = whereToMoveShark(c, neighbors);
 		
 		if(cellToMoveTo.equals(c)) {
 			return; //indicates no possible movement options
 		}
 		
-		cellToMoveTo.setState(c.getState());
+		cellToMoveTo.setState(2);
 		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
 		cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
 		handleReproduction(c);
 	}
 	
-	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList){
+	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors){
 		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
 		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<PredatorPreyCell>();
 		
-		for(PredatorPreyCell n:arrayList) {
+		for(PredatorPreyCell n:neighbors) {
 			if(n.getState()==0 && (!n.hasMovedThisTurn())) {
 				emptyOptions.add(n);
 			} else if(n.getState()==1 && (!n.hasMovedThisTurn())) {
@@ -164,12 +165,12 @@ public class PredatorPreyRules extends Rules{
 			if(emptyOptions.isEmpty()) {
 				return c;
 			} else {
-				Collections.shuffle(emptyOptions); //randomize fish movement
+//				Collections.shuffle(emptyOptions); //randomize fish movement
 				cellToMoveTo = emptyOptions.remove(emptyOptions.size()-1);
 			}
 		} 
 		else {
-			Collections.shuffle(fishOptions);
+//			Collections.shuffle(fishOptions);
 			cellToMoveTo = fishOptions.remove(fishOptions.size()-1);
 		}
 		

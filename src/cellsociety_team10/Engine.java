@@ -116,14 +116,13 @@ public class Engine extends Application {
 			String className = "rulesVariants." + fp.getType() + "Rules";
 			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
 			myGraph = new Graph(ruleset,fp);
-			
+			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
+			play();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(filename.getAbsolutePath());
 			throw new IllegalArgumentException("Invalid filepath");
 		}
-		//	sets up simulation to run with particular file specifications
-		myVis.amendHeader("Currently running: " + filename.getName());
-		play();
+		
 	}
 }

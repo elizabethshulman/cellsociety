@@ -17,7 +17,7 @@ public class Visualization {
 	private Scene myScene;
 	private HeaderBar myBar;
 	
-	public Visualization(ControlPanel cp, String title, String author) {
+	public Visualization(ControlPanel cp) {
 		myBorderPane = new BorderPane();
 		myBorderPane.setId("main-pane");
 		
@@ -51,6 +51,6 @@ public class Visualization {
 	}
 	
 	public void amendHeader(String header) {
-		myBar.setSimType(header);;
+		myBar.setSimType(header);
 	}
 }

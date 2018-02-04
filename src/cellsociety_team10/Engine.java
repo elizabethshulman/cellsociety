@@ -121,6 +121,11 @@ public class Engine extends Application {
 		}
 	}
 	
+	private void resetState() {
+		myControlPanel.enableButtons();
+		myAnimation.setRate(ANIM_RATE);
+	}
+	
 	private void handleChosenFile(File filename) {
 		FileProcessor fp;
 		try {
@@ -132,6 +137,8 @@ public class Engine extends Application {
 		
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
+		
+		resetState();
 		
 		myVis.amendHeader(buildHeader(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);

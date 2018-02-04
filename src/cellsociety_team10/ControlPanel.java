@@ -4,6 +4,7 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
@@ -25,6 +26,7 @@ public class ControlPanel {
 	private Text myIterationCount;
 	private Timeline myAnimation;
 	private Slider mySlider;
+	private HBox buttonBox;
 
 	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
 		myAnimation = animation;
@@ -33,20 +35,18 @@ public class ControlPanel {
 		myVBox.setId("control-panel-overall");
 		
 		HBox hb_top = topHBox();
-		HBox hb_bottom = bottomHBox(play_handler, pause_handler, stop_handler, next_handler);
-		myVBox.getChildren().addAll(hb_top, hb_bottom);
+		bottomHBox(play_handler, pause_handler, stop_handler, next_handler);
+		myVBox.getChildren().addAll(hb_top, buttonBox);
 	}
 	
-	private HBox bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
-		HBox hb_bottom = new HBox();
-		hb_bottom.setId("control-panel-bottom");
+	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
+		buttonBox = new HBox();
+		buttonBox.setId("control-panel-bottom");
 		
-		hb_bottom.getChildren().addAll(makeButton(PLAY, play_handler),
+		buttonBox.getChildren().addAll(makeButton(PLAY, play_handler),
 										makeButton(PAUSE, pause_handler),
 										makeButton(STOP, stop_handler),
 										makeButton(NEXT, next_handler));
-		
-		return hb_bottom;
 	}
 	
 	private HBox topHBox() {
@@ -119,5 +119,15 @@ public class ControlPanel {
 	
 	public void resetSlider() {
 		mySlider.setValue((MAX_SLIDER + MIN_SLIDER) / 2);
+	}
+	
+	public void disableButtons() {
+		for (int i=0; i < buttonBox.getChildren().size(); i++) {
+			// stop button needs to remain active for exit
+			if (i != 2) {
+				Node curr = buttonBox.getChildren().get(i);
+				curr.setId("control_disabled");
+			}
+		}
 	}
 }

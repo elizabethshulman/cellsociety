@@ -28,6 +28,7 @@ public class Engine extends Application {
 	private Stage myStage;
 	private FileChooser myFileChooser;
 	private RulesFactory myRulesFactory;
+	private ControlPanel myControlPanel;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -61,7 +62,8 @@ public class Engine extends Application {
 		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
-		myVis = new Visualization(new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next()));
+		myControlPanel = new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next());
+		myVis = new Visualization(myControlPanel);
 		setupAnimation();
 		
 		myStage.setScene(myStartScene);
@@ -78,10 +80,12 @@ public class Engine extends Application {
 	}
 
 	private void step() {
-//		if (myGraph.isDead()) {
-//			myAnimation.pause();
-//			myAnimation.setRate(0);
-//		}
+		if (myGraph.isDead()) {
+			myAnimation.pause();
+			myAnimation.setRate(0);
+			myControlPanel.disableButtons();
+			return;
+		}
 		myGraph.buildNextGrid();
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());

@@ -1,19 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simulation>
    <header>
-      <simtype>Fire</simtype>
+      <simtype>GameOfLife</simtype>
       <author>Andrew Yeung</author>
-      <title>Spreading Of Fire</title>
+      <title>Conway's Game of Life</title>
    </header>
    <global_vars>
-      <probCatchFire>0.5</probCatchFire>
    </global_vars>
    <grid>
       <row>
          <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+      </row>
+      <row>
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -23,83 +71,15 @@
       <row>
          <cell state="0" />
          <cell state="1" />
+         <cell state="0" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
          <cell state="0" />
       </row>
       <row>
-         <cell state="0" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="2" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="0" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="0" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -109,6 +89,4 @@
          <cell state="0" />
       </row>
    </grid>
-</simulation>
-  
 </simulation>

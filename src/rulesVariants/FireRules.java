@@ -1,0 +1,73 @@
+package rulesVariants;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import cellVariants.Cell;
+
+
+//Is it better to override the protected methods in Rules when applyGraphRules
+//must be overridden, or to create new private methods?
+
+/**
+ * Empty: 0
+ * Tree: 1
+ * Burning: 2
+ */
+public class FireRules extends Rules {
+	
+	private final double probCatchFire;
+	private Random randomGenerator = new Random();
+	
+	
+	public FireRules(HashMap<String,Double> globalVars) {
+		probCatchFire = globalVars.get("probCatchFire");	
+	}
+	
+	
+	@Override
+	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+		return(state==2 || 
+				(state==1 && neighborIsBurning(neighbors) 
+				&& ((randomGenerator.nextInt(100)+1)/100.0<probCatchFire)));
+	}
+
+	
+	/**
+	 * @param neighbors		ArrayList of cells neighboring current cell
+	 * @return true if at least one neighbor is burning
+	 * Currently considering all cell neighbors, regardless of 2D N/S/E/W specification
+	 */
+	private boolean neighborIsBurning(ArrayList<Cell> neighbors) {
+		for(Cell c:neighbors) {
+			if(c.getState()==2) return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * A cell that acts must have state 1 or 2 (tree or burning, respectively). If cell is burning, kill it, otherwise set tree on fire
+	 */
+	@Override
+	protected void act(Cell c) {
+		if(c.getState()==2) { 
+			c.setState(0);
+		} else {
+			c.setState(2);
+		}
+	}
+	
+	
+	@Override
+	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+		dead=true;
+		for(Cell c:g.keySet()) {
+			if(c.getState()==2) {
+				dead=false;
+				break;
+			}
+		}
+	}
+}

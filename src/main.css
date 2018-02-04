@@ -1,0 +1,206 @@
+/* This section deals with components from the ControlPanel. */
+#control {
+     -fx-background-color: #00BF9A;
+     -fx-border-radius: 2px;
+     -fx-cursor: pointer;
+     -fx-display: flex;
+     -fx-align-self: center;
+     -fx-font-size: 15;
+     -fx-line-height: 1;
+     -fx-padding: 10px 30px;
+     -fx-text-decoration: none;
+     -fx-text-align: center;
+     -fx-text-transform: uppercase;
+     -fx-font-weight: 700;
+     -fx-border-width: 2px;
+     -fx-text-fill: #F3F7F0;
+}
+
+#control:hover {
+	-fx-background-color: #005b49;
+}
+
+#control_disabled {
+	-fx-background-color: #9DA09C;
+	-fx-text-fill: #24282b;
+	-fx-border-radius: 2px;
+    -fx-cursor: pointer;
+    -fx-display: flex;
+    -fx-align-self: center;
+    -fx-font-size: 15;
+    -fx-line-height: 1;
+    -fx-padding: 10px 30px;
+    -fx-text-decoration: none;
+    -fx-text-align: center;
+    -fx-text-transform: uppercase;
+    -fx-font-weight: 700;
+    -fx-border-width: 2px;
+}
+
+
+#main-text {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 18;
+}
+
+#title-text {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 30;
+	-fx-fill: rgb(229, 229, 229);
+}
+
+#control-panel-bottom {
+	-fx-spacing: 30px;
+	-fx-alignment: center;
+	-fx-padding: 30px, 0px, 30px, 0px;
+}
+
+#cp-text {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 18;
+	-fx-fill: rgb(214, 214, 214);	
+}
+
+.axis {
+	-fx-tick-label-fill: rgb(214, 214, 214);
+	-fx-tick-label-font: bold 12 "sans-serif";
+	-fx-control-inner-background: #00BF9A;
+	-fx-padding: 0 0 -20 0;
+}
+
+#control-panel-overall {
+	-fx-background-color: rgb(0, 137, 117);
+	-fx-alignment: center;
+}
+
+#slider-hbox {
+	-fx-alignment: center;
+	-fx-spacing: 20px;
+}
+
+#control-panel-top {
+	-fx-alignment: center;
+	-fx-spacing: 40px;
+	-fx-padding: 20px, 0px, 0px, 0px;
+}
+
+
+/* This section deals with components from the StartPage. */
+#predator {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+	-fx-content-display: top;
+}
+
+#predator:hover {
+	-fx-background-color: rgb(114, 156, 255);
+	-fx-text-fill: rgb(229, 229, 229);
+}
+
+#fire {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+	-fx-content-display: top;
+}
+
+#fire:hover {
+	-fx-background-color: rgb(255, 173, 86);
+}
+
+#life {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+	-fx-content-display: top;
+}
+
+#life:hover {
+	-fx-background-color: rgb(163, 255, 112);
+}
+
+#segregation {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+	-fx-content-display: top;
+}
+
+#segregation:hover {
+	-fx-background-color: rgb(99, 219, 255);
+}
+
+#pick-sim {
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 25;
+	-fx-fill: rgb(105,105,105);
+}
+
+/* This section deals with components from the Containers. */
+#container-display {
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-style: solid;
+	-fx-border-width: 2px;
+	-fx-border-insets: 0;
+	-fx-max-width: 0px;
+}
+
+#container-row {
+	-fx-alignment: center;
+	-fx-max-width: 0px;
+}
+
+#container-vbox {
+	-fx-alignment: center;
+}
+
+/* This section deals with components from Visualization. */
+#main-pane {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-corner-radius: 0px;
+}
+
+/* This section deals with components from StartPage. */
+#box-bonanza {
+	-fx-alignment: center;
+	-fx-spacing: 30;
+}
+
+#header {
+	-fx-pref-height: 85;
+	-fx-background-color: rgb(0, 137, 117);
+	-fx-alignment: center;
+	-fx-spacing: 30px;
+}
+
+#background-bp {
+	-fx-background-color: rgb(249, 249, 249);
+}
+
+/* This section deals with components from StatusBar. */
+

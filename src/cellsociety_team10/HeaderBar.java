@@ -30,7 +30,7 @@ public class HeaderBar {
 		return hbox;
 	}
 	
-	public void setSimType(String type) {
-		sim_text.setText(type);
+	public void setSimHeader(String header) {
+		sim_text.setText(header);
 	}
 }

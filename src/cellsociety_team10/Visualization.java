@@ -51,6 +51,6 @@ public class Visualization {
 	}
 	
 	public void amendHeader(String header) {
-		myBar.setSimType(header);
+		myBar.setSimHeader(header);
 	}
 }

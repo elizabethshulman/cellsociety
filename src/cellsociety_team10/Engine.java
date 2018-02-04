@@ -17,9 +17,7 @@ import rulesVariants.Rules;
 public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
-	private static final double SECOND_DELAY = 50.0;
 	private static final String SIM_FOLDER = "data/simulations/";
-	private static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	private static final String LANGUAGE = "English";
 
 	private ResourceBundle myResources;
@@ -48,25 +46,27 @@ public class Engine extends Application {
 		 * 
 		 */
 		myStage = stage;
-		myStartScene = new StartPage(e -> buildFileChooser("predator"),
-									e -> buildFileChooser("segregation"),
-									e -> buildFileChooser("life"), 
-									e -> buildFileChooser("fire")).getScene();
-
-		myStage.setScene(myStartScene);
-		myStage.setTitle("Cell Society");
-		myStage.show();
 		
-//		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + LANGUAGE);
+		myResources = ResourceBundle.getBundle(LANGUAGE);
+		
+		myStartScene = new StartPage(myResources,
+									e -> showFileChooser("predator"),
+									e -> showFileChooser("segregation"),
+									e -> showFileChooser("life"), 
+									e -> showFileChooser("fire")).getScene();
 		
 		myFileChooser = new FileChooser();
-		myFileChooser.setTitle("Cell Simulation File Chooser");
+		myFileChooser.setTitle(myResources.getString("FileTitle"));
 		
 		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
 		myVis = new Visualization(new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next()));
 		setupAnimation();
+		
+		myStage.setScene(myStartScene);
+		myStage.setTitle(myResources.getString("Title"));
+		myStage.show();
 	}
 
 	private void setupAnimation() {
@@ -108,17 +108,16 @@ public class Engine extends Application {
 		step();
 	}
 
-	private void buildFileChooser(String directory) {
+	private void showFileChooser(String directory) {
 		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
-		if (f == null) {
-			return;
+		if (f != null) {
+			handleChosenFile(f);
 		}
-		selectFile(f);
 	}
 	
-	private void selectFile(File filename) {
+	private void handleChosenFile(File filename) {
 		FileProcessor fp;
 		try {
 			fp = new FileProcessor(filename.getAbsolutePath());
@@ -130,8 +129,12 @@ public class Engine extends Application {
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 		
-		myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
+		myVis.amendHeader(buildHeader(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
+	}
+	
+	private String buildHeader(String title, String author) {
+		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 }

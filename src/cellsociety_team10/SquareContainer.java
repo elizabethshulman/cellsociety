@@ -50,7 +50,7 @@ public class SquareContainer extends Container {
 		for (Cell curr : g.getCells()) {
 			ImageView curr_image_view = curr.getImageView();
 			curr_image_view.setPreserveRatio(true);
-			curr_image_view.setFitHeight((GRID_SIZE - 2 * 2) / g.getCols());
+			curr_image_view.setFitHeight((GRID_SIZE - 2 * 2.0) / g.getCols());
 			curr_grid[curr.getRow()][curr.getCol()] = curr_image_view;
 		}
 		return curr_grid;

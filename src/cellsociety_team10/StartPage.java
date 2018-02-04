@@ -1,6 +1,7 @@
 package cellsociety_team10;
 
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -20,18 +21,23 @@ public class StartPage {
 	private static final String STYLESHEET_NAME = "main.css";
 
 
-	private HashMap<String, String> myNameMap = createNameMap();
+	private HashMap<String, String> myNameMap;
 	private Scene myScene;
+	private ResourceBundle myResources;
 
-	public StartPage(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
+	public StartPage(ResourceBundle resource_bundle, EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
+		myResources = resource_bundle;
+		
 		BorderPane border_pane = new BorderPane();
 		border_pane.setId("background-bp");
-		
+
 		myScene = new Scene(border_pane, SCREEN_WIDTH, SCREEN_HEIGHT);
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(STYLESHEET_NAME);
 
-		border_pane.setTop(new HeaderBar("Cell Society").getHBox());
+		createNameMap();
+
+		border_pane.setTop(new HeaderBar(myResources.getString("Title")).getHBox());
 		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler));
 	}
 
@@ -39,12 +45,12 @@ public class StartPage {
 		VBox vbox = new VBox();
 		vbox.setId("box-bonanza");
 
-		Text pick_sim = new Text("Select a simulation:");
+		Text pick_sim = new Text(myResources.getString("SelectSim"));
 		pick_sim.setId("pick-sim");
-		
+
 		HBox row_one = createRow(makeButton("life", life_handler), makeButton("fire", fire_handler));
 		HBox row_two = createRow(makeButton("predator", pred_handler), makeButton("segregation", seg_handler));
-		
+
 		vbox.getChildren().addAll(pick_sim, row_one, row_two);
 		return vbox;
 	}
@@ -58,7 +64,7 @@ public class StartPage {
 
 		return tester;
 	}
-	
+
 	private HBox createRow(Button one, Button two) {
 		HBox row = new HBox();
 		row.setId("box-bonanza");
@@ -66,15 +72,14 @@ public class StartPage {
 		return row;
 	}
 
-	private HashMap<String, String> createNameMap() {
-		HashMap<String, String> name_map = new HashMap<String, String>();
-		name_map.put("predator", "Predator-Prey Relationships");
-		name_map.put("segregation", "Model of Segregation");
-		name_map.put("life", "Game of Life");
-		name_map.put("fire", "Spreading of Fire");
-		return name_map;
+	private void createNameMap() {
+		myNameMap = new HashMap<String, String>();
+		myNameMap.put("predator", myResources.getString("PredButton"));
+		myNameMap.put("segregation", myResources.getString("SegButton"));
+		myNameMap.put("life", myResources.getString("LifeButton"));
+		myNameMap.put("fire", myResources.getString("FireButton"));
 	}
-	
+
 	public Scene getScene() {
 		return myScene;
 	}

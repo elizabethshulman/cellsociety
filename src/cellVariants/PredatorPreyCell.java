@@ -1,5 +1,7 @@
 package cellVariants;
 
+import cellsociety_team10.Helper;
+
 public class PredatorPreyCell extends Cell {
 
 	private int reproductiveTime;
@@ -27,6 +29,13 @@ public class PredatorPreyCell extends Cell {
 			reproduce=false;
 			sharkEnergy=0;
 		}
+	}
+	
+	@Override
+	protected void buildHashMap() {
+		statesAndColors.put(0, Helper.generateImageView("lightblue.png"));
+		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
+		statesAndColors.put(2, Helper.generateImageView("burgundy.png"));
 	}
 	
 	public void increaseSharkEnergy() {

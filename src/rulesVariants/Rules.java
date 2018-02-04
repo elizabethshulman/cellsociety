@@ -20,7 +20,7 @@ public abstract class Rules {
 	}
 	
 	//return updated graph
-	protected HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell,ArrayList<Cell>> g) {
+	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell,ArrayList<Cell>> g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();	
 		for(Cell c : g.keySet()) {
 			if(dissatisfied(c.getState(), g.get(c))) {

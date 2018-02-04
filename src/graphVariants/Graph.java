@@ -33,8 +33,8 @@ public class Graph {
 		currentGrid = fp.getCellGrid();
 	}
 	
-	private void buildNextGrid() {
-//		Graph g = myRules.applyGraphRules();
+	public void buildNextGrid() {
+		currentGrid = myRules.applyGraphRules(currentGrid);
 	}
 	
 	

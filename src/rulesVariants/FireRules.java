@@ -21,18 +21,14 @@ public class FireRules extends Rules {
 	private Random randomGenerator = new Random();
 	
 	public FireRules(HashMap<String,Double> globalVars) {
-<<<<<<< HEAD
 		probCatchFire = globalVars.get("probCatchFire"); //confirm with Andrew	
-=======
-		probCatch = globalVars.get("probCatchFire"); //confirm with Andrew	
->>>>>>> bb41cd50734e16368c14f6d6d49f66253a28c901
 	}
 	
 	@Override
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
 		return(state==2 || 
 				(state==1 && neighborIsBurning(neighbors) 
-				&& (randomGenerator.nextInt(100)+1)>probCatchFire));
+				&& ((randomGenerator.nextInt(100)+1)/100.0<probCatchFire)));
 	}
 
 	/**

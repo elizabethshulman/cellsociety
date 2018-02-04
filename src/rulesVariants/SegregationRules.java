@@ -54,13 +54,21 @@ public class SegregationRules extends Rules{
 	 */
 	@Override
 	public Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+		if(state==0) return false;
+		
 		int similarCount=0;
+		int notEmptyCount=0;
 		for(Cell c:neighbors) {
 			if(c.getState()==state) {
 				similarCount+=1;
+			} if(c.getState()!=0) {
+				notEmptyCount+=1;
 			}
 		}
-		return (similarCount/neighbors.size() < satisfactionThreshold);
+		if(notEmptyCount==0) {
+			return false;
+		}
+		return ((similarCount/notEmptyCount) < satisfactionThreshold);
 	}
 
 	/**

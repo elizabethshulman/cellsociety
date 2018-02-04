@@ -17,10 +17,11 @@ import rulesVariants.Rules;
  */
 public class Graph {
 
-	HashMap<Cell, ArrayList<Cell>> currentGrid;
-	Rules myRules;
-	int numRows;
-	int numCols;
+	private HashMap<Cell, ArrayList<Cell>> currentGrid;
+	private Rules myRules;
+	private int numRows;
+	private int numCols;
+	private boolean dead=false;
 	
 	public Graph(Rules rules, FileProcessor fp) {
 		myRules = rules;
@@ -30,7 +31,11 @@ public class Graph {
 	}
 	
 	public void buildNextGrid() {
-		currentGrid = myRules.applyGraphRules(currentGrid);
+		HashMap<Cell, ArrayList<Cell>> newgraph = myRules.applyGraphRules(currentGrid);
+		if(newgraph.equals(currentGrid)) {
+			dead=true;
+		} 
+		currentGrid=newgraph;
 	}
 	
 	
@@ -48,5 +53,9 @@ public class Graph {
 	}
 	public int getCols() {
 		return numCols;
+	}
+
+	public boolean isDead() {
+		return dead;
 	}
 }

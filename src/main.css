@@ -78,6 +78,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #predator:hover {
@@ -95,6 +96,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #fire:hover {
@@ -111,6 +113,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #life:hover {
@@ -127,6 +130,7 @@
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
 	-fx-min-width: 240px;
+	-fx-content-display: top;
 }
 
 #segregation:hover {

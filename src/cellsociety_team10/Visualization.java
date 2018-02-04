@@ -10,7 +10,7 @@ public class Visualization {
 	private static final String CSS_STRING = "main.css";
 	private static final String FONT_URL = "https://fonts.googleapis.com/css?family=Roboto:700";
 	
-	private int myIteration = 0;
+	private int myIteration;
 	private BorderPane myBorderPane;
 	private Container myVisualContainer;
 	private ControlPanel myControlPanel;
@@ -46,7 +46,7 @@ public class Visualization {
 	}
 	
 	public void reset() {
-		myIteration = 0;
+		myIteration = -1;
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 	}

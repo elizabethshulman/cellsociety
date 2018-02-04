@@ -17,18 +17,18 @@ import cellVariants.Cell;
  */
 public class FireRules extends Rules {
 	
-	private final double probCatch;
+	private final double probCatchFire;
 	private Random randomGenerator = new Random();
 	
 	public FireRules(HashMap<String,Double> globalVars) {
-		probCatch = globalVars.get("probCatch"); //confirm with Andrew	
+		probCatchFire = globalVars.get("probCatchFire"); //confirm with Andrew	
 	}
 	
 	@Override
 	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
 		return(state==2 || 
 				(state==1 && neighborIsBurning(neighbors) 
-				&& (randomGenerator.nextInt(100)+1)>probCatch));
+				&& (randomGenerator.nextInt(100)+1)>probCatchFire));
 	}
 
 	/**

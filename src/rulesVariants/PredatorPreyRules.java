@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import cellVariants.Cell;
-import cellsociety_team10.FileProcessor;
-import graphVariants.Graph;
 
 public class PredatorPreyRules extends Rules{
 	//revise to see if there are ways to simplify movement/creation of arrayLists/iterating through graph
@@ -16,10 +14,10 @@ public class PredatorPreyRules extends Rules{
 	Double sharkReproductionAge;
 	Double sharkStarveTime;
 	
-	public PredatorPreyRules(FileProcessor fp) {
-		fishReproductionAge=fp.getGlobalVars().get("fishBreedTime");
-		sharkReproductionAge=fp.getGlobalVars().get("sharkBreedTime");
-		sharkStarveTime=fp.getGlobalVars().get("sharkStarveTime");
+	public PredatorPreyRules(HashMap<String,Double> globalVars) {
+		fishReproductionAge = globalVars.get("fishBreedTime");
+		sharkReproductionAge = globalVars.get("sharkBreedTime");
+		sharkStarveTime=globalVars.get("sharkStarveTime");
 	}
 	
 	

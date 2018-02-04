@@ -2,17 +2,17 @@ package graphVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 import cellVariants.PredatorPreyCell;
+import cellsociety_team10.FileProcessor;
 import rulesVariants.Rules;
 
 public class PredatorPreyGraph extends Graph {
 
 	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentGrid;
 	
-	public PredatorPreyGraph(Rules rules) {
-		super(rules);
+	public PredatorPreyGraph(Rules rules, FileProcessor fp) {
+		super(rules, fp);
 		instantiate();
 	}
 

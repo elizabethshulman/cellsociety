@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 
 import cellVariants.Cell;
-import cellsociety_team10.FileProcessor;
-import graphVariants.Graph;
 
 /**
  * 
@@ -17,8 +15,8 @@ public class SegregationRules extends Rules{
 
 	private final double satisfactionThreshold;
 	
-	public SegregationRules(FileProcessor fp) {
-		satisfactionThreshold = fp.getGlobalVars().get("satisfactionThreshold");
+	public SegregationRules(HashMap<String,Double> globalVars) {
+		satisfactionThreshold = globalVars.get("satisfactionThreshold");
 	}
 	
 	/**

@@ -18,19 +18,15 @@ import rulesVariants.Rules;
 public class Graph {
 
 	HashMap<Cell, ArrayList<Cell>> currentGrid;
-	FileProcessor fp;
 	Rules myRules;
+	int numRows;
+	int numCols;
 	
-	public Graph(Rules rules) {
+	public Graph(Rules rules, FileProcessor fp) {
 		myRules = rules;
-//		fp = rules.getFileProcessor();
-		instantiate();
-	}
-	
-	private void instantiate() {
-		//ask Andrew about what incoming cell data looks like
-		//update (build initial map) when input is clear (maybe a rules.getCellCount()?)
 		currentGrid = fp.getCellGrid();
+		numRows = fp.getRowCount();
+		numCols = fp.getColCount();
 	}
 	
 	public void buildNextGrid() {
@@ -45,5 +41,12 @@ public class Graph {
 	
 	public ArrayList<Cell> getNeighbors(Cell c){
 		return currentGrid.get(c);
+	}
+	
+	public int getRows() {
+		return numRows;
+	}
+	public int getCols() {
+		return numCols;
 	}
 }

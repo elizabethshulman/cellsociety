@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import cellVariants.Cell;
-import graphVariants.Graph;
 
 public abstract class Rules {
 	/**

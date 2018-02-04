@@ -1,10 +1,10 @@
 package rulesVariants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import cellVariants.Cell;
-import cellsociety_team10.FileProcessor;
 
 
 //Is it better to override the protected methods in Rules when applyGraphRules
@@ -20,8 +20,8 @@ public class FireRules extends Rules {
 	private final double probCatch;
 	private Random randomGenerator = new Random();
 	
-	public FireRules(FileProcessor fp) {
-		probCatch = fp.getGlobalVars().get("probCatch"); //confirm with Andrew	
+	public FireRules(HashMap<String,Double> globalVars) {
+		probCatch = globalVars.get("probCatch"); //confirm with Andrew	
 	}
 	
 	@Override

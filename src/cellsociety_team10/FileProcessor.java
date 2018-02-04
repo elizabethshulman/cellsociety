@@ -171,6 +171,7 @@ public class FileProcessor {
 				System.out.println();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid filepath");
 		}
 	}

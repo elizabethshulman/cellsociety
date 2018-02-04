@@ -1,13 +1,13 @@
 package rulesVariants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import cellVariants.Cell;
-import cellsociety_team10.FileProcessor;
 
 public class GameOfLifeRules extends Rules{
 	
-	public GameOfLifeRules() {
+	public GameOfLifeRules(HashMap<String,Double> globalVars) {
 	}
 
 	@Override

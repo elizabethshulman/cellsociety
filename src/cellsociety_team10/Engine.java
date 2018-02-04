@@ -104,10 +104,11 @@ public class Engine extends Application {
 	private void buildFileChooser(String directory) {
 		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
+		// need to handle if they hit cancel
 		File f = myFileChooser.showOpenDialog(myStage);
 		selectFile(f);
 	}
-
+	
 	private void selectFile(File filename) {
 		try {
 			FileProcessor fp = new FileProcessor(filename.getAbsolutePath());

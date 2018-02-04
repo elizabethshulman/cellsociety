@@ -1,7 +1,6 @@
 package cellsociety_team10;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import graphVariants.Graph;
@@ -56,7 +55,11 @@ public class Engine extends Application {
 		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
-		myControlPanel = new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next());
+		myControlPanel = new ControlPanel(myAnimation, 
+										e -> play(), 
+										e -> pause(), 
+										e -> end(), 
+										e -> next());
 		myVis = new Visualization(myControlPanel);
 		setupAnimation();
 		

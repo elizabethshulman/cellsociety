@@ -40,12 +40,6 @@ public class Engine extends Application {
 	}
 
 	private void initializeSimulation(Stage stage) {
-		/**
-		 * read first line of file, determine simulation type
-		 * build appropriate fileProcessor, pass fp into grid
-		 * initialize Visualization myVis
-		 * 
-		 */
 		myStage = stage;
 		
 		myResources = ResourceBundle.getBundle(LANGUAGE);
@@ -121,7 +115,7 @@ public class Engine extends Application {
 		}
 	}
 	
-	private void resetState() {
+	private void reset() {
 		myControlPanel.enableButtons();
 		myAnimation.setRate(ANIM_RATE);
 	}
@@ -138,7 +132,7 @@ public class Engine extends Application {
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 		
-		resetState();
+		reset();
 		
 		myVis.amendHeader(buildHeader(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);

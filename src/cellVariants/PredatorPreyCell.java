@@ -22,9 +22,11 @@ public class PredatorPreyCell extends Cell {
 	@Override
 	public void setState(int st) {
 		state=st;
-		reproductiveTime=0;
-		reproduce=false;
-		sharkEnergy=0;
+		if(st==0) {
+			reproductiveTime=0;
+			reproduce=false;
+			sharkEnergy=0;
+		}
 	}
 	
 	public void increaseSharkEnergy() {

@@ -3,6 +3,7 @@ package rulesVariants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
@@ -30,7 +31,6 @@ public class PredatorPreyRules extends Rules{
 		updateSharkEnergy(temp);
 		indicateReproduction(temp);
 		resetMovedThisTurn(temp);
-		
 		
 		HashMap<Cell, ArrayList<Cell>> returnGraph = new HashMap(temp);
 		updateDeath(returnGraph);
@@ -76,12 +76,26 @@ public class PredatorPreyRules extends Rules{
 	
 	private void handleReproduction(PredatorPreyCell c) {
 		if(c.getReproduce()==true) {
-			c.setState(c.getState());
+			c.setReproduce(false);
+			c.setSharkEnergy(0);
+			c.setReproductiveTime(0);
 		} else {
 			c.setState(0);
 		}
 	}
 	
+	@Override protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+		Set<Cell> cellSet = g.keySet();
+		Cell[] cellArray = cellSet.toArray(new Cell[0]);
+		int sampleState = cellArray[0].getState();
+		dead=true;
+		for(Cell c:cellArray) {
+			if(c.getState()!=sampleState) {
+				dead=false;
+				return;
+			}
+		}
+	}
 	
 	
 	
@@ -165,5 +179,5 @@ public class PredatorPreyRules extends Rules{
 		return cellToMoveTo;
 	}
 	
-
+	
 }

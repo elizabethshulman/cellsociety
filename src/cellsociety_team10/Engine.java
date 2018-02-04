@@ -123,7 +123,7 @@ public class Engine extends Application {
 			throw new IllegalArgumentException("Invalid filepath");
 		}
 		//	sets up simulation to run with particular file specifications
-		myVis.ammendHeader("Currently running: " + filename.getName());
+		myVis.amendHeader("Currently running: " + filename.getName());
 		play();
 	}
 }

@@ -22,7 +22,7 @@ public class PredatorPreyRules extends Rules{
 	
 	
 	@Override
-	protected HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
+	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
 		initialCellMovement(g);
 		updateSharkEnergy(g);
 		indicateReproduction(g);
@@ -51,7 +51,6 @@ public class PredatorPreyRules extends Rules{
 				c.setState(0);
 			}
 		}
-		
 	}
 
 	private void indicateReproduction(HashMap<Cell, ArrayList<Cell>> g) {

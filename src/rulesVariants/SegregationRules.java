@@ -68,7 +68,7 @@ public class SegregationRules extends Rules{
 		if(notEmptyCount==0) {
 			return false;
 		}
-		return ((similarCount/notEmptyCount) < satisfactionThreshold);
+		return ((similarCount/(notEmptyCount*1.0)) < satisfactionThreshold);
 	}
 
 	/**

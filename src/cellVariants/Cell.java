@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 
 public abstract class Cell {
 
-	private int state;
+	protected int state;
 	protected HashMap<Integer, ImageView> statesAndColors;
 	private int row;
 	private int col;

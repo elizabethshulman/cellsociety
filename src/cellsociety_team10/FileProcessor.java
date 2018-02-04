@@ -129,7 +129,7 @@ public class FileProcessor {
 		}
 		
 	}
-	//
+	
 	//convert Cell grid to hashmap
 	private void createCellMap(Cell[][] cellArray)
 	{
@@ -152,29 +152,4 @@ public class FileProcessor {
 				cellGrid.put(toAdd, neighbors);
 			}
 	}
-	// temporary tester method
-	public static void main(String[] args)
-	{
-		try {
-			FileProcessor fp = new FileProcessor("/Users/andrew/Documents/workspace/cellsociety_team10/data/simulations/segregation/segregation1.xml");
-			fp.readFile();
-			System.out.println(fp.getType());
-			HashMap<String,Double> globalVar = fp.getGlobalVars();
-			for(String s: globalVar.keySet())
-				System.out.println(s + ": " + globalVar.get(s));
-			for(Cell c : fp.getCellGrid().keySet())
-			{
-				System.out.print(c.getRow() + " " + c.getCol() + ": ");
-				ArrayList<Cell> neighboring = fp.getCellGrid().get(c);
-				for(int a = 0; a < neighboring.size(); a++)
-					System.out.print(neighboring.get(a).getRow() + " " + neighboring.get(a).getCol() + ", ");
-				System.out.println();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Invalid filepath");
-		}
-	}
-
-
 }

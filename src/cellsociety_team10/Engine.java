@@ -68,13 +68,13 @@ public class Engine extends Application {
 
 	private void setupAnimation() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-				e -> step(SECOND_DELAY));
+				e -> step());
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
 		myAnimation.getKeyFrames().add(frame);
 		myAnimation.setRate(ANIM_RATE);
 	}
 
-	private void step(double elapsedTime) {
+	private void step() {
 //		if (myGraph.isDead()) {
 //			myAnimation.pause();
 //			myAnimation.setRate(0);
@@ -102,14 +102,16 @@ public class Engine extends Application {
 
 	private void next() {
 		myAnimation.pause();
-		step(SECOND_DELAY);
+		step();
 	}
 
 	private void buildFileChooser(String directory) {
 		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
-		// need to handle if they hit cancel
 		File f = myFileChooser.showOpenDialog(myStage);
+		if (f == null) {
+			return;
+		}
 		selectFile(f);
 	}
 	
@@ -121,10 +123,11 @@ public class Engine extends Application {
 			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
 			myGraph = new Graph(ruleset,fp);
 			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
-			play();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid filepath");
 		}
+		myVis.visualizeGraph(myGraph);
+		myStage.setScene(myVis.getScene());
 	}
 }

@@ -56,7 +56,11 @@ public class Engine extends Application {
 		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
-		myControlPanel = new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next());
+		myControlPanel = new ControlPanel(myAnimation, 
+										e -> play(), 
+										e -> pause(), 
+										e -> end(), 
+										e -> next());
 		myVis = new Visualization(myControlPanel);
 		setupAnimation();
 		
@@ -93,8 +97,6 @@ public class Engine extends Application {
 		myAnimation.play();
 	}
 
-	// would be called stop, but stop can't be overwritten with a lower
-	// visibility since it's implemented in the Application class
 	private void end() {
 		myStage.setScene(myStartScene);
 	}

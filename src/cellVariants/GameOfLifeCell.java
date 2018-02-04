@@ -1,9 +1,6 @@
 package cellVariants;
 
-import java.util.HashMap;
-
 import cellsociety_team10.Helper;
-import javafx.scene.image.ImageView;
 
 public class GameOfLifeCell extends Cell {
 	

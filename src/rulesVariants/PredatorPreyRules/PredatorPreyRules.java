@@ -1,4 +1,4 @@
-package rulesVariants;
+package rulesVariants.PredatorPreyRules;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
+import rulesVariants.Rules;
 
 public class PredatorPreyRules extends Rules{
 	//revise to see if there are ways to simplify movement/creation of arrayLists/iterating through graph
@@ -25,22 +26,24 @@ public class PredatorPreyRules extends Rules{
 	@Override
 	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
 		HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> temp = new HashMap(g);
+		
 		initialCellMovement(temp);
+		
 		updateSharkEnergy(temp);
 		indicateReproduction(temp);
 		resetMovedThisTurn(temp);
+		
+		
 		HashMap<Cell, ArrayList<Cell>> returnGraph = new HashMap(temp);
+		updateDeath(returnGraph);
 		return returnGraph;
 	}
 
 	private void initialCellMovement(HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> temp) {
 		for(PredatorPreyCell c:temp.keySet()) {
-			
 			if(c.getState()==1) {
 				moveFish(c, temp.get(c));
-			}
-			
-			else if(c.getState()==2) {
+			} else if(c.getState()==2) {
 				moveShark(c, temp.get(c));
 			}
 		}
@@ -72,6 +75,9 @@ public class PredatorPreyRules extends Rules{
 			c.setMovedThisTurn(false);
 		}
 	}
+	
+	
+	
 	
 	
 	//FISH MOVEMENT
@@ -107,6 +113,10 @@ public class PredatorPreyRules extends Rules{
 			c.setState(0);
 		}
 	}
+	
+	
+	
+	
 	
 	
 	//SHARK MOVEMENT

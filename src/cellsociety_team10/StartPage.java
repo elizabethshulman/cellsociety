@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +18,7 @@ public class StartPage {
 	private static final double SCREEN_WIDTH = 700;
 	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
 	private static final String STYLESHEET_NAME = "main.css";
+	private static final double IMAGE_SIZE = 150;
 
 
 	private HashMap<String, String> myNameMap;
@@ -56,10 +56,9 @@ public class StartPage {
 	}
 
 	private Button makeButton(String filename, EventHandler<MouseEvent> handler) {
-		ImageView image_view = Helper.generateImageView(filename + ".png", 150);
+		ImageView image_view = Helper.generateImageView(filename + ".png", IMAGE_SIZE);
 		Button tester = new Button(myNameMap.get(filename), image_view);
 		tester.setOnMouseClicked(handler);
-		tester.setContentDisplay(ContentDisplay.TOP);
 		tester.setId(filename);
 
 		return tester;

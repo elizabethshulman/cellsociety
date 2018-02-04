@@ -21,7 +21,7 @@ public class FireRules extends Rules {
 	private Random randomGenerator = new Random();
 	
 	public FireRules(HashMap<String,Double> globalVars) {
-		probCatchFire = globalVars.get("probCatchFire"); //confirm with Andrew	
+		probCatchFire = globalVars.get("probCatchFire");	
 	}
 	
 	@Override

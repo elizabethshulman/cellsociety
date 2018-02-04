@@ -1,6 +1,7 @@
 package cellsociety_team10;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import graphVariants.Graph;
@@ -112,8 +113,8 @@ public class Engine extends Application {
 			FileProcessor fp = new FileProcessor(filename.getAbsolutePath());
 			fp.readFile();
 			String className = "rulesVariants." + fp.getType() + "Rules";
-			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(FileProcessor.class).newInstance(fp);
-			myGraph = new Graph(ruleset);
+			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
+			myGraph = new Graph(ruleset,fp);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

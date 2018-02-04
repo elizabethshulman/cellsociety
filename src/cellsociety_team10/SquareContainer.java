@@ -54,7 +54,7 @@ public class SquareContainer extends Container {
 	public void setGraphDisplay(Graph g) {
 		myDisplay.getChildren().clear();
 		ImageView[][] graph_grid = mapToGrid(g);
-		for (int c=0; c < g.getColumns(); c++) {
+		for (int c=0; c < g.getCols(); c++) {
 			HBox row = new HBox();
 			row.setId("container-row");
 			for (int r=0; r < g.getRows() / 4; r++) {
@@ -66,9 +66,12 @@ public class SquareContainer extends Container {
 	
 	private ImageView[][] mapToGrid(Graph g) {
 //		need to think about this line...what if it's not a perfect square?
-		ImageView[][] curr_grid = new ImageView[g.getRows()][g.getColumns()];
+		ImageView[][] curr_grid = new ImageView[g.getRows()][g.getCols()];
 		for (Cell curr : g.getCells()) {
-			curr_grid[curr.getRow()][curr.getCol()] = curr.getImageView();
+			ImageView curr_image_view = curr.getImageView();
+			curr_image_view.setPreserveRatio(true);
+			curr_image_view.setFitHeight((GRID_SIZE - 2*2) / n);
+			curr_grid[curr.getRow()][curr.getCol()] = curr_image_view;
 		}
 		return curr_grid;
 	}

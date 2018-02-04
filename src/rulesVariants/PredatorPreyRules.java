@@ -27,7 +27,6 @@ public class PredatorPreyRules extends Rules{
 		HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> temp = new HashMap(g);
 		
 		initialCellMovement(temp);
-		
 		updateSharkEnergy(temp);
 		indicateReproduction(temp);
 		resetMovedThisTurn(temp);
@@ -75,6 +74,14 @@ public class PredatorPreyRules extends Rules{
 		}
 	}
 	
+	private void handleReproduction(PredatorPreyCell c) {
+		if(c.getReproduce()==true) {
+			c.setState(c.getState());
+		} else {
+			c.setState(0);
+		}
+	}
+	
 	
 	
 	
@@ -85,7 +92,7 @@ public class PredatorPreyRules extends Rules{
 		PredatorPreyCell cellToMoveTo = whereToMoveFish(c, arrayList);
 		if(c.equals(cellToMoveTo)) return;
 		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
-		handleFishReproduction(c);
+		handleReproduction(c);
 	}
 	
 	private PredatorPreyCell whereToMoveFish(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList) {
@@ -105,20 +112,13 @@ public class PredatorPreyRules extends Rules{
 		return cellToMoveTo;
 	}
 	
-	private void handleFishReproduction(PredatorPreyCell c) {
-		if(c.getReproduce()==true) {
-			c.setReproductiveTime(0);
-		} else {
-			c.setState(0);
-		}
-	}
-	
 	
 	
 	
 	
 	
 	//SHARK MOVEMENT
+	
 	private void moveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList) {
 		
 		PredatorPreyCell cellToMoveTo = whereToMoveShark(c, arrayList);
@@ -127,10 +127,10 @@ public class PredatorPreyRules extends Rules{
 			return; //indicates no possible movement options
 		}
 		
+		cellToMoveTo.setState(c.getState());
 		cellToMoveTo.setReproductiveTime(c.getReproductiveTime());
 		cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
-		
-		handleSharkReproduction(c);
+		handleReproduction(c);
 	}
 	
 	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c, ArrayList<PredatorPreyCell> arrayList){
@@ -165,13 +165,5 @@ public class PredatorPreyRules extends Rules{
 		return cellToMoveTo;
 	}
 	
-	
-	private void handleSharkReproduction(PredatorPreyCell c) {
-		if(c.getReproduce()==true) {
-			c.setReproductiveTime(0);
-			c.setSharkEnergy(3);
-		} else {
-			c.setState(0);
-		}
-	}
+
 }

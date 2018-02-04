@@ -96,8 +96,6 @@ public class Engine extends Application {
 	// would be called stop, but stop can't be overwritten with a lower
 	// visibility since it's implemented in the Application class
 	private void end() {
-		myAnimation.stop();
-		myVis.reset();
 		myStage.setScene(myStartScene);
 	}
 
@@ -115,9 +113,11 @@ public class Engine extends Application {
 		}
 	}
 	
-	private void reset() {
-		myControlPanel.enableButtons();
+	private void resetEngine() {
 		myAnimation.setRate(ANIM_RATE);
+		myAnimation.stop();
+		
+		myVis.reset();
 	}
 	
 	private void handleChosenFile(File filename) {
@@ -132,7 +132,7 @@ public class Engine extends Application {
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 		
-		reset();
+		resetEngine();
 		
 		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);

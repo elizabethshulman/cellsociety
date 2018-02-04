@@ -75,6 +75,10 @@ public class Engine extends Application {
 	}
 
 	private void step(double elapsedTime) {
+		if (myGraph.isDead()) {
+			myAnimation.pause();
+			myAnimation.setRate(0);
+		}
 		myGraph.buildNextGrid();
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());

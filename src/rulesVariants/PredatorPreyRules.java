@@ -1,4 +1,4 @@
-package rulesVariants.PredatorPreyRules;
+package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
-import rulesVariants.Rules;
 
 public class PredatorPreyRules extends Rules{
 	//revise to see if there are ways to simplify movement/creation of arrayLists/iterating through graph

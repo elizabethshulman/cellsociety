@@ -35,7 +35,6 @@ public class Visualization {
 	}
 	
 	public void visualizeGraph(Graph g) {
-		System.out.println(myIteration);
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		

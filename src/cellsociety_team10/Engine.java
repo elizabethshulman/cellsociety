@@ -1,7 +1,6 @@
 package cellsociety_team10;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import graphVariants.Graph;
@@ -45,10 +44,10 @@ public class Engine extends Application {
 		myResources = ResourceBundle.getBundle(LANGUAGE);
 		
 		myStartScene = new StartPage(myResources,
-									e -> showFileChooser("predator"),
+									new HandlerHolder(e -> showFileChooser("predator"),
 									e -> showFileChooser("segregation"),
 									e -> showFileChooser("life"), 
-									e -> showFileChooser("fire")).getScene();
+									e -> showFileChooser("fire"))).getScene();
 		
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
@@ -98,6 +97,7 @@ public class Engine extends Application {
 	}
 
 	private void end() {
+		resetEngine();
 		myStage.setScene(myStartScene);
 	}
 

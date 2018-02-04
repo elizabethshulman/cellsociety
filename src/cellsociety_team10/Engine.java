@@ -119,10 +119,7 @@ public class Engine extends Application {
 			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
 			play();
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(filename.getAbsolutePath());
 			throw new IllegalArgumentException("Invalid filepath");
 		}
-		
 	}
 }

@@ -12,7 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import rulesVariants.*;
+import rulesVariants.Rules;
 
 public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;
@@ -29,6 +29,7 @@ public class Engine extends Application {
 	private Scene myStartScene;
 	private Stage myStage;
 	private FileChooser myFileChooser;
+	private RulesFactory myRulesFactory;
 
 	public static void main (String[] args) {
 		launch(args);
@@ -60,6 +61,8 @@ public class Engine extends Application {
 		
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle("Cell Simulation File Chooser");
+		
+		myRulesFactory = new RulesFactory();
 
 		myAnimation = new Timeline();
 		myVis = new Visualization(new ControlPanel(myAnimation, e -> play(), e -> pause(), e -> end(), e -> next()));
@@ -116,17 +119,18 @@ public class Engine extends Application {
 	}
 	
 	private void selectFile(File filename) {
+		FileProcessor fp;
 		try {
-			FileProcessor fp = new FileProcessor(filename.getAbsolutePath());
+			fp = new FileProcessor(filename.getAbsolutePath());
 			fp.readFile();
-			String className = "rulesVariants." + fp.getType() + "Rules";
-			Rules ruleset = (Rules) Class.forName(className).getDeclaredConstructor(HashMap.class).newInstance(fp.getGlobalVars());
-			myGraph = new Graph(ruleset,fp);
-			myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Invalid filepath");
+			throw new IllegalArgumentException("Invalid filepath.");
 		}
+		
+		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
+		myGraph = new Graph(curr_rules, fp);
+		
+		myVis.amendHeader(fp.getTitle() + " by " + fp.getAuthor());
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}

@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package visualComponents;
 
 import graphVariants.Graph;
 import javafx.scene.layout.VBox;

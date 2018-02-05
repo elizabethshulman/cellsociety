@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package visualComponents;
 
 import javafx.scene.Group;
 import javafx.scene.Node;

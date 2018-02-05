@@ -1,6 +1,6 @@
 package cellVariants;
 
-import cellsociety_team10.Helper;
+import visualComponents.Helper;
 
 public class PredatorPreyCell extends Cell {
 
@@ -17,7 +17,7 @@ public class PredatorPreyCell extends Cell {
 		 */
 		super(st);
 		reproductiveTime=0;
-		sharkEnergy=0; //determine where to set initial shark energy
+		sharkEnergy=0;
 		reproduce=false;
 	}
 	
@@ -33,9 +33,9 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("lightblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
-		statesAndColors.put(2, Helper.generateImageView("burgundy.png"));
+		statesAndColors.put(0, Helper.generateImageView("navy.png"));
+		statesAndColors.put(1, Helper.generateImageView("lightteal.png"));
+		statesAndColors.put(2, Helper.generateImageView("sharkred.png"));
 	}
 	
 	public void increaseSharkEnergy() {
@@ -85,6 +85,4 @@ public class PredatorPreyCell extends Cell {
 	public void setMovedThisTurn(boolean movedThisTurn) {
 		this.movedThisTurn = movedThisTurn;
 	}
-	
-
 }

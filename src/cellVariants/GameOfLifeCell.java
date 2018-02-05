@@ -1,6 +1,6 @@
 package cellVariants;
 
-import cellsociety_team10.Helper;
+import visualComponents.Helper;
 
 public class GameOfLifeCell extends Cell {
 	

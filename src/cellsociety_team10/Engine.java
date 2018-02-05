@@ -12,6 +12,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import rulesVariants.Rules;
+import visualComponents.ControlPanel;
+import visualComponents.RulesFactory;
+import visualComponents.StartPage;
+import visualComponents.Visualization;
 
 public class Engine extends Application {
 	private static final double ANIM_RATE = 2.5;

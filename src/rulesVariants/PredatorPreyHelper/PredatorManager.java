@@ -33,19 +33,19 @@ public class PredatorManager {
 	}
 	
 	public void moveSharks(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
-			PredatorPreyCell cellToMoveTo = whereToMoveShark(c);
-			if(cellToMoveTo.equals(c)) { //indicates no possible movement options
-				c.setReproductiveTime(c.getReproductiveTime()+1);
-				return; 
-			}
-			if(cellToMoveTo.getState()==1) {
-				cellToMoveTo.setSharkEnergy(c.getSharkEnergy()-2);
-			} else {
-				cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
-			}
-			cellToMoveTo.setState(2);
-			cellToMoveTo.setReproductiveTime(c.getReproductiveTime()+1);
-			handleReproduction(c);
+		PredatorPreyCell cellToMoveTo = whereToMoveShark(c);
+		if(cellToMoveTo.equals(c)) { //indicates no possible movement options
+			c.setReproductiveTime(c.getReproductiveTime()+1);
+			return; 
+		}
+		if(cellToMoveTo.getState()==1) {
+			cellToMoveTo.setSharkEnergy(c.getSharkEnergy()-2);
+		} else {
+			cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
+		}
+		cellToMoveTo.setState(2);
+		cellToMoveTo.setReproductiveTime(c.getReproductiveTime()+1);
+		handleReproduction(c);
 	}
 	
 	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c){

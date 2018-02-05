@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package visualComponents;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;

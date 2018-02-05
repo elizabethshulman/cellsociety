@@ -2,8 +2,8 @@ package cellVariants;
 
 import java.util.HashMap;
 
-import cellsociety_team10.Helper;
 import javafx.scene.image.ImageView;
+import visualComponents.Helper;
 
 public abstract class Cell {
 

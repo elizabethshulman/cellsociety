@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package visualComponents;
 
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;

@@ -3,299 +3,299 @@
    <header>
       <simtype>Segregation</simtype>
       <author>Andrew Yeung</author>
-      <title>Queen Me</title>
+      <title>American Special</title>
    </header>
    <global_vars>
-      <satisfactionThreshold>0.57</satisfactionThreshold>
+      <satisfactionThreshold>0.7</satisfactionThreshold>
    </global_vars>
    <grid>
       <row>
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
          <cell state="E" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-         <cell state="E" />
          <cell state="R" />
-         <cell state="B" />
          <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-      </row>
-      <row>
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-      </row>
-      <row>
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="E" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-      </row>
-      <row>
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="E" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
-         <cell state="R" />
-         <cell state="B" />
       </row>
       <row>
          <cell state="B" />
          <cell state="E" />
          <cell state="B" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="B" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="B" />
-         <cell state="R" />
+         <cell state="E" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
-         <cell state="R" />
          <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="E" />
          <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="E" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+      </row>
+      <row>
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+         <cell state="R" />
+      </row>
+      <row>
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
+         <cell state="B" />
       </row>
    </grid>
 </simulation>

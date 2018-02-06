@@ -6,7 +6,7 @@
       <title>Ba Sing Se</title>
    </header>
    <global_vars>
-      <probCatchFire>0.4</probCatchFire>
+      <probCatchFire>0.6</probCatchFire>
    </global_vars>
    <grid>
       <row>
@@ -80,7 +80,7 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="2" />
+         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />

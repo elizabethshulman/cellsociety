@@ -1,4 +1,4 @@
-package cellsociety_team10;
+package visualComponents;
 
 import java.util.HashMap;
 import java.util.ResourceBundle;

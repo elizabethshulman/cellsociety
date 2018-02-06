@@ -2,8 +2,8 @@ package cellVariants;
 
 import java.util.HashMap;
 
-import cellsociety_team10.Helper;
 import javafx.scene.image.ImageView;
+import visualComponents.Helper;
 
 public abstract class Cell {
 
@@ -20,8 +20,8 @@ public abstract class Cell {
 
 	protected void buildHashMap() {
 		statesAndColors.put(0, Helper.generateImageView("darkblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("teal.png"));
-		statesAndColors.put(2, Helper.generateImageView("midblue.png"));
+		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
+		statesAndColors.put(2, Helper.generateImageView("lightblue.png"));
 	}
 
 	public int getRow() {

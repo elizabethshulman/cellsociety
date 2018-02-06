@@ -6,6 +6,7 @@ import java.util.HashMap;
 import cellVariants.Cell;
 
 public abstract class Rules {
+	
 	/**
 	 * When given a grid, return a grid with updated cells per values stored in corresponding FileProcessor
 	 */
@@ -43,5 +44,4 @@ public abstract class Rules {
 	public boolean simulationIsDead() {
 		return dead;
 	}
-
 }

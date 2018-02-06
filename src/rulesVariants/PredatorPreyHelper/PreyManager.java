@@ -15,7 +15,6 @@ public class PreyManager {
 	}
 	
 	public void moveFish(PredatorPreyCell c) {
-
 		PredatorPreyCell cellToMoveTo = whereToMoveFish(c);
 		if(c.equals(cellToMoveTo)) {
 			return;

@@ -7,8 +7,8 @@
    </header>
    <global_vars>
       <fishBreedTime>3</fishBreedTime>
-      <sharkBreedTime>10</sharkBreedTime>
-      <sharkStarveTime>7</sharkStarveTime>
+      <sharkBreedTime>12</sharkBreedTime>
+      <sharkStarveTime>5</sharkStarveTime>
    </global_vars>
    <grid>
       <row>

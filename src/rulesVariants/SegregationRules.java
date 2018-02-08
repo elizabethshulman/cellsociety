@@ -27,8 +27,8 @@ public class SegregationRules extends Rules {
 	 */
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
-		List<Cell> needChange = new ArrayList<Cell>();
-		List<Cell> emptyCells = new ArrayList<Cell>();
+		List<Cell> needChange = new ArrayList<>();
+		List<Cell> emptyCells = new ArrayList<>();
 		for(Cell c : g.keySet()) {
 			if(c.getState()==0) {
 				emptyCells.add(c);

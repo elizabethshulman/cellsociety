@@ -11,6 +11,7 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
+import fileInfoExtractorVariants.FileInfoExtractor;
 
 public class FileProcessor {
 	
@@ -92,7 +93,7 @@ public class FileProcessor {
 		
 	}
 	private void readGlobalVars() throws XMLStreamException {
-		globalVars = new HashMap<String,Double>();
+		globalVars = new HashMap<>();
 		int xml;
 		myParser.next();
 		do {

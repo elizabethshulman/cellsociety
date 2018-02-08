@@ -78,7 +78,7 @@ public class PredatorManager {
 	}
 	
 	private void handleReproduction(PredatorPreyCell c) {
-		if(c.getReproduce()==true) {
+		if(c.getReproduce()) {
 			c.setReproduce(false);
 			c.setSharkEnergy(0);
 			c.setReproductiveTime(0);

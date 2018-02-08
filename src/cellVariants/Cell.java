@@ -2,26 +2,39 @@ package cellVariants;
 
 import java.util.HashMap;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import visualComponents.Helper;
 
 public abstract class Cell {
 
 	protected int state;
-	protected HashMap<Integer, ImageView> statesAndColors;
+	protected HashMap<Integer, Image> statesAndColors;
 	private int row;
 	private int col;
+	private ImageView imageView;
 	
 	public Cell(int st) {
 		state = st;
-		statesAndColors = new HashMap<Integer, ImageView>();
+		statesAndColors = new HashMap<Integer, Image>();
 		buildHashMap();
+		imageView = new ImageView(statesAndColors.get(state));
+		imageView.setOnMouseClicked(e -> {
+			nextImage();
+		});
 	}
 
-	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("darkblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
-		statesAndColors.put(2, Helper.generateImageView("lightblue.png"));
+	protected abstract void buildHashMap();
+	
+	protected void nextImage() {
+		state = (state + 1) % statesAndColors.size();
+		setState(state);
+		imageView.setImage(statesAndColors.get(state));
+	}
+	
+	protected Image buildCellImage(String filename) {
+		Image temp = Helper.generateImage(filename);
+		return temp;
 	}
 
 	public int getRow() {
@@ -46,9 +59,10 @@ public abstract class Cell {
 	
 	public void setState(int st) {
 		state = st;
+		imageView.setImage(statesAndColors.get(st));
 	}
 	
 	public ImageView getImageView() {
-		return statesAndColors.get(state);
+		return imageView;
 	}
 }

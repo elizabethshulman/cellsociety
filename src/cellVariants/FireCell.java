@@ -10,8 +10,8 @@ public class FireCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("black.png"));
-		statesAndColors.put(1, Helper.generateImageView("forestgreen.png"));
-		statesAndColors.put(2, Helper.generateImageView("burntorange.png"));
+		statesAndColors.put(0, buildCellImage("black.png"));
+		statesAndColors.put(1, buildCellImage("forestgreen.png"));
+		statesAndColors.put(2, buildCellImage("burntorange.png"));
 	}
 }

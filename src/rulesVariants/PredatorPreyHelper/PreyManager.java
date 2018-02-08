@@ -3,12 +3,13 @@ package rulesVariants.PredatorPreyHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import cellVariants.PredatorPreyCell;
 
 public class PreyManager extends Manager {
 	
-	public PreyManager(HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph) {
+	public PreyManager(HashMap<PredatorPreyCell, List<PredatorPreyCell>> currentgraph) {
 		super(currentgraph);
 	}
 	

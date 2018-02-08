@@ -2,6 +2,7 @@ package rulesVariants.PredatorPreyHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
@@ -10,7 +11,7 @@ public class PredatorManager extends Manager {
 
 	private double sharkStarveTime;
 	
-	public PredatorManager(Map<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph,
+	public PredatorManager(Map<PredatorPreyCell, List<PredatorPreyCell>> currentgraph,
 			double starveTime) {
 		super(currentgraph);
 		sharkStarveTime = starveTime;
@@ -30,7 +31,7 @@ public class PredatorManager extends Manager {
 		}
 	}
 	
-	public void moveSharks(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
+	public void moveSharks(PredatorPreyCell c, List<PredatorPreyCell> neighbors) {
 		PredatorPreyCell cellToMoveTo = whereToMove(c);
 		if(cellToMoveTo.equals(c)) { //indicates no possible movement options
 			c.setReproductiveTime(c.getReproductiveTime() + 1);

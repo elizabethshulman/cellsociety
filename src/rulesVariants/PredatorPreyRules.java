@@ -18,7 +18,7 @@ public class PredatorPreyRules extends Rules {
 	Double sharkStarveTime;
 	PredatorManager sharkManager;
 	PreyManager fishManager;
-	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> tempOcean;
+	HashMap<PredatorPreyCell, List<PredatorPreyCell>> tempOcean;
 	
 	public PredatorPreyRules(Map<String, Double> map) {
 		fishReproductionAge = map.get("fishBreedTime");

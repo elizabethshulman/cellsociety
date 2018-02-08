@@ -1,14 +1,14 @@
 package rulesVariants.PredatorPreyHelper;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
 
 public abstract class Manager {
-	protected Map<PredatorPreyCell, ArrayList<PredatorPreyCell>> ocean;
+	protected Map<PredatorPreyCell, List<PredatorPreyCell>> ocean;
 	
-	public Manager(Map<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph) {
+	public Manager(Map<PredatorPreyCell, List<PredatorPreyCell>> currentgraph) {
 		ocean = currentgraph;
 	}
 	

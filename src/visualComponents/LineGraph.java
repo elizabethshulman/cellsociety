@@ -10,8 +10,7 @@ public class LineGraph {
 	public LineGraph() {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
-		LineChart<Number, Number> myLineChart = 
-				new LineChart<>(xAxis,yAxis);
+		myLineChart = new LineChart<>(xAxis,yAxis);
 		
 		myLineChart.setLegendVisible(false);
 		myLineChart.setHorizontalGridLinesVisible(false);

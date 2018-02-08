@@ -22,7 +22,7 @@ public class Visualization {
 		myBorderPane.setId("main-pane");
 		
 		myBar = new HeaderBar("");
-		myVisualContainer = new HexContainer();
+		myVisualContainer = new SquareContainer();
 		myControlPanel = cp;
 		
 		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);

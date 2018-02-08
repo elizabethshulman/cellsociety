@@ -3,6 +3,8 @@ package rulesVariants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cellVariants.Cell;
 
@@ -11,7 +13,7 @@ import cellVariants.Cell;
  * @author elizabethshulman
  *	Assuming 0 for empty, 1 & 2 for groups A and B
  */
-public class SegregationRules extends Rules{
+public class SegregationRules extends Rules {
 
 	private final double satisfactionThreshold;
 
@@ -25,7 +27,7 @@ public class SegregationRules extends Rules{
 	 * @return g, modified graph
 	 */
 	@Override
-	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
+	public Map<Cell, ArrayList<Cell>> applyGraphRules(Map<Cell, ArrayList<Cell>> g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
 		for(Cell c : g.keySet()) {
@@ -51,7 +53,7 @@ public class SegregationRules extends Rules{
 	 * Returns true if cell needs to change position, as its neighbors are too different
 	 */
 	@Override
-	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+	protected Boolean dissatisfied(int state, List<Cell> neighbors) {
 		if(state==0) {
 			return false;
 		}
@@ -71,7 +73,7 @@ public class SegregationRules extends Rules{
 	}
 	
 	@Override
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
 		dead=true;
 	}
 	
@@ -81,7 +83,7 @@ public class SegregationRules extends Rules{
 	 * @param changing	ArrayList of cells that are dissatisfied with their location
 	 */
 	private void tradeCellStates(ArrayList<Cell> empty, ArrayList<Cell> changing) {
-		while(empty.size()>0 && changing.size()>0) {
+		while(! empty.isEmpty() && ! changing.isEmpty()) {
 			Cell currentEmpty = empty.remove(empty.size()-1);
 			Cell cellToChange = changing.remove(changing.size()-1);
 			currentEmpty.setState(cellToChange.getState());

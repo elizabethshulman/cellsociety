@@ -2,13 +2,16 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
-import rulesVariants.PredatorPreyHelper.*;
+import rulesVariants.PredatorPreyHelper.PredatorManager;
+import rulesVariants.PredatorPreyHelper.PreyManager;
 
-public class PredatorPreyRules extends Rules{
+public class PredatorPreyRules extends Rules {
 
 	Double fishReproductionAge;
 	Double sharkReproductionAge;
@@ -24,14 +27,14 @@ public class PredatorPreyRules extends Rules{
 	}
 	
 	@Override
-	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
+	public Map<Cell, ArrayList<Cell>> applyGraphRules(Map<Cell, ArrayList<Cell>> g) {
 		tempOcean = new HashMap(g);
 		sharkManager = new PredatorManager(tempOcean, sharkStarveTime);
 		fishManager = new PreyManager(tempOcean);
 		initialCellMovement();
 		sharkManager.manageSharks();
 		resetMovementAndReproduction();
-		HashMap<Cell, ArrayList<Cell>> returnGraph = new HashMap(tempOcean);
+		Map<Cell, ArrayList<Cell>> returnGraph = new HashMap(tempOcean);
 		updateDeath(returnGraph);
 		return returnGraph;
 	}
@@ -61,7 +64,7 @@ public class PredatorPreyRules extends Rules{
 	}
 		
 	@Override 
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> ocean) {
+	protected void updateDeath(Map<Cell, ArrayList<Cell>> ocean) {
 		Set<Cell> cellSet = ocean.keySet();
 		Cell[] cellArray = cellSet.toArray(new Cell[0]);
 		int sampleState = cellArray[0].getState();

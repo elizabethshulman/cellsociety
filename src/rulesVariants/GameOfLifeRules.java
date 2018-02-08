@@ -2,16 +2,17 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cellVariants.Cell;
 
 public class GameOfLifeRules extends Rules{
 	
-	public GameOfLifeRules(HashMap<String,Double> globalVars) {
-	}
+//	public GameOfLifeRules(Map<String,Double> globalVars) {}
 
 	@Override
-	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {	
+	protected Boolean dissatisfied(int state, List<Cell> neighbors) {	
 		//assuming 0 for dead, 1 for alive
 		int livecount = 0;
 		for(Cell c:neighbors) {
@@ -36,7 +37,7 @@ public class GameOfLifeRules extends Rules{
 	}
 	
 	@Override
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
 		dead=true;
 		for(Cell c:g.keySet()) {
 			if(dissatisfied(c.getState(), g.get(c))) {

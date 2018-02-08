@@ -3,22 +3,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import cellVariants.*;
+
+import cellVariants.Cell;
 public class FileProcessor {
 	
 	private String myType;
 	private String filepath;
 	private String author;
 	private String title;
-	private HashMap<String,Double> globalVars;
+	private Map<String,Double> globalVars;
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
-	private HashMap<Cell,ArrayList<Cell>> cellGrid;
+	private Map<Cell,ArrayList<Cell>> cellGrid;
 	private int gridRowCount;
 	private int gridColCount;
 	
@@ -39,10 +41,10 @@ public class FileProcessor {
 	public String getTitle() {
 		return title;
 	}
-	public HashMap<String,Double> getGlobalVars() {
+	public Map<String,Double> getGlobalVars() {
 		return globalVars;
 	}
-	public HashMap<Cell,ArrayList<Cell>> getCellGrid() {
+	public Map<Cell,ArrayList<Cell>> getCellGrid() {
 		return cellGrid;
 	}
 	public int getRowCount(){

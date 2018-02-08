@@ -2,6 +2,8 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import cellVariants.Cell;
@@ -22,7 +24,7 @@ public class FireRules extends Rules {
 	}
 	
 	@Override
-	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+	protected Boolean dissatisfied(int state, List<Cell> neighbors) {
 		return(state==2 || 
 				state==1 && neighborIsBurning(neighbors) && (randomGenerator.nextInt(100)+1<probCatchFire));
 	}
@@ -31,7 +33,7 @@ public class FireRules extends Rules {
 	 * @param neighbors		ArrayList of cells neighboring current cell
 	 * @return true if at least one neighbor is burning
 	 */
-	private boolean neighborIsBurning(ArrayList<Cell> neighbors) {
+	private boolean neighborIsBurning(List<Cell> neighbors) {
 		for(Cell c:neighbors) {
 			if(c.getState()==2) {
 				return true;
@@ -51,7 +53,7 @@ public class FireRules extends Rules {
 	}
 	
 	@Override
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
 		dead=true;
 		for(Cell c:g.keySet()) {
 			if(c.getState()==2) {

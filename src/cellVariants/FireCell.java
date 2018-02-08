@@ -1,7 +1,5 @@
 package cellVariants;
 
-import visualComponents.Helper;
-
 public class FireCell extends Cell {
 	public FireCell(int st) {
 		super(st);

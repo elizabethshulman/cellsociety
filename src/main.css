@@ -162,10 +162,15 @@
 }
 
 /* This section deals with components from the Containers. */
-#container-display {
+#container-display-square {
 	-fx-border-color: rgb(105,105,105);
 	-fx-border-style: solid;
 	-fx-border-width: 2px;
+	-fx-border-insets: 0;
+	-fx-max-width: 0px;
+}
+
+#container-display-hex {
 	-fx-border-insets: 0;
 	-fx-max-width: 0px;
 }

@@ -1,7 +1,6 @@
 package rulesVariants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +8,6 @@ import cellVariants.Cell;
 
 public class GameOfLifeRules extends Rules{
 	
-//	public GameOfLifeRules(Map<String,Double> globalVars) {}
-
 	@Override
 	protected Boolean dissatisfied(int state, List<Cell> neighbors) {	
 		//assuming 0 for dead, 1 for alive

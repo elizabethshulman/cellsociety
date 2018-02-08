@@ -1,7 +1,6 @@
 package rulesVariants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -19,8 +18,8 @@ public class FireRules extends Rules {
 	private final double probCatchFire;
 	private Random randomGenerator = new Random();
 	
-	public FireRules(HashMap<String,Double> globalVars) {
-		probCatchFire = globalVars.get("probCatchFire")*100.0;	
+	public FireRules(Map<String, Double> map) {
+		probCatchFire = map.get("probCatchFire")*100.0;	
 	}
 	
 	@Override

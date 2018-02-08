@@ -2,7 +2,6 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,10 +19,10 @@ public class PredatorPreyRules extends Rules {
 	PreyManager fishManager;
 	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> tempOcean;
 	
-	public PredatorPreyRules(HashMap<String,Double> globalVars) {
-		fishReproductionAge = globalVars.get("fishBreedTime");
-		sharkReproductionAge = globalVars.get("sharkBreedTime");
-		sharkStarveTime = globalVars.get("sharkStarveTime");
+	public PredatorPreyRules(Map<String, Double> map) {
+		fishReproductionAge = map.get("fishBreedTime");
+		sharkReproductionAge = map.get("sharkBreedTime");
+		sharkStarveTime = map.get("sharkStarveTime");
 	}
 	
 	@Override

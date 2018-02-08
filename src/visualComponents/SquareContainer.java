@@ -1,6 +1,7 @@
 package visualComponents;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import cellVariants.Cell;
 import graphVariants.Graph;
@@ -61,6 +62,6 @@ public class SquareContainer extends Container {
 	 */
 	private double calcSquareHeight(int num_cols) {
 		BigDecimal cols = new BigDecimal(num_cols);
-		return Container.GRID_SIZE.divide(cols, BigDecimal.ROUND_UP).doubleValue();
+		return Container.GRID_SIZE.divide(cols, RoundingMode.UP).doubleValue();
 	}
 }

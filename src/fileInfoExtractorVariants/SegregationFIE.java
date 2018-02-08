@@ -1,6 +1,7 @@
 package fileInfoExtractorVariants;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -8,12 +9,10 @@ import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
 import cellVariants.SegregationCell;
 
-import cellsociety_team10.FileInfoExtractor;
-
 public class SegregationFIE extends FileInfoExtractor {
 
 	@Override
-	protected Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().equals("satisfactionThreshold")) {
 			xmlRead.next();
 			return Double.parseDouble(xmlRead.getText());
@@ -22,7 +21,7 @@ public class SegregationFIE extends FileInfoExtractor {
 	}
 
 	@Override
-	protected Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0)) {
 			case "E": return new SegregationCell(0);
 			case "R": return new SegregationCell(1);
@@ -31,8 +30,8 @@ public class SegregationFIE extends FileInfoExtractor {
 		}
 	}
 	@Override
-	public ArrayList<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
-		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
+	public List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
+		ArrayList<int[]> neighborCoordinates = new ArrayList<>();
 		for(int a = row - 1; a <= row + 1; a++) {
 			for(int b = col - 1; b <= col + 1; b++) {
 				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a != row || b != col)) {

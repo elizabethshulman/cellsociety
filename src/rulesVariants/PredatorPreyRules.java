@@ -2,6 +2,7 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,14 +27,14 @@ public class PredatorPreyRules extends Rules {
 	}
 	
 	@Override
-	public Map<Cell, ArrayList<Cell>> applyGraphRules(Map<Cell, ArrayList<Cell>> g) {
+	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempOcean = new HashMap(g);
 		sharkManager = new PredatorManager(tempOcean, sharkStarveTime);
 		fishManager = new PreyManager(tempOcean);
 		initialCellMovement();
 		sharkManager.manageSharks();
 		resetMovementAndReproduction();
-		Map<Cell, ArrayList<Cell>> returnGraph = new HashMap(tempOcean);
+		Map<Cell, List<Cell>> returnGraph = new HashMap(tempOcean);
 		updateDeath(returnGraph);
 		return returnGraph;
 	}
@@ -63,7 +64,7 @@ public class PredatorPreyRules extends Rules {
 	}
 		
 	@Override 
-	protected void updateDeath(Map<Cell, ArrayList<Cell>> ocean) {
+	protected void updateDeath(Map<Cell, List<Cell>> ocean) {
 		Set<Cell> cellSet = ocean.keySet();
 		Cell[] cellArray = cellSet.toArray(new Cell[0]);
 		int sampleState = cellArray[0].getState();

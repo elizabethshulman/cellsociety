@@ -1,6 +1,5 @@
 package rulesVariants;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -52,7 +51,7 @@ public class FireRules extends Rules {
 	}
 	
 	@Override
-	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, List<Cell>> g) {
 		dead=true;
 		for(Cell c:g.keySet()) {
 			if(c.getState()==2) {

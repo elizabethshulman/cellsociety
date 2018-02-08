@@ -24,7 +24,7 @@ public class PreyManager extends Manager {
 	}
 	
 	protected PredatorPreyCell whereToMove(PredatorPreyCell c){
-		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
+		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<>();
 		for(PredatorPreyCell n : ocean.get(c)) {
 			if(n.getState() == 0 && !n.hasMovedThisTurn()) {
 				emptyOptions.add(n);

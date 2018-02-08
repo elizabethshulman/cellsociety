@@ -1,8 +1,8 @@
 package rulesVariants;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import cellVariants.Cell;
@@ -26,9 +26,9 @@ public class SegregationRules extends Rules {
 	 * @return g, modified graph
 	 */
 	@Override
-	public Map<Cell, ArrayList<Cell>> applyGraphRules(Map<Cell, ArrayList<Cell>> g) {
-		ArrayList<Cell> needChange = new ArrayList<Cell>();
-		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
+	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
+		List<Cell> needChange = new ArrayList<>();
+		List<Cell> emptyCells = new ArrayList<>();
 		for(Cell c : g.keySet()) {
 			if(c.getState()==0) {
 				emptyCells.add(c);
@@ -72,16 +72,16 @@ public class SegregationRules extends Rules {
 	}
 	
 	@Override
-	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, List<Cell>> g) {
 		dead=true;
 	}
 	
 	/**
 	 * Move dissatisfied cell to an empty cell
-	 * @param empty		ArrayList of empty cells
-	 * @param changing	ArrayList of cells that are dissatisfied with their location
+	 * @param empty		List of empty cells
+	 * @param changing	List of cells that are dissatisfied with their location
 	 */
-	private void tradeCellStates(ArrayList<Cell> empty, ArrayList<Cell> changing) {
+	private void tradeCellStates(List<Cell> empty, List<Cell> changing) {
 		while(! empty.isEmpty() && ! changing.isEmpty()) {
 			Cell currentEmpty = empty.remove(empty.size()-1);
 			Cell cellToChange = changing.remove(changing.size()-1);

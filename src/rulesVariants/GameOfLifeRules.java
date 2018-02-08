@@ -1,6 +1,5 @@
 package rulesVariants;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,7 @@ public class GameOfLifeRules extends Rules{
 	}
 	
 	@Override
-	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, List<Cell>> g) {
 		dead=true;
 		for(Cell c:g.keySet()) {
 			if(dissatisfied(c.getState(), g.get(c))) {

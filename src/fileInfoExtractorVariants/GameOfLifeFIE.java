@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import cellVariants.*;
+import cellVariants.Cell;
+import cellVariants.GameOfLifeCell;
+
 import cellsociety_team10.FileInfoExtractor;
 
 public class GameOfLifeFIE extends FileInfoExtractor {
@@ -18,8 +20,9 @@ public class GameOfLifeFIE extends FileInfoExtractor {
 	@Override
 	protected Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
-		if(val < 0 || val > 2)
+		if(val < 0 || val > 2) {
 			throw new XMLStreamException("Invalid Game Of Life cell type.");
+		}
 		return new GameOfLifeCell(val);
 	}
 
@@ -28,8 +31,9 @@ public class GameOfLifeFIE extends FileInfoExtractor {
 		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
 		for(int a = row - 1; a <= row + 1; a++) {
 			for(int b = col - 1; b <= col + 1; b++) {
-				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a != row || b != col))
+				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a != row || b != col)) {
 					neighborCoordinates.add(new int[]{a,b});
+				}
 			}
 		}
 		return neighborCoordinates;

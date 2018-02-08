@@ -3,7 +3,6 @@ package visualComponents;
 import graphVariants.Graph;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 
 public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;

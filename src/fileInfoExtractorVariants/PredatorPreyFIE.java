@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
-import cellVariants.*;
+import cellVariants.Cell;
+import cellVariants.PredatorPreyCell;
 import cellsociety_team10.FileInfoExtractor;
 
 public class PredatorPreyFIE extends FileInfoExtractor{
@@ -16,7 +17,7 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 			xmlRead.next();
 			return Double.parseDouble(xmlRead.getText());
 		}
-		else throw new XMLStreamException("Invalid global variables in file.");
+		throw new XMLStreamException("Invalid global variables in file.");
 	}
 
 	@Override
@@ -34,10 +35,9 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
 		for(int a = row - 1; a <= row + 1; a++) {
 			for(int b = col - 1; b <= col + 1; b++) {
-				if(a == row ^ b == col)
-				if(isValidGridLocation(a,b,gridRowLength,gridColLength))
-					neighborCoordinates.add(new int[]{a,b});
-				else neighborCoordinates.add(new int[]{(a + gridRowLength) % gridRowLength,(b + gridColLength) % gridColLength});
+				if(a == row ^ b == col) {
+					neighborCoordinates.add(new int[]{(a + gridRowLength) % gridRowLength,(b + gridColLength) % gridColLength});
+				}
 			}
 		}
 		return neighborCoordinates;

@@ -8,7 +8,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import cellVariants.*;
+import cellVariants.Cell;
 public class FileProcessor {
 	
 	private String myType;
@@ -77,9 +77,11 @@ public class FileProcessor {
 						}
 				  		break;
 				  	case "author": myParser.next(); 
-				  		author = myParser.getText(); break;
+				  					author = myParser.getText();
+				  					break;
 				  	case "title": myParser.next();
-				  		title = myParser.getText(); break;
+				  					title = myParser.getText();
+				  					break;
 				  }
 			  }
 		}
@@ -103,23 +105,22 @@ public class FileProcessor {
 	private void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
 		ArrayList<Cell> newRow = new ArrayList<Cell>();
-		while(true)
-		{
+		while(true) {
 			 int xmlEvent = myParser.next();
 			  //Process start element.
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
-				  switch(myParser.getLocalName())
-				  {
-				  	case "row":	newRow = new ArrayList<Cell>(); break;
-				  	case "cell": newRow.add(helper.getCell(myParser)); break;
+				  switch(myParser.getLocalName()) {
+				  	case "row":	newRow = new ArrayList<Cell>();
+				  				break;
+				  	case "cell": newRow.add(helper.getCell(myParser));
+				  				break;
 				  	
 				  }
 			  }
-			  if(xmlEvent == XMLStreamConstants.END_ELEMENT)
-			  {
-				  switch(myParser.getLocalName())
-				  {
-				  	case "row": newGrid.add(newRow); break;
+			  if(xmlEvent == XMLStreamConstants.END_ELEMENT) {
+				  switch(myParser.getLocalName()) {
+				  	case "row": newGrid.add(newRow);
+				  				break;
 				  	case "grid":
 				  		Cell[][] cellArray = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
 				  		createCellMap(cellArray);
@@ -137,9 +138,8 @@ public class FileProcessor {
 		gridColCount = cellArray[0].length;
 		cellGrid = new HashMap<Cell, ArrayList<Cell>>();
 		ArrayList<Cell> neighbors;
-		for(int x = 0; x < cellArray.length; x++)
-			for(int y = 0; y < cellArray[x].length; y++)
-			{
+		for(int x = 0; x < cellArray.length; x++) {
+			for(int y = 0; y < cellArray[x].length; y++) {
 				neighbors = new ArrayList<Cell>();
 				Cell toAdd = cellArray[x][y];
 				toAdd.setRow(x);
@@ -151,5 +151,6 @@ public class FileProcessor {
 				}
 				cellGrid.put(toAdd, neighbors);
 			}
+		}
 	}
 }

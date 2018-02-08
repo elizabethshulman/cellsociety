@@ -4,15 +4,11 @@ import graphVariants.Graph;
 import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class TriangleContainer extends Container {
 	public static final int test_value = 15;
 	public static final double height = Container.GRID_SIZE.doubleValue() / test_value * 0.75;
 	
-	private VBox myVBox;
-	private VBox myDisplay;
-
 	public TriangleContainer() {
 		super();
 		myDisplay.setId("container-display-borderless");

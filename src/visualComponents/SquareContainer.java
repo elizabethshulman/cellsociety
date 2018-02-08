@@ -3,11 +3,8 @@ package visualComponents;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import cellVariants.Cell;
-import graphVariants.Graph;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class SquareContainer extends Container {
 	public SquareContainer() {
@@ -24,11 +21,6 @@ public class SquareContainer extends Container {
 		return row;
 	}
 
-
-	/* Uses deprecated BigDecimal rounding division but works like a charm!
-	 * Necessary to prevent gaps between squares resulting from imprecise 
-	 * double division.
-	 */
 	@Override
 	protected double calcShapeHeight(int num_cols) {
 		BigDecimal cols = new BigDecimal(num_cols);

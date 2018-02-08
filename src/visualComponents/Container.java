@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public abstract class Container {
+	public static final BigDecimal GRID_SIZE = new BigDecimal(400);
+	
 	protected VBox myVBox;
 	protected VBox myDisplay;
 	
@@ -19,8 +21,6 @@ public abstract class Container {
 		myVBox.setId("container-vbox");
 		myVBox.getChildren().add(myDisplay);
 	}
-	
-	public static final BigDecimal GRID_SIZE = new BigDecimal(400);
 	
 	public VBox getContainer() {
 		return myVBox;

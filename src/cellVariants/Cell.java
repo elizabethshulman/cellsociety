@@ -12,7 +12,7 @@ public abstract class Cell {
 	protected HashMap<Integer, Image> statesAndColors;
 	private int row;
 	private int col;
-	private ImageView imageView;
+	protected ImageView imageView;
 	
 	public Cell(int st) {
 		state = st;

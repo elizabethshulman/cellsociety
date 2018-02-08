@@ -1,7 +1,5 @@
 package cellVariants;
 
-import visualComponents.Helper;
-
 public class PredatorPreyCell extends Cell {
 
 	private int reproductiveTime;
@@ -24,6 +22,8 @@ public class PredatorPreyCell extends Cell {
 	@Override
 	public void setState(int st) {
 		state=st;
+		imageView.setImage(statesAndColors.get(st));
+		
 		if(st==0) {
 			reproductiveTime=0;
 			reproduce=false;

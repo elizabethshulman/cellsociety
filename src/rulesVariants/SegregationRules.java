@@ -2,7 +2,6 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +16,8 @@ public class SegregationRules extends Rules {
 
 	private final double satisfactionThreshold;
 
-	public SegregationRules(HashMap<String,Double> globalVars) {
-		satisfactionThreshold = globalVars.get("satisfactionThreshold");
+	public SegregationRules(Map<String, Double> map) {
+		satisfactionThreshold = map.get("satisfactionThreshold");
 	}
 	
 	/**

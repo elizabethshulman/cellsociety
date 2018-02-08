@@ -7,9 +7,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HexContainer extends Container {
-	public static final int n = 5;
+	public static final int test_value = 5;
 	public static final ImageView baseline = Helper.generateImageView("hex1.png");
-	public static final double height = Container.GRID_SIZE.doubleValue() / n * 0.75;
+	public static final double height = Container.GRID_SIZE.doubleValue() / test_value * 0.75;
 	
 	
 	private double side_length = Helper.generateImageView("hex1.png", height).getBoundsInLocal().getWidth() / 2;
@@ -35,8 +35,8 @@ public class HexContainer extends Container {
 	public void setGraphDisplay(Graph g) {
 		myDisplay.getChildren().clear();
 		ImageView[][] graph_grid = buildImageView();
-		for (int r=0; r < n; r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, n));
+		for (int r=0; r < test_value; r++) {
+			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, test_value));
 		}
 	}
 	
@@ -60,9 +60,9 @@ public class HexContainer extends Container {
 	}
 
 	private ImageView[][] buildImageView() {
-		ImageView[][] temp = new ImageView[n][n];
-		for (int r=0; r < n; r++) {
-			for (int c=0; c < n; c++) {
+		ImageView[][] temp = new ImageView[test_value][test_value];
+		for (int r=0; r < test_value; r++) {
+			for (int c=0; c < test_value; c++) {
 				if (c % 2 == 1) {
 					temp[r][c] = Helper.generateImageView("hex1.png", height);
 				} else {

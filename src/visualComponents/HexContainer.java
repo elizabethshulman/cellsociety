@@ -4,7 +4,6 @@ import graphVariants.Graph;
 import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class HexContainer extends Container {
 	public static final int test_value = 5;
@@ -14,21 +13,10 @@ public class HexContainer extends Container {
 	
 	private double side_length = Helper.generateImageView("hex1.png", height).getBoundsInLocal().getWidth() / 2;
 	private double useful = 1 / Math.tan(Math.PI / 6);
-	private VBox myVBox;
-	private VBox myDisplay;
 	
 	public HexContainer() {
-		myDisplay = new VBox();
+		super();
 		myDisplay.setId("container-display-borderless");
-		
-		myVBox = new VBox();
-		myVBox.setId("container-vbox");
-		myVBox.getChildren().add(myDisplay);
-	}
-
-	@Override
-	public VBox getContainer() {
-		return myVBox;
 	}
 
 	@Override
@@ -40,7 +28,7 @@ public class HexContainer extends Container {
 		}
 	}
 	
-	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
+	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
 		HBox row = new HBox();
 		for (int c=0; c < num_cols; c++) {
 			row.getChildren().add(graph_grid[r][c]);
@@ -72,6 +60,10 @@ public class HexContainer extends Container {
 		}
 		
 		return temp;
+	}
+	
+	protected double calcShapeHeight(int num_cols) {
+		return height;
 	}
 
 }

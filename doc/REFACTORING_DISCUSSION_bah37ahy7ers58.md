@@ -13,4 +13,4 @@ The FileInfoExtractor class was moved to the same package as its subclasses. Its
 
 #### General Refactoring
 
-Most of the warnings in Code Smells were indentation issues that have been ignored. There is one instance of nested loops that was fixed; the other instance of nested loops was deemed unavoidable. For Java Notes, most of the warnings were requests for package info documentation that were ignored. There are a couple of requests to rethrow/log errors that are found via try/catch but those are handled by throwing new errors instead; these errors were also ignored.
+For Code Smells, our only errors had to do with spacing issues (i.e., `Make this line start at column 9.`). We had 329 of those -- not much to say there. For Java Notes, we moved a single line of code into the superclass that was shared amongst classes and got rid of a deprecation warning inside the `calcShapeHeight()` function of SquareContainer. That was a super useful flag for us, as it was inside a method tucked in a file that we might not have caught again.  

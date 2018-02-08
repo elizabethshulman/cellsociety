@@ -14,17 +14,8 @@ public class TriangleContainer extends Container {
 	private VBox myDisplay;
 
 	public TriangleContainer() {
-		myDisplay = new VBox();
+		super();
 		myDisplay.setId("container-display-borderless");
-		
-		myVBox = new VBox();
-		myVBox.setId("container-vbox");
-		myVBox.getChildren().add(myDisplay);
-	}
-
-	@Override
-	public VBox getContainer() {
-		return myVBox;
 	}
 
 	@Override
@@ -52,7 +43,7 @@ public class TriangleContainer extends Container {
 		return temp;
 	}
 	
-	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
+	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
 		HBox row = new HBox();
 		for (int c=0; c < num_cols; c++) {
 			row.getChildren().add(graph_grid[r][c]);
@@ -63,6 +54,10 @@ public class TriangleContainer extends Container {
 			row.setPadding(new Insets(0, 0, 0, -graph_grid[0][0].getBoundsInLocal().getWidth() / 2));
 		} 
 		return row;
+	}
+	
+	protected double calcShapeHeight(int num_cols) {
+		return height;
 	}
 
 }

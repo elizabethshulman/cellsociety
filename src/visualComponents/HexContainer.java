@@ -18,17 +18,8 @@ public class HexContainer extends Container {
 	private VBox myDisplay;
 	
 	public HexContainer() {
-		myDisplay = new VBox();
+		super();
 		myDisplay.setId("container-display-borderless");
-		
-		myVBox = new VBox();
-		myVBox.setId("container-vbox");
-		myVBox.getChildren().add(myDisplay);
-	}
-
-	@Override
-	public VBox getContainer() {
-		return myVBox;
 	}
 
 	@Override
@@ -40,7 +31,7 @@ public class HexContainer extends Container {
 		}
 	}
 	
-	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
+	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
 		HBox row = new HBox();
 		for (int c=0; c < num_cols; c++) {
 			row.getChildren().add(graph_grid[r][c]);
@@ -72,6 +63,10 @@ public class HexContainer extends Container {
 		}
 		
 		return temp;
+	}
+	
+	protected double calcShapeHeight(int num_cols) {
+		return height;
 	}
 
 }

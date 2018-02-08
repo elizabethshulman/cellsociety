@@ -3,10 +3,12 @@ package visualComponents;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.VBox;
 
 public class LineGraph {
 	
 	private LineChart<Number, Number> myLineChart;
+	private VBox myVBox;
 	
 	public LineGraph() {
 		NumberAxis xAxis = new NumberAxis();
@@ -47,11 +49,14 @@ public class LineGraph {
 		series3.getData().add(new XYChart.Data<Number, Number>(22, 36));
 		series3.getData().add(new XYChart.Data<Number, Number>(43, 33));
 		series3.getData().add(new XYChart.Data<Number, Number>(23, 31));
-		
+	
 		myLineChart.getData().addAll(series1, series2, series3);
+		
+		myVBox = new VBox();
+		myVBox.getChildren().add(myLineChart);
 	}
 	
-	public LineChart<Number, Number> getLineChart() {
-		return myLineChart;
+	public VBox getLineChart() {
+		return myVBox;
 	}
 }

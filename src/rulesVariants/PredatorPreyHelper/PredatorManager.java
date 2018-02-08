@@ -3,16 +3,18 @@ package rulesVariants.PredatorPreyHelper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
 
 public class PredatorManager {
 
-	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> ocean;
+	Map<PredatorPreyCell, ArrayList<PredatorPreyCell>> ocean;
 	double sharkStarveTime;
 	
 	
-	public PredatorManager(HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph,
+	public PredatorManager(Map<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph,
 			double starveTime) {
 		ocean = currentgraph;
 		sharkStarveTime=starveTime;

@@ -2,6 +2,7 @@ package graphVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import cellVariants.Cell;
@@ -17,7 +18,7 @@ import rulesVariants.Rules;
  */
 public class Graph {
 
-	private HashMap<Cell, ArrayList<Cell>> currentGrid;
+	private Map<Cell, ArrayList<Cell>> currentGrid;
 	private Rules myRules;
 	private int numRows;
 	private int numCols;
@@ -46,7 +47,7 @@ public class Graph {
 		return currentGrid.keySet();
 	}
 	
-	public ArrayList<Cell> getNeighbors(Cell c){
+	public List<Cell> getNeighbors(Cell c){
 		return currentGrid.get(c);
 	}
 	

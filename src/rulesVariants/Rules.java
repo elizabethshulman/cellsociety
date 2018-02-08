@@ -2,6 +2,8 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cellVariants.Cell;
 
@@ -14,7 +16,7 @@ public abstract class Rules {
 	protected boolean dead=false;
 	
 	//return updated graph
-	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell,ArrayList<Cell>> g) {
+	public Map<Cell, ArrayList<Cell>> applyGraphRules(Map<Cell, ArrayList<Cell>> g) {
 		ArrayList<Cell> needChange = new ArrayList<Cell>();	
 		for(Cell c : g.keySet()) {
 			if(dissatisfied(c.getState(), g.get(c))) {
@@ -28,11 +30,11 @@ public abstract class Rules {
 	}
 	
 	//check for simulation death & update boolean
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {		
+	protected void updateDeath(Map<Cell, ArrayList<Cell>> g) {		
 	}
 
 	//true if cell needs to change state, false if otherwise
-	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+	protected Boolean dissatisfied(int state, List<Cell> neighbors) {
 		return false;
 	}
 	

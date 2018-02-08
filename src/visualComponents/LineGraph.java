@@ -54,10 +54,16 @@ public class LineGraph {
 				myLineChart.getData().add(series);
 				mySeries.put(state, series);
 			}
-			
+
 			XYChart.Series<Number, Number> series = mySeries.get(state);
 			series.getData().add(new XYChart.Data<Number, Number>(myIteration, type_count.get(state)));
 		}
 		myIteration += 1;
+	}
+	
+	public void resetChart() {
+		myLineChart.getData().clear();
+		mySeries.clear();
+		myIteration = 0;
 	}
 }

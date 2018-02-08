@@ -57,6 +57,7 @@ public class Visualization {
 		myIteration = -1;
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
+		myLineGraph.resetChart();
 	}
 	
 	public void amendHeader(String header) {

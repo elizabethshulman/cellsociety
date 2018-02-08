@@ -6,7 +6,7 @@ import graphVariants.Graph;
 import javafx.scene.layout.VBox;
 
 public abstract class Container {
-	public static final BigDecimal GRID_SIZE = new BigDecimal(400);
+	public static final BigDecimal GRID_SIZE = new BigDecimal(350);
 	
 	public abstract VBox getContainer();
 	

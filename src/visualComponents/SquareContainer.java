@@ -1,6 +1,8 @@
 package visualComponents;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 import cellVariants.Cell;
 import graphVariants.Graph;
@@ -9,21 +11,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SquareContainer extends Container {
-	private VBox myVBox;
+	private VBox myGrid;
 	private VBox myDisplay;
 	
 	public SquareContainer() {
 		myDisplay = new VBox();
 		myDisplay.setId("container-display-square");
 		
-		myVBox = new VBox();
-		myVBox.setId("container-vbox");
-		myVBox.getChildren().add(myDisplay);
+		myGrid = new VBox();
+		myGrid.setId("container-vbox");
+		myGrid.getChildren().add(myDisplay);
 	}
 	
 	@Override
 	public VBox getContainer() {
-		return myVBox;
+		return myGrid;
 	}
 	
 	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
@@ -46,12 +48,14 @@ public class SquareContainer extends Container {
 	
 	private ImageView[][] mapToGrid(Graph g) {
 		ImageView[][] curr_grid = new ImageView[g.getRows()][g.getCols()];
+		
 		for (Cell curr : g.getCells()) {
 			ImageView curr_image_view = curr.getImageView();
 			curr_image_view.setPreserveRatio(true);
 			curr_image_view.setFitHeight(calcSquareHeight(g.getCols()));
 			curr_grid[curr.getRow()][curr.getCol()] = curr_image_view;
 		}
+		
 		return curr_grid;
 	}
 

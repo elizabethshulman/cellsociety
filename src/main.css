@@ -207,5 +207,25 @@
 	-fx-background-color: rgb(249, 249, 249);
 }
 
-/* This section deals with components from StatusBar. */
+/* This section deals with components from LineGraph. */
+#line-chart {
+	-fx-legend-visible: false;
+	-fx-horizontal-grid-lines-visible: false;
+	-fx-vertical-grid-lines-visible: false;
+	-fx-create-symbols: false;
+	-fx-create-symbols: false;
+	-fx-horizontal-zero-line-visible: false;
+	-fx-vertical-zero-line-visible: false;
+	-fx-max-height: 100;
+	-fx-min-height: 100;
+}
+
+#axis {
+	-fx-tick-labels-visible: false;
+	-fx-opacity: 0;
+}
+
+.chart-plot-background {
+	-fx-background-color: transparent;
+}
 

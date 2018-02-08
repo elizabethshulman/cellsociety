@@ -17,23 +17,27 @@ public class Visualization {
 	private ControlPanel myControlPanel;
 	private Scene myScene;
 	private HeaderBar myBar;
+	private LineGraph myLineGraph;
 	
 	public Visualization(ControlPanel cp) {
 		myBorderPane = new BorderPane();
 		myBorderPane.setId("main-pane");
 		
-		myBar = new HeaderBar("");
-		myVisualContainer = new SquareContainer();
-		myControlPanel = cp;
-		
 		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(CSS_STRING);
 		
+		myBar = new HeaderBar("");
+		myVisualContainer = new SquareContainer();
+		myControlPanel = cp;
+		myLineGraph = new LineGraph();
+		
+		VBox center = new VBox();
+		center.getChildren().add(myLineGraph.getLineChart());
+		center.getChildren().add(myVisualContainer.getContainer());
+		
 		myBorderPane.setTop(myBar.getHBox());
-		
-		
-		myBorderPane.setCenter(myVisualContainer.getContainer());
+		myBorderPane.setCenter(center);
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	
@@ -42,8 +46,9 @@ public class Visualization {
 		myControlPanel.setIteration(myIteration);
 		
 		myVisualContainer.setGraphDisplay(g);
+		myLineGraph.addCoordinates(g);
 	}
-	
+
 	public Scene getScene() {
 		return myScene;
 	}

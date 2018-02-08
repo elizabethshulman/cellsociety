@@ -1,5 +1,10 @@
 package visualComponents;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import cellVariants.Cell;
+import graphVariants.Graph;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -7,56 +12,52 @@ import javafx.scene.layout.VBox;
 
 public class LineGraph {
 	
+	private Map<Integer, XYChart.Series<Number, Number>> mySeries = new HashMap<Integer, XYChart.Series<Number, Number>>();
+	private int myIteration = 0;
 	private LineChart<Number, Number> myLineChart;
 	private VBox myVBox;
 	
 	public LineGraph() {
 		NumberAxis xAxis = new NumberAxis();
+		xAxis.setId("axis");
 		NumberAxis yAxis = new NumberAxis();
-		LineChart<Number, Number> myLineChart = 
-				new LineChart<Number, Number>(xAxis,yAxis);
-		
-		myLineChart.setLegendVisible(false);
-		myLineChart.setHorizontalGridLinesVisible(false);
-		myLineChart.setVerticalGridLinesVisible(false);
-		myLineChart.setCreateSymbols(false);
-		myLineChart.setHorizontalZeroLineVisible(false);
-		myLineChart.setVerticalZeroLineVisible(false);
-		
-		yAxis.setTickLabelsVisible(false);
-		yAxis.setOpacity(0);
-		
-		xAxis.setTickLabelsVisible(false);
-		xAxis.setOpacity(0);
+		yAxis.setId("axis");
+		myLineChart = new LineChart<Number, Number>(xAxis,yAxis);
+		myLineChart.setId("line-chart");
 
-		XYChart.Series<Number, Number> series1 = new XYChart.Series<Number, Number>();
-		series1.getData().add(new XYChart.Data<Number, Number>(10, 23));
-		series1.getData().add(new XYChart.Data<Number, Number>(45, 14));
-		series1.getData().add(new XYChart.Data<Number, Number>(77, 15));
-		series1.getData().add(new XYChart.Data<Number, Number>(23, 24));
-		series1.getData().add(new XYChart.Data<Number, Number>(01, 34));
-
-		XYChart.Series<Number, Number> series2 = new XYChart.Series<Number, Number>();
-		series2.getData().add(new XYChart.Data<Number, Number>(7, 33));
-		series2.getData().add(new XYChart.Data<Number, Number>(17, 34));
-		series2.getData().add(new XYChart.Data<Number, Number>(34, 25));
-		series2.getData().add(new XYChart.Data<Number, Number>(22, 44));
-		series2.getData().add(new XYChart.Data<Number, Number>(43, 39));
-
-		XYChart.Series<Number, Number> series3 = new XYChart.Series<Number, Number>();
-		series3.getData().add(new XYChart.Data<Number, Number>(44, 44));
-		series3.getData().add(new XYChart.Data<Number, Number>(21, 35));
-		series3.getData().add(new XYChart.Data<Number, Number>(22, 36));
-		series3.getData().add(new XYChart.Data<Number, Number>(43, 33));
-		series3.getData().add(new XYChart.Data<Number, Number>(23, 31));
-	
-		myLineChart.getData().addAll(series1, series2, series3);
-		
 		myVBox = new VBox();
 		myVBox.getChildren().add(myLineChart);
 	}
 	
 	public VBox getLineChart() {
 		return myVBox;
+	}
+	
+	private Map<Integer, Integer> countStates(Graph g) {
+		Map<Integer, Integer> type_count = new HashMap<Integer, Integer>();
+		
+		for (Cell curr : g.getCells()) {
+			int count = type_count.containsKey(curr.getState()) ? type_count.get(curr.getState()) : 0;
+			type_count.put(curr.getState(), count + 1);
+		}
+		
+		return type_count;
+	}
+	
+	
+	public void addCoordinates(Graph g) {
+		Map<Integer, Integer> type_count = countStates(g);
+		
+		for (Integer state : type_count.keySet()) {
+			if (! mySeries.containsKey(state)) {
+				XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+				myLineChart.getData().add(series);
+				mySeries.put(state, series);
+			}
+			
+			XYChart.Series<Number, Number> series = mySeries.get(state);
+			series.getData().add(new XYChart.Data<Number, Number>(myIteration, type_count.get(state)));
+		}
+		myIteration += 1;
 	}
 }

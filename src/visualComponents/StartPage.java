@@ -72,7 +72,7 @@ public class StartPage {
 	}
 
 	private void createNameMap() {
-		myNameMap = new HashMap<String, String>();
+		myNameMap = new HashMap<>();
 		myNameMap.put("predator", myResources.getString("PredButton"));
 		myNameMap.put("segregation", myResources.getString("SegButton"));
 		myNameMap.put("life", myResources.getString("LifeButton"));

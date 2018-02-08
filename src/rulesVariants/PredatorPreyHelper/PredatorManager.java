@@ -2,20 +2,19 @@ package rulesVariants.PredatorPreyHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
 
-public class PredatorManager {
+public class PredatorManager extends Manager {
 
-	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> ocean;
-	double sharkStarveTime;
+	private double sharkStarveTime;
 	
-	
-	public PredatorManager(HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> currentgraph,
+	public PredatorManager(Map<PredatorPreyCell, List<PredatorPreyCell>> currentgraph,
 			double starveTime) {
-		ocean = currentgraph;
-		sharkStarveTime=starveTime;
+		super(currentgraph);
+		sharkStarveTime = starveTime;
 	}
 	
 	public void manageSharks() {
@@ -24,40 +23,39 @@ public class PredatorManager {
 	
 	private void updateSharkEnergy() {
 		for(PredatorPreyCell c:ocean.keySet()) {
-			if (c.getState()==2) {
+			if (c.getState() == 2) {
 				c.increaseSharkEnergy();
-			} if(c.getSharkEnergy()>=sharkStarveTime) {
+			} if(c.getSharkEnergy() >= sharkStarveTime) {
 				c.setState(0);
 			}
 		}
 	}
 	
-	public void moveSharks(PredatorPreyCell c, ArrayList<PredatorPreyCell> neighbors) {
-		PredatorPreyCell cellToMoveTo = whereToMoveShark(c);
+	public void moveSharks(PredatorPreyCell c, List<PredatorPreyCell> neighbors) {
+		PredatorPreyCell cellToMoveTo = whereToMove(c);
 		if(cellToMoveTo.equals(c)) { //indicates no possible movement options
-			c.setReproductiveTime(c.getReproductiveTime()+1);
+			c.setReproductiveTime(c.getReproductiveTime() + 1);
 			return; 
 		}
-		if(cellToMoveTo.getState()==1) {
-			cellToMoveTo.setSharkEnergy(c.getSharkEnergy()-2);
+		if(cellToMoveTo.getState() == 1) {
+			cellToMoveTo.setSharkEnergy(c.getSharkEnergy() - 2);
 		} else {
 			cellToMoveTo.setSharkEnergy(c.getSharkEnergy());
 		}
 		cellToMoveTo.setState(2);
-		cellToMoveTo.setReproductiveTime(c.getReproductiveTime()+1);
+		cellToMoveTo.setReproductiveTime(c.getReproductiveTime() + 1);
 		handleReproduction(c);
 	}
 	
-	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c){
-		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
-		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<PredatorPreyCell>();
-		for(PredatorPreyCell n:ocean.get(c)) {
-			if(n.getState()==0 && (!n.hasMovedThisTurn())) {
+
+	protected PredatorPreyCell whereToMove(PredatorPreyCell c){
+		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<>();
+		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<>();
+		for(PredatorPreyCell n : ocean.get(c)) {
+			if(n.getState() == 0 && (!n.hasMovedThisTurn())) {
 				emptyOptions.add(n);
-			} else {
-				if(n.getState()==1 && (!n.hasMovedThisTurn())) {
-					fishOptions.add(n);
-				}
+			} else if (n.getState() == 1 && (!n.hasMovedThisTurn())) {
+				fishOptions.add(n);
 			}
 		}
 		PredatorPreyCell cellToMoveTo = c;
@@ -66,24 +64,14 @@ public class PredatorManager {
 				return c;
 			} else {
 				Collections.shuffle(emptyOptions); //randomize fish movement
-				cellToMoveTo = emptyOptions.remove(emptyOptions.size()-1);
+				cellToMoveTo = emptyOptions.remove(emptyOptions.size() - 1);
 			}
 		} else {
 			Collections.shuffle(fishOptions);
-			cellToMoveTo = fishOptions.remove(fishOptions.size()-1);
+			cellToMoveTo = fishOptions.remove(fishOptions.size() - 1);
 		}
 		cellToMoveTo.setMovedThisTurn(true);
 		c.setMovedThisTurn(true);
 		return cellToMoveTo;
-	}
-	
-	private void handleReproduction(PredatorPreyCell c) {
-		if(c.getReproduce()==true) {
-			c.setReproduce(false);
-			c.setSharkEnergy(0);
-			c.setReproductiveTime(0);
-		} else {
-			c.setState(0);
-		}
 	}
 }

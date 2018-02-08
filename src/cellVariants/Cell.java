@@ -16,7 +16,7 @@ public abstract class Cell {
 	
 	public Cell(int st) {
 		state = st;
-		statesAndColors = new HashMap<Integer, Image>();
+		statesAndColors = new HashMap<>();
 		buildHashMap();
 		imageView = new ImageView(statesAndColors.get(state));
 		imageView.setOnMouseClicked(e -> {

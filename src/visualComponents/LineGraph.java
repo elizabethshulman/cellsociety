@@ -22,7 +22,7 @@ public class LineGraph {
 		xAxis.setId("axis");
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setId("axis");
-		myLineChart = new LineChart<Number, Number>(xAxis,yAxis);
+		myLineChart = new LineChart<>(xAxis,yAxis);
 		myLineChart.setId("line-chart");
 
 		myVBox = new VBox();
@@ -54,7 +54,7 @@ public class LineGraph {
 				myLineChart.getData().add(series);
 				mySeries.put(state, series);
 			}
-
+			
 			XYChart.Series<Number, Number> series = mySeries.get(state);
 			series.getData().add(new XYChart.Data<Number, Number>(myIteration, type_count.get(state)));
 		}

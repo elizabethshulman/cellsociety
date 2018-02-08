@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import graphVariants.Graph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,7 +16,7 @@ import visualComponents.RulesFactory;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
 
-public class Engine extends Application {
+public class Engine {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final String SIM_FOLDER = "data/simulations/";
@@ -33,16 +32,7 @@ public class Engine extends Application {
 	private RulesFactory myRulesFactory;
 	private ControlPanel myControlPanel;
 
-	public static void main (String[] args) {
-		launch(args);
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		initializeSimulation(primaryStage);
-	}
-
-	private void initializeSimulation(Stage stage) {
+	public void initializeSimulation(Stage stage) {
 		myStage = stage;
 		
 		myResources = ResourceBundle.getBundle(LANGUAGE);

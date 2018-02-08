@@ -1,6 +1,7 @@
 package fileInfoExtractorVariants;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
@@ -31,8 +32,8 @@ public class SegregationFIE extends FileInfoExtractor {
 		}
 	}
 	@Override
-	public ArrayList<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
-		ArrayList<int[]> neighborCoordinates = new ArrayList<int[]>();
+	public List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
+		ArrayList<int[]> neighborCoordinates = new ArrayList<>();
 		for(int a = row - 1; a <= row + 1; a++) {
 			for(int b = col - 1; b <= col + 1; b++) {
 				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a != row || b != col)) {

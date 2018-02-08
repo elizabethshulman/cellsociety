@@ -18,7 +18,7 @@ import rulesVariants.Rules;
  */
 public class Graph {
 
-	private Map<Cell, ArrayList<Cell>> currentGrid;
+	private Map<Cell, List<Cell>> currentGrid;
 	private Rules myRules;
 	private int numRows;
 	private int numCols;

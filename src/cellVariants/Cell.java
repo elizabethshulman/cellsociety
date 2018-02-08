@@ -14,7 +14,7 @@ public abstract class Cell {
 	
 	public Cell(int st) {
 		state = st;
-		statesAndColors = new HashMap<Integer, ImageView>();
+		statesAndColors = new HashMap<>();
 		buildHashMap();
 	}
 

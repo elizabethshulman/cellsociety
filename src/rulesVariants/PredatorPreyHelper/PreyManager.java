@@ -26,7 +26,7 @@ public class PreyManager {
 	}
 	
 	private PredatorPreyCell whereToMoveFish(PredatorPreyCell c) {
-		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
+		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<>();
 		for(PredatorPreyCell n:ocean.get(c)) {
 			if(n.getState()==0 && !n.hasMovedThisTurn()) {
 				emptyOptions.add(n);
@@ -43,7 +43,7 @@ public class PreyManager {
 	}
 	
 	private void handleReproduction(PredatorPreyCell c) {
-		if(c.getReproduce()==true) {
+		if(c.getReproduce()) {
 			c.setReproduce(false);
 			c.setSharkEnergy(0);
 			c.setReproductiveTime(0);

@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
@@ -20,7 +21,7 @@ public class FileProcessor {
 	private Map<String,Double> globalVars;
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
-	private Map<Cell,ArrayList<Cell>> cellGrid;
+	private Map<Cell,List<Cell>> cellGrid;
 	private int gridRowCount;
 	private int gridColCount;
 	
@@ -44,7 +45,7 @@ public class FileProcessor {
 	public Map<String,Double> getGlobalVars() {
 		return globalVars;
 	}
-	public Map<Cell,ArrayList<Cell>> getCellGrid() {
+	public Map<Cell,List<Cell>> getCellGrid() {
 		return cellGrid;
 	}
 	public int getRowCount(){
@@ -105,8 +106,8 @@ public class FileProcessor {
 	
 	//Creates 2D array based on information from file
 	private void readCells() throws XMLStreamException {
-		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
-		ArrayList<Cell> newRow = new ArrayList<Cell>();
+		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<>();
+		ArrayList<Cell> newRow = new ArrayList<>();
 		while(true) {
 			 int xmlEvent = myParser.next();
 			  //Process start element.
@@ -138,15 +139,15 @@ public class FileProcessor {
 	{
 		gridRowCount = cellArray.length;
 		gridColCount = cellArray[0].length;
-		cellGrid = new HashMap<Cell, ArrayList<Cell>>();
+		cellGrid = new HashMap<>();
 		ArrayList<Cell> neighbors;
 		for(int x = 0; x < cellArray.length; x++) {
 			for(int y = 0; y < cellArray[x].length; y++) {
-				neighbors = new ArrayList<Cell>();
+				neighbors = new ArrayList<>();
 				Cell toAdd = cellArray[x][y];
 				toAdd.setRow(x);
 				toAdd.setCol(y);
-				ArrayList<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
+				List<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
 				for(int a = 0; a < neighborIndices.size(); a++)
 				{
 					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);

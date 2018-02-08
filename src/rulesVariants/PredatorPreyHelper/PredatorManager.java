@@ -49,8 +49,8 @@ public class PredatorManager {
 	}
 	
 	private PredatorPreyCell whereToMoveShark(PredatorPreyCell c){
-		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<PredatorPreyCell>();
-		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<PredatorPreyCell>();
+		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<>();
+		ArrayList<PredatorPreyCell> fishOptions = new ArrayList<>();
 		for(PredatorPreyCell n:ocean.get(c)) {
 			if(n.getState()==0 && (!n.hasMovedThisTurn())) {
 				emptyOptions.add(n);

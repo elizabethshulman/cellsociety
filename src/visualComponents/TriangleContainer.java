@@ -15,7 +15,7 @@ public class TriangleContainer extends Container {
 
 	public TriangleContainer() {
 		myDisplay = new VBox();
-		myDisplay.setId("container-display-hex");
+		myDisplay.setId("container-display-borderless");
 		
 		myVBox = new VBox();
 		myVBox.setId("container-vbox");

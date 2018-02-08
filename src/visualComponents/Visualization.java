@@ -3,6 +3,7 @@ package visualComponents;
 import graphVariants.Graph;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
@@ -30,6 +31,7 @@ public class Visualization {
 		myScene.getStylesheets().add(CSS_STRING);
 		
 		myBorderPane.setTop(myBar.getHBox());
+		
 		myBorderPane.setCenter(myVisualContainer.getContainer());
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}

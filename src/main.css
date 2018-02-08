@@ -170,7 +170,7 @@
 	-fx-max-width: 0px;
 }
 
-#container-display-hex {
+#container-display-borderless {
 	-fx-border-insets: 0;
 	-fx-max-width: 0px;
 }

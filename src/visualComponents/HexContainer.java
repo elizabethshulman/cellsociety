@@ -7,10 +7,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HexContainer extends Container {
-	public static final int n = 4;
+	public static final int n = 5;
 	public static final ImageView baseline = Helper.generateImageView("hex1.png");
 	public static final double height = Container.GRID_SIZE.doubleValue() / n * 0.75;
 	
+	
+	private double side_length = Helper.generateImageView("hex1.png", height).getBoundsInLocal().getWidth() / 2;
+	private double useful = 1 / Math.tan(Math.PI / 6);
 	private VBox myVBox;
 	private VBox myDisplay;
 	
@@ -35,7 +38,6 @@ public class HexContainer extends Container {
 		for (int r=0; r < n; r++) {
 			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, n));
 		}
-		
 	}
 	
 	private HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
@@ -43,23 +45,18 @@ public class HexContainer extends Container {
 		for (int c=0; c < num_cols; c++) {
 			row.getChildren().add(graph_grid[r][c]);
 		}
+		double padding = - height / 4 - 0.5;
 		if (r % 2 == 1) {
-			row.setPadding(new Insets(-height / 4, 0, -height / 4, getOffset()));
+			row.setPadding(new Insets(padding, 0, padding, getOffset()));
 		} else {
-			row.setPadding(new Insets(-height / 4, 0, -height / 4, 0));
+			row.setPadding(new Insets(padding, 0, padding, 0));
 		}
-		row.setSpacing(getSideLength());
+		row.setSpacing(side_length);
 		return row;
 	}
 	
-	private double getSideLength() {
-		return Helper.generateImageView("hex1.png", height).getBoundsInLocal().getWidth() / 2;
-	}
-	
 	private double getOffset() {
-		double offset = height / 2 * (1 / Math.tan(Math.PI / 6));
-		System.out.println(offset);
-		return offset;
+		return height / 2 * useful - 0.5;
 	}
 
 	private ImageView[][] buildImageView() {

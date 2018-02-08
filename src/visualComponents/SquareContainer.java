@@ -9,21 +9,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class SquareContainer extends Container {
-	private static final BigDecimal GRID_SIZE = new BigDecimal(400);
-	
 	private VBox myVBox;
 	private VBox myDisplay;
 	
 	public SquareContainer() {
 		myDisplay = new VBox();
-		myDisplay.setId("container-display");
+		myDisplay.setId("container-display-square");
 		
 		myVBox = new VBox();
 		myVBox.setId("container-vbox");
 		myVBox.getChildren().add(myDisplay);
 	}
 	
-	public VBox getVBox() {
+	@Override
+	public VBox getContainer() {
 		return myVBox;
 	}
 	
@@ -36,6 +35,7 @@ public class SquareContainer extends Container {
 		return row;
 	}
 	
+	@Override
 	public void setGraphDisplay(Graph g) {
 		myDisplay.getChildren().clear();
 		ImageView[][] graph_grid = mapToGrid(g);
@@ -61,6 +61,6 @@ public class SquareContainer extends Container {
 	 */
 	private double calcSquareHeight(int num_cols) {
 		BigDecimal cols = new BigDecimal(num_cols);
-		return GRID_SIZE.divide(cols, BigDecimal.ROUND_UP).doubleValue();
+		return Container.GRID_SIZE.divide(cols, BigDecimal.ROUND_UP).doubleValue();
 	}
 }

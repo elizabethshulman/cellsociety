@@ -22,7 +22,7 @@ public class Visualization {
 		myBorderPane.setId("main-pane");
 		
 		myBar = new HeaderBar("");
-		myVisualContainer = new SquareContainer();
+		myVisualContainer = new HexContainer();
 		myControlPanel = cp;
 		
 		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -30,7 +30,7 @@ public class Visualization {
 		myScene.getStylesheets().add(CSS_STRING);
 		
 		myBorderPane.setTop(myBar.getHBox());
-		myBorderPane.setCenter(myVisualContainer.getVBox());
+		myBorderPane.setCenter(myVisualContainer.getContainer());
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	

@@ -1,5 +1,6 @@
 package visualComponents;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -63,7 +64,7 @@ public class Sidebar {
 	        @Override
 	        public void changed(ObservableValue<? extends String> ov,
 	        		String old_val, String new_val) {
-	        		myEngine.changeSimulation(translations.get(new_val));
+	        		myEngine.loadSimulation(new File(translations.get(new_val)));
 			}
 	    });
 
@@ -72,10 +73,10 @@ public class Sidebar {
 	
 	private Map<String, String> initTranslations(ResourceBundle resources) {
 		HashMap<String, String> translations = new HashMap<>();
-		translations.put(resources.getString("LifeButton"), "data/simulations/default/.xml");
-		translations.put(resources.getString("FireButton"), "data/simulations/default/fire/fire_square.xml");
-		translations.put(resources.getString("PredButton"), "data/simulations/default/pred/pred_square.xml");
-		translations.put(resources.getString("SegButton"), "data/simulations/default/seg/seg_square.xml");
+		translations.put(resources.getString("LifeButton"), "data/simulations/life/gameoflife1.xml");
+		translations.put(resources.getString("FireButton"), "data/simulations/fire/fire1.xml");
+		translations.put(resources.getString("PredButton"), "data/simulations/predator/predatorprey1.xml");
+		translations.put(resources.getString("SegButton"), "data/simulations/segregation/segregation1.xml");
 		return translations;
 	}
 	

@@ -10,5 +10,5 @@ public class SquareGraph extends Graph {
 	}
 	
 //	public adjustRows()
-//	public adjustCols();
+//	public adjustCols()
 }

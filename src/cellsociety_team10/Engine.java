@@ -1,10 +1,10 @@
 package cellsociety_team10;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import graphVariants.Graph;
+import graphVariants.GraphFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -31,6 +31,7 @@ public class Engine {
 	private Stage myStage;
 	private FileChooser myFileChooser;
 	private RulesFactory myRulesFactory;
+	private GraphFactory myGraphFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
 
@@ -50,6 +51,7 @@ public class Engine {
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
 
 		myRulesFactory = new RulesFactory();
+		myGraphFactory = new GraphFactory(myRulesFactory);
 
 		myAnimation = new Timeline();
 		myControlPanel = new ControlPanel(myAnimation, 
@@ -57,6 +59,7 @@ public class Engine {
 				e -> pause(), 
 				e -> end(), 
 				e -> next());
+		myVis = new Visualization(myControlPanel, stage);
 
 		myStage.setScene(myStartScene);
 		myStage.setTitle(myResources.getString("Title"));
@@ -107,7 +110,7 @@ public class Engine {
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
 		if (f != null) {
-			handleChosenFile(f, null);
+			handleChosenFile(f);
 		}
 	}
 
@@ -118,33 +121,27 @@ public class Engine {
 		myVis.reset();
 	}
 
-	private void handleChosenFile(File filename, Stage stage) {
-		myGraph = new Graph(filename, myRulesFactory);
-
-		myVis = new Visualization(myControlPanel, stage);
+	public void loadSimulation(File file) {
+		myGraph = myGraphFactory.createGraph(file);
+//		myGraph = new Graph(filename, myRulesFactory);
+		
 		setupAnimation();
-
 		resetEngine();
+		
+		myVis.visualizeGraph(myGraph);
+		myStage.setScene(myVis.getScene());
+	}
+
+	private void handleChosenFile(File file) {
+		loadSimulation(file);
 
 		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
-		myVis.visualizeGraph(myGraph);
-		myStage.setScene(myVis.getScene());
 	}
 
-	public void changeSimulation(String simulation) {
-		myGraph = new Graph(new File(simulation), myRulesFactory);
-
-		setupAnimation();
-
-		resetEngine();
-
-		myVis.visualizeGraph(myGraph);
-		myStage.setScene(myVis.getScene());
-	}
 
 	private void setupDIY() {
-		File file = new File("data/simulations/default/life/life_square.xml");
-		handleChosenFile(file, myStage);
+		File file = new File("data/simulations/life/gameoflife1.xml");
+		handleChosenFile(file);
 
 		mySidebar = new Sidebar(myResources, this);
 		myVis.addSidebar(mySidebar);

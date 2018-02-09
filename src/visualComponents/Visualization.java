@@ -21,10 +21,6 @@ public class Visualization {
 	private LineGraph myLineGraph;
 	private Stage myStage;
 	
-	public Visualization(ControlPanel cp) {
-		this(cp, null);
-	}
-	
 	public Visualization(ControlPanel cp, Stage stage) {
 		myStage = stage;
 		

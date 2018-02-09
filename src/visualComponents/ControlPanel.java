@@ -68,7 +68,6 @@ public class ControlPanel {
 
 		mySlider = new Slider(MIN_SLIDER, MAX_SLIDER, (MAX_SLIDER + MIN_SLIDER) / 2);		
 		mySlider.getStyleClass().add("axis");
-
 		mySlider.setShowTickLabels(true);
 		mySlider.setLabelFormatter(new StringConverter<Double>() {
 			@Override

@@ -249,8 +249,24 @@
 
 /* This section deals with components from Sidebar. */
 #sidebar {
-	-fx-max-width: 100;
-	-fx-min-width: 100;
-	-fx-background-color: rgb(249, 249, 249);
+	-fx-pref-height: 200;
+	-fx-pref-width: 200;
+	-fx-background-color: rgb(224, 224, 224);
+	-fx-alignment: center;
+	-fx-spacing: 40px;
 }
 
+#combo {
+    -fx-background-color: transparent;
+    -fx-border-color: blue;
+    -fx-border-width: 5;
+    -fx-border-radius: 2;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: blue;
+}
+
+#slider {
+	
+}

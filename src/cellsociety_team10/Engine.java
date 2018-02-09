@@ -140,8 +140,7 @@ public class Engine {
 	}
 	
 	private void setupDIY() {
-		System.out.println("in here");
-		mySidebar = new Sidebar();
+		mySidebar = new Sidebar(myResources);
 		myVis = new Visualization(myControlPanel, mySidebar);
 		setupAnimation();
 		

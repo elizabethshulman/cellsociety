@@ -34,13 +34,13 @@ public class Engine {
 	private RulesFactory myRulesFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
-	private HashMap<String, FileProcessor> mySimMap;
+	private HashMap<String, File> mySimMap;
 
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
 
 		myResources = ResourceBundle.getBundle(LANGUAGE);
-		
+
 		mySimMap = initializeSimMap();
 
 		myStartScene = new StartPage(myResources,
@@ -143,8 +143,8 @@ public class Engine {
 		myStage.setScene(myVis.getScene());
 	}
 
-	private HashMap<String, FileProcessor> initializeSimMap() {
-		HashMap<String, FileProcessor> sim_map = new HashMap<>();
+	private HashMap<String, File> initializeSimMap() {
+		HashMap<String, File> sim_map = new HashMap<>();
 		String default_dir = "data/simulations/default/";
 
 		addToMap(sim_map, myResources.getString("LifeButton"), default_dir + "life/life_square.xml");
@@ -155,17 +155,19 @@ public class Engine {
 		return sim_map;
 	}
 
-	private void addToMap(HashMap<String, FileProcessor> sim_map, String key, String filename) {
-		try {
-			sim_map.put(key, new FileProcessor(new File(filename).getAbsolutePath()));
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
+	private void addToMap(HashMap<String, File> sim_map, String key, String filename) {
+		sim_map.put(key, new File(filename));
+
 	}
 
 	public void changeSimulation(String simulation) {
-		FileProcessor fp = mySimMap.get(simulation);
-		
+		FileProcessor fp;
+		try {
+			fp = new FileProcessor(mySimMap.get(simulation).getAbsolutePath());
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Invalid filepath.");
+		}
+
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 
@@ -180,7 +182,7 @@ public class Engine {
 	private void setupDIY() {
 		File file = new File("data/simulations/default/life/life_square.xml");
 		handleChosenFile(file, myStage);
-		
+
 		mySidebar = new Sidebar(myResources, this);
 		myVis.addSidebar(mySidebar);
 	}

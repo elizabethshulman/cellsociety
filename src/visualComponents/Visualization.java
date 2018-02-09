@@ -46,7 +46,6 @@ public class Visualization {
 		myBorderPane.setTop(myBar.getHBox());
 		myBorderPane.setCenter(center);
 		myBorderPane.setBottom(myControlPanel.getVBox());
-		
 	}
 	
 	public void visualizeGraph(Graph g) {

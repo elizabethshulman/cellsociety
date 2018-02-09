@@ -2,6 +2,7 @@ package visualComponents;
 
 import java.util.ResourceBundle;
 
+import cellsociety_team10.Engine;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,13 +19,15 @@ import javafx.util.StringConverter;
 public class Sidebar {
 	public static final double WIDTH = 200;
 	private static final double MIN_SLIDER = 0;
-	private static final double START_SLIDER = 15;
+	private static final double START_SLIDER = 8;
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;
 
 	private VBox myVBox = new VBox();
+	private Engine myEngine;
 
-	public Sidebar(ResourceBundle resources) {
+	public Sidebar(ResourceBundle resources, Engine engine) {
+		myEngine = engine;
 		myVBox.setId("sidebar");
 		myVBox.getChildren().addAll(buildSimBox(resources), createSlider(), createSlider(), buildShapeOptions(resources));
 	}
@@ -42,8 +45,15 @@ public class Sidebar {
 				);
 		ComboBox<String> combo = new ComboBox<String>(sim_options);
 		combo.setId("combo");
-
 		combo.setValue("Simulation type:");
+		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+
+	        @Override
+	        public void changed(ObservableValue<? extends String> ov,
+	        		String old_val, String new_val) {
+	        		myEngine.changeSimulation(new_val);
+			}
+	    });
 
 		return combo;
 	}
@@ -97,5 +107,9 @@ public class Sidebar {
 			}
 		});
 		return temp;
+	}
+	
+	public void sizeHandlers() {
+		
 	}
 }

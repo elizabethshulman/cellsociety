@@ -4,10 +4,11 @@ import graphVariants.Graph;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Visualization {
 	private static final double SCREEN_HEIGHT = 750;
-	private static final double SCREEN_WIDTH = 700;
+	public static final double SCREEN_WIDTH = 700;
 	private static final String CSS_STRING = "main.css";
 	private static final String FONT_URL = "https://fonts.googleapis.com/css?family=Roboto:700";
 	
@@ -18,21 +19,18 @@ public class Visualization {
 	private Scene myScene;
 	private HeaderBar myBar;
 	private LineGraph myLineGraph;
+	private Stage myStage;
 	
 	public Visualization(ControlPanel cp) {
 		this(cp, null);
 	}
 	
-	public Visualization(ControlPanel cp, Sidebar sb) {
+	public Visualization(ControlPanel cp, Stage stage) {
+		myStage = stage;
+		
 		myBorderPane.setId("main-pane");
 		
-		double total_width = SCREEN_WIDTH;
-		if (sb != null) {
-			myBorderPane.setLeft(sb.getVBox());
-			total_width += Sidebar.WIDTH;
-		}
-		
-		myScene = new Scene(myBorderPane, total_width, SCREEN_HEIGHT);
+		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(CSS_STRING);
 		
@@ -72,5 +70,10 @@ public class Visualization {
 	
 	public void amendHeader(String header) {
 		myBar.setSimHeader(header);
+	}
+	
+	public void addSidebar(Sidebar sidebar) {
+		myStage.setWidth(SCREEN_WIDTH + Sidebar.WIDTH);
+		myBorderPane.setLeft(sidebar.getVBox());
 	}
 }

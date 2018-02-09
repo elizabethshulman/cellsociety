@@ -30,6 +30,8 @@ public class FileProcessor {
 		filepath = fpath;
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(fpath));
+		
+		readFile();
 	}
 	public String getType() {
 		return myType;

@@ -11,8 +11,8 @@ public class Visualization {
 	private static final String CSS_STRING = "main.css";
 	private static final String FONT_URL = "https://fonts.googleapis.com/css?family=Roboto:700";
 	
+	private BorderPane myBorderPane = new BorderPane();
 	private int myIteration;
-	private BorderPane myBorderPane;
 	private Container myVisualContainer;
 	private ControlPanel myControlPanel;
 	private Scene myScene;
@@ -20,10 +20,19 @@ public class Visualization {
 	private LineGraph myLineGraph;
 	
 	public Visualization(ControlPanel cp) {
-		myBorderPane = new BorderPane();
+		this(cp, null);
+	}
+	
+	public Visualization(ControlPanel cp, Sidebar sb) {
 		myBorderPane.setId("main-pane");
 		
-		myScene = new Scene(myBorderPane, SCREEN_WIDTH, SCREEN_HEIGHT);
+		double total_width = SCREEN_WIDTH;
+		if (sb != null) {
+			myBorderPane.setLeft(sb.getVBox());
+			total_width += Sidebar.WIDTH;
+		}
+		
+		myScene = new Scene(myBorderPane, total_width, SCREEN_HEIGHT);
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(CSS_STRING);
 		
@@ -39,6 +48,7 @@ public class Visualization {
 		myBorderPane.setTop(myBar.getHBox());
 		myBorderPane.setCenter(center);
 		myBorderPane.setBottom(myControlPanel.getVBox());
+		
 	}
 	
 	public void visualizeGraph(Graph g) {

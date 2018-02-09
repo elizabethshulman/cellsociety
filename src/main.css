@@ -155,10 +155,44 @@
 	-fx-background-color: rgb(99, 219, 255);
 }
 
+#diy {
+	-fx-background-color: rgb(249, 249, 249);
+	-fx-font-family: 'Roboto', sans-serif;
+	-fx-font-size: 15;
+	-fx-text-fill: rgb(105,105,105);
+	-fx-border-width: 2px;
+	-fx-border-color: rgb(105,105,105);
+	-fx-border-radius: 3px;
+	-fx-padding: 20px;
+	-fx-min-width: 240px;
+	-fx-content-display: top;
+}
+
+#diy:hover {
+	-fx-background-color: rgb(255, 117, 142);
+}
+
+
 #pick-sim {
 	-fx-font-family: 'Roboto', sans-serif;
-	-fx-font-size: 25;
+	-fx-font-size: 20;
 	-fx-fill: rgb(105,105,105);
+}
+
+#box-bonanza {
+	-fx-alignment: center;
+	-fx-spacing: 30;
+}
+
+#header {
+	-fx-pref-height: 85;
+	-fx-background-color: rgb(0, 137, 117);
+	-fx-alignment: center;
+	-fx-spacing: 30px;
+}
+
+#background-bp {
+	-fx-background-color: rgb(249, 249, 249);
 }
 
 /* This section deals with components from the Containers. */
@@ -190,22 +224,6 @@
 	-fx-corner-radius: 0px;
 }
 
-/* This section deals with components from StartPage. */
-#box-bonanza {
-	-fx-alignment: center;
-	-fx-spacing: 30;
-}
-
-#header {
-	-fx-pref-height: 85;
-	-fx-background-color: rgb(0, 137, 117);
-	-fx-alignment: center;
-	-fx-spacing: 30px;
-}
-
-#background-bp {
-	-fx-background-color: rgb(249, 249, 249);
-}
 
 /* This section deals with components from LineGraph. */
 #line-chart {
@@ -227,5 +245,12 @@
 
 .chart-plot-background {
 	-fx-background-color: transparent;
+}
+
+/* This section deals with components from Sidebar. */
+#sidebar {
+	-fx-max-width: 100;
+	-fx-min-width: 100;
+	-fx-background-color: rgb(249, 249, 249);
 }
 

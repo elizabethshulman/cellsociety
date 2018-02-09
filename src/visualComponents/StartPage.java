@@ -18,14 +18,16 @@ public class StartPage {
 	private static final double SCREEN_WIDTH = 700;
 	private static final String FONT_URL = "http://fonts.googleapis.com/css?family=Roboto:300";
 	private static final String STYLESHEET_NAME = "main.css";
-	private static final double IMAGE_SIZE = 150;
+	private static final double IMAGE_SIZE = 75;
 
 
 	private HashMap<String, String> myNameMap;
 	private Scene myScene;
 	private ResourceBundle myResources;
 
-	public StartPage(ResourceBundle resource_bundle, EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
+	public StartPage(ResourceBundle resource_bundle, EventHandler<MouseEvent> pred_handler, 
+			EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, 
+			EventHandler<MouseEvent> fire_handler, EventHandler<MouseEvent> diy_handler) {
 		myResources = resource_bundle;
 		
 		BorderPane border_pane = new BorderPane();
@@ -38,10 +40,12 @@ public class StartPage {
 		createNameMap();
 
 		border_pane.setTop(new HeaderBar(myResources.getString("Title")).getHBox());
-		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler));
+		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler, diy_handler));
 	}
 
-	private VBox buttonBonanza(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler) {
+	private VBox buttonBonanza(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, 
+			EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler,
+			EventHandler<MouseEvent> diy_handler) {
 		VBox vbox = new VBox();
 		vbox.setId("box-bonanza");
 
@@ -50,8 +54,12 @@ public class StartPage {
 
 		HBox row_one = createRow(makeButton("life", life_handler), makeButton("fire", fire_handler));
 		HBox row_two = createRow(makeButton("predator", pred_handler), makeButton("segregation", seg_handler));
+		
+		Text diy_sim = new Text(myResources.getString("DIY"));
+		diy_sim.setId("pick-sim");
+		Button diy_button = makeButton("diy", diy_handler);
 
-		vbox.getChildren().addAll(pick_sim, row_one, row_two);
+		vbox.getChildren().addAll(pick_sim, row_one, row_two, diy_sim, diy_button);
 		return vbox;
 	}
 

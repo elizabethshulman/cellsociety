@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import rulesVariants.Rules;
 import visualComponents.ControlPanel;
 import visualComponents.RulesFactory;
+import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
 
@@ -31,6 +32,7 @@ public class Engine {
 	private FileChooser myFileChooser;
 	private RulesFactory myRulesFactory;
 	private ControlPanel myControlPanel;
+	private Sidebar mySidebar;
 
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
@@ -41,7 +43,8 @@ public class Engine {
 									e -> showFileChooser("predator"),
 									e -> showFileChooser("segregation"),
 									e -> showFileChooser("life"), 
-									e -> showFileChooser("fire")).getScene();
+									e -> showFileChooser("fire"),
+									e -> setupDIY()).getScene();
 		
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
@@ -54,8 +57,6 @@ public class Engine {
 										e -> pause(), 
 										e -> end(), 
 										e -> next());
-		myVis = new Visualization(myControlPanel);
-		setupAnimation();
 		
 		myStage.setScene(myStartScene);
 		myStage.setTitle(myResources.getString("Title"));
@@ -90,8 +91,6 @@ public class Engine {
 		myAnimation.play();
 	}
 
-	// would be called stop, but stop can't be overwritten with a lower
-	// visibility since it's implemented in the Application class
 	private void end() {
 		resetEngine();
 		myStage.setScene(myStartScene);
@@ -130,10 +129,25 @@ public class Engine {
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 		
+		myVis = new Visualization(myControlPanel);
+		setupAnimation();
+		
 		resetEngine();
 		
 		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
 		myVis.visualizeGraph(myGraph);
+		myStage.setScene(myVis.getScene());
+	}
+	
+	private void setupDIY() {
+		System.out.println("in here");
+		mySidebar = new Sidebar();
+		myVis = new Visualization(myControlPanel, mySidebar);
+		setupAnimation();
+		
+		resetEngine();
+		
+		myVis.amendHeader(createHeaderText(myResources.getString("Greatest"), myResources.getString("You")));
 		myStage.setScene(myVis.getScene());
 	}
 	

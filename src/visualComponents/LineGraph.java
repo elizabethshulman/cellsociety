@@ -44,10 +44,19 @@ public class LineGraph {
 		return type_count;
 	}
 	
+	private void setVisibility() {
+		if (myIteration > 0) {
+			myLineChart.setVisible(true);
+		} else {
+			myLineChart.setVisible(false);
+		}
+	}
+	
 	
 	public void addCoordinates(Graph g) {
-		Map<Integer, Integer> type_count = countStates(g);
+		setVisibility();
 		
+		Map<Integer, Integer> type_count = countStates(g);
 		for (Integer state : type_count.keySet()) {
 			if (! mySeries.containsKey(state)) {
 				XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();

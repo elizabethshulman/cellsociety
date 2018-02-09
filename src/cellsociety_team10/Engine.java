@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import rulesVariants.Rules;
 import visualComponents.ControlPanel;
 import visualComponents.RulesFactory;
 import visualComponents.Sidebar;
@@ -34,14 +33,11 @@ public class Engine {
 	private RulesFactory myRulesFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
-	private HashMap<String, File> mySimMap;
 
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
 
 		myResources = ResourceBundle.getBundle(LANGUAGE);
-
-		mySimMap = initializeSimMap();
 
 		myStartScene = new StartPage(myResources,
 				e -> showFileChooser("predator"),
@@ -123,53 +119,20 @@ public class Engine {
 	}
 
 	private void handleChosenFile(File filename, Stage stage) {
-		FileProcessor fp;
-		try {
-			fp = new FileProcessor(filename.getAbsolutePath());
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
-
-		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
-		myGraph = new Graph(curr_rules, fp);
+		myGraph = new Graph(filename, myRulesFactory);
 
 		myVis = new Visualization(myControlPanel, stage);
 		setupAnimation();
 
 		resetEngine();
 
-		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
+		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}
 
-	private HashMap<String, File> initializeSimMap() {
-		HashMap<String, File> sim_map = new HashMap<>();
-		String default_dir = "data/simulations/default/";
-
-		addToMap(sim_map, myResources.getString("LifeButton"), default_dir + "life/life_square.xml");
-		addToMap(sim_map, myResources.getString("FireButton"), default_dir + "fire/fire_square.xml");
-		addToMap(sim_map, myResources.getString("PredButton"), default_dir + "predator/predatorprey_square.xml");
-		addToMap(sim_map, myResources.getString("SegButton"), default_dir + "segregation/segregation_square.xml");
-
-		return sim_map;
-	}
-
-	private void addToMap(HashMap<String, File> sim_map, String key, String filename) {
-		sim_map.put(key, new File(filename));
-
-	}
-
 	public void changeSimulation(String simulation) {
-		FileProcessor fp;
-		try {
-			fp = new FileProcessor(mySimMap.get(simulation).getAbsolutePath());
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
-
-		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
-		myGraph = new Graph(curr_rules, fp);
+		myGraph = new Graph(new File(simulation), myRulesFactory);
 
 		setupAnimation();
 

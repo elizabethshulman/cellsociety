@@ -1,9 +1,10 @@
 package visualComponents;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import cellsociety_team10.Engine;
-import graphVariants.Graph;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -48,6 +49,7 @@ public class Sidebar {
 	}
 
 	private ComboBox<String> buildSimBox(ResourceBundle resources) {
+		Map<String, String> translations = initTranslations(resources);
 		ObservableList<String> sim_options = FXCollections.observableArrayList(
 				resources.getString("LifeButton"),
 				resources.getString("FireButton"),
@@ -58,15 +60,23 @@ public class Sidebar {
 		combo.setId("combo");
 		combo.setValue("Simulation type:");
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
 	        @Override
 	        public void changed(ObservableValue<? extends String> ov,
 	        		String old_val, String new_val) {
-	        		myEngine.changeSimulation(new_val);
+	        		myEngine.changeSimulation(translations.get(new_val));
 			}
 	    });
 
 		return combo;
+	}
+	
+	private Map<String, String> initTranslations(ResourceBundle resources) {
+		HashMap<String, String> translations = new HashMap<>();
+		translations.put(resources.getString("LifeButton"), "data/simulations/default/.xml");
+		translations.put(resources.getString("FireButton"), "data/simulations/default/fire/fire_square.xml");
+		translations.put(resources.getString("PredButton"), "data/simulations/default/pred/pred_square.xml");
+		translations.put(resources.getString("SegButton"), "data/simulations/default/seg/seg_square.xml");
+		return translations;
 	}
 	
 	private HBox buildShapeOptions(ResourceBundle resources) {
@@ -115,9 +125,5 @@ public class Sidebar {
 			}
 		});
 		return temp;
-	}
-	
-	public void sizeHandlers() {
-		
 	}
 }

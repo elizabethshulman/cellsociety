@@ -111,7 +111,7 @@ public class Engine {
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
 		if (f != null) {
-			handleChosenFile(f);
+			handleChosenFile(f, null);
 		}
 	}
 
@@ -122,7 +122,7 @@ public class Engine {
 		myVis.reset();
 	}
 
-	private void handleChosenFile(File filename) {
+	private void handleChosenFile(File filename, Stage stage) {
 		FileProcessor fp;
 		try {
 			fp = new FileProcessor(filename.getAbsolutePath());
@@ -133,7 +133,7 @@ public class Engine {
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 
-		myVis = new Visualization(myControlPanel);
+		myVis = new Visualization(myControlPanel, stage);
 		setupAnimation();
 
 		resetEngine();
@@ -178,28 +178,11 @@ public class Engine {
 	}
 
 	private void setupDIY() {
-		FileProcessor fp;
-		try {
-			File filename = new File("data/simulations/default/life/life_square.xml");
-			fp = new FileProcessor(filename.getAbsolutePath());
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
-
-		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
-		myGraph = new Graph(curr_rules, fp);
-
-		myVis = new Visualization(myControlPanel, myStage);
-		setupAnimation();
-
-		resetEngine();
-
+		File file = new File("data/simulations/default/life/life_square.xml");
+		handleChosenFile(file, myStage);
+		
 		mySidebar = new Sidebar(myResources, this);
 		myVis.addSidebar(mySidebar);
-
-		myVis.amendHeader(createHeaderText(myResources.getString("Greatest"), myResources.getString("You")));
-		myVis.visualizeGraph(myGraph);
-		myStage.setScene(myVis.getScene());
 	}
 
 	private String createHeaderText(String title, String author) {

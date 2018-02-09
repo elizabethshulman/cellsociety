@@ -34,11 +34,14 @@ public class Engine {
 	private RulesFactory myRulesFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
+	private HashMap<String, FileProcessor> mySimMap;
 
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
 
 		myResources = ResourceBundle.getBundle(LANGUAGE);
+		
+		mySimMap = initializeSimMap();
 
 		myStartScene = new StartPage(myResources,
 				e -> showFileChooser("predator"),
@@ -140,28 +143,36 @@ public class Engine {
 		myStage.setScene(myVis.getScene());
 	}
 
-	public void changeSimulation(String simulation) {
-		HashMap<String, String> sim_map = new HashMap<>();
+	private HashMap<String, FileProcessor> initializeSimMap() {
+		HashMap<String, FileProcessor> sim_map = new HashMap<>();
 		String default_dir = "data/simulations/default/";
 
-		sim_map.put(myResources.getString("LifeButton"), default_dir + "life/life_square.xml");
-		sim_map.put(myResources.getString("FireButton"), default_dir + "fire/fire_square.xml");
-		sim_map.put(myResources.getString("PredButton"), default_dir + "predator/predatorprey_square.xml");
-		sim_map.put(myResources.getString("SegButton"), default_dir + "segregation/segregation_square.xml");
+		addToMap(sim_map, myResources.getString("LifeButton"), default_dir + "life/life_square.xml");
+		addToMap(sim_map, myResources.getString("FireButton"), default_dir + "fire/fire_square.xml");
+		addToMap(sim_map, myResources.getString("PredButton"), default_dir + "predator/predatorprey_square.xml");
+		addToMap(sim_map, myResources.getString("SegButton"), default_dir + "segregation/segregation_square.xml");
 
-		FileProcessor fp;
+		return sim_map;
+	}
+
+	private void addToMap(HashMap<String, FileProcessor> sim_map, String key, String filename) {
 		try {
-			fp = new FileProcessor(new File(sim_map.get(simulation)).getAbsolutePath());
+			sim_map.put(key, new FileProcessor(new File(filename).getAbsolutePath()));
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Invalid filepath.");
 		}
+	}
+
+	public void changeSimulation(String simulation) {
+		FileProcessor fp = mySimMap.get(simulation);
+		
 		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
 		myGraph = new Graph(curr_rules, fp);
 
 		setupAnimation();
 
 		resetEngine();
-		
+
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}

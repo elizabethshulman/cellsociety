@@ -35,11 +35,9 @@ public class Graph {
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);
 		if(myRules.simulationIsDead()) {
-			dead=true;
+			dead = true;
 		}
 	}
-	
-	
 	
 	//GETTERS
 	public Set<Cell> getCells(){

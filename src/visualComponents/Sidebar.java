@@ -3,6 +3,7 @@ package visualComponents;
 import java.util.ResourceBundle;
 
 import cellsociety_team10.Engine;
+import graphVariants.Graph;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,7 +19,7 @@ import javafx.util.StringConverter;
 
 public class Sidebar {
 	public static final double WIDTH = 200;
-	private static final double MIN_SLIDER = 0;
+	private static final double MIN_SLIDER = 4;
 	private static final double START_SLIDER = 8;
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;
@@ -29,7 +30,17 @@ public class Sidebar {
 	public Sidebar(ResourceBundle resources, Engine engine) {
 		myEngine = engine;
 		myVBox.setId("sidebar");
-		myVBox.getChildren().addAll(buildSimBox(resources), createSlider(), createSlider(), buildShapeOptions(resources));
+		Slider rows = createSlider();
+		Slider cols = createSlider();
+		myVBox.getChildren().addAll(buildSimBox(resources), rows, cols, buildShapeOptions(resources));
+		
+//		rows.setOnMouseReleased(e -> {
+//			graph.adjustRows(Math.round(rows.getValue()));
+//		});
+//		
+//		cols.setOnMouseReleased(e -> {
+//			graph.adjustCols(Math.round(cols.getValue()));
+//		});
 	}
 
 	public VBox getVBox() {
@@ -84,17 +95,14 @@ public class Sidebar {
 		Slider temp = new Slider(MIN_SLIDER, MAX_SLIDER, START_SLIDER);
 		temp.getStyleClass().add("axis");
 		temp.setShowTickLabels(true);
-		temp.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> ov,
-					Number old_val, Number new_val) {
-				System.out.println(Math.round(new_val.doubleValue()));
-			}
-		});
+		temp.setSnapToTicks(true);
+		temp.setMinorTickCount(0);
+		temp.setMajorTickUnit(1);
 		temp.setLabelFormatter(new StringConverter<Double>() {
 			@Override
 			public String toString(Double n) {
 				if (n == MIN_SLIDER) {
-					return "0";
+					return "4";
 				} else if (n == MAX_SLIDER) {
 					return "40";
 				}

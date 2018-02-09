@@ -1,8 +1,9 @@
 package rulesVariants;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Map;
 
 import cellVariants.Cell;
 
@@ -11,12 +12,12 @@ import cellVariants.Cell;
  * @author elizabethshulman
  *	Assuming 0 for empty, 1 & 2 for groups A and B
  */
-public class SegregationRules extends Rules{
+public class SegregationRules extends Rules {
 
 	private final double satisfactionThreshold;
 
-	public SegregationRules(HashMap<String,Double> globalVars) {
-		satisfactionThreshold = globalVars.get("satisfactionThreshold");
+	public SegregationRules(Map<String, Double> map) {
+		satisfactionThreshold = map.get("satisfactionThreshold");
 	}
 	
 	/**
@@ -25,9 +26,9 @@ public class SegregationRules extends Rules{
 	 * @return g, modified graph
 	 */
 	@Override
-	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
-		ArrayList<Cell> needChange = new ArrayList<Cell>();
-		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
+	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
+		List<Cell> needChange = new ArrayList<>();
+		List<Cell> emptyCells = new ArrayList<>();
 		for(Cell c : g.keySet()) {
 			if(c.getState()==0) {
 				emptyCells.add(c);
@@ -51,7 +52,7 @@ public class SegregationRules extends Rules{
 	 * Returns true if cell needs to change position, as its neighbors are too different
 	 */
 	@Override
-	protected Boolean dissatisfied(int state, ArrayList<Cell> neighbors) {
+	protected Boolean dissatisfied(int state, List<Cell> neighbors) {
 		if(state==0) {
 			return false;
 		}
@@ -71,17 +72,17 @@ public class SegregationRules extends Rules{
 	}
 	
 	@Override
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> g) {
+	protected void updateDeath(Map<Cell, List<Cell>> g) {
 		dead=true;
 	}
 	
 	/**
 	 * Move dissatisfied cell to an empty cell
-	 * @param empty		ArrayList of empty cells
-	 * @param changing	ArrayList of cells that are dissatisfied with their location
+	 * @param empty		List of empty cells
+	 * @param changing	List of cells that are dissatisfied with their location
 	 */
-	private void tradeCellStates(ArrayList<Cell> empty, ArrayList<Cell> changing) {
-		while(empty.size()>0 && changing.size()>0) {
+	private void tradeCellStates(List<Cell> empty, List<Cell> changing) {
+		while(! empty.isEmpty() && ! changing.isEmpty()) {
 			Cell currentEmpty = empty.remove(empty.size()-1);
 			Cell cellToChange = changing.remove(changing.size()-1);
 			currentEmpty.setState(cellToChange.getState());

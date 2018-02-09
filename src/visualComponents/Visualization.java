@@ -30,7 +30,8 @@ public class Visualization {
 		myScene.getStylesheets().add(CSS_STRING);
 		
 		myBorderPane.setTop(myBar.getHBox());
-		myBorderPane.setCenter(myVisualContainer.getVBox());
+		
+		myBorderPane.setCenter(myVisualContainer.getContainer());
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	

@@ -2,36 +2,39 @@ package rulesVariants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
-import rulesVariants.PredatorPreyHelper.*;
+import rulesVariants.PredatorPreyHelper.PredatorManager;
+import rulesVariants.PredatorPreyHelper.PreyManager;
 
-public class PredatorPreyRules extends Rules{
+public class PredatorPreyRules extends Rules {
 
 	Double fishReproductionAge;
 	Double sharkReproductionAge;
 	Double sharkStarveTime;
 	PredatorManager sharkManager;
 	PreyManager fishManager;
-	HashMap<PredatorPreyCell, ArrayList<PredatorPreyCell>> tempOcean;
+	HashMap<PredatorPreyCell, List<PredatorPreyCell>> tempOcean;
 	
-	public PredatorPreyRules(HashMap<String,Double> globalVars) {
-		fishReproductionAge = globalVars.get("fishBreedTime");
-		sharkReproductionAge = globalVars.get("sharkBreedTime");
-		sharkStarveTime = globalVars.get("sharkStarveTime");
+	public PredatorPreyRules(Map<String, Double> map) {
+		fishReproductionAge = map.get("fishBreedTime");
+		sharkReproductionAge = map.get("sharkBreedTime");
+		sharkStarveTime = map.get("sharkStarveTime");
 	}
 	
 	@Override
-	public HashMap<Cell, ArrayList<Cell>> applyGraphRules(HashMap<Cell, ArrayList<Cell>> g) {
+	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempOcean = new HashMap(g);
 		sharkManager = new PredatorManager(tempOcean, sharkStarveTime);
 		fishManager = new PreyManager(tempOcean);
 		initialCellMovement();
 		sharkManager.manageSharks();
 		resetMovementAndReproduction();
-		HashMap<Cell, ArrayList<Cell>> returnGraph = new HashMap(tempOcean);
+		Map<Cell, List<Cell>> returnGraph = new HashMap(tempOcean);
 		updateDeath(returnGraph);
 		return returnGraph;
 	}
@@ -61,7 +64,7 @@ public class PredatorPreyRules extends Rules{
 	}
 		
 	@Override 
-	protected void updateDeath(HashMap<Cell, ArrayList<Cell>> ocean) {
+	protected void updateDeath(Map<Cell, List<Cell>> ocean) {
 		Set<Cell> cellSet = ocean.keySet();
 		Cell[] cellArray = cellSet.toArray(new Cell[0]);
 		int sampleState = cellArray[0].getState();

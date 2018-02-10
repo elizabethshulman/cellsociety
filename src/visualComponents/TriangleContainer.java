@@ -5,36 +5,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class TriangleContainer extends Container {
-	public static final int test_value = 15;
-	public static final double height = Container.GRID_SIZE.doubleValue() / test_value * 0.75;
+	private double height;
 	
 	public TriangleContainer() {
 		super();
 		myDisplay.setId("container-display-borderless");
 	}
 
-//	private ImageView[][] buildImageView() {
-//		ImageView[][] temp = new ImageView[test_value][test_value];
-//		for (int r=0; r < test_value; r++) {
-//			for (int c=0; c < test_value; c++) {
-//				if (c % 2 == 1) {
-//					temp[r][c] = Helper.generateImageView("triangle1.png", height);
-//					temp[r][c].setRotate(180);
-//				} else {
-//					temp[r][c] = Helper.generateImageView("triangle2.png", height);
-//				}
-//			}
-//		}
-//		
-//		return temp;
-//	}
-	
-	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
+	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols, int num_rows) {
+		height = Container.GRID_SIZE.doubleValue() / num_rows;
+		
 		HBox row = new HBox();
 		for (int c=0; c < num_cols; c++) {
 			ImageView image_view = graph_grid[r][c];
 			image_view.setPreserveRatio(true);
-			image_view.setFitHeight(Container.GRID_SIZE.doubleValue() / num_cols * 0.75);
+			image_view.setFitHeight(height);
 			if (c % 2 == 1) {
 				image_view.setRotate(180);
 			}

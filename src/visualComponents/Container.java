@@ -27,7 +27,7 @@ public abstract class Container {
 		myDisplay.getChildren().clear();
 		ImageView[][] graph_grid = mapToGrid(g);
 		for (int r=0; r < g.getRows(); r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, g.getCols()));
+			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, g.getCols(), g.getRows()));
 		}
 	}
 	
@@ -44,5 +44,5 @@ public abstract class Container {
 	
 	protected abstract double calcShapeHeight(int num_cols);
 	
-	protected abstract HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols);
+	protected abstract HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols, int num_rows);
 }

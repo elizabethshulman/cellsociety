@@ -19,6 +19,7 @@ public class ControlPanel {
 	private static final String PAUSE = "pause.png";
 	private static final String STOP = "stop.png";
 	private static final String NEXT = "next.png";
+	private static final String SAVE = "save.png";
 	private static final double MIN_SLIDER = 0;
 	private static final double MAX_SLIDER = 100;
 
@@ -29,18 +30,18 @@ public class ControlPanel {
 	private HBox buttonBox;
 	private Button myStopButton;
 
-	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
+	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myAnimation = animation;
 
 		myVBox = new VBox();
 		myVBox.setId("control-panel-overall");
 
 		HBox hb_top = topHBox();
-		bottomHBox(play_handler, pause_handler, stop_handler, next_handler);
+		bottomHBox(play_handler, pause_handler, stop_handler, next_handler, save_handler);
 		myVBox.getChildren().addAll(hb_top, buttonBox);
 	}
 
-	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
+	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		buttonBox = new HBox();
 		buttonBox.setId("control-panel-bottom");
 
@@ -48,7 +49,8 @@ public class ControlPanel {
 		buttonBox.getChildren().addAll(makeButton(PLAY, play_handler),
 				makeButton(PAUSE, pause_handler),
 				myStopButton,
-				makeButton(NEXT, next_handler));
+				makeButton(NEXT, next_handler),
+				makeButton(SAVE, save_handler));
 	}
 
 	private HBox topHBox() {

@@ -9,6 +9,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import rulesVariants.RulesFactory;
@@ -49,7 +50,7 @@ public class Engine {
 
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
-
+		
 		myRulesFactory = new RulesFactory();
 		myGraphFactory = new GraphFactory(myRulesFactory);
 
@@ -62,7 +63,8 @@ public class Engine {
 				e -> play(), 
 				e -> pause(), 
 				e -> end(), 
-				e -> next());
+				e -> next(),
+				e -> save());
 		myVis = new Visualization(myControlPanel, stage);
 
 		myStage.setScene(myStartScene);
@@ -107,6 +109,14 @@ public class Engine {
 	private void next() {
 		myAnimation.pause();
 		step();
+	}
+	
+	private void save() {
+		File saved_file = myFileChooser.showSaveDialog(myStage);
+		if (saved_file != null) {
+			// need to write to this file here
+			System.out.println(saved_file);
+		}
 	}
 
 	private void showFileChooser(String directory) {

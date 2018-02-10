@@ -34,7 +34,7 @@ public class Visualization {
 		myScene.getStylesheets().add(CSS_STRING);
 		
 		myBar = new HeaderBar("");
-		myVisualContainer = new TriangleContainer();
+		myVisualContainer = new HexContainer();
 		myControlPanel = cp;
 		myLineGraph = new LineGraph();
 		

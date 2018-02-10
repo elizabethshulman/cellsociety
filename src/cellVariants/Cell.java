@@ -29,7 +29,6 @@ public abstract class Cell {
 	protected void nextImage() {
 		state = (state + 1) % statesAndColors.size();
 		setState(state);
-		imageView.setImage(statesAndColors.get(state));
 	}
 	
 	protected Image buildCellImage(String filename) {
@@ -64,5 +63,9 @@ public abstract class Cell {
 	
 	public ImageView getImageView() {
 		return imageView;
+	}
+	
+	public int getStateCount() {
+		return statesAndColors.size();
 	}
 }

@@ -9,6 +9,9 @@
       <probCatchFire>0.6</probCatchFire>
    </global_vars>
    <grid>
+   <cellShape>Square</cellShape>
+   	<neighbors>orthogonal</neighbors>
+   	<borders>finite</borders>
       <row>
          <cell state="1" />
          <cell state="1" />

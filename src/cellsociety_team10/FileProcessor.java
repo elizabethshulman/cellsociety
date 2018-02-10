@@ -25,6 +25,10 @@ public class FileProcessor {
 	private Map<Cell,List<Cell>> cellGrid;
 	private int gridRowCount;
 	private int gridColCount;
+	private boolean isToroidal;
+	private boolean isDiagonal;
+	private String cellShape;
+	private NeighborCalculator nCalc;
 	
 	public FileProcessor(String fpath) throws FileNotFoundException, XMLStreamException{
 		filepath = fpath;
@@ -118,6 +122,14 @@ public class FileProcessor {
 				  				break;
 				  	case "cell": newRow.add(helper.getCell(myParser));
 				  				break;
+				  	case "cellShape": myParser.next();
+			  		cellShape = myParser.getText();
+				  				break;
+				  	case "borders": myParser.next();
+				  		isToroidal = myParser.getText().equals("torus");
+				  		break;
+				  	case "neighbors": myParser.next();
+				  		isDiagonal = myParser.getText().equals("adjacent");
 				  	
 				  }
 			  }
@@ -142,13 +154,19 @@ public class FileProcessor {
 		gridColCount = cellArray[0].length;
 		cellGrid = new HashMap<>();
 		ArrayList<Cell> neighbors;
+		try {
+				String className = "cellsociety_team10." + cellShape + "NeighborCalculator";
+			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Cell shape is invalid");
+		}
 		for(int x = 0; x < cellArray.length; x++) {
 			for(int y = 0; y < cellArray[x].length; y++) {
 				neighbors = new ArrayList<>();
 				Cell toAdd = cellArray[x][y];
 				toAdd.setRow(x);
 				toAdd.setCol(y);
-				List<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
+				List<int[]> neighborIndices = nCalc.calcNeighborLocations(x,y);
 				for(int a = 0; a < neighborIndices.size(); a++)
 				{
 					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);

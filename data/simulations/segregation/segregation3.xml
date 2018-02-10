@@ -9,6 +9,9 @@
       <satisfactionThreshold>0.7</satisfactionThreshold>
    </global_vars>
    <grid>
+   <cellShape>Square</cellShape>
+   	<neighbors>adjacent</neighbors>
+   	<borders>finite</borders>
       <row>
          <cell state="B" />
          <cell state="B" />

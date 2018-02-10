@@ -155,7 +155,7 @@ public class FileProcessor {
 		cellGrid = new HashMap<>();
 		ArrayList<Cell> neighbors;
 		try {
-				String className = "cellsociety_team10." + cellShape + "NeighborCalculator";
+				String className = "neighborCalculatorVariants." + cellShape + "NeighborCalculator";
 			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
 		} catch (Exception e) {
 			e.printStackTrace();

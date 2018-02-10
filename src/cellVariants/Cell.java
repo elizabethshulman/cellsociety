@@ -10,15 +10,14 @@ import visualComponents.Helper;
 public abstract class Cell {
 
 	protected int state;
-	protected HashMap<Integer, Image> statesAndImages;
-	protected HashMap<Integer, Color> statesAndColors;
+	protected HashMap<Integer, Image> statesAndImages = new HashMap<>();
+	protected HashMap<Integer, Color> statesAndColors = new HashMap<>();
 	private int row;
 	private int col;
 	protected ImageView imageView;
 	
 	public Cell(int st) {
 		state = st;
-		statesAndImages = new HashMap<>();
 		buildHashMap();
 		imageView = new ImageView(statesAndImages.get(state));
 		imageView.setOnMouseClicked(e -> {

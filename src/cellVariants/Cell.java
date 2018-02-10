@@ -4,21 +4,23 @@ import java.util.HashMap;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import visualComponents.Helper;
 
 public abstract class Cell {
 
 	protected int state;
-	protected HashMap<Integer, Image> statesAndColors;
+	protected HashMap<Integer, Image> statesAndImages;
+	protected HashMap<Integer, Color> statesAndColors;
 	private int row;
 	private int col;
 	protected ImageView imageView;
 	
 	public Cell(int st) {
 		state = st;
-		statesAndColors = new HashMap<>();
+		statesAndImages = new HashMap<>();
 		buildHashMap();
-		imageView = new ImageView(statesAndColors.get(state));
+		imageView = new ImageView(statesAndImages.get(state));
 		imageView.setOnMouseClicked(e -> {
 			nextImage();
 		});
@@ -26,10 +28,14 @@ public abstract class Cell {
 
 	protected abstract void buildHashMap();
 	
+	public Color getCorrespondingColor(Integer state) {
+		return statesAndColors.get(state);
+	}
+	
 	protected void nextImage() {
-		state = (state + 1) % statesAndColors.size();
+		state = (state + 1) % statesAndImages.size();
 		setState(state);
-		imageView.setImage(statesAndColors.get(state));
+		imageView.setImage(statesAndImages.get(state));
 	}
 	
 	protected Image buildCellImage(String filename) {
@@ -59,7 +65,7 @@ public abstract class Cell {
 	
 	public void setState(int st) {
 		state = st;
-		imageView.setImage(statesAndColors.get(st));
+		imageView.setImage(statesAndImages.get(st));
 	}
 	
 	public ImageView getImageView() {

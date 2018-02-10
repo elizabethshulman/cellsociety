@@ -8,8 +8,8 @@ public class SegregationCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, buildCellImage("lightblue.png"));
-		statesAndColors.put(1, buildCellImage("darkblue.png"));
-		statesAndColors.put(2, buildCellImage("midblue.png"));
+		statesAndImages.put(0, buildCellImage("lightblue.png"));
+		statesAndImages.put(1, buildCellImage("darkblue.png"));
+		statesAndImages.put(2, buildCellImage("midblue.png"));
 	}
 }

@@ -22,7 +22,7 @@ public class PredatorPreyCell extends Cell {
 	@Override
 	public void setState(int st) {
 		state=st;
-		imageView.setImage(statesAndColors.get(st));
+		imageView.setImage(statesAndImages.get(st));
 		
 		if(st==0) {
 			reproductiveTime=0;
@@ -33,9 +33,9 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, buildCellImage("navy.png"));
-		statesAndColors.put(1, buildCellImage("lightteal.png"));
-		statesAndColors.put(2, buildCellImage("sharkred.png"));
+		statesAndImages.put(0, buildCellImage("navy.png"));
+		statesAndImages.put(1, buildCellImage("lightteal.png"));
+		statesAndImages.put(2, buildCellImage("sharkred.png"));
 	}
 	
 	public void increaseSharkEnergy() {

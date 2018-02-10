@@ -1,7 +1,10 @@
 package cellsociety_team10;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
+
+import javax.xml.stream.XMLStreamException;
 
 import graphVariants.Graph;
 import graphVariants.GraphFactory;
@@ -34,6 +37,7 @@ public class Engine {
 	private GraphFactory myGraphFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
+	private FileProcessor myFileProcessor;
 
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
@@ -113,8 +117,15 @@ public class Engine {
 	private void save() {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
-			// need to write to this file here
-			System.out.println(saved_file);
+			try {
+				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
+			} catch (FileNotFoundException e) {
+				// clean this up!!
+				e.printStackTrace();
+			} catch (XMLStreamException ee) {
+				ee.printStackTrace();
+			}
+			
 		}
 	}
 
@@ -126,9 +137,18 @@ public class Engine {
 			loadSimulation(f);
 		}
 	}
+	
+	private void initFileProcessor(File file) {
+		try {
+			myFileProcessor = new FileProcessor(file);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Invalid filepath.");
+		}
+	}
 
 	public void loadSimulation(File file) {
-		myGraph = myGraphFactory.createGraph(file);
+		initFileProcessor(file);
+		myGraph = myGraphFactory.createGraph(myFileProcessor);
 		
 		resetAnimation();
 		

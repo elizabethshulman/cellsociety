@@ -14,7 +14,6 @@ public class Visualization {
 	private static final String CSS_STRING = "main.css";
 	private static final String FONT_URL = "https://fonts.googleapis.com/css?family=Roboto:700";
 	private static final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
-	private static final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
 	
 	private BorderPane myBorderPane = new BorderPane();
 	private int myIteration;
@@ -60,12 +59,19 @@ public class Visualization {
 		return myScene;
 	}
 	
-	public void reset() {
+	public void reset(boolean backToHome) {
+		if (backToHome) {
+			myBorderPane.setLeft(null);
+		}
 		myIteration = -1;
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 		myLineGraph.resetChart();
 		centerOnScreen();
+	}
+	
+	public void reset() {
+		
 	}
 	
 	public void amendHeader(String header) {

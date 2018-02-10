@@ -101,7 +101,7 @@ public class Engine {
 		myAnimation.stop();
 		myStage.setScene(myStartScene);
 		myStage.setWidth(Visualization.SCREEN_WIDTH);
-		myVis.reset();
+		myVis.reset(true);
 	}
 
 	private void next() {
@@ -114,7 +114,7 @@ public class Engine {
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
 		if (f != null) {
-			handleChosenFile(f);
+			loadSimulation(f);
 		}
 	}
 
@@ -123,16 +123,11 @@ public class Engine {
 		
 		resetAnimation();
 		
-		myVis.reset();
+		myVis.reset(false);
 		
+		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
-	}
-
-	private void handleChosenFile(File file) {
-		loadSimulation(file);
-
-		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 	}
 
 

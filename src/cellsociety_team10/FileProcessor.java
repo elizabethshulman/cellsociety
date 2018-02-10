@@ -27,6 +27,7 @@ public class FileProcessor {
 	private String title;
 	private Map<String,Double> globalVars;
 	private XMLStreamReader myParser;
+	private XMLStreamWriter myWriter;
 	private FileInfoExtractor helper;
 	private Map<Cell,List<Cell>> cellGrid;
 	private int gridRowCount;
@@ -102,7 +103,6 @@ public class FileProcessor {
 			  }
 		}
 		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
-		
 	}
 	private void readGlobalVars() throws XMLStreamException {
 		globalVars = new HashMap<>();
@@ -151,9 +151,7 @@ public class FileProcessor {
 				  }
 			  }
 		}
-		
 	}
-	
 	//convert Cell grid to hashmap
 	private void createCellMap(Cell[][] cellArray)
 	{
@@ -165,6 +163,7 @@ public class FileProcessor {
 				String className = "cellsociety_team10." + cellShape + "NeighborCalculator";
 			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Cell shape is invalid");
 		}
 		for(int x = 0; x < cellArray.length; x++) {
@@ -182,21 +181,83 @@ public class FileProcessor {
 			}
 		}
 	}
-	public void saveGridState(Set<Cell> currentState, File file) throws FileNotFoundException, XMLStreamException {
+
+	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
 		XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
-		XMLStreamWriter myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));
+		myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));
 		myWriter.writeStartDocument();
-		
-		
+		myWriter.writeStartElement("simulation");
+		writeHeader();
+		writeGlobalVars();
+		writeGrid(createStateGrid(cells));
 		myWriter.writeEndElement();
+		myWriter.writeEndDocument();
 		myWriter.flush();
 		
-		
 	}
-	public int[][] createStateGrid(Map<Cell,List<Cell>> cells) {
-		int[][] arrangement = new int[gridRowCount][gridColCount];
-		for(Cell c: cells.keySet())
-			arrangement[c.getRow()][c.getCol()] = c.getState();
+	private void writeHeader() throws XMLStreamException {
+		myWriter.writeStartElement("header");
+		myWriter.writeStartElement("simType");
+		myWriter.writeCharacters(myType);
+		myWriter.writeEndElement();
+		myWriter.writeStartElement("title");
+		myWriter.writeCharacters(title);
+		myWriter.writeEndElement();
+		myWriter.writeStartElement("author");
+		myWriter.writeCharacters(author);
+		myWriter.writeEndElement();
+		myWriter.writeEndElement();
+	}
+	private void writeGlobalVars() throws XMLStreamException {
+		myWriter.writeStartElement("global_vars");
+		for(String s: globalVars.keySet()) {
+			myWriter.writeStartElement(s);
+			myWriter.writeCharacters(Double.toString(globalVars.get(s)));
+			myWriter.writeEndElement();
+		}
+		myWriter.writeEndElement();
+	}
+	private void writeGrid(String[][] stateGrid) throws XMLStreamException {
+		myWriter.writeStartElement("grid");
+		writeGridHeader();
+		
+		for(int a = 0; a < gridRowCount; a++) {
+			myWriter.writeStartElement("row");
+			for(int b = 0; b < gridColCount; b++) {
+				myWriter.writeEmptyElement("cell");
+				myWriter.writeAttribute("state", stateGrid[a][b]);
+			}
+			myWriter.writeEndElement();
+		}
+		myWriter.writeEndElement();
+	}
+	
+	private void writeGridHeader() throws XMLStreamException {
+
+		myWriter.writeStartElement("cellShape");
+		myWriter.writeCharacters(cellShape);
+		myWriter.writeEndElement();
+		
+		myWriter.writeStartElement("neighbors");
+		if(isDiagonal)
+			myWriter.writeCharacters("adjacent");
+		else
+			myWriter.writeCharacters("orthogonal");
+		myWriter.writeEndElement();
+		
+		myWriter.writeStartElement("borders");
+		if(isToroidal)
+			myWriter.writeCharacters("torus");
+		else
+			myWriter.writeCharacters("finite");
+		myWriter.writeEndElement();
+	}
+	
+	public String[][] createStateGrid(Set<Cell> cells) {
+		String[][] arrangement = new String[gridRowCount][gridColCount];
+		for(Cell c: cells) {
+			arrangement[c.getRow()][c.getCol()] = helper.getEncoding(c.getState());
+		}
 		return arrangement;
 	}
 }

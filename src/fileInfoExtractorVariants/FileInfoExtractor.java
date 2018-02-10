@@ -5,7 +5,8 @@ import javax.xml.stream.XMLStreamReader;
 
 import cellVariants.Cell;
 
-public abstract class FileInfoExtractor {
-	public abstract Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException;
-	public abstract Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException;
+public interface FileInfoExtractor {
+	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException;
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException;
+	public String getEncoding(int state);
 }

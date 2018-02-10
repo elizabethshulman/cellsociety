@@ -6,7 +6,7 @@ import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
 
-public class PredatorPreyFIE extends FileInfoExtractor{
+public class PredatorPreyFIE implements FileInfoExtractor{
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -25,6 +25,16 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 			case "F": return new PredatorPreyCell(1);
 			case "S": return new PredatorPreyCell(2);
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
+		}
+	}
+
+	@Override
+	public String getEncoding(int state) {
+		switch(state)
+		{
+			case 2: return "S";
+			case 1: return "F";
+			default: return "E";
 		}
 	}
 

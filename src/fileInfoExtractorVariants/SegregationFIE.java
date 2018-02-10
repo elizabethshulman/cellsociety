@@ -6,7 +6,7 @@ import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
 import cellVariants.SegregationCell;
 
-public class SegregationFIE extends FileInfoExtractor {
+public class SegregationFIE implements FileInfoExtractor {
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -24,6 +24,16 @@ public class SegregationFIE extends FileInfoExtractor {
 			case "R": return new SegregationCell(1);
 			case "B": return new SegregationCell(2);
 			default: throw new XMLStreamException("Invalid Segregation cell type");
+		}
+	}
+
+	@Override
+	public String getEncoding(int state) {
+		switch(state)
+		{
+			case 2: return "B";
+			case 1: return "R";
+			default: return "E";
 		}
 	}
 

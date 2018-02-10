@@ -3,22 +3,26 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import cellVariants.*;
+import cellVariants.Cell;
+import fileInfoExtractorVariants.FileInfoExtractor;
+
 public class FileProcessor {
 	
 	private String myType;
 	private String filepath;
 	private String author;
 	private String title;
-	private HashMap<String,Double> globalVars;
+	private Map<String,Double> globalVars;
 	private XMLStreamReader myParser;
 	private FileInfoExtractor helper;
-	private HashMap<Cell,ArrayList<Cell>> cellGrid;
+	private Map<Cell,List<Cell>> cellGrid;
 	private int gridRowCount;
 	private int gridColCount;
 	
@@ -39,10 +43,10 @@ public class FileProcessor {
 	public String getTitle() {
 		return title;
 	}
-	public HashMap<String,Double> getGlobalVars() {
+	public Map<String,Double> getGlobalVars() {
 		return globalVars;
 	}
-	public HashMap<Cell,ArrayList<Cell>> getCellGrid() {
+	public Map<Cell,List<Cell>> getCellGrid() {
 		return cellGrid;
 	}
 	public int getRowCount(){
@@ -77,9 +81,11 @@ public class FileProcessor {
 						}
 				  		break;
 				  	case "author": myParser.next(); 
-				  		author = myParser.getText(); break;
+				  					author = myParser.getText();
+				  					break;
 				  	case "title": myParser.next();
-				  		title = myParser.getText(); break;
+				  					title = myParser.getText();
+				  					break;
 				  }
 			  }
 		}
@@ -87,7 +93,7 @@ public class FileProcessor {
 		
 	}
 	private void readGlobalVars() throws XMLStreamException {
-		globalVars = new HashMap<String,Double>();
+		globalVars = new HashMap<>();
 		int xml;
 		myParser.next();
 		do {
@@ -101,25 +107,24 @@ public class FileProcessor {
 	
 	//Creates 2D array based on information from file
 	private void readCells() throws XMLStreamException {
-		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<ArrayList<Cell>>();
-		ArrayList<Cell> newRow = new ArrayList<Cell>();
-		while(true)
-		{
+		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<>();
+		ArrayList<Cell> newRow = new ArrayList<>();
+		while(true) {
 			 int xmlEvent = myParser.next();
 			  //Process start element.
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
-				  switch(myParser.getLocalName())
-				  {
-				  	case "row":	newRow = new ArrayList<Cell>(); break;
-				  	case "cell": newRow.add(helper.getCell(myParser)); break;
+				  switch(myParser.getLocalName()) {
+				  	case "row":	newRow = new ArrayList<Cell>();
+				  				break;
+				  	case "cell": newRow.add(helper.getCell(myParser));
+				  				break;
 				  	
 				  }
 			  }
-			  if(xmlEvent == XMLStreamConstants.END_ELEMENT)
-			  {
-				  switch(myParser.getLocalName())
-				  {
-				  	case "row": newGrid.add(newRow); break;
+			  if(xmlEvent == XMLStreamConstants.END_ELEMENT) {
+				  switch(myParser.getLocalName()) {
+				  	case "row": newGrid.add(newRow);
+				  				break;
 				  	case "grid":
 				  		Cell[][] cellArray = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
 				  		createCellMap(cellArray);
@@ -135,21 +140,21 @@ public class FileProcessor {
 	{
 		gridRowCount = cellArray.length;
 		gridColCount = cellArray[0].length;
-		cellGrid = new HashMap<Cell, ArrayList<Cell>>();
+		cellGrid = new HashMap<>();
 		ArrayList<Cell> neighbors;
-		for(int x = 0; x < cellArray.length; x++)
-			for(int y = 0; y < cellArray[x].length; y++)
-			{
-				neighbors = new ArrayList<Cell>();
+		for(int x = 0; x < cellArray.length; x++) {
+			for(int y = 0; y < cellArray[x].length; y++) {
+				neighbors = new ArrayList<>();
 				Cell toAdd = cellArray[x][y];
 				toAdd.setRow(x);
 				toAdd.setCol(y);
-				ArrayList<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
+				List<int[]> neighborIndices = helper.calcNeighborLocations(x,y,cellArray.length,cellArray[x].length);
 				for(int a = 0; a < neighborIndices.size(); a++)
 				{
 					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);
 				}
 				cellGrid.put(toAdd, neighbors);
 			}
+		}
 	}
 }

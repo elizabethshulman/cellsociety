@@ -89,7 +89,7 @@ public class ControlPanel {
 		mySlider.valueProperty().addListener(new ChangeListener<Number>() {
 			public void changed(ObservableValue<? extends Number> ov,
 					Number old_val, Number new_val) {
-				myAnimation.setRate(new_val.doubleValue() / 20);
+				myAnimation.setRate(new_val.doubleValue() / 20 + 0.1);
 			}
 		});
 

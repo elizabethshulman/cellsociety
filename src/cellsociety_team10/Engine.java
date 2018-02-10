@@ -161,7 +161,8 @@ public class Engine {
 
 
 	private void setupDIY() {
-		File file = new File("data/simulations/life/gameoflife2.xml");
+		File file = new File("data/simulations/default/life/life_square.xml");
+		System.out.println();
 		loadSimulation(file);
 
 		mySidebar = new Sidebar(myResources, this, myGraph);

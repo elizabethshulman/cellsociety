@@ -2,13 +2,16 @@
 <simulation>
    <header>
       <simtype>Segregation</simtype>
-      <author>Andrew Yeung</author>
-      <title>Segregation Model</title>
+      <author>You</author>
+      <title>The Best Simulation Ever</title>
    </header>
    <global_vars>
       <satisfactionThreshold>0.3</satisfactionThreshold>
    </global_vars>
    <grid>
+   <cellShape>Square</cellShape>
+   	<neighbors>adjacent</neighbors>
+   	<borders>toroidal</borders>
       <row>
          <cell state="E" />
          <cell state="E" />

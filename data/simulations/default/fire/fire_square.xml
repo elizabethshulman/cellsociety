@@ -2,25 +2,17 @@
 <simulation>
    <header>
       <simtype>Fire</simtype>
-      <author>Ben Hubsch</author>
-      <title>Default Fire</title>
+      <author>You</author>
+      <title>The Best Simulation Ever</title>
    </header>
    <global_vars>
       <probCatchFire>0.5</probCatchFire>
    </global_vars>
    <grid>
+   	<cellShape>Square</cellShape>
+   	<neighbors>orthogonal</neighbors>
+   	<borders>finite</borders>
       <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-      </row>
-      <row >
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -59,6 +51,17 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="2" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />

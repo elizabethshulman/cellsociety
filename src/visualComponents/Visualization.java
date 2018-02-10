@@ -23,6 +23,7 @@ public class Visualization {
 	private HeaderBar myBar;
 	private LineGraph myLineGraph;
 	private Stage myStage;
+	private ContainerFactory myContainerFactory;
 	
 	public Visualization(ControlPanel cp, Stage stage) {
 		myStage = stage;
@@ -33,21 +34,30 @@ public class Visualization {
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(CSS_STRING);
 		
-		myBar = new HeaderBar("");
-		myVisualContainer = new TriangleContainer();
+		myContainerFactory = new ContainerFactory();
 		myControlPanel = cp;
-		myLineGraph = new LineGraph();
 		
-		VBox center = new VBox();
-		center.getChildren().add(myLineGraph.getLineChart());
-		center.getChildren().add(myVisualContainer.getContainer());
+		myLineGraph = new LineGraph();
+		myBar = new HeaderBar("");
 		
 		myBorderPane.setTop(myBar.getHBox());
-		myBorderPane.setCenter(center);
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	
+//	private void setupContainer() {
+//		myVisualContainer
+//		
+//		VBox center = new VBox();
+//		center.getChildren().add(myLineGraph.getLineChart());
+//		center.getChildren().add(myVisualContainer.getContainer());
+//		
+//		myBorderPane.setCenter(center);
+//	}
+	
 	public void visualizeGraph(Graph g) {
+//		if (myVisualContainer == null) {
+//			setupBorderPane();
+//		}
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		

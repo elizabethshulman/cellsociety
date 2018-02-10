@@ -142,6 +142,7 @@ public class Engine {
 		try {
 			myFileProcessor = new FileProcessor(file);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid filepath.");
 		}
 	}

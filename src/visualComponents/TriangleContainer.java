@@ -13,15 +13,15 @@ public class TriangleContainer extends Container {
 		super();
 		myDisplay.setId("container-display-borderless");
 	}
-
-	@Override
-	public void setGraphDisplay(Graph g) {
-		myDisplay.getChildren().clear();
-		ImageView[][] graph_grid = buildImageView();
-		for (int r=0; r < test_value; r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, test_value));
-		}
-	}
+//
+//	@Override
+//	public void setGraphDisplay(Graph g) {
+//		myDisplay.getChildren().clear();
+//		ImageView[][] graph_grid = buildImageView();
+//		for (int r=0; r < test_value; r++) {
+//			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, test_value));
+//		}
+//	}
 	
 	private ImageView[][] buildImageView() {
 		ImageView[][] temp = new ImageView[test_value][test_value];

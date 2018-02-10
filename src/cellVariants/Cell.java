@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import visualComponents.Helper;
 
 public abstract class Cell {
@@ -15,14 +14,20 @@ public abstract class Cell {
 	private int row;
 	private int col;
 	protected ImageView imageView;
+	private String myShape;
 	
-	public Cell(int st) {
+	public Cell(int st, String shape) {
+		myShape = shape;
 		state = st;
 		buildHashMap();
 		imageView = new ImageView(statesAndImages.get(state));
 		imageView.setOnMouseClicked(e -> {
 			nextImage();
 		});
+	}
+	
+	protected String getShapeType() {
+		return myShape;
 	}
 
 	protected abstract void buildHashMap();

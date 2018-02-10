@@ -11,8 +11,8 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import rulesVariants.RulesFactory;
 import visualComponents.ControlPanel;
-import visualComponents.RulesFactory;
 import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
@@ -135,7 +135,7 @@ public class Engine {
 		File file = new File("data/simulations/life/gameoflife1.xml");
 		loadSimulation(file);
 
-		mySidebar = new Sidebar(myResources, this);
+		mySidebar = new Sidebar(myResources, this, myGraph);
 		myVis.addSidebar(mySidebar);
 	}
 

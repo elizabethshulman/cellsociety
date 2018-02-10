@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import cellsociety_team10.Engine;
+import graphVariants.Graph;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
@@ -29,20 +29,20 @@ public class Sidebar {
 	private VBox myVBox = new VBox();
 	private Engine myEngine;
 
-	public Sidebar(ResourceBundle resources, Engine engine) {
+	public Sidebar(ResourceBundle resources, Engine engine, Graph graph) {
 		myEngine = engine;
 		myVBox.setId("sidebar");
 		Slider rows = createSlider();
 		Slider cols = createSlider();
 		myVBox.getChildren().addAll(buildSimBox(resources), rows, cols, buildShapeOptions(resources));
 		
-//		rows.setOnMouseReleased(e -> {
-//			graph.adjustRows(Math.round(rows.getValue()));
-//		});
-//		
-//		cols.setOnMouseReleased(e -> {
-//			graph.adjustCols(Math.round(cols.getValue()));
-//		});
+		rows.setOnMouseReleased(e -> {
+			graph.adjustRows((int) rows.getValue());
+		});
+		
+		cols.setOnMouseReleased(e -> {
+			graph.adjustCols((int) cols.getValue());
+		});
 	}
 
 	public VBox getVBox() {
@@ -59,7 +59,7 @@ public class Sidebar {
 				);
 		ComboBox<String> combo = new ComboBox<String>(sim_options);
 		combo.setId("combo");
-		combo.setValue("Simulation type:");
+		combo.getSelectionModel().selectFirst();
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 	        @Override
 	        public void changed(ObservableValue<? extends String> ov,
@@ -82,13 +82,10 @@ public class Sidebar {
 	
 	private HBox buildShapeOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
-		RadioButton rb1 = new RadioButton();
-		RadioButton rb2 = new RadioButton();
-		RadioButton rb3 = new RadioButton();
-		rb1.setGraphic(Helper.generateImageView("burgundy.png", SHAPE_SIZE));
-		rb2.setGraphic(Helper.generateImageView("triangle1.png", SHAPE_SIZE));
-		rb3.setGraphic(Helper.generateImageView("hex1.png", SHAPE_SIZE));
-		
+		hbox.setId("shape-hbox");
+		RadioButton rb1 = createRadioButton("burgundy.png");
+		RadioButton rb2 = createRadioButton("triangle1.png");
+		RadioButton rb3 = createRadioButton("hex1.png");
 		rb1.setSelected(true);
 		
 		ToggleGroup toggleGroup = new ToggleGroup();
@@ -97,18 +94,19 @@ public class Sidebar {
 		rb3.setToggleGroup(toggleGroup);
 		
 		hbox.getChildren().addAll(rb1, rb2, rb3);
-		hbox.setAlignment(Pos.CENTER);
-		hbox.setSpacing(15);
 		return hbox;
+	}
+	
+	private RadioButton createRadioButton(String filename) {
+		RadioButton temp = new RadioButton();
+		temp.setGraphic(Helper.generateImageView(filename, SHAPE_SIZE));
+		return temp;
 	}
 	
 	private Slider createSlider() {
 		Slider temp = new Slider(MIN_SLIDER, MAX_SLIDER, START_SLIDER);
 		temp.getStyleClass().add("axis");
-		temp.setShowTickLabels(true);
-		temp.setSnapToTicks(true);
-		temp.setMinorTickCount(0);
-		temp.setMajorTickUnit(1);
+		temp.setId("#slider-sidebar");
 		temp.setLabelFormatter(new StringConverter<Double>() {
 			@Override
 			public String toString(Double n) {

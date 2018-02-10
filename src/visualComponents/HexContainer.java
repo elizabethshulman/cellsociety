@@ -22,7 +22,7 @@ public class HexContainer extends Container {
 			image_view.setFitHeight(height);
 			row.getChildren().add(image_view);
 		}
-		double padding = - height / 4 - 0.5;
+		double padding = -height / 4 - 0.5;
 		if (r % 2 == 1) {
 			row.setPadding(new Insets(padding, 0, padding, getOffset()));
 		} else {

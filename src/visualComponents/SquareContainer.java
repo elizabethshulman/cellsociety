@@ -17,7 +17,7 @@ public class SquareContainer extends Container {
 		for (int c=0; c < num_cols; c++) {
 			row.getChildren().add(graph_grid[r][c]);
 		}
-		row.setId("container-row");
+		row.setId("container-row-square");
 		return row;
 	}
 

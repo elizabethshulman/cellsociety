@@ -118,7 +118,7 @@ public class Engine {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
 			try {
-				myFileProcessor.saveGridState(myGraph.getCurrentGrid(), saved_file);
+				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
 			} catch (FileNotFoundException e) {
 				// clean this up!!
 				e.printStackTrace();

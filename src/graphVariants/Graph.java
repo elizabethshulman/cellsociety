@@ -6,6 +6,7 @@ import java.util.Set;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
+import javafx.scene.paint.Color;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 
@@ -48,10 +49,6 @@ public abstract class Graph {
 		return currentGrid.keySet();
 	}
 	
-	public Map<Cell, List<Cell>> getCurrentGrid() {
-		return currentGrid;
-	}
-	
 	public List<Cell> getNeighbors(Cell c) {
 		return currentGrid.get(c);
 	}
@@ -72,5 +69,10 @@ public abstract class Graph {
 	}
 	public String getAuthor() {
 		return myFileProcessor.getAuthor();
+	}
+	
+	public Color getCorrectColor(Integer state) {
+		Cell cell = currentGrid.keySet().iterator().next();
+		return cell.getCorrespondingColor(state);
 	}
 }

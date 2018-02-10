@@ -8,7 +8,7 @@ public class GameOfLifeCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, buildCellImage("darkblue.png"));
-		statesAndColors.put(1, buildCellImage("midblue.png"));
+		statesAndImages.put(0, buildCellImage("darkblue.png"));
+		statesAndImages.put(1, buildCellImage("midblue.png"));
 	}
 }

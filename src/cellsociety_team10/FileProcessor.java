@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -181,7 +182,7 @@ public class FileProcessor {
 			}
 		}
 	}
-	public void saveGridState(Map<Cell,List<Cell>> currentState, File file) throws FileNotFoundException, XMLStreamException {
+	public void saveGridState(Set<Cell> currentState, File file) throws FileNotFoundException, XMLStreamException {
 		XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
 		XMLStreamWriter myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));
 		myWriter.writeStartDocument();

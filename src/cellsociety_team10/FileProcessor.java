@@ -103,7 +103,6 @@ public class FileProcessor {
 			  }
 		}
 		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
-		
 	}
 	private void readGlobalVars() throws XMLStreamException {
 		globalVars = new HashMap<>();
@@ -152,9 +151,7 @@ public class FileProcessor {
 				  }
 			  }
 		}
-		
 	}
-	
 	//convert Cell grid to hashmap
 	private void createCellMap(Cell[][] cellArray)
 	{
@@ -166,6 +163,7 @@ public class FileProcessor {
 				String className = "cellsociety_team10." + cellShape + "NeighborCalculator";
 			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Cell shape is invalid");
 		}
 		for(int x = 0; x < cellArray.length; x++) {
@@ -183,6 +181,7 @@ public class FileProcessor {
 			}
 		}
 	}
+
 	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
 		XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
 		myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));

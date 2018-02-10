@@ -30,6 +30,7 @@ public abstract class Graph {
 		try {
 			myFileProcessor = new FileProcessor(file);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid filepath.");
 		}
 

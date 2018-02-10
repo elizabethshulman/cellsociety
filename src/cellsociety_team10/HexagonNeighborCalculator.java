@@ -3,9 +3,9 @@ package cellsociety_team10;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HexagonNeigborCalculator extends NeighborCalculator {
+public class HexagonNeighborCalculator extends NeighborCalculator {
 
-	public HexagonNeigborCalculator(int numRows, int numCols, boolean isDiagonal, boolean isTorus) {
+	public HexagonNeighborCalculator(int numRows, int numCols, boolean isDiagonal, boolean isTorus) {
 		super(numRows, numCols, isDiagonal, isTorus);
 	}
 

@@ -8,7 +8,7 @@
    <global_vars>
    </global_vars>
    <grid>
-   <cellShape>Square</cellShape>
+   <cellShape>Hexagon</cellShape>
    	<neighbors>adjacent</neighbors>
    	<borders>finite</borders>
       <row>

@@ -7,8 +7,8 @@ import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
-import rulesVariants.PredatorPreyHelper.PredatorManager;
-import rulesVariants.PredatorPreyHelper.PreyManager;
+import rulesVariants.RulesVariantsManagers.PredatorManager;
+import rulesVariants.RulesVariantsManagers.PreyManager;
 
 public class PredatorPreyRules extends Rules {
 

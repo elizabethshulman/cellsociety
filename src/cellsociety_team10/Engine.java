@@ -4,20 +4,21 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import graphVariants.Graph;
+import graphVariants.GraphFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import rulesVariants.Rules;
+import rulesVariants.RulesFactory;
 import visualComponents.ControlPanel;
-import visualComponents.RulesFactory;
+import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
 
-public class Engine extends Application {
+public class Engine {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final String SIM_FOLDER = "data/simulations/";
@@ -31,52 +32,50 @@ public class Engine extends Application {
 	private Stage myStage;
 	private FileChooser myFileChooser;
 	private RulesFactory myRulesFactory;
+	private GraphFactory myGraphFactory;
 	private ControlPanel myControlPanel;
+	private Sidebar mySidebar;
 
-	public static void main (String[] args) {
-		launch(args);
-	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		initializeSimulation(primaryStage);
-	}
-
-	private void initializeSimulation(Stage stage) {
+	public void initializeSimulation(Stage stage) {
 		myStage = stage;
-		
+
 		myResources = ResourceBundle.getBundle(LANGUAGE);
-		
+
 		myStartScene = new StartPage(myResources,
-									new HandlerHolder(e -> showFileChooser("predator"),
-									e -> showFileChooser("segregation"),
-									e -> showFileChooser("life"), 
-									e -> showFileChooser("fire"))).getScene();
-		
+				e -> showFileChooser("predator"),
+				e -> showFileChooser("segregation"),
+				e -> showFileChooser("life"), 
+				e -> showFileChooser("fire"),
+				e -> setupDIY()).getScene();
+
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
 		
 		myRulesFactory = new RulesFactory();
+		myGraphFactory = new GraphFactory(myRulesFactory);
 
 		myAnimation = new Timeline();
-		myControlPanel = new ControlPanel(myAnimation, 
-										e -> play(), 
-										e -> pause(), 
-										e -> end(), 
-										e -> next());
-		myVis = new Visualization(myControlPanel);
-		setupAnimation();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+				e -> step());
+		myAnimation.getKeyFrames().add(frame);
 		
+		myControlPanel = new ControlPanel(myAnimation, 
+				e -> play(), 
+				e -> pause(), 
+				e -> end(), 
+				e -> next(),
+				e -> save());
+		myVis = new Visualization(myControlPanel, stage);
+
 		myStage.setScene(myStartScene);
 		myStage.setTitle(myResources.getString("Title"));
 		myStage.show();
 	}
 
-	private void setupAnimation() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-				e -> step());
+	private void resetAnimation() {
+		myAnimation.stop();
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
-		myAnimation.getKeyFrames().add(frame);
+		
 		myAnimation.setRate(ANIM_RATE);
 	}
 
@@ -101,13 +100,23 @@ public class Engine extends Application {
 	}
 
 	private void end() {
-		resetEngine();
+		myAnimation.stop();
 		myStage.setScene(myStartScene);
+		myStage.setWidth(Visualization.SCREEN_WIDTH);
+		myVis.reset(true);
 	}
 
 	private void next() {
 		myAnimation.pause();
 		step();
+	}
+	
+	private void save() {
+		File saved_file = myFileChooser.showSaveDialog(myStage);
+		if (saved_file != null) {
+			// need to write to this file here
+			System.out.println(saved_file);
+		}
 	}
 
 	private void showFileChooser(String directory) {
@@ -115,36 +124,31 @@ public class Engine extends Application {
 		myFileChooser.setInitialDirectory(new File(source));
 		File f = myFileChooser.showOpenDialog(myStage);
 		if (f != null) {
-			handleChosenFile(f);
+			loadSimulation(f);
 		}
 	}
-	
-	private void resetEngine() {
-		myAnimation.setRate(ANIM_RATE);
-		myAnimation.stop();
+
+	public void loadSimulation(File file) {
+		myGraph = myGraphFactory.createGraph(file);
 		
-		myVis.reset();
-	}
-	
-	private void handleChosenFile(File filename) {
-		FileProcessor fp;
-		try {
-			fp = new FileProcessor(filename.getAbsolutePath());
-			fp.readFile();
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
+		resetAnimation();
 		
-		Rules curr_rules = myRulesFactory.createRules(fp.getType(), fp.getGlobalVars());
-		myGraph = new Graph(curr_rules, fp);
+		myVis.reset(false);
 		
-		resetEngine();
-		
-		myVis.amendHeader(createHeaderText(fp.getTitle(), fp.getAuthor()));
+		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}
-	
+
+
+	private void setupDIY() {
+		File file = new File("data/simulations/life/gameoflife1.xml");
+		loadSimulation(file);
+
+		mySidebar = new Sidebar(myResources, this, myGraph);
+		myVis.addSidebar(mySidebar);
+	}
+
 	private String createHeaderText(String title, String author) {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}

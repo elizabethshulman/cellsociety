@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation>
+   <header>
+      <simtype>Fire</simtype>
+      <author>Ben Hubsch</author>
+      <title>Default Fire</title>
+   </header>
+   <global_vars>
+      <probCatchFire>0.5</probCatchFire>
+   </global_vars>
+   <grid>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row >
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+   </grid>
+</simulation>

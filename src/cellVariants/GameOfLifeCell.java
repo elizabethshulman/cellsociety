@@ -1,9 +1,6 @@
 package cellVariants;
 
-import visualComponents.Helper;
-
 public class GameOfLifeCell extends Cell {
-	
 
 	public GameOfLifeCell(int st) {
 		super(st);
@@ -11,7 +8,7 @@ public class GameOfLifeCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("darkblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
+		statesAndColors.put(0, buildCellImage("darkblue.png"));
+		statesAndColors.put(1, buildCellImage("midblue.png"));
 	}
 }

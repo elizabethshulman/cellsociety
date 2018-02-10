@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation>
+   <header>
+      <simtype>GameOfLife</simtype>
+      <author>Ben Hubsch</author>
+      <title>Default Square</title>
+   </header>
+   <global_vars>
+   </global_vars>
+   <grid>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+   </grid>
+</simulation>

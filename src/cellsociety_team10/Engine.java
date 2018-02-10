@@ -54,6 +54,10 @@ public class Engine {
 		myGraphFactory = new GraphFactory(myRulesFactory);
 
 		myAnimation = new Timeline();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+				e -> step());
+		myAnimation.getKeyFrames().add(frame);
+		
 		myControlPanel = new ControlPanel(myAnimation, 
 				e -> play(), 
 				e -> pause(), 
@@ -67,10 +71,9 @@ public class Engine {
 	}
 
 	private void setupAnimation() {
-		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
-				e -> step());
+		myAnimation.stop();
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
-		myAnimation.getKeyFrames().add(frame);
+		
 		myAnimation.setRate(ANIM_RATE);
 	}
 
@@ -95,7 +98,8 @@ public class Engine {
 	}
 
 	private void end() {
-		resetEngine();
+		myAnimation.stop();
+		myVis.reset();
 		myStage.setScene(myStartScene);
 		myStage.setWidth(Visualization.SCREEN_WIDTH);
 	}
@@ -114,19 +118,12 @@ public class Engine {
 		}
 	}
 
-	private void resetEngine() {
-		myAnimation.setRate(ANIM_RATE);
-		myAnimation.stop();
-
-		myVis.reset();
-	}
-
 	public void loadSimulation(File file) {
 		myGraph = myGraphFactory.createGraph(file);
-//		myGraph = new Graph(filename, myRulesFactory);
 		
 		setupAnimation();
-		resetEngine();
+		
+		myVis.reset();
 		
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
@@ -141,7 +138,7 @@ public class Engine {
 
 	private void setupDIY() {
 		File file = new File("data/simulations/life/gameoflife1.xml");
-		handleChosenFile(file);
+		loadSimulation(file);
 
 		mySidebar = new Sidebar(myResources, this);
 		myVis.addSidebar(mySidebar);

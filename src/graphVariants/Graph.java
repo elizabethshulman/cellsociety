@@ -8,7 +8,7 @@ import java.util.Set;
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
 import rulesVariants.Rules;
-import visualComponents.RulesFactory;
+import rulesVariants.RulesFactory;
 
 
 /**
@@ -17,7 +17,7 @@ import visualComponents.RulesFactory;
  *	Stores cell/neighbor map
  *
  */
-public class Graph {
+public abstract class Graph {
 
 	private Map<Cell, List<Cell>> currentGrid;
 	private Rules myRules;
@@ -41,6 +41,9 @@ public class Graph {
 		numCols = myFileProcessor.getColCount();
 	}
 	
+	public abstract void adjustRows(int new_rows);
+	
+	public abstract void adjustCols(int new_cols);
 	
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);

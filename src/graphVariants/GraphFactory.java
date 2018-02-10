@@ -2,7 +2,7 @@ package graphVariants;
 
 import java.io.File;
 
-import visualComponents.RulesFactory;
+import rulesVariants.RulesFactory;
 
 public class GraphFactory {
 	RulesFactory myRulesFactory;

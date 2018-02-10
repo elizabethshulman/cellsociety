@@ -1,4 +1,4 @@
-package visualComponents;
+package rulesVariants;
 import java.util.Map;
 
 import rulesVariants.FireRules;

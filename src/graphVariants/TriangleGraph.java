@@ -2,7 +2,7 @@ package graphVariants;
 
 import java.io.File;
 
-import visualComponents.RulesFactory;
+import rulesVariants.RulesFactory;
 
 public class TriangleGraph extends Graph {
 
@@ -10,6 +10,15 @@ public class TriangleGraph extends Graph {
 		super(file, rules_factory);
 	}
 
-//	public adjustRows()
-//	public adjustCols()
+	@Override
+	public void adjustRows(int new_rows) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void adjustCols(int new_cols) {
+		// TODO Auto-generated method stub
+		
+	}
 }

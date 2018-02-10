@@ -24,7 +24,6 @@ import javafx.util.StringConverter;
 public class Sidebar {
 	public static final double WIDTH = 200;
 	private static final double MIN_SLIDER = 4;
-	private static final double START_SLIDER = 8;
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;
 

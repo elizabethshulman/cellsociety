@@ -2,8 +2,8 @@
 <simulation>
    <header>
       <simtype>PredatorPrey</simtype>
-      <author>Andrew Yeung</author>
-      <title>Wator World</title>
+      <author>You</author>
+      <title>The Best Simulation Ever</title>
    </header>
    <global_vars>
       <fishBreedTime>5</fishBreedTime>

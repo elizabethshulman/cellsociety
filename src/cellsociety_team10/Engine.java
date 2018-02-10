@@ -142,7 +142,6 @@ public class Engine {
 		try {
 			myFileProcessor = new FileProcessor(file);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new IllegalArgumentException("Invalid filepath.");
 		}
 	}
@@ -162,7 +161,7 @@ public class Engine {
 
 
 	private void setupDIY() {
-		File file = new File("data/simulations/life/gameoflife1.xml");
+		File file = new File("data/simulations/life/gameoflife2.xml");
 		loadSimulation(file);
 
 		mySidebar = new Sidebar(myResources, this, myGraph);

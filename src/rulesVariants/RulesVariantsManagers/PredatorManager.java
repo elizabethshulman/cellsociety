@@ -1,4 +1,4 @@
-package rulesVariants.PredatorPreyHelper;
+package rulesVariants.RulesVariantsManagers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
 
-public class PredatorManager extends Manager {
+public class PredatorManager extends VariantsManager {
 
 	private double sharkStarveTime;
 	

@@ -14,12 +14,12 @@ public class GameOfLifeFIE implements FileInfoExtractor {
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 2) {
 			throw new XMLStreamException("Invalid Game Of Life cell type.");
 		}
-		return new GameOfLifeCell(val);
+		return new GameOfLifeCell(val, shape);
 	}
 
 	@Override

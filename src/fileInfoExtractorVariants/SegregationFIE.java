@@ -18,11 +18,11 @@ public class SegregationFIE implements FileInfoExtractor {
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0)) {
-			case "E": return new SegregationCell(0);
-			case "R": return new SegregationCell(1);
-			case "B": return new SegregationCell(2);
+			case "E": return new SegregationCell(0, shape);
+			case "R": return new SegregationCell(1, shape);
+			case "B": return new SegregationCell(2, shape);
 			default: throw new XMLStreamException("Invalid Segregation cell type");
 		}
 	}

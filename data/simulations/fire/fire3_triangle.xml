@@ -9,6 +9,9 @@
       <probCatchFire>0.8</probCatchFire>
    </global_vars>
    <grid>
+   <cellShape>Triangle</cellShape>
+   	<neighbors>adjacent</neighbors>
+   	<borders>finite</borders>
       <row>
          <cell state="2" />
          <cell state="1" />
@@ -31,6 +34,10 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
          <cell state="2" />
       </row>
       <row>
@@ -56,26 +63,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-      </row>
-      <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -86,26 +73,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-      </row>
-      <row>
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -152,26 +119,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-      </row>
-      <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -182,26 +129,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-      </row>
-      <row>
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -248,26 +175,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-      </row>
-      <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -278,26 +185,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-      </row>
-      <row>
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -344,26 +231,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-      </row>
-      <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -374,26 +241,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-      </row>
-      <row>
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -440,26 +287,6 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
-      </row>
-      <row>
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
-         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -488,8 +315,156 @@
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
       </row>
       <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />
@@ -515,6 +490,10 @@
       </row>
       <row>
          <cell state="2" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
          <cell state="1" />
          <cell state="1" />
          <cell state="1" />

@@ -1,15 +1,12 @@
 package fileInfoExtractorVariants;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import cellVariants.Cell;
 import cellVariants.FireCell;
 
-public final class FireFIE extends FileInfoExtractor {
+public final class FireFIE implements FileInfoExtractor {
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -21,24 +18,17 @@ public final class FireFIE extends FileInfoExtractor {
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 2) {
 			throw new XMLStreamException("Invalid Fire cell type.");
 		}
-		return new FireCell(val);
+		return new FireCell(val, shape);
 	}
+
 	@Override
-	public List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
-		ArrayList<int[]> neighborCoordinates = new ArrayList<>();
-		for(int a = row - 1; a <= row + 1; a++) {
-			for(int b = col - 1; b <= col + 1; b++) {
-				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a == row ^ b == col)) { 
-					neighborCoordinates.add(new int[]{a,b});
-				}
-			}
-		}
-		return neighborCoordinates;
+	public String getEncoding(int state) {
+		return Integer.toString(state);
 	}
 
 }

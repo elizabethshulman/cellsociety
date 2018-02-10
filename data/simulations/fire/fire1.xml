@@ -9,6 +9,9 @@
       <probCatchFire>0.5</probCatchFire>
    </global_vars>
    <grid>
+   	<cellShape>Square</cellShape>
+   	<neighbors>orthogonal</neighbors>
+   	<borders>finite</borders>
       <row>
          <cell state="0" />
          <cell state="0" />
@@ -20,7 +23,7 @@
          <cell state="0" />
          <cell state="0" />
       </row>
-      <row >
+      <row>
          <cell state="0" />
          <cell state="1" />
          <cell state="1" />

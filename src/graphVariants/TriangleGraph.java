@@ -1,13 +1,12 @@
 package graphVariants;
 
-import java.io.File;
-
+import cellsociety_team10.FileProcessor;
 import rulesVariants.RulesFactory;
 
 public class TriangleGraph extends Graph {
 
-	public TriangleGraph(File file, RulesFactory rules_factory) {
-		super(file, rules_factory);
+	public TriangleGraph(FileProcessor file_processor, RulesFactory rules_factory) {
+		super(file_processor, rules_factory);
 	}
 
 	@Override

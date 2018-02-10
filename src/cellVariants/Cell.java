@@ -9,25 +9,35 @@ import visualComponents.Helper;
 public abstract class Cell {
 
 	protected int state;
-	protected HashMap<Integer, Image> statesAndColors;
+	protected HashMap<Integer, Image> statesAndImages = new HashMap<>();
+	protected HashMap<Integer, String> statesAndColors = new HashMap<>();
 	private int row;
 	private int col;
 	protected ImageView imageView;
+	private String myShape;
 	
-	public Cell(int st) {
+	public Cell(int st, String shape) {
+		myShape = shape;
 		state = st;
-		statesAndColors = new HashMap<>();
 		buildHashMap();
-		imageView = new ImageView(statesAndColors.get(state));
+		imageView = new ImageView(statesAndImages.get(state));
 		imageView.setOnMouseClicked(e -> {
 			nextImage();
 		});
 	}
+	
+	protected String getShapeType() {
+		return myShape;
+	}
 
 	protected abstract void buildHashMap();
 	
+	public String getCorrespondingColor(Integer state) {
+		return statesAndColors.get(state);
+	}
+	
 	protected void nextImage() {
-		state = (state + 1) % statesAndColors.size();
+		state = (state + 1) % statesAndImages.size();
 		setState(state);
 	}
 	
@@ -58,7 +68,7 @@ public abstract class Cell {
 	
 	public void setState(int st) {
 		state = st;
-		imageView.setImage(statesAndColors.get(st));
+		imageView.setImage(statesAndImages.get(st));
 	}
 	
 	public ImageView getImageView() {

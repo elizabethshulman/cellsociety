@@ -1,6 +1,5 @@
 package graphVariants;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,13 +25,8 @@ public abstract class Graph {
 	private FileProcessor myFileProcessor;
 	
 	
-	public Graph(File file, RulesFactory rules_factory) {
-		try {
-			myFileProcessor = new FileProcessor(file.getAbsolutePath());
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
-		}
-
+	public Graph(FileProcessor file_processor, RulesFactory rules_factory) {
+		myFileProcessor = file_processor;
 		Rules curr_rules = rules_factory.createRules(myFileProcessor.getType(), myFileProcessor.getGlobalVars());
 		
 		myRules = curr_rules;
@@ -50,11 +44,11 @@ public abstract class Graph {
 	}
 	
 	//GETTERS
-	public Set<Cell> getCells(){
+	public Set<Cell> getCells() {
 		return currentGrid.keySet();
 	}
 	
-	public List<Cell> getNeighbors(Cell c){
+	public List<Cell> getNeighbors(Cell c) {
 		return currentGrid.get(c);
 	}
 	
@@ -74,5 +68,10 @@ public abstract class Graph {
 	}
 	public String getAuthor() {
 		return myFileProcessor.getAuthor();
+	}
+	
+	public String getCorrectColor(Integer state) {
+		Cell cell = currentGrid.keySet().iterator().next();
+		return cell.getCorrespondingColor(state);
 	}
 }

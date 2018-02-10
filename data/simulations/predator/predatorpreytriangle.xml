@@ -11,7 +11,7 @@
       <sharkStarveTime>6</sharkStarveTime>
    </global_vars>
    <grid>
-   <cellShape>Square</cellShape>
+   <cellShape>Triangle</cellShape>
    	<neighbors>orthogonal</neighbors>
    	<borders>torus</borders>
       <row>

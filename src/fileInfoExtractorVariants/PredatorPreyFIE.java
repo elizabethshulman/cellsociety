@@ -1,15 +1,12 @@
 package fileInfoExtractorVariants;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
 
-public class PredatorPreyFIE extends FileInfoExtractor{
+public class PredatorPreyFIE implements FileInfoExtractor{
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -21,26 +18,24 @@ public class PredatorPreyFIE extends FileInfoExtractor{
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
 		{
-			case "E": return new PredatorPreyCell(0);
-			case "F": return new PredatorPreyCell(1);
-			case "S": return new PredatorPreyCell(2);
+			case "E": return new PredatorPreyCell(0, shape);
+			case "F": return new PredatorPreyCell(1, shape);
+			case "S": return new PredatorPreyCell(2, shape);
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
 		}
 	}
+
 	@Override
-	public List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
-		ArrayList<int[]> neighborCoordinates = new ArrayList<>();
-		for(int a = row - 1; a <= row + 1; a++) {
-			for(int b = col - 1; b <= col + 1; b++) {
-				if(a == row ^ b == col) {
-					neighborCoordinates.add(new int[]{(a + gridRowLength) % gridRowLength,(b + gridColLength) % gridColLength});
-				}
-			}
+	public String getEncoding(int state) {
+		switch(state)
+		{
+			case 2: return "S";
+			case 1: return "F";
+			default: return "E";
 		}
-		return neighborCoordinates;
 	}
 
 }

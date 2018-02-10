@@ -7,13 +7,13 @@ public class PredatorPreyCell extends Cell {
 	private boolean reproduce;
 	private boolean movedThisTurn;
 	
-	public PredatorPreyCell(int st) {
+	public PredatorPreyCell(int st, String shape) {
 		/*
 		 * 0: Empty
 		 * 1: Fish
 		 * 2: Shark
 		 */
-		super(st);
+		super(st, shape);
 		reproductiveTime=0;
 		sharkEnergy=0;
 		reproduce=false;
@@ -22,7 +22,7 @@ public class PredatorPreyCell extends Cell {
 	@Override
 	public void setState(int st) {
 		state=st;
-		imageView.setImage(statesAndColors.get(st));
+		imageView.setImage(statesAndImages.get(st));
 		
 		if(st==0) {
 			reproductiveTime=0;
@@ -33,9 +33,13 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, buildCellImage("navy.png"));
-		statesAndColors.put(1, buildCellImage("lightteal.png"));
-		statesAndColors.put(2, buildCellImage("sharkred.png"));
+		statesAndImages.put(0, buildCellImage(getShapeType() + "/navy.png"));
+		statesAndImages.put(1, buildCellImage(getShapeType() + "/lightteal.png"));
+		statesAndImages.put(2, buildCellImage(getShapeType() + "/sharkred.png"));
+		
+		statesAndColors.put(0, "rgb(14, 25, 54)");
+		statesAndColors.put(1, "rgb(68, 139, 165)");
+		statesAndColors.put(2, "rgb(137, 0, 0)");
 	}
 	
 	public void increaseSharkEnergy() {

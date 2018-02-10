@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cellVariants.Cell;
 import graphVariants.Graph;
+import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -65,7 +66,12 @@ public class LineGraph {
 			}
 			
 			XYChart.Series<Number, Number> series = mySeries.get(state);
-			series.getData().add(new XYChart.Data<Number, Number>(myIteration, type_count.get(state)));
+			XYChart.Data<Number, Number> point = new XYChart.Data<>(myIteration, type_count.get(state));
+			series.getData().add(point);
+			
+			for(Node n : myLineChart.lookupAll(".series" + state)) {
+	            n.setStyle("-fx-stroke: " + g.getCorrectColor(state) + ";");
+	        }
 		}
 		myIteration += 1;
 	}

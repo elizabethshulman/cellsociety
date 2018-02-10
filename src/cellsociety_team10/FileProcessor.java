@@ -1,15 +1,20 @@
 package cellsociety_team10;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
+
 import cellVariants.Cell;
 import fileInfoExtractorVariants.FileInfoExtractor;
 
@@ -30,10 +35,10 @@ public class FileProcessor {
 	private String cellShape;
 	private NeighborCalculator nCalc;
 	
-	public FileProcessor(String fpath) throws FileNotFoundException, XMLStreamException{
-		filepath = fpath;
+	public FileProcessor(File file) throws FileNotFoundException, XMLStreamException{
+		filepath = file.getAbsolutePath();
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
-		myParser = xmlif.createXMLStreamReader(new FileInputStream(fpath));
+		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 	}
 	public String getType() {
 		return myType;
@@ -108,7 +113,6 @@ public class FileProcessor {
 		}
 		while(xml != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("global_vars"));
 	}
-	
 	//Creates 2D array based on information from file
 	private void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<>();
@@ -174,5 +178,22 @@ public class FileProcessor {
 				cellGrid.put(toAdd, neighbors);
 			}
 		}
+	}
+	public void saveGridState(Map<Cell,List<Cell>> currentState, File file) throws FileNotFoundException, XMLStreamException {
+		XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
+		XMLStreamWriter myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));
+		myWriter.writeStartDocument();
+		
+		
+		myWriter.writeEndElement();
+		myWriter.flush();
+		
+		
+	}
+	public int[][] createStateGrid(Map<Cell,List<Cell>> cells) {
+		int[][] arrangement = new int[gridRowCount][gridColCount];
+		for(Cell c: cells.keySet())
+			arrangement[c.getRow()][c.getCol()] = c.getState();
+		return arrangement;
 	}
 }

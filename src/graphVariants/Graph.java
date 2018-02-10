@@ -6,7 +6,6 @@ import java.util.Set;
 
 import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
-import javafx.scene.paint.Color;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 
@@ -71,7 +70,7 @@ public abstract class Graph {
 		return myFileProcessor.getAuthor();
 	}
 	
-	public Color getCorrectColor(Integer state) {
+	public String getCorrectColor(Integer state) {
 		Cell cell = currentGrid.keySet().iterator().next();
 		return cell.getCorrespondingColor(state);
 	}

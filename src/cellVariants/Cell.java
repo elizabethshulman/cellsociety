@@ -11,7 +11,7 @@ public abstract class Cell {
 
 	protected int state;
 	protected HashMap<Integer, Image> statesAndImages = new HashMap<>();
-	protected HashMap<Integer, Color> statesAndColors = new HashMap<>();
+	protected HashMap<Integer, String> statesAndColors = new HashMap<>();
 	private int row;
 	private int col;
 	protected ImageView imageView;
@@ -27,7 +27,7 @@ public abstract class Cell {
 
 	protected abstract void buildHashMap();
 	
-	public Color getCorrespondingColor(Integer state) {
+	public String getCorrespondingColor(Integer state) {
 		return statesAndColors.get(state);
 	}
 	

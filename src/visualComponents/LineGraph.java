@@ -70,7 +70,10 @@ public class LineGraph {
 			series.getData().add(point);
 			
 			for(Node n : myLineChart.lookupAll(".series" + state)) {
-	            n.setStyle("-fx-stroke: " + g.getCorrectColor(state) + "; ");
+				System.out.println(state);
+				System.out.println(g.getCorrectColor(state));
+				System.out.println();
+	            n.setStyle("-fx-stroke: " + g.getCorrectColor(state) + ";");
 	        }
 		}
 		myIteration += 1;

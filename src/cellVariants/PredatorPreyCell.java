@@ -36,6 +36,10 @@ public class PredatorPreyCell extends Cell {
 		statesAndImages.put(0, buildCellImage("navy.png"));
 		statesAndImages.put(1, buildCellImage("lightteal.png"));
 		statesAndImages.put(2, buildCellImage("sharkred.png"));
+		
+		statesAndColors.put(0, "rgb(14, 25, 54)");
+		statesAndColors.put(1, "rgb(68, 139, 165)");
+		statesAndColors.put(2, "rgb(137, 0, 0)");
 	}
 	
 	public void increaseSharkEnergy() {

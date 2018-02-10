@@ -49,7 +49,8 @@ public class Engine {
 				e -> showFileChooser("segregation"),
 				e -> showFileChooser("life"), 
 				e -> showFileChooser("fire"),
-				e -> setupDIY()).getScene();
+				e -> setupDIY()
+				).getScene();
 
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
@@ -154,6 +155,10 @@ public class Engine {
 		
 		myVis.reset(false);
 		
+		if (mySidebar != null) {
+			mySidebar.setSliderVals(myGraph.getRows(), myGraph.getCols());
+		}
+		
 		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
@@ -162,7 +167,6 @@ public class Engine {
 
 	private void setupDIY() {
 		File file = new File("data/simulations/default/life/life_square.xml");
-		System.out.println();
 		loadSimulation(file);
 
 		mySidebar = new Sidebar(myResources, this, myGraph);

@@ -34,30 +34,32 @@ public class Sidebar {
 	private HashMap<String, String> myConversions = new HashMap<>();
 	private ResourceBundle myResources;
 	private ComboBox<String> mySimBox;
+	private Slider myRowsSlider;
+	private Slider myColsSlider;
 
 	public Sidebar(ResourceBundle resources, Engine engine, Graph graph) {
 		myEngine = engine;
 		myVBox.setId("sidebar");
-		Slider rows = createSlider();
-		Slider cols = createSlider();
+		myRowsSlider = createSlider(graph.getRows());
+		myColsSlider = createSlider(graph.getCols());
 		
 		myResources = resources;
 		setTranslations();
 		
 		buildSimBox(resources);
 		textAndComponent(myResources.getString("PickSim"), mySimBox);
-		textAndComponent(myResources.getString("Width"), rows);
-		textAndComponent(myResources.getString("Height"), cols);
+		textAndComponent(myResources.getString("Width"), myRowsSlider);
+		textAndComponent(myResources.getString("Height"), myColsSlider);
 		textAndComponent(myResources.getString("Shape"), buildShapeOptions(resources));
 		textAndComponent(myResources.getString("EdgeType"), buildEdgeBox(resources));
 		textAndComponent(myResources.getString("NeighborType"), buildNeighborOptions(resources));
 
-		rows.setOnMouseReleased(e -> {
-			graph.adjustRows((int) rows.getValue());
+		myRowsSlider.setOnMouseReleased(e -> {
+			graph.adjustRows((int) myRowsSlider.getValue());
 		});
 
-		cols.setOnMouseReleased(e -> {
-			graph.adjustCols((int) cols.getValue());
+		myColsSlider.setOnMouseReleased(e -> {
+			graph.adjustCols((int) myColsSlider.getValue());
 		});
 	}
 
@@ -80,7 +82,6 @@ public class Sidebar {
 	}
 
 	private void buildSimBox(ResourceBundle resources) {
-		
 		ObservableList<String> sim_options = FXCollections.observableArrayList(
 				resources.getString("LifeButton"),
 				resources.getString("FireButton"),
@@ -91,9 +92,7 @@ public class Sidebar {
 		mySimBox.getSelectionModel().selectFirst();
 		mySimBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
-			public void changed(ObservableValue<? extends String> ov,
-					String old_val, String new_val) {
-				System.out.println(new File(myConversions.get(new_val)));
+			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
 				myEngine.loadSimulation(new File(myConversions.get(new_val)));
 			}
 		});
@@ -110,9 +109,8 @@ public class Sidebar {
 		combo.getSelectionModel().selectFirst();
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
-			public void changed(ObservableValue<? extends String> ov,
-					String old_val, String new_val) {
-				System.out.println(new_val);;
+			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
+				System.out.println(new_val);
 			}
 		});
 
@@ -185,8 +183,8 @@ public class Sidebar {
 		return temp;
 	}
 
-	private Slider createSlider() {
-		Slider temp = new Slider(MIN_SLIDER, MAX_SLIDER, START_SLIDER);
+	private Slider createSlider(int beginning_val) {
+		Slider temp = new Slider(MIN_SLIDER, MAX_SLIDER, beginning_val);
 		temp.getStyleClass().add("axis");
 		temp.setId("slider-sidebar");
 
@@ -207,5 +205,10 @@ public class Sidebar {
 			}
 		});
 		return temp;
+	}
+	
+	public void setSliderVals(int num_rows, int num_cols) {	
+		myRowsSlider.setValue(num_rows);
+		myColsSlider.setValue(num_cols);
 	}
 }

@@ -6,7 +6,7 @@ import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
 import cellVariants.FireCell;
 
-public final class FireFIE extends FileInfoExtractor {
+public final class FireFIE implements FileInfoExtractor {
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -24,6 +24,11 @@ public final class FireFIE extends FileInfoExtractor {
 			throw new XMLStreamException("Invalid Fire cell type.");
 		}
 		return new FireCell(val);
+	}
+
+	@Override
+	public String getEncoding(int state) {
+		return Integer.toString(state);
 	}
 
 }

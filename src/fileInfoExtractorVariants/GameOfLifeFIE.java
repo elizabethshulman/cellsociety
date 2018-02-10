@@ -6,7 +6,7 @@ import javax.xml.stream.XMLStreamReader;
 import cellVariants.Cell;
 import cellVariants.GameOfLifeCell;
 
-public class GameOfLifeFIE extends FileInfoExtractor {
+public class GameOfLifeFIE implements FileInfoExtractor {
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -20,6 +20,11 @@ public class GameOfLifeFIE extends FileInfoExtractor {
 			throw new XMLStreamException("Invalid Game Of Life cell type.");
 		}
 		return new GameOfLifeCell(val);
+	}
+
+	@Override
+	public String getEncoding(int state) {
+		return Integer.toString(state);
 	}
 
 

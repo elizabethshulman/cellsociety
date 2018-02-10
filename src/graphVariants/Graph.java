@@ -28,7 +28,7 @@ public abstract class Graph {
 	
 	public Graph(File file, RulesFactory rules_factory) {
 		try {
-			myFileProcessor = new FileProcessor(file.getAbsolutePath());
+			myFileProcessor = new FileProcessor(file);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Invalid filepath.");
 		}

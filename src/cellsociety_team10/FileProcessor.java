@@ -42,6 +42,9 @@ public class FileProcessor {
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 		readFile();
 	}
+	public String getCellShape() {
+		return cellShape;
+	}
 	public String getType() {
 		return myType;
 	}
@@ -211,7 +214,7 @@ public class FileProcessor {
 		}
 		myWriter.writeEndElement();
 	}
-	private void writeGrid(String[][] stateGrid) throws XMLStreamException {
+	private void writeGrid(Cell[][] stateGrid) throws XMLStreamException {
 		myWriter.writeStartElement("grid");
 		writeGridHeader();
 		
@@ -219,7 +222,7 @@ public class FileProcessor {
 			myWriter.writeStartElement("row");
 			for(int b = 0; b < gridColCount; b++) {
 				myWriter.writeEmptyElement("cell");
-				myWriter.writeAttribute("state", stateGrid[a][b]);
+				helper.writeCell(myWriter,stateGrid[a][b]);
 			}
 			myWriter.writeEndElement();
 		}
@@ -247,10 +250,10 @@ public class FileProcessor {
 		myWriter.writeEndElement();
 	}
 	
-	public String[][] createStateGrid(Set<Cell> cells) {
-		String[][] arrangement = new String[gridRowCount][gridColCount];
+	public Cell[][] createStateGrid(Set<Cell> cells) {
+		Cell[][] arrangement = new Cell[gridRowCount][gridColCount];
 		for(Cell c: cells) {
-			arrangement[c.getRow()][c.getCol()] = helper.getEncoding(c.getState());
+			arrangement[c.getRow()][c.getCol()] = c;
 		}
 		return arrangement;
 	}

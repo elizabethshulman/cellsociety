@@ -2,6 +2,7 @@ package fileInfoExtractorVariants;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import cellVariants.SegregationCell;
@@ -28,13 +29,16 @@ public class SegregationFIE implements FileInfoExtractor {
 	}
 
 	@Override
-	public String getEncoding(int state) {
-		switch(state)
-		{
-			case 2: return "B";
-			case 1: return "R";
-			default: return "E";
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
+		String s;
+		switch(cell.getState()) {
+			case 2: s = "B";
+			case 1: s = "R";
+			default: s = "E";
 		}
+		myWriter.writeAttribute("state", s);
+		
 	}
+
 
 }

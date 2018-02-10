@@ -2,6 +2,7 @@ package fileInfoExtractorVariants;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import cellVariants.FireCell;
@@ -27,8 +28,8 @@ public final class FireFIE implements FileInfoExtractor {
 	}
 
 	@Override
-	public String getEncoding(int state) {
-		return Integer.toString(state);
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
+		myWriter.writeAttribute("state", Integer.toString(cell.getState()));
 	}
 
 }

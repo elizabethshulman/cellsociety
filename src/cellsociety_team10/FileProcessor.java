@@ -18,11 +18,11 @@ import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import fileInfoExtractorVariants.FileInfoExtractor;
+import neighborCalculatorVariants.NeighborCalculator;
 
 public class FileProcessor {
 	
 	private String myType;
-	private String filepath;
 	private String author;
 	private String title;
 	private Map<String,Double> globalVars;
@@ -38,17 +38,12 @@ public class FileProcessor {
 	private NeighborCalculator nCalc;
 	
 	public FileProcessor(File file) throws FileNotFoundException, XMLStreamException{
-		filepath = file.getAbsolutePath();
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
-		
 		readFile();
 	}
 	public String getType() {
 		return myType;
-	}
-	public String getFilepath() {
-		return filepath;
 	}
 	public String getAuthor() {
 		return author;
@@ -111,6 +106,7 @@ public class FileProcessor {
 		do {
 			xml = myParser.next();
 			if(xml == XMLStreamConstants.START_ELEMENT && !myParser.getLocalName().equals("global_vars")) {
+				System.out.println(myParser.getLocalName());
 				globalVars.put(myParser.getLocalName(), helper.getGlobalVar(myParser));
 			}
 		}
@@ -127,17 +123,16 @@ public class FileProcessor {
 				  switch(myParser.getLocalName()) {
 				  	case "row":	newRow = new ArrayList<Cell>();
 				  				break;
-				  	case "cell": newRow.add(helper.getCell(myParser));
+				  	case "cell": newRow.add(helper.getCell(myParser,cellShape));
 				  				break;
 				  	case "cellShape": myParser.next();
-			  		cellShape = myParser.getText();
-				  				break;
+			  						cellShape = myParser.getText();
+			  						break;
 				  	case "borders": myParser.next();
 				  		isToroidal = myParser.getText().equals("torus");
 				  		break;
 				  	case "neighbors": myParser.next();
 				  		isDiagonal = myParser.getText().equals("adjacent");
-				  	
 				  }
 			  }
 			  if(xmlEvent == XMLStreamConstants.END_ELEMENT) {
@@ -164,7 +159,7 @@ public class FileProcessor {
 			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new IllegalArgumentException("Cell shape is invalid");
+			throw new IllegalArgumentException("Cell shape parameter is invalid.");
 		}
 		for(int x = 0; x < cellArray.length; x++) {
 			for(int y = 0; y < cellArray[x].length; y++) {
@@ -197,7 +192,7 @@ public class FileProcessor {
 	}
 	private void writeHeader() throws XMLStreamException {
 		myWriter.writeStartElement("header");
-		myWriter.writeStartElement("simType");
+		myWriter.writeStartElement("simtype");
 		myWriter.writeCharacters(myType);
 		myWriter.writeEndElement();
 		myWriter.writeStartElement("title");

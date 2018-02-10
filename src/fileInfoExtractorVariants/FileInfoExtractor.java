@@ -7,6 +7,6 @@ import cellVariants.Cell;
 
 public interface FileInfoExtractor {
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException;
-	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException;
+	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException;
 	public String getEncoding(int state);
 }

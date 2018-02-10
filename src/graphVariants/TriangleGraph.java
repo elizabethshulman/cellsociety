@@ -2,6 +2,7 @@ package graphVariants;
 
 import cellsociety_team10.FileProcessor;
 import rulesVariants.RulesFactory;
+import visualComponents.Container;
 
 public class TriangleGraph extends Graph {
 
@@ -19,5 +20,10 @@ public class TriangleGraph extends Graph {
 	public void adjustCols(int new_cols) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public Container createContainer() {
+		return myContainerFactory.create("Triangle");
 	}
 }

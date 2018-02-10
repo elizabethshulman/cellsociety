@@ -2,6 +2,8 @@ package graphVariants;
 
 import cellsociety_team10.FileProcessor;
 import rulesVariants.RulesFactory;
+import visualComponents.Container;
+import visualComponents.ContainerFactory;
 
 public class HexagonGraph extends Graph {
 	public HexagonGraph(FileProcessor file_processor, RulesFactory rules_factory) {
@@ -18,5 +20,10 @@ public class HexagonGraph extends Graph {
 	public void adjustCols(int new_cols) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Container createContainer() {
+		return myContainerFactory.create("Hexagon");
 	}
 }

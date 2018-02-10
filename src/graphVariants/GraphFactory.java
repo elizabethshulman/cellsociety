@@ -10,18 +10,14 @@ public class GraphFactory {
 	}
 	
 	public Graph createGraph(FileProcessor file_processor) {
-		String type = file_processor.getType();
-		// obviously not that useful for now...matters once other shapes integrated.
-		// -> folder_name should become shape_type
+		String type = file_processor.getCellShape();
 		switch(type) {
-			case "GameOfLife": 
+			case "Square": 
 				return new SquareGraph(file_processor, myRulesFactory);
-			case "Segregation": 
-				return new SquareGraph(file_processor, myRulesFactory);
-			case "PredatorPrey": 
-				return new SquareGraph(file_processor, myRulesFactory);
-			case "Fire": 
-				return new SquareGraph(file_processor, myRulesFactory);
+			case "Hexagon": 
+				return new HexagonGraph(file_processor, myRulesFactory);
+			case "Triangle": 
+				return new TriangleGraph(file_processor, myRulesFactory);
 			default: 
 				throw new IllegalArgumentException("Invalid rules class creation");
 		}

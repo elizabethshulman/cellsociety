@@ -8,6 +8,8 @@ import cellVariants.Cell;
 import cellsociety_team10.FileProcessor;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
+import visualComponents.Container;
+import visualComponents.ContainerFactory;
 
 
 /**
@@ -23,6 +25,7 @@ public abstract class Graph {
 	private int numRows;
 	private int numCols;
 	private FileProcessor myFileProcessor;
+	protected ContainerFactory myContainerFactory = new ContainerFactory();
 	
 	
 	public Graph(FileProcessor file_processor, RulesFactory rules_factory) {
@@ -74,4 +77,6 @@ public abstract class Graph {
 		Cell cell = currentGrid.keySet().iterator().next();
 		return cell.getCorrespondingColor(state);
 	}
+	
+	public abstract Container createContainer();
 }

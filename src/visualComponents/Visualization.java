@@ -44,20 +44,20 @@ public class Visualization {
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	
-//	private void setupContainer() {
-//		myVisualContainer
-//		
-//		VBox center = new VBox();
-//		center.getChildren().add(myLineGraph.getLineChart());
-//		center.getChildren().add(myVisualContainer.getContainer());
-//		
-//		myBorderPane.setCenter(center);
-//	}
+	private void setupContainer(Graph g) {
+		myVisualContainer = g.createContainer();
+		
+		VBox center = new VBox();
+		center.getChildren().add(myLineGraph.getLineChart());
+		center.getChildren().add(myVisualContainer.getContainer());
+		
+		myBorderPane.setCenter(center);
+	}
 	
 	public void visualizeGraph(Graph g) {
-//		if (myVisualContainer == null) {
-//			setupBorderPane();
-//		}
+		if (myVisualContainer == null) {
+			setupContainer(g);
+		}
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		
@@ -73,15 +73,12 @@ public class Visualization {
 		if (backToHome) {
 			myBorderPane.setLeft(null);
 		}
+		myVisualContainer = null;
 		myIteration = -1;
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 		myLineGraph.resetChart();
 		centerOnScreen();
-	}
-	
-	public void reset() {
-		
 	}
 	
 	public void amendHeader(String header) {

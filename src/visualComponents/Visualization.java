@@ -1,9 +1,11 @@
 package visualComponents;
 
 import graphVariants.Graph;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Visualization {
@@ -11,6 +13,8 @@ public class Visualization {
 	public static final double SCREEN_WIDTH = 700;
 	private static final String CSS_STRING = "main.css";
 	private static final String FONT_URL = "https://fonts.googleapis.com/css?family=Roboto:700";
+	private static final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
+	private static final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
 	
 	private BorderPane myBorderPane = new BorderPane();
 	private int myIteration;
@@ -61,6 +65,7 @@ public class Visualization {
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 		myLineGraph.resetChart();
+		centerOnScreen();
 	}
 	
 	public void amendHeader(String header) {
@@ -70,5 +75,12 @@ public class Visualization {
 	public void addSidebar(Sidebar sidebar) {
 		myStage.setWidth(SCREEN_WIDTH + Sidebar.WIDTH);
 		myBorderPane.setLeft(sidebar.getVBox());
+		centerOnScreen();
 	}
+	
+	private void centerOnScreen() {
+		Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+		double centerX = bounds.getMinX() + (bounds.getWidth() - myStage.getWidth()) * CENTER_ON_SCREEN_X_FRACTION;
+        myStage.setX(centerX);
+    }
 }

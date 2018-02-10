@@ -70,7 +70,7 @@ public class Engine {
 		myStage.show();
 	}
 
-	private void setupAnimation() {
+	private void resetAnimation() {
 		myAnimation.stop();
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
 		
@@ -99,9 +99,9 @@ public class Engine {
 
 	private void end() {
 		myAnimation.stop();
-		myVis.reset();
 		myStage.setScene(myStartScene);
 		myStage.setWidth(Visualization.SCREEN_WIDTH);
+		myVis.reset();
 	}
 
 	private void next() {
@@ -121,7 +121,7 @@ public class Engine {
 	public void loadSimulation(File file) {
 		myGraph = myGraphFactory.createGraph(file);
 		
-		setupAnimation();
+		resetAnimation();
 		
 		myVis.reset();
 		

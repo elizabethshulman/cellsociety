@@ -106,7 +106,6 @@ public class FileProcessor {
 		do {
 			xml = myParser.next();
 			if(xml == XMLStreamConstants.START_ELEMENT && !myParser.getLocalName().equals("global_vars")) {
-				System.out.println(myParser.getLocalName());
 				globalVars.put(myParser.getLocalName(), helper.getGlobalVar(myParser));
 			}
 		}

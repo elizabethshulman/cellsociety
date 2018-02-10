@@ -1,7 +1,6 @@
 package graphVariants;
 
-import java.io.File;
-
+import cellsociety_team10.FileProcessor;
 import rulesVariants.RulesFactory;
 
 public class GraphFactory {
@@ -10,21 +9,19 @@ public class GraphFactory {
 		myRulesFactory = rules_factory;
 	}
 	
-	public Graph createGraph(File file) {
-		String[] path_arr = file.getAbsolutePath().split("/");
-		String folder_name = path_arr[path_arr.length - 2];
-		
+	public Graph createGraph(FileProcessor file_processor) {
+		String type = file_processor.getType();
 		// obviously not that useful for now...matters once other shapes integrated.
 		// -> folder_name should become shape_type
-		switch(folder_name) {
-			case "life": 
-				return new SquareGraph(file, myRulesFactory);
-			case "fire": 
-				return new SquareGraph(file, myRulesFactory);
-			case "predator": 
-				return new SquareGraph(file, myRulesFactory);
-			case "segregation": 
-				return new SquareGraph(file, myRulesFactory);
+		switch(type) {
+			case "GameOfLife": 
+				return new SquareGraph(file_processor, myRulesFactory);
+			case "Segregation": 
+				return new SquareGraph(file_processor, myRulesFactory);
+			case "PredatorPrey": 
+				return new SquareGraph(file_processor, myRulesFactory);
+			case "Fire": 
+				return new SquareGraph(file_processor, myRulesFactory);
 			default: 
 				throw new IllegalArgumentException("Invalid rules class creation");
 		}

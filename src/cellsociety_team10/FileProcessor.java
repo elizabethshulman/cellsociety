@@ -38,7 +38,7 @@ public class FileProcessor {
 	public FileProcessor(File file) throws FileNotFoundException, XMLStreamException{
 		filepath = file.getAbsolutePath();
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
-		myParser = xmlif.createXMLStreamReader(new FileInputStream(fpath));
+		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 		
 		readFile();
 	}

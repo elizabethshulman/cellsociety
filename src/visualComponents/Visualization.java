@@ -44,6 +44,7 @@ public class Visualization {
 		
 		myBorderPane.setTop(myBar.getHBox());
 		myBorderPane.setCenter(center);
+		System.out.println("here");
 		myBorderPane.setBottom(myControlPanel.getVBox());
 	}
 	

@@ -112,7 +112,6 @@ public class ControlPanel {
 	}
 
 	public VBox getVBox() {
-		System.out.println(myVBox.getChildren());
 		return myVBox;
 	}
 

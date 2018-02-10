@@ -11,6 +11,9 @@
       <sharkStarveTime>6</sharkStarveTime>
    </global_vars>
    <grid>
+   <cellShape>Square</cellShape>
+   	<neighbors>orthogonal</neighbors>
+   	<borders>torus</borders>
       <row>
          <cell state="F" />
          <cell state="S" />

@@ -27,7 +27,7 @@ public class ControlPanel {
 	private Text myIterationCount;
 	private Timeline myAnimation;
 	private Slider mySlider;
-	private HBox buttonBox;
+	private HBox myButtonBox;
 	private Button myStopButton;
 
 	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
@@ -124,7 +124,7 @@ public class ControlPanel {
 	}
 
 	public void disableButtons() {
-		for (Node curr : buttonBox.getChildren()) {
+		for (Node curr : myButtonBox.getChildren()) {
 			if (curr != myStopButton) {
 				curr.setId("control_disabled");
 			}
@@ -132,7 +132,7 @@ public class ControlPanel {
 	}
 
 	public void enableButtons() {
-		for (Node curr : buttonBox.getChildren()) {
+		for (Node curr : myButtonBox.getChildren()) {
 			curr.setId("control");
 		}
 	}

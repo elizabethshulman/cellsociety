@@ -3,6 +3,7 @@ package visualComponents;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import cellsociety_team10.HandlerHolder;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -67,8 +67,7 @@ public class FileProcessor {
 		return gridColCount;
 	}
 	// Reads in the file and sets instance variables based on file information
-	public void readFile() throws XMLStreamException
-	{
+	public void readFile() throws XMLStreamException {
 		readHeader();
 		readGlobalVars();
 		readCells();
@@ -76,8 +75,7 @@ public class FileProcessor {
 	// Reads the header section of the file
 	private void readHeader() throws XMLStreamException {
 		int xmlEvent;
-		do
-		{
+		do {
 			 xmlEvent = myParser.next();
 			 if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
 				  switch(myParser.getLocalName()) {
@@ -113,6 +111,7 @@ public class FileProcessor {
 			}
 		}
 		while(xml != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("global_vars"));
+		helper.addDefaultGlobals(globalVars);
 	}
 	//Creates 2D array based on information from file
 	private void readCells() throws XMLStreamException {
@@ -190,6 +189,7 @@ public class FileProcessor {
 		myWriter.writeEndElement();
 		myWriter.writeEndDocument();
 		myWriter.flush();
+		myWriter.close();
 		
 	}
 	private void writeHeader() throws XMLStreamException {

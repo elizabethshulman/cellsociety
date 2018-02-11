@@ -25,6 +25,7 @@ public class PredatorPreyRules extends Rules {
 		sharkStarveTime = map.get("sharkStarveTime");
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempOcean = new HashMap(g);

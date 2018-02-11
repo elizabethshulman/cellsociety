@@ -8,13 +8,9 @@ public class RockPaperScissorsCell extends Cell{
 
 	private int health;
 	
-	public RockPaperScissorsCell(int st, String shape) {
+	public RockPaperScissorsCell(int st, int gradient, String shape) {
 		super(st, shape);
-		if(st==0) {
-			health=0;
-		} else {
-			health = new Random().nextInt(10);
-		}
+		health = gradient;
 	}
 
 	@Override
@@ -29,7 +25,6 @@ public class RockPaperScissorsCell extends Cell{
 		if (health<=10) {
 			health+=1;
 		}
-		
 	}
 
 	public void decreaseHealth() {
@@ -43,5 +38,4 @@ public class RockPaperScissorsCell extends Cell{
 	public int getHealth() {
 		return health;
 	}
-
 }

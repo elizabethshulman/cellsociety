@@ -19,12 +19,12 @@ public class GameOfLifeFIE implements FileInfoExtractor {
 	public void addDefaultGlobals(Map<String,Double> globals) {}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 1) {
 			throw new XMLStreamException("Invalid Game Of Life cell type.");
 		}
-		return new GameOfLifeCell(val, shape);
+		return new GameOfLifeCell(val);
 	}
 
 	@Override

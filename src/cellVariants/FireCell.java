@@ -3,16 +3,19 @@ package cellVariants;
 import javafx.scene.paint.Color;
 
 public class FireCell extends Cell {
-//	hashmap of states to rgb values 
-	public FireCell(int st, String shape) {
-		super(st, shape);
+	private static Color BLACK = Color.rgb(0,0,0);
+	private static Color FOREST_GREEN = Color.rgb(0, 70, 25);
+	private static Color BURNT_ORANGE = Color.rgb(165, 66, 2);
+	
+	public FireCell(int st) {
+		super(st);
 	}
 	
 	
 	@Override
 	protected void buildHashMap() {
-		myStatesAndColors.put(0, Color.rgb(0,0,0));
-		myStatesAndColors.put(1, Color.rgb(0, 70, 25));
-		myStatesAndColors.put(2, Color.rgb(165, 66, 2));
+		myStatesAndColors.put(0, BLACK);
+		myStatesAndColors.put(1, FOREST_GREEN);
+		myStatesAndColors.put(2, BURNT_ORANGE);
 	}
 }

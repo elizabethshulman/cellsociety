@@ -33,12 +33,12 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
 		{
-			case "E": return new PredatorPreyCell(0, shape);
-			case "F": return new PredatorPreyCell(1, shape);
-			case "S": return new PredatorPreyCell(2, shape);
+			case "E": return new PredatorPreyCell(0);
+			case "F": return new PredatorPreyCell(1);
+			case "S": return new PredatorPreyCell(2);
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
 		}
 	}

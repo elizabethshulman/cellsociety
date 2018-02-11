@@ -3,7 +3,10 @@ package cellVariants;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class ForagingCell extends Cell {
+	private static Color BLACK = Color.rgb(0,0,0);
 
 	/*
 	 * FORAGING CELL STATES:
@@ -21,8 +24,8 @@ public class ForagingCell extends Cell {
 	private double foodPheromoneLevel = 0;				
 	private double MAX_PHEROMONE_LEVEL = 50;
 	
-	public ForagingCell(int st, String shape) {
-		super(st, shape);
+	public ForagingCell(int st) {
+		super(st);
 		mapCellState();									//when to set state=nest or obstacle -> ask andrew?
 		antsHere = new ArrayList<AntCell>();
 	}
@@ -39,8 +42,10 @@ public class ForagingCell extends Cell {
 
 	@Override
 	protected void buildHashMap() {
-		// TODO Auto-generated method stub
-		
+		myStatesAndColors.put(0, BLACK);
+		myStatesAndColors.put(1, BLACK);
+		myStatesAndColors.put(2, BLACK);
+		myStatesAndColors.put(3, BLACK);
 	}
 
 	

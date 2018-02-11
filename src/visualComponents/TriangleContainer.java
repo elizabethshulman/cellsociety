@@ -6,7 +6,6 @@ import javafx.scene.shape.Polygon;
 public class TriangleContainer extends Container {
 	public TriangleContainer() {
 		super();
-		myDisplay.setId("container-display-borderless");
 	}
 
 	@Override

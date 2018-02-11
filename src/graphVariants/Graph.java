@@ -44,11 +44,11 @@ public class Graph {
 	
 	public void adjustRows(int new_rows) {
 		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
-		neighbor_calc.setRowLength(new_rows);
+		myFileProcessor.setRowsAndCols(new_rows, numCols);
 		if (new_rows > numRows) {
 			for (int r=numRows; r < new_rows; r++) {
 				for (int c=0; c < numCols; c++) {
-					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
 					findAndAddNeighbors(cell, neighbor_calc);
@@ -70,11 +70,11 @@ public class Graph {
 	
 	public void adjustCols(int new_cols) {
 		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
-		neighbor_calc.setColLength(new_cols);
+		myFileProcessor.setRowsAndCols(numRows, new_cols);
 		if (new_cols > numCols) {
 			for (int r=0; r < numRows; r++) {
 				for (int c=numCols; c < new_cols; c++) {
-					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
 					findAndAddNeighbors(cell, neighbor_calc);
@@ -108,6 +108,9 @@ public class Graph {
 		for (Cell possible : neighbors) {
 			currentGrid.get(possible).add(cell);
 		}
+	}
+	public void updateGraph() {
+		currentGrid = myFileProcessor.getCellGrid();
 	}
 	
 	public void buildNextGrid() {

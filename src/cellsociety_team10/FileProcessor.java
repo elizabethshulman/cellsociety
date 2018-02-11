@@ -1,5 +1,4 @@
 package cellsociety_team10;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,6 +56,8 @@ public class FileProcessor {
 	}
 	protected void setCellShape(String shape) {
 		cellShape = shape;
+		createNCalc();
+		refreshMap();
 	}
 	public String getType() {
 		return myType;
@@ -91,22 +92,22 @@ public class FileProcessor {
 	public int getRowCount(){
 		return gridRowCount;
 	}
-	protected void setRowCount(int row){
+	public void setRowsAndCols(int row, int col){
 		gridRowCount = row;
+		nCalc.setRowLength(row);
+		gridColCount = col;
+		nCalc.setColLength(col);
 	}
 	public int getColCount() {
 		return gridColCount;
 	}
-	protected void setColCount(int col){
-		gridColCount = col;
-	}
 	protected void setBorders(boolean b) {
 		isToroidal = b;
-		nCalc.setBorders(b);
+		refreshMap();
 		}
 	protected void setNeighbors(boolean b) {
 		isDiagonal = b;
-		nCalc.setNeighbors(b);
+		refreshMap();
 	}
 	// Reads in the file and sets instance variables based on file information
 	public void readFile() throws XMLStreamException {
@@ -158,7 +159,7 @@ public class FileProcessor {
 				  switch(myParser.getLocalName()) {
 				  	case "row":	newRow = new ArrayList<Cell>();
 				  				break;
-				  	case "cell": newRow.add(helper.getCell(myParser,cellShape));
+				  	case "cell": newRow.add(helper.getCell(myParser));
 				  				break;
 				  	case "cellShape": myParser.next();
 			  						cellShape = myParser.getText();
@@ -189,13 +190,7 @@ public class FileProcessor {
 		gridColCount = cellArray[0].length;
 		cellGrid = new HashMap<>();
 		ArrayList<Cell> neighbors;
-		try {
-				String className = "neighborCalculatorVariants." + cellShape + "NeighborCalculator";
-			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new IllegalArgumentException("Cell shape parameter is invalid.");
-		}
+		createNCalc();
 		for(int x = 0; x < cellArray.length; x++) {
 			for(int y = 0; y < cellArray[x].length; y++) {
 				neighbors = new ArrayList<>();
@@ -300,5 +295,17 @@ public class FileProcessor {
 	
 	public NeighborCalculator getNeighborCalc() {
 		return nCalc;
+	}
+	public void createNCalc() {
+		try {
+			String className = "neighborCalculatorVariants." + cellShape + "NeighborCalculator";
+			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Cell shape parameter is invalid.");
+		}
+	}
+	public void refreshMap() {
+		Cell[][] current = createStateGrid(cellGrid.keySet());
+		createCellMap(current);
 	}
 }

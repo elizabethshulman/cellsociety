@@ -124,8 +124,7 @@ public class Engine {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
 			try {
-				myFileProcessor.setColCount(myGraph.getCols());
-				myFileProcessor.setRowCount(myGraph.getRows());
+				myFileProcessor.setRowsAndCols(myGraph.getRows(), myGraph.getCols());
 				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
 			} catch (FileNotFoundException e) {
 				Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
@@ -173,14 +172,14 @@ public class Engine {
 			mySidebar.setSliders(myGraph);
 		}
 		
-		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
+		myVis.changeHeaderText(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}
 
 
 	private void setupDIY() {
-		File file = new File("data/simulations/default/life/life_square.xml");
+		File file = new File("data/simulations/default/Game of Life.xml");
 		loadSimulation(file);
 		
 		updateDIY();
@@ -200,11 +199,12 @@ public class Engine {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 	
-	public void updateBorders(Boolean isToroidal) {
+	public void updateSettings(String shape, boolean isDiagonal, boolean isToroidal) {
+		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
-	}
-	
-	public void updateNeighbors(Boolean isDiagonal) {
 		myFileProcessor.setNeighbors(isDiagonal);
+		myVis.reset(false);
+		myGraph.updateGraph();
+		myVis.visualizeGraph(myGraph);
 	}
 }

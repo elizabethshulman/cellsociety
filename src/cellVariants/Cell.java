@@ -14,6 +14,7 @@ public abstract class Cell {
 	private int myCol;
 
 	public Cell(int st) {
+		myState = st;
 		buildHashMap();
 	}
 

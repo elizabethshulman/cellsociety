@@ -1,32 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simulation>
    <header>
-      <simtype>Segregation</simtype>
+      <simtype>PredatorPrey</simtype>
       <author>You</author>
       <title>The Best Simulation Ever</title>
    </header>
    <global_vars>
-      <satisfactionThreshold>0.3</satisfactionThreshold>
+   	  <fishBreedTime>5</fishBreedTime>
+      <sharkBreedTime>20</sharkBreedTime>
+      <sharkStarveTime>6</sharkStarveTime>
    </global_vars>
    <grid>
-   <cellShape>Square</cellShape>
+   <cellShape>Hexagon</cellShape>
    	<neighbors>adjacent</neighbors>
-   	<borders>torus</borders>
+   	<borders>finite</borders>
       <row>
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-      </row>
-      <row >
-         <cell state="E" />
-         <cell state="E" />
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
@@ -45,24 +33,8 @@
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
       </row>
       <row>
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-      </row>
-      <row>
-         <cell state="E" />
-         <cell state="E" />
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
@@ -81,24 +53,8 @@
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
       </row>
       <row>
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-         <cell state="E" />
-      </row>
-      <row>
-         <cell state="E" />
-         <cell state="E" />
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
@@ -117,12 +73,98 @@
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
          <cell state="E" />
          <cell state="E" />
       </row>
       <row>
          <cell state="E" />
          <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+         <cell state="E" />
+      </row>
+      <row>
          <cell state="E" />
          <cell state="E" />
          <cell state="E" />

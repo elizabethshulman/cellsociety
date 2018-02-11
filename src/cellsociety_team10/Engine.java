@@ -199,12 +199,9 @@ public class Engine {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 	
-	public void updateBorders(boolean isToroidal) {
+	public void updateSettings(String shape, boolean isDiagonal, boolean isToroidal) {
+		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
-		myGraph.updateGraph();
-	}
-	
-	public void updateNeighbors(boolean isDiagonal) {
 		myFileProcessor.setNeighbors(isDiagonal);
 		myGraph.updateGraph();
 	}

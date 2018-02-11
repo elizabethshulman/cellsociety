@@ -45,13 +45,17 @@ public class Visualization {
 	}
 	
 	private void setupContainer(Graph g) {
-		myVisualContainer = g.createContainer();
+		myVisualContainer = myContainerFactory.create(g.getCellShape());
 		
 		VBox center = new VBox();
 		center.getChildren().add(myLineGraph.getLineChart());
 		center.getChildren().add(myVisualContainer.getContainer());
 		
 		myBorderPane.setCenter(center);
+	}
+	
+	public void updateGraphOnly(Graph g) {
+		myVisualContainer.setGraphDisplay(g);
 	}
 	
 	public void visualizeGraph(Graph g) {

@@ -47,18 +47,20 @@ public class Sidebar {
 		
 		buildSimBox(resources);
 		textAndComponent(myResources.getString("PickSim"), mySimBox);
-		textAndComponent(myResources.getString("Width"), myRowsSlider);
-		textAndComponent(myResources.getString("Height"), myColsSlider);
+		textAndComponent(myResources.getString("Rows"), myRowsSlider);
+		textAndComponent(myResources.getString("Columns"), myColsSlider);
 		textAndComponent(myResources.getString("Shape"), buildShapeOptions(resources));
 		textAndComponent(myResources.getString("EdgeType"), buildEdgeBox(resources));
 		textAndComponent(myResources.getString("NeighborType"), buildNeighborOptions(resources));
 
 		myRowsSlider.setOnMouseReleased(e -> {
 			graph.adjustRows((int) myRowsSlider.getValue());
+			myEngine.updateDIY();
 		});
 
 		myColsSlider.setOnMouseReleased(e -> {
 			graph.adjustCols((int) myColsSlider.getValue());
+			myEngine.updateDIY();
 		});
 	}
 
@@ -206,8 +208,22 @@ public class Sidebar {
 		return temp;
 	}
 	
-	public void setSliderVals(int num_rows, int num_cols) {	
-		myRowsSlider.setValue(num_rows);
-		myColsSlider.setValue(num_cols);
+	private void setSliderVals(int num_rows, int num_cols) {	
+		
+	}
+	
+	public void setSliders(Graph graph) {
+		myRowsSlider.setOnMouseReleased(e -> {
+			graph.adjustRows((int) myRowsSlider.getValue());
+			myEngine.updateDIY();
+		});
+
+		myColsSlider.setOnMouseReleased(e -> {
+			graph.adjustCols((int) myColsSlider.getValue());
+			myEngine.updateDIY();
+		});
+		
+		myRowsSlider.setValue(graph.getRows());
+		myColsSlider.setValue(graph.getCols());
 	}
 }

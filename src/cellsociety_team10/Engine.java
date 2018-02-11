@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 
 import javax.xml.stream.XMLStreamException;
 
+import cellVariants.CellFactory;
 import graphVariants.Graph;
-import graphVariants.GraphFactory;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -34,7 +34,7 @@ public class Engine {
 	private Stage myStage;
 	private FileChooser myFileChooser;
 	private RulesFactory myRulesFactory;
-	private GraphFactory myGraphFactory;
+	private CellFactory myCellFactory;
 	private ControlPanel myControlPanel;
 	private Sidebar mySidebar;
 	private FileProcessor myFileProcessor;
@@ -56,7 +56,7 @@ public class Engine {
 		myFileChooser.setTitle(myResources.getString("FileTitle"));
 		
 		myRulesFactory = new RulesFactory();
-		myGraphFactory = new GraphFactory(myRulesFactory);
+		myCellFactory = new CellFactory();
 
 		myAnimation = new Timeline();
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
@@ -149,14 +149,14 @@ public class Engine {
 
 	public void loadSimulation(File file) {
 		initFileProcessor(file);
-		myGraph = myGraphFactory.createGraph(myFileProcessor);
+		myGraph = new Graph(myFileProcessor, myRulesFactory, myCellFactory);
 		
 		resetAnimation();
 		
 		myVis.reset(false);
 		
 		if (mySidebar != null) {
-			mySidebar.setSliderVals(myGraph.getRows(), myGraph.getCols());
+			mySidebar.setSliders(myGraph);
 		}
 		
 		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
@@ -171,6 +171,10 @@ public class Engine {
 
 		mySidebar = new Sidebar(myResources, this, myGraph);
 		myVis.addSidebar(mySidebar);
+	}
+	
+	public void updateDIY() {
+		myVis.updateGraphOnly(myGraph);
 	}
 
 	private String createHeaderText(String title, String author) {

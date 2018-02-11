@@ -92,7 +92,7 @@ public class FileProcessor {
 	public int getRowCount(){
 		return gridRowCount;
 	}
-	protected void setRowAndCols(int row, int col){
+	public void setRowsAndCols(int row, int col){
 		gridRowCount = row;
 		nCalc.setRowLength(row);
 		gridColCount = col;

@@ -11,17 +11,16 @@ import cellVariants.ForagingCell;
 
 public class AntManager {
 
-	public static final double MAX_PHEROMONE_LEVEL = 50;
+	
 	public static final double TOO_MANY_ANTS = 10;
 	
 	public AntManager() {
 	}
-
 	
 	public void returnToNest(AntCell c, Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		ForagingCell nextStop = nextStepHome(c, tempEnvironment.get(c.getHome()));
 		if(nextStop!=null) {
-			dropFoodPheromones(c);
+			dropFoodPheromones(c, tempEnvironment.get(c.getHome()));
 			c.move(nextStop);
 		}
 	}
@@ -29,12 +28,10 @@ public class AntManager {
 	public void findFoodSource(AntCell c, Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		ForagingCell nextStop = nextStepFood(c, tempEnvironment.get(c.getHome()));
 		if(nextStop!=null) {
-			dropHomePheromones(c);																					
+			dropHomePheromones(c, tempEnvironment.get(c.getHome()));																					
 			c.move(nextStop);
 		}
 	}
-
-	
 	
 	private ForagingCell nextStepHome(AntCell c, List<ForagingCell> neighbors) {
 
@@ -60,13 +57,11 @@ public class AntManager {
 		
 		ArrayList<ForagingCell> moveOptions = new ArrayList<ForagingCell>();
 		for(ForagingCell neighbor:neighbors) {
-			if(!neighbor.isObstacle()) {
+			if(!neighbor.isObstacle() && neighbor.getAntsHere().size()<TOO_MANY_ANTS) {
 				moveOptions.add(neighbor);
 			}
 		} 
-		
 		ForagingCell nextStop = null;
-		
 		if(moveOptions!=null) {
 			double maxNeighboringLevel = 0;
 			for(ForagingCell option:moveOptions) {
@@ -74,45 +69,48 @@ public class AntManager {
 					nextStop = option;
 					maxNeighboringLevel = option.getFoodPheromones();
 				}
-			}
-			if(nextStop==null) {
+			} if(nextStop==null) {
 				Collections.shuffle(moveOptions);
 				nextStop = moveOptions.remove(0);
 			}
 		}
-		
 		return nextStop;
 	}
 	
 	
-	
-	//COMPLETE
-	private void dropFoodPheromones(AntCell c) {
-		if(c.getHome().isFoodSource()) {
-			c.getHome().setFoodPheromones(MAX_PHEROMONE_LEVEL);
+	private void dropFoodPheromones(AntCell c, List<ForagingCell> neighbors) {
+		ForagingCell home = c.getHome();
+		if(home.isFoodSource()) {
+			home.maxFoodPheromones();
 		} else {
-			/*
-			 * double MAX = max food pheromones of neighbor locations
-			 * DES = MAX-2
-			 * D = DES-food pheromones at current cell
-			 * if(D>0) { 
-			 * 	currentCell.setFoodPheromoneLevels(currentCell.getFoodPheromoneLevels + D) 			//create method to avoid topping too high
-			 */
+			double maxNearby = 0;
+			for(ForagingCell n:neighbors) {
+				if(n.getFoodPheromones()>maxNearby) {
+					maxNearby = n.getFoodPheromones();
+				}
+			}
+			double diff = maxNearby-5-home.getFoodPheromones();
+			if(diff>0) {
+				home.increaseFoodPheromones(diff);
+			}
 		}
 	}
 	
-	//COMPLETE
-	private void dropHomePheromones(AntCell c) {
-		if(c.getHome().isNest()) {
-			c.getHome().setHomePheromones(MAX_PHEROMONE_LEVEL);
+	private void dropHomePheromones(AntCell c, List<ForagingCell> neighbors) {
+		ForagingCell home = c.getHome();
+		if(home.isNest()) {
+			home.maxHomePheromones();
 		} else {
-			/*
-			 * double MAX = max home pheromones of neighbor locations
-			 * DES = MAX-2
-			 * D = DES-home pheromones at current cell
-			 * if(D>0) {
-			 * 	currentCell.setHomePheromoneLevels(currentCell.getHomePheromoneLevels + D) 			//create method to avoid topping too high
-			 */
+			double maxNearby = 0;
+			for(ForagingCell n:neighbors) {
+				if(n.getHomePheromones()>maxNearby) {
+					maxNearby = n.getHomePheromones();
+				}
+			}
+			double diff = maxNearby-5-home.getHomePheromones();
+			if(diff>0) {
+				home.increaseHomePheromones(diff);
+			}
 		}
 	}
 }

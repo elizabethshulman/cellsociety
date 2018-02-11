@@ -51,8 +51,6 @@ public class RockPaperScissorsRules extends Rules {
 		neighborPredator.decreaseHealth();
 	}
 	
-	
-	
 	private void victoryLossAct(RockPaperScissorsCell winner, RockPaperScissorsCell loser) {
 		winner.increaseHealth();
 		loser.decreaseHealth();

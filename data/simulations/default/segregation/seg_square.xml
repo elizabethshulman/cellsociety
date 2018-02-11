@@ -11,7 +11,7 @@
    <grid>
    <cellShape>Square</cellShape>
    	<neighbors>adjacent</neighbors>
-   	<borders>toroidal</borders>
+   	<borders>finite</borders>
       <row>
          <cell state="E" />
          <cell state="E" />

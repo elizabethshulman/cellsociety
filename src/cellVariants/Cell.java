@@ -1,6 +1,7 @@
 package cellVariants;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -8,9 +9,9 @@ import javafx.scene.shape.Polygon;
 public abstract class Cell {
 
 	protected int myState;
-	protected HashMap<Integer, Color> statesAndColors = new HashMap<>();
-	private int row;
-	private int col;
+	protected HashMap<Integer, Color> myStatesAndColors = new HashMap<>();
+	private int myRow;
+	private int myCol;
 	private String myShape;
 	
 	public Cell(int st, String shape) {
@@ -26,29 +27,29 @@ public abstract class Cell {
 	protected abstract void buildHashMap();
 	
 	public Color getColor() {
-		return statesAndColors.get(myState);
+		return myStatesAndColors.get(myState);
 	}
 	
 	public void nextColor(Polygon polygon) {
-		myState = (myState + 1) % statesAndColors.size();
-		polygon.setFill(statesAndColors.get(myState));
+		myState = (myState + 1) % myStatesAndColors.size();
+		polygon.setFill(myStatesAndColors.get(myState));
 		setState(myState);
 	}
 	
 	public int getRow() {
-		return row;
+		return myRow;
 	}
 
 	public void setRow(int r) {
-		row = r;
+		myRow = r;
 	}
 
 	public int getCol() {
-		return col;
+		return myCol;
 	}
 
 	public void setCol(int c) {
-		col = c;
+		myCol = c;
 	}
 	
 	public int getState() {
@@ -60,15 +61,19 @@ public abstract class Cell {
 	}
 	
 	public int getStateCount() {
-		return statesAndColors.size();
+		return myStatesAndColors.size();
 	}
 	
 	public String getCorrespondingColor(int state) {
-		Color color = statesAndColors.get(state);
+		Color color = myStatesAndColors.get(state);
 		return String.format("rgb(%s, %s, %s)", rgbS(color.getRed()), rgbS(color.getGreen()), rgbS(color.getBlue()));
 	}
 	
 	private String rgbS(Double d) {
 		return String.valueOf((int) (d * 255));
+	}
+	
+	public void setRandom() {
+		setState(new Random().nextInt(myStatesAndColors.keySet().size()));
 	}
 }

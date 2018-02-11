@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><simulation>
   <header>
-    <simtype>Fire</simtype>
-    <title>The Dangers of Fire</title>
-    <author>Smokey the Bear</author>
+    <simtype>RockPaperScissors</simtype>
+    <title>Rock Paper Scissors</title>
+    <author>Andrew Yeung</author>
   </header>
   <global_vars>
     <probCatchFire>0.8</probCatchFire>

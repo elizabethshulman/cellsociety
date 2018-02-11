@@ -224,7 +224,7 @@ public class FileProcessor {
 		myWriter.writeEndDocument();
 		myWriter.close();
 		try {
-			OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+			OutputStream out = new FileOutputStream(file);
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 		    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");

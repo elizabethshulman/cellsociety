@@ -7,8 +7,8 @@ public class SegregationCell extends Cell {
 	private static Color NAVY = Color.rgb(3, 35, 87);
 	private static Color LIGHT_BLUE = Color.rgb(207, 231, 243);
 	
-	public SegregationCell(int st, String shape) {
-		super(st, shape);
+	public SegregationCell(int st) {
+		super(st);
 	}
 	
 	

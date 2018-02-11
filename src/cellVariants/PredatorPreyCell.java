@@ -12,13 +12,13 @@ public class PredatorPreyCell extends Cell {
 	private boolean reproduce;
 	private boolean movedThisTurn;
 	
-	public PredatorPreyCell(int st, String shape) {
+	public PredatorPreyCell(int st) {
 		/*
 		 * 0: Empty
 		 * 1: Fish
 		 * 2: Shark
 		 */
-		super(st, shape);
+		super(st);
 		reproductiveTime=0;
 		sharkEnergy=0;
 		reproduce=false;

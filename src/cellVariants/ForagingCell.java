@@ -24,8 +24,8 @@ public class ForagingCell extends Cell {
 	private double foodPheromoneLevel = 0;				
 	private double MAX_PHEROMONE_LEVEL = 50;
 	
-	public ForagingCell(int st, String shape) {
-		super(st, shape);
+	public ForagingCell(int st) {
+		super(st);
 		mapCellState();									//when to set state=nest or obstacle -> ask andrew?
 		antsHere = new ArrayList<AntCell>();
 	}

@@ -6,8 +6,8 @@ public class GameOfLifeCell extends Cell {
 	private static Color NAVY = Color.rgb(3, 35, 87);
 	private static Color TURQUOISE = Color.rgb(1, 159, 157);
 
-	public GameOfLifeCell(int st, String shape) {
-		super(st, shape);
+	public GameOfLifeCell(int st) {
+		super(st);
 	}
 	
 	@Override

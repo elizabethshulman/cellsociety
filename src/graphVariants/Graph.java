@@ -48,7 +48,7 @@ public class Graph {
 		if (new_rows > numRows) {
 			for (int r=numRows; r < new_rows; r++) {
 				for (int c=0; c < numCols; c++) {
-					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
 					findAndAddNeighbors(cell, neighbor_calc);
@@ -74,7 +74,7 @@ public class Graph {
 		if (new_cols > numCols) {
 			for (int r=0; r < numRows; r++) {
 				for (int c=numCols; c < new_cols; c++) {
-					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
 					findAndAddNeighbors(cell, neighbor_calc);

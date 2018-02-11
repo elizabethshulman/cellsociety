@@ -10,8 +10,8 @@ public class RockPaperScissorsCell extends Cell{
 
 	private int health;
 	
-	public RockPaperScissorsCell(int st, int gradient, String shape) {
-		super(st, shape);
+	public RockPaperScissorsCell(int st, int gradient) {
+		super(st);
 		health = gradient;
 	}
 

@@ -30,7 +30,9 @@ public class Sidebar {
 
 	private VBox myVBox = new VBox();
 	private Engine myEngine;
-	private String myCurrShape = "square";
+	private String myCurrShape = "Square";
+	private Boolean isToroidal = false;
+	private Boolean isDiagonal = true;
 	private HashMap<String, String> myConversions = new HashMap<>();
 	private ResourceBundle myResources;
 	private ComboBox<String> mySimBox;
@@ -74,7 +76,7 @@ public class Sidebar {
 	public VBox getVBox() {
 		return myVBox;
 	}
-
+	
 	private void buildSimBox(ResourceBundle resources) {
 		ObservableList<String> sim_options = FXCollections.observableArrayList(
 				resources.getString("LifeButton"),
@@ -90,6 +92,7 @@ public class Sidebar {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
 				myEngine.loadSimulation(new File(myConversions.get(new_val)));
+				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
 				myEngine.updateDIY();
 			}
 		});
@@ -107,13 +110,8 @@ public class Sidebar {
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				Boolean b;
-				if (new_val.equals("Toroidal")) {
-					b = true;
-				} else {
-					b = false;
-				}
-				myEngine.updateBorders(b);
+				isToroidal = new_val.equals("Toroidal");
+				myEngine.updateSettings(myCurrShape, isToroidal, isDiagonal);
 			}
 		});
 
@@ -121,23 +119,23 @@ public class Sidebar {
 	}
 
 	private void setTranslations() {
-		myConversions.put(myResources.getString("LifeButton"), "data/simulations/default/life/life_" + myCurrShape + ".xml");
-		myConversions.put(myResources.getString("FireButton"), "data/simulations/default/fire/fire_" + myCurrShape + ".xml");
-		myConversions.put(myResources.getString("PredButton"), "data/simulations/default/predator/pred_" + myCurrShape + ".xml");
-		myConversions.put(myResources.getString("SegButton"), "data/simulations/default/segregation/seg_" + myCurrShape + ".xml");
-		myConversions.put(myResources.getString("AntButton"), "data/simulations/default/ant/ant_" + myCurrShape + ".xml");
-		myConversions.put(myResources.getString("RPSButton"), "data/simulations/default/rps/rps_" + myCurrShape + ".xml");
+		myConversions.put(myResources.getString("LifeButton"), "data/simulations/default/life/life_square.xml");
+		myConversions.put(myResources.getString("FireButton"), "data/simulations/default/fire/fire_square.xml");
+		myConversions.put(myResources.getString("PredButton"), "data/simulations/default/predator/pred_square.xml");
+		myConversions.put(myResources.getString("SegButton"), "data/simulations/default/segregation/seg_square.xml");
+		myConversions.put(myResources.getString("AntButton"), "data/simulations/default/ant/ant_square.xml");
+		myConversions.put(myResources.getString("RPSButton"), "data/simulations/default/rps/rps_square.xml");
 	}
 
 	private HBox buildShapeOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("shape-hbox");
-		RadioButton rb1 = createRadioButton("sidebar_square.png", "square", SHAPE_SIZE);
+		RadioButton rb1 = createRadioButton("sidebar_square.png", "Square", SHAPE_SIZE);
 		rb1.setId("radio");
 		rb1.setSelected(true);
-		RadioButton rb2 = createRadioButton("sidebar_triangle.png", "triangle", SHAPE_SIZE);
+		RadioButton rb2 = createRadioButton("sidebar_triangle.png", "Triangle", SHAPE_SIZE);
 		rb2.setId("radio");
-		RadioButton rb3 = createRadioButton("sidebar_hex.png", "hex", SHAPE_SIZE);
+		RadioButton rb3 = createRadioButton("sidebar_hex.png", "Hexagon", SHAPE_SIZE);
 		rb3.setId("radio");
 
 
@@ -152,10 +150,7 @@ public class Sidebar {
 				RadioButton selectedRadioButton = (RadioButton) t1.getToggleGroup().getSelectedToggle();
 				myCurrShape = selectedRadioButton.getGraphic().getUserData().toString();
 				
-				setTranslations();
-				
-				String curr_sim = mySimBox.getSelectionModel().getSelectedItem().toString();
-				myEngine.loadSimulation(new File(myConversions.get(curr_sim)));
+				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
 				myEngine.updateDIY();
 			}
 		});
@@ -184,9 +179,9 @@ public class Sidebar {
 				RadioButton selectedRadioButton = (RadioButton) t1.getToggleGroup().getSelectedToggle();
 				String neighbor_type = selectedRadioButton.getGraphic().getUserData().toString();
 				
-				Boolean b = neighbor_type.equals("diag");
+				isDiagonal = neighbor_type.equals("diag");
 				
-				myEngine.updateNeighbors(b);
+				myEngine.updateSettings(myCurrShape, isToroidal, isDiagonal);
 			}
 		});
 

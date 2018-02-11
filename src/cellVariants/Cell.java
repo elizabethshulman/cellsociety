@@ -12,16 +12,9 @@ public abstract class Cell {
 	protected HashMap<Integer, Color> myStatesAndColors = new HashMap<>();
 	private int myRow;
 	private int myCol;
-	private String myShape;
-	
-	public Cell(int st, String shape) {
-		myShape = shape;
-		myState = st;
+
+	public Cell(int st) {
 		buildHashMap();
-	}
-	
-	protected String getShapeType() {
-		return myShape;
 	}
 
 	protected abstract void buildHashMap();

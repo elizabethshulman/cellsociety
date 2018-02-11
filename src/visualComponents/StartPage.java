@@ -27,7 +27,8 @@ public class StartPage {
 
 	public StartPage(ResourceBundle resource_bundle, EventHandler<MouseEvent> pred_handler, 
 			EventHandler<MouseEvent> seg_handler, EventHandler<MouseEvent> life_handler, 
-			EventHandler<MouseEvent> fire_handler, EventHandler<MouseEvent> diy_handler) {
+			EventHandler<MouseEvent> fire_handler, EventHandler<MouseEvent> ant_handler, 
+			EventHandler<MouseEvent> rps_handler, EventHandler<MouseEvent> diy_handler) {
 		myResources = resource_bundle;
 		
 		BorderPane border_pane = new BorderPane();
@@ -40,20 +41,21 @@ public class StartPage {
 		createNameMap();
 
 		border_pane.setTop(new HeaderBar(myResources.getString("Title")).getHBox());
-		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler, diy_handler));
+		border_pane.setCenter(buttonBonanza(pred_handler, seg_handler, life_handler, fire_handler, diy_handler, ant_handler, rps_handler));
 	}
 
 	private VBox buttonBonanza(EventHandler<MouseEvent> pred_handler, EventHandler<MouseEvent> seg_handler, 
 			EventHandler<MouseEvent> life_handler, EventHandler<MouseEvent> fire_handler,
-			EventHandler<MouseEvent> diy_handler) {
+			EventHandler<MouseEvent> diy_handler, EventHandler<MouseEvent> ant_handler,
+			EventHandler<MouseEvent> rps_handler) {
 		VBox vbox = new VBox();
 		vbox.setId("box-bonanza");
 
 		Text pick_sim = new Text(myResources.getString("SelectSim"));
 		pick_sim.setId("pick-sim");
 
-		HBox row_one = createRow(makeButton("life", life_handler), makeButton("fire", fire_handler));
-		HBox row_two = createRow(makeButton("predator", pred_handler), makeButton("segregation", seg_handler));
+		HBox row_one = createRow(makeButton("life", life_handler), makeButton("ant", ant_handler), makeButton("fire", fire_handler));
+		HBox row_two = createRow(makeButton("predator", pred_handler), makeButton("rps", rps_handler), makeButton("segregation", seg_handler));
 		
 		Text diy_sim = new Text(myResources.getString("DIY"));
 		diy_sim.setId("pick-sim");
@@ -72,10 +74,10 @@ public class StartPage {
 		return tester;
 	}
 
-	private HBox createRow(Button one, Button two) {
+	private HBox createRow(Button one, Button two, Button three) {
 		HBox row = new HBox();
 		row.setId("box-bonanza");
-		row.getChildren().addAll(one, two);
+		row.getChildren().addAll(one, two, three);
 		return row;
 	}
 
@@ -85,6 +87,8 @@ public class StartPage {
 		myNameMap.put("segregation", myResources.getString("SegButton"));
 		myNameMap.put("life", myResources.getString("LifeButton"));
 		myNameMap.put("fire", myResources.getString("FireButton"));
+		myNameMap.put("ant", myResources.getString("AntButton"));
+		myNameMap.put("rps", myResources.getString("RPSButton"));
 	}
 
 	public Scene getScene() {

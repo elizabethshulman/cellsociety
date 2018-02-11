@@ -86,7 +86,7 @@
 
 
 /* This section deals with components from the StartPage. */
-#predator {
+#predator, #fire, #life, #segregation, #ant, #rps {
 	-fx-background-color: rgb(249, 249, 249);
 	-fx-font-family: 'Roboto', sans-serif;
 	-fx-font-size: 15;
@@ -95,7 +95,7 @@
 	-fx-border-color: rgb(105,105,105);
 	-fx-border-radius: 3px;
 	-fx-padding: 20px;
-	-fx-min-width: 240px;
+	-fx-min-width: 190px;
 	-fx-content-display: top;
 }
 
@@ -104,55 +104,24 @@
 	-fx-text-fill: rgb(229, 229, 229);
 }
 
-#fire {
-	-fx-background-color: rgb(249, 249, 249);
-	-fx-font-family: 'Roboto', sans-serif;
-	-fx-font-size: 15;
-	-fx-text-fill: rgb(105,105,105);
-	-fx-border-width: 2px;
-	-fx-border-color: rgb(105,105,105);
-	-fx-border-radius: 3px;
-	-fx-padding: 20px;
-	-fx-min-width: 240px;
-	-fx-content-display: top;
-}
-
 #fire:hover {
 	-fx-background-color: rgb(255, 173, 86);
-}
-
-#life {
-	-fx-background-color: rgb(249, 249, 249);
-	-fx-font-family: 'Roboto', sans-serif;
-	-fx-font-size: 15;
-	-fx-text-fill: rgb(105,105,105);
-	-fx-border-width: 2px;
-	-fx-border-color: rgb(105,105,105);
-	-fx-border-radius: 3px;
-	-fx-padding: 20px;
-	-fx-min-width: 240px;
-	-fx-content-display: top;
 }
 
 #life:hover {
 	-fx-background-color: rgb(163, 255, 112);
 }
 
-#segregation {
-	-fx-background-color: rgb(249, 249, 249);
-	-fx-font-family: 'Roboto', sans-serif;
-	-fx-font-size: 15;
-	-fx-text-fill: rgb(105,105,105);
-	-fx-border-width: 2px;
-	-fx-border-color: rgb(105,105,105);
-	-fx-border-radius: 3px;
-	-fx-padding: 20px;
-	-fx-min-width: 240px;
-	-fx-content-display: top;
-}
-
 #segregation:hover {
 	-fx-background-color: rgb(99, 219, 255);
+}
+
+#rps:hover {
+	-fx-background-color: rgb(255, 130, 109);
+}
+
+#ant:hover {
+	-fx-background-color: rgb(255, 235, 84);
 }
 
 #diy {
@@ -181,7 +150,7 @@
 
 #box-bonanza {
 	-fx-alignment: center;
-	-fx-spacing: 30;
+	-fx-spacing: 15;
 }
 
 #header {

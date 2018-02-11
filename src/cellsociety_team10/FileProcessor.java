@@ -47,9 +47,6 @@ public class FileProcessor {
 	private String cellShape;
 	private NeighborCalculator nCalc;
 	
-	public FileProcessor() {
-		
-	}
 	public FileProcessor(File file) throws FileNotFoundException, XMLStreamException{
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));

@@ -305,7 +305,7 @@ public class FileProcessor {
 		return arrangement;
 	}
 	
-	public List<int[]> getPossibleNeighbors(int row, int col) {
-		return nCalc.calcNeighborLocations(row, col);
+	public NeighborCalculator getNeighborCalc() {
+		return nCalc;
 	}
 }

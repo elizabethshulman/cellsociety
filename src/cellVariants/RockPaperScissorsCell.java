@@ -1,7 +1,5 @@
 package cellVariants;
 
-import java.util.Random;
-
 import javafx.scene.paint.Color;
 
 public class RockPaperScissorsCell extends Cell{

@@ -7,7 +7,7 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
-import cellVariants.GameOfLifeCell;
+import cellVariants.RockPaperScissorsCell;
 
 public class RockPaperScissorsFIE implements FileInfoExtractor{
 
@@ -35,7 +35,7 @@ public class RockPaperScissorsFIE implements FileInfoExtractor{
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		myWriter.writeAttribute("state", Integer.toString(cell.getState()));
-		myWriter.writeAttribute("gradient", Integer.toString(((RockPaperScissorsCell) cell).getGradient()));	
+		myWriter.writeAttribute("gradient", Integer.toString(((RockPaperScissorsCell) cell).getHealth()));	
 	}
 
 }

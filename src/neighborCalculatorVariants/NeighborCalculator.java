@@ -28,12 +28,4 @@ public abstract class NeighborCalculator {
 		if(isToroidal || isValid(row, col))
 			neighborList.add(new int[] {(row + gridRowLength) % gridRowLength,(col + gridColLength)%gridColLength});
 	}
-	public void setBorders(boolean b) {
-		isToroidal = b;
-		
-	}
-	public void setNeighbors(boolean b) {
-		includesDiagonals = b;
-		
-	}
 }

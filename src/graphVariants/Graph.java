@@ -109,6 +109,16 @@ public class Graph {
 			currentGrid.get(possible).add(cell);
 		}
 	}
+	public void updateGraph() {
+		currentGrid = myFileProcessor.getCellGrid();
+		for(Cell c: currentGrid.keySet())
+		{
+			System.out.println(c.getRow() + " " + c.getCol());
+			for(Cell f: currentGrid.get(c))
+				System.out.println(f.getRow() + " " + f.getCol());
+			System.out.println();
+		}
+	}
 	
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);

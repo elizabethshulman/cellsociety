@@ -12,8 +12,8 @@
    </global_vars>
    <grid>
    <cellShape>Square</cellShape>
-   	<neighbors>orthogonal</neighbors>
-   	<borders>torus</borders>
+   	<neighbors>adjacent</neighbors>
+   	<borders>finite</borders>
       <row>
          <cell state="E" />
          <cell state="E" />

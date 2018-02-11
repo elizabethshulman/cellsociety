@@ -1,5 +1,8 @@
 package cellVariants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.paint.Color;
 
 public class RockPaperScissorsCell extends Cell{
@@ -26,6 +29,15 @@ public class RockPaperScissorsCell extends Cell{
 				(neighbor.getState()==0 && !(myState==0))) {
 					return true;
 		} return false;
+	}
+	
+	public List<RockPaperScissorsCell> getNonEmptyNeighbors(List<RockPaperScissorsCell> neighbors){
+		ArrayList<RockPaperScissorsCell> toReturn = new ArrayList<RockPaperScissorsCell>();
+		for(RockPaperScissorsCell c:neighbors) {
+			if(c.getState()!=0) {
+				toReturn.add(c);
+			}
+		} return toReturn;
 	}
 	
 	public void increaseHealth() {

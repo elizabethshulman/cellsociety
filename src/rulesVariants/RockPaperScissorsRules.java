@@ -1,6 +1,5 @@
 package rulesVariants;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -20,36 +19,25 @@ public class RockPaperScissorsRules extends Rules {
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempGameField = new HashMap(g);
 		for(RockPaperScissorsCell c:tempGameField.keySet()) {
-			if(c.getState()==0) {
-				emptyAct(c, tempGameField.get(c));
-			}
-			else {
-				Collections.shuffle(tempGameField.get(c));
-				RockPaperScissorsCell neighbor = tempGameField.get(c).get(0);
+			
+			List<RockPaperScissorsCell> nonEmptyNeighbors = c.getNonEmptyNeighbors(tempGameField.get(c));
+			Collections.shuffle(nonEmptyNeighbors);
+			
+			if(!nonEmptyNeighbors.isEmpty()) {
+				RockPaperScissorsCell neighbor = nonEmptyNeighbors.get(0);
 				if(neighbor.beats(c)) {
 					victoryLossAct(neighbor, c);						
 				} 
 				else if (c.beats(neighbor)) {
 					victoryLossAct(c, neighbor);
 				}
+				else if(c.getState()==0) {
+					killCell(c,neighbor);
+				}
 			}
 		}
 		Map<Cell, List<Cell>> returnGraph = new HashMap(tempGameField);
 		return returnGraph;
-	}
-	
-	private void emptyAct(RockPaperScissorsCell c, List<RockPaperScissorsCell> list) {
-		ArrayList<RockPaperScissorsCell> nonEmptyNeighbors = new ArrayList<RockPaperScissorsCell>();
-		for(Cell neighbor : list) {
-			if(neighbor.getState()!=0) {
-				nonEmptyNeighbors.add(c);
-			}
-		}
-		if(nonEmptyNeighbors.isEmpty()) return;
-		Collections.shuffle(nonEmptyNeighbors);
-		RockPaperScissorsCell neighborPredator = nonEmptyNeighbors.remove(nonEmptyNeighbors.size()-1);
-		killCell(c, neighborPredator);
-		neighborPredator.decreaseHealth();
 	}
 	
 	private void victoryLossAct(RockPaperScissorsCell winner, RockPaperScissorsCell loser) {

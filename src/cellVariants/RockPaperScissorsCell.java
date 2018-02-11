@@ -27,12 +27,10 @@ public class RockPaperScissorsCell extends Cell{
 	}
 
 	public boolean beats(RockPaperScissorsCell neighbor) {
-		if((myState==1 && neighbor.getState()==3) || 
+		 return ((myState==1 && neighbor.getState()==3) || 
 				(myState==2 && neighbor.getState()==1) ||
 				(myState==3 && neighbor.getState()==2) ||
-				(neighbor.getState()==0 && !(myState==0))) {
-					return true;
-		} return false;
+				(neighbor.getState()==0 && !(myState==0)));
 	}
 	
 	public List<RockPaperScissorsCell> getNonEmptyNeighbors(List<RockPaperScissorsCell> neighbors){

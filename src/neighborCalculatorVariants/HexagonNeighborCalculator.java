@@ -11,19 +11,15 @@ public class HexagonNeighborCalculator extends NeighborCalculator {
 
 	@Override
 	public List<int[]> calcNeighborLocations(int row, int col) {
-		
 		ArrayList<int[]> neighborLocs = new ArrayList<>();
-		for(int x = row - 2; x <= row + 2; x++)
-		{
-			if(x == row)
-				continue;
-			addLocation(x,col,neighborLocs);
-				
-		}
-		int shift_constant = 2 * (row % 2) - 1;
+		int shift_constant = 2* (col % 2) - 1;
 		for(int x = row - 1; x <= row + 1; x++)
 		{
-			addLocation(x,col + shift_constant,neighborLocs);
+			for(int y = col - 1; y <= col + 1; y++) {
+				if((row == x ^ col == y) || x == row + shift_constant)
+					addLocation(x,y,neighborLocs);
+			}
+				
 		}
 		return neighborLocs;
 	}

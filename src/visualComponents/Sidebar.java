@@ -80,7 +80,9 @@ public class Sidebar {
 				resources.getString("LifeButton"),
 				resources.getString("FireButton"),
 				resources.getString("PredButton"),
-				resources.getString("SegButton"));
+				resources.getString("SegButton"),
+				resources.getString("AntButton"),
+				resources.getString("RPSButton"));
 		mySimBox = new ComboBox<String>(sim_options);
 		mySimBox.setId("combo");
 		mySimBox.getSelectionModel().selectFirst();
@@ -123,6 +125,8 @@ public class Sidebar {
 		myConversions.put(myResources.getString("FireButton"), "data/simulations/default/fire/fire_" + myCurrShape + ".xml");
 		myConversions.put(myResources.getString("PredButton"), "data/simulations/default/predator/pred_" + myCurrShape + ".xml");
 		myConversions.put(myResources.getString("SegButton"), "data/simulations/default/segregation/seg_" + myCurrShape + ".xml");
+		myConversions.put(myResources.getString("AntButton"), "data/simulations/default/ant/ant_" + myCurrShape + ".xml");
+		myConversions.put(myResources.getString("RPSButton"), "data/simulations/default/rps/rps_" + myCurrShape + ".xml");
 	}
 
 	private HBox buildShapeOptions(ResourceBundle resources) {

@@ -12,6 +12,8 @@ import graphVariants.Graph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -50,6 +52,8 @@ public class Engine {
 				e -> showFileChooser("segregation"),
 				e -> showFileChooser("life"), 
 				e -> showFileChooser("fire"),
+				e -> showFileChooser("ant"),
+				e -> showFileChooser("rps"),
 				e -> setupDIY()
 				).getScene();
 
@@ -120,12 +124,15 @@ public class Engine {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
 			try {
+				myFileProcessor.setColCount(myGraph.getCols());
+				myFileProcessor.setRowCount(myGraph.getRows());
 				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
 			} catch (FileNotFoundException e) {
-				// clean this up!!
-				e.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
+				alert.show();
 			} catch (XMLStreamException ee) {
-				ee.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR, ee.getLocalizedMessage());
+				alert.show();
 			}
 			
 		}
@@ -140,16 +147,22 @@ public class Engine {
 		}
 	}
 	
-	private void initFileProcessor(File file) {
+	private Boolean initFileProcessor(File file) {
 		try {
 			myFileProcessor = new FileProcessor(file);
+			return true;
 		} catch (Exception e) {
-			throw new IllegalArgumentException("Invalid filepath.");
+			Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
+			alert.show();
+			return false;
 		}
 	}
 
 	public void loadSimulation(File file) {
-		initFileProcessor(file);
+		Boolean success = initFileProcessor(file);
+		if (! success) {
+			return;
+		}
 		myGraph = new Graph(myFileProcessor, myRulesFactory, myCellFactory);
 		
 		resetAnimation();

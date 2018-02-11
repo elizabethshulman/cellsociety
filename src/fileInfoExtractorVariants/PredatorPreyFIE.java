@@ -15,18 +15,21 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().matches("fishBreedTime|sharkBreedTime|sharkStarveTime")) {
 			xmlRead.next();
-			return Double.parseDouble(xmlRead.getText());
+			double d =  Double.parseDouble(xmlRead.getText());
+			if(d % 1 != 0.0)
+				throw new XMLStreamException("Noninteger global variable specified");
+			return d;
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
 	@Override
 	public void addDefaultGlobals(Map<String,Double> globals) {
 		if(!globals.containsKey("sharkBreedTime"))
-			globals.put("sharkBreedTime", 5.0);
+			globals.put("sharkBreedTime", 10.0);
 		if(!globals.containsKey("fishBreedTime"))
-			globals.put("sharkBreedTime", 5.0);
+			globals.put("fishBreedTime", 5.0);
 		if(!globals.containsKey("sharkStarveTime"))
-			globals.put("sharkBreedTime", 5.0);
+			globals.put("sharkStarveTime", 5.0);
 	}
 
 	@Override
@@ -44,8 +47,8 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		String s;
 		switch(cell.getState()) {
-			case 2: s = "S";
-			case 1: s = "F";
+			case 2: s = "S"; break;
+			case 1: s = "F"; break;
 			default: s = "E";
 		}
 		myWriter.writeAttribute("state", s);

@@ -15,7 +15,10 @@ public final class FireFIE implements FileInfoExtractor {
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().equals("probCatchFire")) {
 			xmlRead.next();
-			return Double.parseDouble(xmlRead.getText());
+			double d = Double.parseDouble(xmlRead.getText());
+			if(d < 0 || d > 1)
+				throw new XMLStreamException("Fire catching probability has invalid value.");
+			return d;
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}

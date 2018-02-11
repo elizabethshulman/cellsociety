@@ -15,7 +15,10 @@ public class SegregationFIE implements FileInfoExtractor {
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().equals("satisfactionThreshold")) {
 			xmlRead.next();
-			return Double.parseDouble(xmlRead.getText());
+			double d = Double.parseDouble(xmlRead.getText());
+			if(d < 0 || d > 1)
+				throw new XMLStreamException("Satisfaction threshold has invalid value.");
+			return d;
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
@@ -38,8 +41,8 @@ public class SegregationFIE implements FileInfoExtractor {
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		String s;
 		switch(cell.getState()) {
-			case 2: s = "B";
-			case 1: s = "R";
+			case 2: s = "B"; break;
+			case 1: s = "R"; break;
 			default: s = "E";
 		}
 		myWriter.writeAttribute("state", s);

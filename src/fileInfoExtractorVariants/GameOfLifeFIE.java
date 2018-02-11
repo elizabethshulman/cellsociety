@@ -1,5 +1,7 @@
 package fileInfoExtractorVariants;
 
+import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
@@ -13,6 +15,8 @@ public class GameOfLifeFIE implements FileInfoExtractor {
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		throw new XMLStreamException("Invalid global variables in file");
 	}
+	@Override
+	public void addDefaultGlobals(Map<String,Double> globals) {}
 
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {

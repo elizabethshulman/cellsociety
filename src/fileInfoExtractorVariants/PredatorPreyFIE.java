@@ -1,5 +1,7 @@
 package fileInfoExtractorVariants;
 
+import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
@@ -16,6 +18,15 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 			return Double.parseDouble(xmlRead.getText());
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
+	}
+	@Override
+	public void addDefaultGlobals(Map<String,Double> globals) {
+		if(!globals.containsKey("sharkBreedTime"))
+			globals.put("sharkBreedTime", 5.0);
+		if(!globals.containsKey("fishBreedTime"))
+			globals.put("sharkBreedTime", 5.0);
+		if(!globals.containsKey("sharkStarveTime"))
+			globals.put("sharkBreedTime", 5.0);
 	}
 
 	@Override

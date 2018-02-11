@@ -26,6 +26,7 @@ public class Sidebar {
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;
 	private static final double DIR_SIZE = 40;
+	private static final String DEFAULT_DIR = "data/simulations/default/";
 
 	private VBox myVBox = new VBox();
 	private String myCurrShape = "Square";
@@ -88,7 +89,7 @@ public class Sidebar {
 		mySimBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				String filename = "data/simulations/default/" + new_val + ".xml";
+				String filename = DEFAULT_DIR + new_val + ".xml";
 				myEngine.loadSimulation(new File(filename));
 				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
 				myEngine.updateDIY();

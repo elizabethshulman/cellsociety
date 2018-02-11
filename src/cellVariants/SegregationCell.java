@@ -1,5 +1,7 @@
 package cellVariants;
 
+import javafx.scene.paint.Color;
+
 public class SegregationCell extends Cell {
 	public SegregationCell(int st, String shape) {
 		super(st, shape);
@@ -8,12 +10,8 @@ public class SegregationCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndImages.put(0, buildCellImage(getShapeType() + "/lightblue.png"));
-		statesAndImages.put(1, buildCellImage(getShapeType() + "/darkblue.png"));
-		statesAndImages.put(2, buildCellImage(getShapeType() + "/midblue.png"));
-		
-		statesAndColors.put(0, "rgb(195, 224, 229)");
-		statesAndColors.put(1, "rgb(3, 35, 37)");
-		statesAndColors.put(2, "rgb(1, 59, 57)");
+		statesAndColors.put(0, Color.rgb(195, 224, 229));
+		statesAndColors.put(1, Color.rgb(3, 35, 37));
+		statesAndColors.put(2, Color.rgb(1, 59, 57));
 	}
 }

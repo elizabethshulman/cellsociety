@@ -2,28 +2,21 @@ package cellVariants;
 
 import java.util.HashMap;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import visualComponents.Helper;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 public abstract class Cell {
 
-	protected int state;
-	protected HashMap<Integer, Image> statesAndImages = new HashMap<>();
-	protected HashMap<Integer, String> statesAndColors = new HashMap<>();
+	protected int myState;
+	protected HashMap<Integer, Color> statesAndColors = new HashMap<>();
 	private int row;
 	private int col;
-	protected ImageView imageView;
 	private String myShape;
 	
 	public Cell(int st, String shape) {
 		myShape = shape;
-		state = st;
+		myState = st;
 		buildHashMap();
-		imageView = new ImageView(statesAndImages.get(state));
-		imageView.setOnMouseClicked(e -> {
-			nextImage();
-		});
 	}
 	
 	protected String getShapeType() {
@@ -32,20 +25,16 @@ public abstract class Cell {
 
 	protected abstract void buildHashMap();
 	
-	public String getCorrespondingColor(Integer state) {
-		return statesAndColors.get(state);
+	public Color getColor() {
+		return statesAndColors.get(myState);
 	}
 	
-	protected void nextImage() {
-		state = (state + 1) % statesAndImages.size();
-		setState(state);
+	public void nextColor(Polygon polygon) {
+		myState = (myState + 1) % statesAndColors.size();
+		polygon.setFill(statesAndColors.get(myState));
+		setState(myState);
 	}
 	
-	protected Image buildCellImage(String filename) {
-		Image temp = Helper.generateImage(filename);
-		return temp;
-	}
-
 	public int getRow() {
 		return row;
 	}
@@ -63,19 +52,23 @@ public abstract class Cell {
 	}
 	
 	public int getState() {
-		return state;
+		return myState;
 	}
 	
-	public void setState(int st) {
-		state = st;
-		imageView.setImage(statesAndImages.get(st));
-	}
-	
-	public ImageView getImageView() {
-		return imageView;
+	public void setState(int state) {
+		myState = state;
 	}
 	
 	public int getStateCount() {
 		return statesAndColors.size();
+	}
+	
+	public String getCorrespondingColor(int state) {
+		Color color = statesAndColors.get(state);
+		return String.format("rgb(%s, %s, %s)", rgbS(color.getRed()), rgbS(color.getGreen()), rgbS(color.getBlue()));
+	}
+	
+	private String rgbS(Double d) {
+		return String.valueOf((int) (d * 255));
 	}
 }

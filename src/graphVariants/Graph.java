@@ -73,9 +73,15 @@ public abstract class Graph {
 		return myFileProcessor.getAuthor();
 	}
 	
-	public String getCorrectColor(Integer state) {
+	public String getCorrectColor(int state) {
 		Cell cell = currentGrid.keySet().iterator().next();
 		return cell.getCorrespondingColor(state);
+	}
+	
+	private String hex(double color) {
+		int col = (int) (color *255);
+        String col_string = Integer.toHexString(col);
+        return col_string;
 	}
 	
 	public abstract Container createContainer();

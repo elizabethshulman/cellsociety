@@ -179,7 +179,7 @@ public class Engine {
 
 
 	private void setupDIY() {
-		File file = new File("data/simulations/default/life/life_square.xml");
+		File file = new File("data/simulations/default/Game of Life.xml");
 		loadSimulation(file);
 		
 		updateDIY();

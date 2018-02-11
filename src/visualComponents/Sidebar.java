@@ -1,7 +1,6 @@
 package visualComponents;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import cellsociety_team10.Engine;
@@ -29,15 +28,14 @@ public class Sidebar {
 	private static final double DIR_SIZE = 40;
 
 	private VBox myVBox = new VBox();
-	private Engine myEngine;
 	private String myCurrShape = "Square";
 	private Boolean isToroidal = false;
 	private Boolean isDiagonal = true;
-	private HashMap<String, String> myConversions = new HashMap<>();
 	private ResourceBundle myResources;
 	private ComboBox<String> mySimBox;
 	private Slider myRowsSlider;
 	private Slider myColsSlider;
+	private Engine myEngine;
 
 	public Sidebar(ResourceBundle resources, Engine engine, Graph graph) {
 		myEngine = engine;
@@ -46,7 +44,6 @@ public class Sidebar {
 		myColsSlider = createSlider(graph.getCols());
 		
 		myResources = resources;
-		setTranslations();
 		
 		buildSimBox(resources);
 		textAndComponent(myResources.getString("PickSim"), mySimBox);
@@ -91,7 +88,8 @@ public class Sidebar {
 		mySimBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				myEngine.loadSimulation(new File(myConversions.get(new_val)));
+				String filename = "data/simulations/default/" + new_val + ".xml";
+				myEngine.loadSimulation(new File(filename));
 				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
 				myEngine.updateDIY();
 			}
@@ -117,16 +115,7 @@ public class Sidebar {
 
 		return combo;
 	}
-
-	private void setTranslations() {
-		myConversions.put(myResources.getString("LifeButton"), "data/simulations/default/life/life_square.xml");
-		myConversions.put(myResources.getString("FireButton"), "data/simulations/default/fire/fire_square.xml");
-		myConversions.put(myResources.getString("PredButton"), "data/simulations/default/predator/pred_square.xml");
-		myConversions.put(myResources.getString("SegButton"), "data/simulations/default/segregation/seg_square.xml");
-		myConversions.put(myResources.getString("AntButton"), "data/simulations/default/ant/ant_square.xml");
-		myConversions.put(myResources.getString("RPSButton"), "data/simulations/default/rps/rps_square.xml");
-	}
-
+	
 	private HBox buildShapeOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("shape-hbox");

@@ -1,5 +1,7 @@
 package fileInfoExtractorVariants;
 
+import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
@@ -16,6 +18,11 @@ public final class FireFIE implements FileInfoExtractor {
 			return Double.parseDouble(xmlRead.getText());
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
+	}
+	@Override
+	public void addDefaultGlobals(Map<String,Double> globals) {
+		if(!globals.containsKey("probCatchFire"))
+			globals.put("probCatchFire", 0.5);
 	}
 
 	@Override

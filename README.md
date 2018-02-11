@@ -1,4 +1,4 @@
-Cell Society Readme
+Cell Society README.md
 ==
 
 #### Ben Hubsch, Andrew Yeung, Elizabeth Shulman
@@ -7,7 +7,7 @@ Cell Society Readme
 Hours worked: 125
 
 ---
-### Roles
+## Roles
 #### Ben Hubsch:  
 Handled components related to, broadly speaking, visualization
 
@@ -18,7 +18,7 @@ Responsible for writing and processing XML files
 Implemented simulation-specific rules for cell and grid updates
 
 ---
-### Resources Used
+## Resources Used
 * [Open Closed Principle](https://www2.cs.duke.edu/courses/compsci308/spring18/readings/ocp.pdf)
 * [Why Java Interfaces Are So Very Cool](https://www2.cs.duke.edu/courses/compsci308/spring18/readings/java_garage_ch17.pdf)
 * [Replace Conditional with Polymorphism](https://sourcemaking.com/refactoring/replace-conditional-with-polymorphism)
@@ -26,9 +26,10 @@ Implemented simulation-specific rules for cell and grid updates
 *  [StackOverflow](https://stackoverflow.com)
 *  Diane Hu
 *  George Bernard
-*  Ashka Stephen
+*  Ashka Stephen  
+
 ---
-### Using the Program
+## Using the Program
 *  File used to start: Main
 *  Known bugs:
     *  Running the program on Mac OS (High Sierra) will generate  a warning that the class FIFinderSyncExtensionHost is implemented in 2 different places. This is tied to JavaFX's FileChooser class and is unavoidable when using a FileChooser. The message itself has no effect on functionality
@@ -42,9 +43,10 @@ Implemented simulation-specific rules for cell and grid updates
     *  gameoflife2.xml
     *  fire3_triangle.xml
     *  predatorprey3.xml
-    *  segregation2.xml
+    *  segregation2.xml  
+
 ---
-### Design Decisions and Assumptions
+## Design Decisions and Assumptions
 #### Within Rules:
 *  Rock-Paper-Scissors
     *  When a cell overtakes an empty or dead neighbor, it is assumed that a new cell is created with one less health point than the parent cell. 
@@ -52,8 +54,9 @@ Implemented simulation-specific rules for cell and grid updates
     *  To accomodate non-rectangular cell shapes, the orientation element of this simulation was disregarded. Instead, an ant's next location was selected by prioritizing pheromone levels.
 #### Within XML:
 *  Random Distributions
-    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.
+    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.  
+    
 ---
-### Impressions of the Assignment
+## Impressions of the Assignment
 *  We felt this project was adequately-sized as an introduction to teamwork in a programming setting.
 *  The only feedback we had was that the second sprint felt considerably more difficult and time-intensive than the first.

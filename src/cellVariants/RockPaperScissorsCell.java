@@ -3,6 +3,10 @@ package cellVariants;
 import javafx.scene.paint.Color;
 
 public class RockPaperScissorsCell extends Cell{
+	private static Color BLACK = Color.rgb(0,0,0);
+	private static Color NAVY = Color.rgb(3, 35, 87);
+	private static Color FOREST_GREEN = Color.rgb(0, 70, 25);
+	private static Color GRASS_GREEN = Color.rgb(68, 139, 65);
 
 	private int health;
 	
@@ -13,10 +17,10 @@ public class RockPaperScissorsCell extends Cell{
 
 	@Override
 	protected void buildHashMap() {
-		myStatesAndColors.put(0, Color.rgb(0, 0, 0));
-		myStatesAndColors.put(1, Color.rgb(3, 35, 87));
-		myStatesAndColors.put(2, Color.rgb(0, 70, 25));
-		myStatesAndColors.put(3, Color.rgb(68, 139, 65));
+		myStatesAndColors.put(0, BLACK);
+		myStatesAndColors.put(1, NAVY);
+		myStatesAndColors.put(2, FOREST_GREEN);
+		myStatesAndColors.put(3, GRASS_GREEN);
 	}
 
 	public void increaseHealth() {

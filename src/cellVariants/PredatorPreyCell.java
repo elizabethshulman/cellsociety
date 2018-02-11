@@ -3,6 +3,9 @@ package cellVariants;
 import javafx.scene.paint.Color;
 
 public class PredatorPreyCell extends Cell {
+	private static Color NAVY = Color.rgb(3, 35, 87);
+	private static Color MIDBLUE = Color.rgb(68, 139, 165);
+	private static Color MAROON = Color.rgb(128, 0, 0);
 
 	private int reproductiveTime;
 	private int sharkEnergy;
@@ -34,9 +37,9 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		myStatesAndColors.put(0, Color.rgb(14, 25, 54));
-		myStatesAndColors.put(1, Color.rgb(68, 139, 165));
-		myStatesAndColors.put(2, Color.rgb(137, 0, 0));
+		myStatesAndColors.put(0, NAVY);
+		myStatesAndColors.put(1, MIDBLUE);
+		myStatesAndColors.put(2, MAROON);
 	}
 	
 	public void increaseSharkEnergy() {

@@ -173,7 +173,7 @@ public class Engine {
 			mySidebar.setSliders(myGraph);
 		}
 		
-		myVis.amendHeader(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
+		myVis.changeHeaderText(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}

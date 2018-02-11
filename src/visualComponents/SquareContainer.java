@@ -6,7 +6,6 @@ import javafx.scene.shape.Polygon;
 public class SquareContainer extends Container {
 	public SquareContainer() {
 		super();
-		myDisplay.setId("container-display-square");
 	}
 
 	@Override
@@ -18,22 +17,12 @@ public class SquareContainer extends Container {
 		double col_offset = 0;
 		for (int r=0; r < g.getRows(); r++) {
 			for (int c=0; c < g.getCols(); c++) {
-				Polygon p;
-				if (c % 2 == 0) {
-					p = generateSquare(
-							col_offset, row_offset,							
-							col_offset, row_offset + height,
-							col_offset + width, row_offset + height,
-							col_offset + width, row_offset
-							);
-				} else {
-					p = generateSquare(
-							col_offset, row_offset,							
-							col_offset, row_offset + height,
-							col_offset + width, row_offset + height,
-							col_offset + width, row_offset
-							);
-				}
+				Polygon p = generateSquare(
+						col_offset, row_offset,							
+						col_offset, row_offset + height,
+						col_offset + width, row_offset + height,
+						col_offset + width, row_offset
+						);
 				myPolygonArr[r][c] = p;
 				myDisplay.getChildren().add(p);
 				col_offset += width;

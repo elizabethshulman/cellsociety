@@ -15,29 +15,15 @@ public class ForagingCell extends Cell {
 	 * 2: food source
 	 * 3: obstacle
 	 */
-	
-	private boolean nest = false;
-	private boolean foodsource = false;
-	private boolean obstacle = false;
+
 	private List<AntCell> antsHere;
 	private double homePheromoneLevel = 0;				//max levels specified in AntManager
 	private double foodPheromoneLevel = 0;				
 	private double MAX_PHEROMONE_LEVEL = 50;
 	
 	public ForagingCell(int st) {
-		super(st);
-		mapCellState();									//when to set state=nest or obstacle -> ask andrew?
+		super(st);								//when to set state=nest or obstacle -> ask andrew?
 		antsHere = new ArrayList<AntCell>();
-	}
-
-	private void mapCellState() {
-		if(myState==1) {
-			nest = true;
-		} else if(myState==2) {
-			foodsource = true;
-		} else if(myState==3) {
-			obstacle = true;
-		}
 	}
 
 	@Override
@@ -92,15 +78,15 @@ public class ForagingCell extends Cell {
 	
 	//STATE CHECKS
 	public boolean isNest() {
-		return nest;
+		return myState == 1;
 	}
 
 	public boolean isFoodSource() {
-		return foodsource;
+		return myState == 2;
 	}
 	
 	public boolean isObstacle() {
-		return obstacle;
+		return myState == 3;
 		
 	}
 }

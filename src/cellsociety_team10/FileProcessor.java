@@ -1,4 +1,7 @@
 package cellsociety_team10;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -101,9 +104,11 @@ public class FileProcessor {
 	}
 	protected void setBorders(boolean b) {
 		isToroidal = b;
-	}
+		nCalc.setBorders(b);
+		}
 	protected void setNeighbors(boolean b) {
 		isDiagonal = b;
+		nCalc.setNeighbors(b);
 	}
 	// Reads in the file and sets instance variables based on file information
 	public void readFile() throws XMLStreamException {
@@ -210,8 +215,8 @@ public class FileProcessor {
 	}
 
 	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
-		XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
-		myWriter = xmlof.createXMLStreamWriter(new FileOutputStream(file));
+		ByteArrayOutputStream temp = new ByteArrayOutputStream();
+		myWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(temp);
 		myWriter.writeStartDocument();
 		myWriter.writeStartElement("simulation");
 		writeHeader();
@@ -219,22 +224,16 @@ public class FileProcessor {
 		writeGrid(createStateGrid(cells));
 		myWriter.writeEndElement();
 		myWriter.writeEndDocument();
-		myWriter.flush();
 		myWriter.close();
 		try {
-			formatOutput(file.getAbsoluteFile());
-		} catch (TransformerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	private void formatOutput(File file) throws TransformerException {
-		 Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			OutputStream out = new BufferedOutputStream(new FileOutputStream(file));
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-	        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-	        transformer.transform(new StreamSource(file), new StreamResult(file));
-		
+		    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+		    transformer.transform(new StreamSource(new ByteArrayInputStream(temp.toByteArray())), new StreamResult(out));
+		} catch (TransformerException e) {
+			throw new FileNotFoundException("Unable to correctly format file.");
+		}
 	}
 	private void writeHeader() throws XMLStreamException {
 		myWriter.writeStartElement("header");
@@ -261,7 +260,6 @@ public class FileProcessor {
 	private void writeGrid(Cell[][] stateGrid) throws XMLStreamException {
 		myWriter.writeStartElement("grid");
 		writeGridHeader();
-		
 		for(int a = 0; a < gridRowCount; a++) {
 			myWriter.writeStartElement("row");
 			for(int b = 0; b < gridColCount; b++) {

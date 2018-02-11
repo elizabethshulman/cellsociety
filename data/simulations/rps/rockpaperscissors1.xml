@@ -5,7 +5,6 @@
     <author>Andrew Yeung</author>
   </header>
   <global_vars>
-    <probCatchFire>0.8</probCatchFire>
   </global_vars>
   <grid>
     <cellShape>Triangle</cellShape>

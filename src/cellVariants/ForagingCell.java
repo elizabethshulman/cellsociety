@@ -27,11 +27,11 @@ public class ForagingCell extends Cell {
 	}
 
 	private void mapCellState() {
-		if(state==1) {
+		if(myState==1) {
 			nest = true;
-		} else if(state==2) {
+		} else if(myState==2) {
 			foodsource = true;
-		} else if(state==3) {
+		} else if(myState==3) {
 			obstacle = true;
 		}
 	}

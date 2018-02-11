@@ -10,7 +10,7 @@ public class CellFactory {
 		case "PredatorPrey": 
 			return new PredatorPreyCell(0, shape);
 		case "RockPaperScissors":
-			return new RockPaperScissorsCell(0, shape); 
+			return new RockPaperScissorsCell(0, 5, shape); 
 		case "Segregation":
 			return new SegregationCell(0, shape);
 		default: 

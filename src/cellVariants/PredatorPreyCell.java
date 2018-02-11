@@ -1,5 +1,7 @@
 package cellVariants;
 
+import javafx.scene.paint.Color;
+
 public class PredatorPreyCell extends Cell {
 
 	private int reproductiveTime;
@@ -20,11 +22,10 @@ public class PredatorPreyCell extends Cell {
 	}
 	
 	@Override
-	public void setState(int st) {
-		state=st;
-		imageView.setImage(statesAndImages.get(st));
+	public void setState(int state) {
+		myState = state;
 		
-		if(st==0) {
+		if(myState == 0) {
 			reproductiveTime=0;
 			reproduce=false;
 			sharkEnergy=0;
@@ -33,13 +34,9 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndImages.put(0, buildCellImage(getShapeType() + "/navy.png"));
-		statesAndImages.put(1, buildCellImage(getShapeType() + "/lightteal.png"));
-		statesAndImages.put(2, buildCellImage(getShapeType() + "/sharkred.png"));
-		
-		statesAndColors.put(0, "rgb(14, 25, 54)");
-		statesAndColors.put(1, "rgb(68, 139, 165)");
-		statesAndColors.put(2, "rgb(137, 0, 0)");
+		statesAndColors.put(0, Color.rgb(14, 25, 54));
+		statesAndColors.put(1, Color.rgb(68, 139, 165));
+		statesAndColors.put(2, Color.rgb(137, 0, 0));
 	}
 	
 	public void increaseSharkEnergy() {

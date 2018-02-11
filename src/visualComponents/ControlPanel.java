@@ -29,6 +29,7 @@ public class ControlPanel {
 	private Slider mySlider;
 	private HBox myButtonBox;
 	private Button myStopButton;
+	private Button mySaveButton;
 
 	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myAnimation = animation;
@@ -46,11 +47,12 @@ public class ControlPanel {
 		myButtonBox.setId("control-panel-bottom");
 
 		myStopButton = makeButton(STOP, stop_handler);
+		mySaveButton = makeButton(SAVE, save_handler);
 		myButtonBox.getChildren().addAll(makeButton(PLAY, play_handler),
 				makeButton(PAUSE, pause_handler),
 				myStopButton,
 				makeButton(NEXT, next_handler),
-				makeButton(SAVE, save_handler));
+				mySaveButton);
 	}
 
 	private HBox topHBox() {
@@ -125,7 +127,7 @@ public class ControlPanel {
 
 	public void disableButtons() {
 		for (Node curr : myButtonBox.getChildren()) {
-			if (curr != myStopButton) {
+			if (curr != myStopButton && curr != mySaveButton) {
 				curr.setId("control_disabled");
 			}
 		}

@@ -23,6 +23,7 @@ public class Visualization {
 	private HeaderBar myBar;
 	private LineGraph myLineGraph;
 	private Stage myStage;
+	private ContainerFactory myContainerFactory;
 	
 	public Visualization(ControlPanel cp, Stage stage) {
 		myStage = stage;
@@ -33,21 +34,34 @@ public class Visualization {
 		myScene.getStylesheets().add(FONT_URL);
 		myScene.getStylesheets().add(CSS_STRING);
 		
-		myBar = new HeaderBar("");
-		myVisualContainer = new HexContainer();
+		myContainerFactory = new ContainerFactory();
 		myControlPanel = cp;
+		
 		myLineGraph = new LineGraph();
+		myBar = new HeaderBar("");
+		
+		myBorderPane.setTop(myBar.getHBox());
+		myBorderPane.setBottom(myControlPanel.getVBox());
+	}
+	
+	private void setupContainer(Graph g) {
+		myVisualContainer = myContainerFactory.create(g.getCellShape());
 		
 		VBox center = new VBox();
 		center.getChildren().add(myLineGraph.getLineChart());
 		center.getChildren().add(myVisualContainer.getContainer());
 		
-		myBorderPane.setTop(myBar.getHBox());
 		myBorderPane.setCenter(center);
-		myBorderPane.setBottom(myControlPanel.getVBox());
+	}
+	
+	public void updateGraphOnly(Graph g) {
+		myVisualContainer.setGraphDisplay(g);
 	}
 	
 	public void visualizeGraph(Graph g) {
+		if (myVisualContainer == null) {
+			setupContainer(g);
+		}
 		myIteration += 1;
 		myControlPanel.setIteration(myIteration);
 		
@@ -63,15 +77,12 @@ public class Visualization {
 		if (backToHome) {
 			myBorderPane.setLeft(null);
 		}
+		myVisualContainer = null;
 		myIteration = -1;
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 		myLineGraph.resetChart();
 		centerOnScreen();
-	}
-	
-	public void reset() {
-		
 	}
 	
 	public void amendHeader(String header) {

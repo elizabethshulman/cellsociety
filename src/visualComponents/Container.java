@@ -1,18 +1,17 @@
 package visualComponents;
 
-import java.math.BigDecimal;
-
 import cellVariants.Cell;
 import graphVariants.Graph;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.Group;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Polygon;
 
 public abstract class Container {
-	public static final BigDecimal GRID_SIZE = new BigDecimal(350);
+	public static final double GRID_SIZE = 350.0;
 	
 	protected VBox myVBox = new VBox();
-	protected VBox myDisplay  = new VBox();
+	protected Group myDisplay  = new Group();
+	protected Polygon[][] myPolygonArr;
 	
 	public Container() {
 		myVBox.setId("container-vbox");
@@ -25,24 +24,20 @@ public abstract class Container {
 	
 	public void setGraphDisplay(Graph g) {
 		myDisplay.getChildren().clear();
-		ImageView[][] graph_grid = mapToGrid(g);
-		for (int r=0; r < g.getRows(); r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, g.getCols(), g.getRows()));
+		myPolygonArr = new Polygon[g.getRows()][g.getCols()];
+		drawGraph(g);
+		setColorAndClick(g);
+	}
+	
+	protected void setColorAndClick(Graph g) {
+		for (Cell cell : g.getCells()) {
+			int r = cell.getRow();
+			int c = cell.getCol();
+			Polygon match = myPolygonArr[r][c];
+			match.setFill(cell.getColor());
+			match.setOnMouseClicked(e -> cell.nextColor(match));
 		}
 	}
 	
-	private ImageView[][] mapToGrid(Graph g) {
-		ImageView[][] curr_grid = new ImageView[g.getRows()][g.getCols()];
-		for (Cell curr : g.getCells()) {
-			ImageView curr_image_view = curr.getImageView();
-			curr_image_view.setPreserveRatio(true);
-			curr_image_view.setFitHeight(calcShapeHeight(g.getCols()));
-			curr_grid[curr.getRow()][curr.getCol()] = curr_image_view;
-		}
-		return curr_grid;
-	}
-	
-	protected abstract double calcShapeHeight(int num_cols);
-	
-	protected abstract HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols, int num_rows);
+	protected abstract void drawGraph(Graph g);
 }

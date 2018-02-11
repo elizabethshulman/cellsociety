@@ -1,4 +1,4 @@
-package rulesVariants.PredatorPreyHelper;
+package rulesVariants.RulesVariantsManagers;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.List;
 
 import cellVariants.PredatorPreyCell;
 
-public class PreyManager extends Manager {
+public class PreyManager extends VariantsManager {
 	
 	public PreyManager(HashMap<PredatorPreyCell, List<PredatorPreyCell>> currentgraph) {
 		super(currentgraph);

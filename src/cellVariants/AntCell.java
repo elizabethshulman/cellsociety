@@ -5,7 +5,6 @@ public class AntCell extends Cell {
 	private ForagingCell home;						//when to set home cell? ask andrew about constructor
 	private boolean holdingFood = false;
 	
-	
 	public AntCell(int st, String shape, ForagingCell homeCell) {
 		super(st, shape);
 		home = homeCell;

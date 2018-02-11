@@ -31,6 +31,10 @@ public class RockPaperScissorsCell extends Cell{
 
 	public void setHealth(int newhealth) {
 		health = newhealth;
+		if(health>0) {
+			health=0;
+			myState=0;
+		}
 	}
 
 	public int getHealth() {

@@ -17,8 +17,9 @@ public class ForagingCell extends Cell {
 	private boolean foodsource = false;
 	private boolean obstacle = false;
 	private List<AntCell> antsHere;
-	private double homePheromoneLevels = 0;				//max levels specified in AntManager
-	private double foodPheromoneLevels = 0;				
+	private double homePheromoneLevel = 0;				//max levels specified in AntManager
+	private double foodPheromoneLevel = 0;				
+	private double MAX_PHEROMONE_LEVEL = 50;
 	
 	public ForagingCell(int st, String shape) {
 		super(st, shape);
@@ -50,21 +51,38 @@ public class ForagingCell extends Cell {
 	}
 	
 	public double getHomePheromones() {
-		return homePheromoneLevels;
-	}
-
-	public void setHomePheromones(double homePheromoneLevels) {
-		this.homePheromoneLevels = homePheromoneLevels;
+		return homePheromoneLevel;
 	}
 	
 	public double getFoodPheromones() {
-		return foodPheromoneLevels;
+		return foodPheromoneLevel;
 	}
 
-	public void setFoodPheromones(double foodPheromoneLevels) {
-		this.foodPheromoneLevels = foodPheromoneLevels;
+
+	
+	//SETTERS
+	public void increaseFoodPheromones(double diff) {
+		foodPheromoneLevel+=diff;
+		if(foodPheromoneLevel>MAX_PHEROMONE_LEVEL) {
+			maxFoodPheromones();
+		}
 	}
 
+	public void maxFoodPheromones() {
+		this.foodPheromoneLevel = MAX_PHEROMONE_LEVEL;
+	}
+	
+	public void increaseHomePheromones(double diff) {
+		homePheromoneLevel+=diff;
+		if(homePheromoneLevel>MAX_PHEROMONE_LEVEL) {
+			maxHomePheromones();
+		}
+	}
+	
+	public void maxHomePheromones() {
+		this.homePheromoneLevel = MAX_PHEROMONE_LEVEL;
+	}
+	
 	
 	
 	//STATE CHECKS
@@ -78,7 +96,6 @@ public class ForagingCell extends Cell {
 	
 	public boolean isObstacle() {
 		return obstacle;
+		
 	}
-
-	
 }

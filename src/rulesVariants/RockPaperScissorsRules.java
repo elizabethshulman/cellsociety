@@ -15,6 +15,7 @@ public class RockPaperScissorsRules extends Rules {
 	HashMap<RockPaperScissorsCell, List<RockPaperScissorsCell>> tempGameField;
 	Random myRandom = new Random();
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempGameField = new HashMap(g);
@@ -61,6 +62,6 @@ public class RockPaperScissorsRules extends Rules {
 	
 	private void killCell(RockPaperScissorsCell nowDead, RockPaperScissorsCell winner) {
 		nowDead.setState(winner.getState());
-		nowDead.setHealth(myRandom.nextInt(10));
+		nowDead.setHealth(winner.getHealth()-1);
 	}
 }

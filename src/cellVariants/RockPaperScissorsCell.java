@@ -19,14 +19,23 @@ public class RockPaperScissorsCell extends Cell{
 		myStatesAndColors.put(3, Color.rgb(68, 139, 65));
 	}
 
+	public boolean beats(RockPaperScissorsCell neighbor) {
+		if((myState==1 && neighbor.getState()==3) || 
+				(myState==2 && neighbor.getState()==1) ||
+				(myState==3 && neighbor.getState()==2) ||
+				(neighbor.getState()==0 && !(myState==0))) {
+					return true;
+		} return false;
+	}
+	
 	public void increaseHealth() {
 		if (health<=10) {
-			health+=1;
+			health+=2;
 		}
 	}
 
 	public void decreaseHealth() {
-		health -=1;
+		health -=2;
 	}
 
 	public void setHealth(int newhealth) {

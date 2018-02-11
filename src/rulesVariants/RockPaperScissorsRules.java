@@ -24,13 +24,13 @@ public class RockPaperScissorsRules extends Rules {
 				emptyAct(c, tempGameField.get(c));
 			}
 			else {
-				for(RockPaperScissorsCell neighbor:tempGameField.get(c)) {
-					if(neighbor.getState()==((c.getState()+1) % c.getStateCount())) {
-						victoryLossAct(neighbor, c);
-					} 
-					else if (c.getState()==((neighbor.getState()+1) % c.getStateCount())) { //neighbor is prey
-						victoryLossAct(c, neighbor);
-					}
+				Collections.shuffle(tempGameField.get(c));
+				RockPaperScissorsCell neighbor = tempGameField.get(c).get(0);
+				if(neighbor.beats(c)) {
+					victoryLossAct(neighbor, c);						
+				} 
+				else if (c.beats(neighbor)) {
+					victoryLossAct(c, neighbor);
 				}
 			}
 		}
@@ -62,6 +62,6 @@ public class RockPaperScissorsRules extends Rules {
 	
 	private void killCell(RockPaperScissorsCell nowDead, RockPaperScissorsCell winner) {
 		nowDead.setState(winner.getState());
-		nowDead.setHealth(winner.getHealth()-1);
+		nowDead.setHealth(10);
 	}
 }

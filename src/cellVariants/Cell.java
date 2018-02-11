@@ -60,10 +60,6 @@ public abstract class Cell {
 		myState = state;
 	}
 	
-	public int getStateCount() {
-		return myStatesAndColors.size();
-	}
-	
 	public String getCorrespondingColor(int state) {
 		Color color = myStatesAndColors.get(state);
 		return String.format("rgb(%s, %s, %s)", rgbS(color.getRed()), rgbS(color.getGreen()), rgbS(color.getBlue()));

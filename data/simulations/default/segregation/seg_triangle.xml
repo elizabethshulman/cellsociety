@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simulation>
    <header>
-      <simtype>PredatorPrey</simtype>
+      <simtype>Segregation</simtype>
       <author>You</author>
       <title>The Best Simulation Ever</title>
    </header>
    <global_vars>
-      <fishBreedTime>5</fishBreedTime>
-      <sharkBreedTime>20</sharkBreedTime>
-      <sharkStarveTime>6</sharkStarveTime>
+      <satisfactionThreshold>0.3</satisfactionThreshold>
    </global_vars>
    <grid>
-   <cellShape>Square</cellShape>
+   <cellShape>Triangle</cellShape>
    	<neighbors>adjacent</neighbors>
    	<borders>finite</borders>
       <row>

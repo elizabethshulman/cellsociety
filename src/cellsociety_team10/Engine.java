@@ -186,4 +186,12 @@ public class Engine {
 	private String createHeaderText(String title, String author) {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
+	
+	public void updateBorders(Boolean isToroidal) {
+		myFileProcessor.setBorders(isToroidal);
+	}
+	
+	public void updateNeighbors(Boolean isDiagonal) {
+		myFileProcessor.setNeighbors(isDiagonal);
+	}
 }

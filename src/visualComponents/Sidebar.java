@@ -26,6 +26,7 @@ public class Sidebar {
 	private static final double MIN_SLIDER = 4;
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;
+	private static final double DIR_SIZE = 40;
 
 	private VBox myVBox = new VBox();
 	private Engine myEngine;
@@ -104,7 +105,13 @@ public class Sidebar {
 		combo.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
-				System.out.println(new_val);
+				Boolean b;
+				if (new_val == "Toroidal") {
+					b = true;
+				} else {
+					b = false;
+				}
+				myEngine.updateBorders(b);
 			}
 		});
 
@@ -121,12 +128,12 @@ public class Sidebar {
 	private HBox buildShapeOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("shape-hbox");
-		RadioButton rb1 = createRadioButton("sidebar_square.png", "square");
+		RadioButton rb1 = createRadioButton("sidebar_square.png", "square", SHAPE_SIZE);
 		rb1.setId("radio");
 		rb1.setSelected(true);
-		RadioButton rb2 = createRadioButton("sidebar_triangle.png", "triangle");
+		RadioButton rb2 = createRadioButton("sidebar_triangle.png", "triangle", SHAPE_SIZE);
 		rb2.setId("radio");
-		RadioButton rb3 = createRadioButton("sidebar_hex.png", "hex");
+		RadioButton rb3 = createRadioButton("sidebar_hex.png", "hex", SHAPE_SIZE);
 		rb3.setId("radio");
 
 
@@ -156,24 +163,41 @@ public class Sidebar {
 	private HBox buildNeighborOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("edge-hbox");
-		RadioButton rb1 = new RadioButton(resources.getString("Adjacent"));
+		RadioButton rb1 = createRadioButton("8dir.png", "diag", DIR_SIZE);
 		rb1.setId("radio");
 		rb1.setSelected(true);
-		RadioButton rb2 = new RadioButton(resources.getString("Orthogonal"));
+		RadioButton rb2 = createRadioButton("4dir.png", "adjacent", DIR_SIZE);
 		rb2.setId("radio");
 
 
 		ToggleGroup toggleGroup = new ToggleGroup();
 		rb1.setToggleGroup(toggleGroup);
 		rb2.setToggleGroup(toggleGroup);
+		
+		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			@Override
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle t, Toggle t1) {
+				RadioButton selectedRadioButton = (RadioButton) t1.getToggleGroup().getSelectedToggle();
+				String neighbor_type = selectedRadioButton.getGraphic().getUserData().toString();
+				
+				Boolean b;
+				if (neighbor_type == "diag") {
+					b = true;
+				} else {
+					b = false;
+				}
+				
+				myEngine.updateNeighbors(b);
+			}
+		});
 
 		hbox.getChildren().addAll(rb1, rb2);
 		return hbox;
 	}
 
-	private RadioButton createRadioButton(String filename, String shape) {
+	private RadioButton createRadioButton(String filename, String shape, double size) {
 		RadioButton temp = new RadioButton();
-		temp.setGraphic(Helper.generateImageView(filename, SHAPE_SIZE));
+		temp.setGraphic(Helper.generateImageView(filename, size));
 		temp.getGraphic().setUserData(shape);
 		return temp;
 	}

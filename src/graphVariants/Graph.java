@@ -8,6 +8,7 @@ import java.util.Set;
 import cellVariants.Cell;
 import cellVariants.CellFactory;
 import cellsociety_team10.FileProcessor;
+import neighborCalculatorVariants.NeighborCalculator;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 import visualComponents.ContainerFactory;
@@ -42,13 +43,15 @@ public class Graph {
 	}
 	
 	public void adjustRows(int new_rows) {
+		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalculator();
+		neighbor_calc.setRows(new_rows);
 		if (new_rows > numRows) {
 			for (int r=numRows; r < new_rows; r++) {
 				for (int c=0; c < numCols; c++) {
 					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
 					cell.setRow(r);
 					cell.setCol(c);
-					findAndAddNeighbors(cell);
+					findAndAddNeighbors(cell, neighbor_calc);
 				}
 			}
 		} else {
@@ -66,13 +69,15 @@ public class Graph {
 	}
 	
 	public void adjustCols(int new_cols) {
+		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalculator();
+		neighbor_calc.setCols(new_cols);
 		if (new_cols > numCols) {
 			for (int r=0; r < numRows; r++) {
 				for (int c=numCols; c < new_cols; c++) {
 					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
 					cell.setRow(r);
 					cell.setCol(c);
-					findAndAddNeighbors(cell);
+					findAndAddNeighbors(cell, neighbor_calc);
 				}
 			}
 		} else {
@@ -89,8 +94,8 @@ public class Graph {
 		numCols = new_cols;
 	}
 	
-	private void findAndAddNeighbors(Cell cell) {
-		List<int[]> l = myFileProcessor.getPossibleNeighbors(cell.getRow(), cell.getCol());
+	private void findAndAddNeighbors(Cell cell, NeighborCalculator neighbor_calc) {
+		List<int[]> l = neighbor_calc.calcNeighborLocations(cell.getRow(), cell.getCol());
 		List<Cell> neighbors = new ArrayList<>();
 		for (int[] pair : l) {
 			for (Cell possible : getCells()) {
@@ -100,8 +105,10 @@ public class Graph {
 			}
 		}
 		currentGrid.put(cell, neighbors);
+		for (Cell possible : neighbors) {
+			currentGrid.get(possible).add(cell);
+		}
 	}
-
 	
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);

@@ -74,6 +74,6 @@ public abstract class Cell {
 	}
 	
 	public void setRandom() {
-		myState = new Random().nextInt(myStatesAndColors.keySet().size());
+		setState(new Random().nextInt(myStatesAndColors.keySet().size()));
 	}
 }

@@ -18,9 +18,9 @@ public class TriangleNeighborCalculator extends NeighborCalculator {
 			for(int a = col - 1; a <= col + 1; a++)
 			{
 				if(a == col)
-					addLocation(row + shift_constant,col,neighborLocs);
+					addLocation(row + shift_constant,a,neighborLocs);
 				else 
-					addLocation(row,col,neighborLocs);
+					addLocation(row,a,neighborLocs);
 			}
 			return neighborLocs;
 		}

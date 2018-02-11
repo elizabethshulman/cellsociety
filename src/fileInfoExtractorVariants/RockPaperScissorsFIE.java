@@ -26,7 +26,7 @@ public class RockPaperScissorsFIE implements FileInfoExtractor{
 		if(val < 0 || val > 3) {
 			throw new XMLStreamException("Invalid Rock Paper Scissors cell type.");
 		}
-		if(val == 3)
+		if(val == 0)
 			return new RockPaperScissorsCell(val, 0, shape);
 		int gradient = Integer.parseInt(xmlRead.getAttributeValue(1));
 		return new RockPaperScissorsCell(val, gradient, shape);

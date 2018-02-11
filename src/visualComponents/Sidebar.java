@@ -108,7 +108,7 @@ public class Sidebar {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
 				Boolean b;
-				if (new_val == "Toroidal") {
+				if (new_val.equals("Toroidal")) {
 					b = true;
 				} else {
 					b = false;
@@ -184,12 +184,7 @@ public class Sidebar {
 				RadioButton selectedRadioButton = (RadioButton) t1.getToggleGroup().getSelectedToggle();
 				String neighbor_type = selectedRadioButton.getGraphic().getUserData().toString();
 				
-				Boolean b;
-				if (neighbor_type == "diag") {
-					b = true;
-				} else {
-					b = false;
-				}
+				Boolean b = neighbor_type.equals("diag");
 				
 				myEngine.updateNeighbors(b);
 			}

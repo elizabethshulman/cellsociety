@@ -200,11 +200,13 @@ public class Engine {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 	
-	public void updateBorders(Boolean isToroidal) {
+	public void updateBorders(boolean isToroidal) {
 		myFileProcessor.setBorders(isToroidal);
+		myGraph.updateGraph();
 	}
 	
-	public void updateNeighbors(Boolean isDiagonal) {
+	public void updateNeighbors(boolean isDiagonal) {
 		myFileProcessor.setNeighbors(isDiagonal);
+		myGraph.updateGraph();
 	}
 }

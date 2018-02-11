@@ -44,17 +44,17 @@ public class RockPaperScissorsCell extends Cell{
 	
 	public void increaseHealth() {
 		if (health<=10) {
-			health+=2;
+			health+=1;
 		}
 	}
 
 	public void decreaseHealth() {
-		health -=2;
+		health -=1;
 	}
 
 	public void setHealth(int newhealth) {
 		health = newhealth;
-		if(health>0) {
+		if(health<=0) {
 			health=0;
 			myState=0;
 		}

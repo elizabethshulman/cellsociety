@@ -25,11 +25,8 @@ public class RockPaperScissorsRules extends Rules {
 				killCell(c,neighbor);
 			}
 			else if(neighbor.beats(c)) {
-				victoryLossAct(neighbor, c);						
-			} 
-//			else if (c.beats(neighbor)) {
-//				victoryLossAct(c, neighbor);
-//			}
+				victoryLossAct(neighbor, c);		
+			}
 			
 		}
 		Map<Cell, List<Cell>> returnGraph = new HashMap(tempGameField);
@@ -48,6 +45,6 @@ public class RockPaperScissorsRules extends Rules {
 		if(winner.getState() == 0)
 			return;
 		nowDead.setState(winner.getState());
-		nowDead.setHealth(10);
+		nowDead.setHealth(winner.getHealth() - 1);
 	}
 }

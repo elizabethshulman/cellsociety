@@ -203,6 +203,8 @@ public class Engine {
 		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
+		myVis.reset(false);
 		myGraph.updateGraph();
+		myVis.visualizeGraph(myGraph);
 	}
 }

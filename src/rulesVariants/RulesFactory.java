@@ -1,12 +1,6 @@
 package rulesVariants;
 import java.util.Map;
 
-import rulesVariants.FireRules;
-import rulesVariants.GameOfLifeRules;
-import rulesVariants.PredatorPreyRules;
-import rulesVariants.Rules;
-import rulesVariants.SegregationRules;
-
 public class RulesFactory {
 	public Rules createRules(String rule, Map<String, Double> map) {
 		switch(rule) {
@@ -18,6 +12,10 @@ public class RulesFactory {
 				return new SegregationRules(map);
 			case "PredatorPrey": 
 				return new PredatorPreyRules(map);
+			case "RockPaperScissors": 
+				return new RockPaperScissorsRules();
+			case "Foraging": 
+				return new ForagingRules(map);
 			default: 
 				throw new IllegalArgumentException("Invalid rules class creation");
 		}

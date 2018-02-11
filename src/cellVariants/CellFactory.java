@@ -9,10 +9,12 @@ public class CellFactory {
 			return new FireCell(1, shape);
 		case "PredatorPrey": 
 			return new PredatorPreyCell(0, shape);
-		case "RockPaperScissors":
-			return new RockPaperScissorsCell(0, 5, shape); 
 		case "Segregation":
 			return new SegregationCell(0, shape);
+		case "RockPaperScissors":
+			return new RockPaperScissorsCell(0, 5, shape); 
+		case "Foraging":
+			return new ForagingCell(0, shape);
 		default: 
 			throw new IllegalArgumentException("Invalid rules class creation");
 		}

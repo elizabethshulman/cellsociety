@@ -21,17 +21,17 @@ public class RockPaperScissorsFIE implements FileInfoExtractor{
 	}
 
 	@Override
-	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 3) {
 			throw new XMLStreamException("Invalid Rock Paper Scissors cell type.");
 		}
 		if(val == 0)
-			return new RockPaperScissorsCell(val, 0, shape);
+			return new RockPaperScissorsCell(val, 0);
 		int gradient = Integer.parseInt(xmlRead.getAttributeValue(1));
 		if(gradient < 1 || gradient > 10)
 			throw new XMLStreamException("Invalid gradient for colored Rock Paper Scissors cell.");
-		return new RockPaperScissorsCell(val, gradient, shape);
+		return new RockPaperScissorsCell(val, gradient);
 	}
 
 	@Override

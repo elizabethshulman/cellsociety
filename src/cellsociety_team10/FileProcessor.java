@@ -1,5 +1,4 @@
 package cellsociety_team10;
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,6 +56,7 @@ public class FileProcessor {
 	}
 	protected void setCellShape(String shape) {
 		cellShape = shape;
+		createNCalc();
 		refreshMap();
 	}
 	public String getType() {
@@ -159,7 +159,7 @@ public class FileProcessor {
 				  switch(myParser.getLocalName()) {
 				  	case "row":	newRow = new ArrayList<Cell>();
 				  				break;
-				  	case "cell": newRow.add(helper.getCell(myParser,cellShape));
+				  	case "cell": newRow.add(helper.getCell(myParser));
 				  				break;
 				  	case "cellShape": myParser.next();
 			  						cellShape = myParser.getText();

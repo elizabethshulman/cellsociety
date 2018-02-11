@@ -128,10 +128,11 @@ public class Engine {
 				myFileProcessor.setRowCount(myGraph.getRows());
 				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
 			} catch (FileNotFoundException e) {
-				// clean this up!!
-				e.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
+				alert.show();
 			} catch (XMLStreamException ee) {
-				ee.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR, ee.getLocalizedMessage());
+				alert.show();
 			}
 			
 		}

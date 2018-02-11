@@ -1,13 +1,17 @@
 package graphVariants;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import cellVariants.Cell;
+import cellVariants.CellFactory;
 import cellsociety_team10.FileProcessor;
+import neighborCalculatorVariants.NeighborCalculator;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
+import visualComponents.ContainerFactory;
 
 
 /**
@@ -16,16 +20,19 @@ import rulesVariants.RulesFactory;
  *	Stores cell/neighbor map
  *
  */
-public abstract class Graph {
+public class Graph {
 
 	private Map<Cell, List<Cell>> currentGrid;
 	private Rules myRules;
 	private int numRows;
 	private int numCols;
 	private FileProcessor myFileProcessor;
+	protected ContainerFactory myContainerFactory = new ContainerFactory();
+	private CellFactory myCellFactory;
 	
 	
-	public Graph(FileProcessor file_processor, RulesFactory rules_factory) {
+	public Graph(FileProcessor file_processor, RulesFactory rules_factory, CellFactory cell_factory) {
+		myCellFactory = cell_factory;
 		myFileProcessor = file_processor;
 		Rules curr_rules = rules_factory.createRules(myFileProcessor.getType(), myFileProcessor.getGlobalVars());
 		
@@ -35,9 +42,73 @@ public abstract class Graph {
 		numCols = myFileProcessor.getColCount();
 	}
 	
-	public abstract void adjustRows(int new_rows);
+	public void adjustRows(int new_rows) {
+		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalculator();
+		neighbor_calc.setRows(new_rows);
+		if (new_rows > numRows) {
+			for (int r=numRows; r < new_rows; r++) {
+				for (int c=0; c < numCols; c++) {
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					cell.setRow(r);
+					cell.setCol(c);
+					findAndAddNeighbors(cell, neighbor_calc);
+				}
+			}
+		} else {
+			List<Cell> toBeRemoved = new ArrayList<>();
+			for (Cell cell : getCells()) {
+				if (cell.getRow() >= new_rows) {
+					toBeRemoved.add(cell);
+				}
+			}
+			for (Cell cell : toBeRemoved) {
+				currentGrid.remove(cell);
+			}
+		}
+		numRows = new_rows;
+	}
 	
-	public abstract void adjustCols(int new_cols);
+	public void adjustCols(int new_cols) {
+		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalculator();
+		neighbor_calc.setCols(new_cols);
+		if (new_cols > numCols) {
+			for (int r=0; r < numRows; r++) {
+				for (int c=numCols; c < new_cols; c++) {
+					Cell cell = myCellFactory.createCell(myFileProcessor.getType(), myFileProcessor.getCellShape());
+					cell.setRow(r);
+					cell.setCol(c);
+					findAndAddNeighbors(cell, neighbor_calc);
+				}
+			}
+		} else {
+			List<Cell> toBeRemoved = new ArrayList<>();
+			for (Cell cell : getCells()) {
+				if (cell.getCol() >= new_cols) {
+					toBeRemoved.add(cell);
+				}
+			}
+			for (Cell cell : toBeRemoved) {
+				currentGrid.remove(cell);
+			}
+		}
+		numCols = new_cols;
+	}
+	
+	private void findAndAddNeighbors(Cell cell, NeighborCalculator neighbor_calc) {
+		List<int[]> l = neighbor_calc.calcNeighborLocations(cell.getRow(), cell.getCol());
+		List<Cell> neighbors = new ArrayList<>();
+		for (int[] pair : l) {
+			for (Cell possible : getCells()) {
+				if (possible.getRow() == pair[0] && possible.getCol() == pair[1]) {
+					neighbors.add(possible);
+				}
+			}
+		}
+		currentGrid.put(cell, neighbors);
+		for (Cell possible : neighbors) {
+			currentGrid.get(possible).add(cell);
+		}
+	}
 	
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);
@@ -70,8 +141,12 @@ public abstract class Graph {
 		return myFileProcessor.getAuthor();
 	}
 	
-	public String getCorrectColor(Integer state) {
+	public String getCorrectColor(int state) {
 		Cell cell = currentGrid.keySet().iterator().next();
 		return cell.getCorrespondingColor(state);
+	}
+	
+	public String getCellShape() {
+		return myFileProcessor.getCellShape();
 	}
 }

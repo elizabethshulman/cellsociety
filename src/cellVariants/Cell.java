@@ -1,29 +1,23 @@
 package cellVariants;
 
 import java.util.HashMap;
+import java.util.Random;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import visualComponents.Helper;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 public abstract class Cell {
 
-	protected int state;
-	protected HashMap<Integer, Image> statesAndImages = new HashMap<>();
-	protected HashMap<Integer, String> statesAndColors = new HashMap<>();
-	private int row;
-	private int col;
-	protected ImageView imageView;
+	protected int myState;
+	protected HashMap<Integer, Color> myStatesAndColors = new HashMap<>();
+	private int myRow;
+	private int myCol;
 	private String myShape;
 	
 	public Cell(int st, String shape) {
 		myShape = shape;
-		state = st;
+		myState = st;
 		buildHashMap();
-		imageView = new ImageView(statesAndImages.get(state));
-		imageView.setOnMouseClicked(e -> {
-			nextImage();
-		});
 	}
 	
 	protected String getShapeType() {
@@ -32,50 +26,54 @@ public abstract class Cell {
 
 	protected abstract void buildHashMap();
 	
-	public String getCorrespondingColor(Integer state) {
-		return statesAndColors.get(state);
+	public Color getColor() {
+		return myStatesAndColors.get(myState);
 	}
 	
-	protected void nextImage() {
-		state = (state + 1) % statesAndImages.size();
-		setState(state);
+	public void nextColor(Polygon polygon) {
+		myState = (myState + 1) % myStatesAndColors.size();
+		polygon.setFill(myStatesAndColors.get(myState));
+		setState(myState);
 	}
 	
-	protected Image buildCellImage(String filename) {
-		Image temp = Helper.generateImage(filename);
-		return temp;
-	}
-
 	public int getRow() {
-		return row;
+		return myRow;
 	}
 
 	public void setRow(int r) {
-		row = r;
+		myRow = r;
 	}
 
 	public int getCol() {
-		return col;
+		return myCol;
 	}
 
 	public void setCol(int c) {
-		col = c;
+		myCol = c;
 	}
 	
 	public int getState() {
-		return state;
+		return myState;
 	}
 	
-	public void setState(int st) {
-		state = st;
-		imageView.setImage(statesAndImages.get(st));
-	}
-	
-	public ImageView getImageView() {
-		return imageView;
+	public void setState(int state) {
+		myState = state;
 	}
 	
 	public int getStateCount() {
-		return statesAndColors.size();
+		return myStatesAndColors.size();
+	}
+	
+	public String getCorrespondingColor(int state) {
+		Color color = myStatesAndColors.get(state);
+		return String.format("rgb(%s, %s, %s)", rgbS(color.getRed()), rgbS(color.getGreen()), rgbS(color.getBlue()));
+	}
+	
+	private String rgbS(Double d) {
+		return String.valueOf((int) (d * 255));
+	}
+	
+	public void setRandom() {
+		setState(new Random().nextInt(myStatesAndColors.keySet().size()));
 	}
 }

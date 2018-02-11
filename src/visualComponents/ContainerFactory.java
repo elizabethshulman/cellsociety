@@ -1,7 +1,7 @@
 package visualComponents;
 
 public class ContainerFactory {
-	public Container createContainer(String shape) {
+	public Container create(String shape) {
 		switch(shape) {
 			case "Triangle": 
 				return new TriangleContainer();

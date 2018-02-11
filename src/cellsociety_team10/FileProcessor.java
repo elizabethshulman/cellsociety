@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,13 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import cellVariants.Cell;
 import fileInfoExtractorVariants.FileInfoExtractor;
@@ -37,22 +46,46 @@ public class FileProcessor {
 	private String cellShape;
 	private NeighborCalculator nCalc;
 	
+	public FileProcessor() {
+		
+	}
 	public FileProcessor(File file) throws FileNotFoundException, XMLStreamException{
 		XMLInputFactory xmlif = XMLInputFactory.newInstance();
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 		readFile();
 	}
+	public String getCellShape() {
+		return cellShape;
+	}
+	protected void setCellShape(String shape) {
+		cellShape = shape;
+	}
 	public String getType() {
 		return myType;
 	}
+	protected void setType(String type) {
+		myType = type;
+		try {
+				String className = "fileInfoExtractorVariants." + myType + "FIE";
+			helper = (FileInfoExtractor) Class.forName(className).getConstructor().newInstance();
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Simulation type argument is invalid");
+		}
+	}
 	public String getAuthor() {
 		return author;
+	}
+	protected void setAuthor(String s) {
+		author = s;
 	}
 	public String getTitle() {
 		return title;
 	}
 	public Map<String,Double> getGlobalVars() {
-		return globalVars;
+		return new HashMap<>(globalVars);
+	}
+	protected void setGlobalVars(Map<String,Double> map) {
+		globalVars = map;
 	}
 	public Map<Cell,List<Cell>> getCellGrid() {
 		return cellGrid;
@@ -60,12 +93,23 @@ public class FileProcessor {
 	public int getRowCount(){
 		return gridRowCount;
 	}
+	protected void setRowCount(int row){
+		gridRowCount = row;
+	}
 	public int getColCount() {
 		return gridColCount;
 	}
+	protected void setColCount(int col){
+		gridColCount = col;
+	}
+	protected void setBorders(boolean b) {
+		isToroidal = b;
+	}
+	protected void setNeighbors(boolean b) {
+		isDiagonal = b;
+	}
 	// Reads in the file and sets instance variables based on file information
-	public void readFile() throws XMLStreamException
-	{
+	public void readFile() throws XMLStreamException {
 		readHeader();
 		readGlobalVars();
 		readCells();
@@ -73,20 +117,12 @@ public class FileProcessor {
 	// Reads the header section of the file
 	private void readHeader() throws XMLStreamException {
 		int xmlEvent;
-		do
-		{
+		do {
 			 xmlEvent = myParser.next();
 			 if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
 				  switch(myParser.getLocalName()) {
 				  	case "simtype": myParser.next();
-				  		String simName = myParser.getText();
-			  			myType = simName;
-			  			try {
-			  				String className = "fileInfoExtractorVariants." + simName + "FIE";
-							helper = (FileInfoExtractor) Class.forName(className).getConstructor().newInstance();
-						} catch (Exception e) {
-							throw new IllegalArgumentException("Simulation type argument is invalid");
-						}
+				  		setType(myParser.getText());
 				  		break;
 				  	case "author": myParser.next(); 
 				  					author = myParser.getText();
@@ -110,6 +146,7 @@ public class FileProcessor {
 			}
 		}
 		while(xml != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("global_vars"));
+		helper.addDefaultGlobals(globalVars);
 	}
 	//Creates 2D array based on information from file
 	private void readCells() throws XMLStreamException {
@@ -117,7 +154,6 @@ public class FileProcessor {
 		ArrayList<Cell> newRow = new ArrayList<>();
 		while(true) {
 			 int xmlEvent = myParser.next();
-			  //Process start element.
 			  if (xmlEvent == XMLStreamConstants.START_ELEMENT) {
 				  switch(myParser.getLocalName()) {
 				  	case "row":	newRow = new ArrayList<Cell>();
@@ -187,6 +223,20 @@ public class FileProcessor {
 		myWriter.writeEndElement();
 		myWriter.writeEndDocument();
 		myWriter.flush();
+		myWriter.close();
+		try {
+			formatOutput(file.getAbsoluteFile());
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	private void formatOutput(File file) throws TransformerException {
+		 Transformer transformer = TransformerFactory.newInstance().newTransformer();
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+	        transformer.transform(new StreamSource(file), new StreamResult(file));
 		
 	}
 	private void writeHeader() throws XMLStreamException {
@@ -211,7 +261,7 @@ public class FileProcessor {
 		}
 		myWriter.writeEndElement();
 	}
-	private void writeGrid(String[][] stateGrid) throws XMLStreamException {
+	private void writeGrid(Cell[][] stateGrid) throws XMLStreamException {
 		myWriter.writeStartElement("grid");
 		writeGridHeader();
 		
@@ -219,7 +269,7 @@ public class FileProcessor {
 			myWriter.writeStartElement("row");
 			for(int b = 0; b < gridColCount; b++) {
 				myWriter.writeEmptyElement("cell");
-				myWriter.writeAttribute("state", stateGrid[a][b]);
+				helper.writeCell(myWriter,stateGrid[a][b]);
 			}
 			myWriter.writeEndElement();
 		}
@@ -247,11 +297,15 @@ public class FileProcessor {
 		myWriter.writeEndElement();
 	}
 	
-	public String[][] createStateGrid(Set<Cell> cells) {
-		String[][] arrangement = new String[gridRowCount][gridColCount];
+	public Cell[][] createStateGrid(Set<Cell> cells) {
+		Cell[][] arrangement = new Cell[gridRowCount][gridColCount];
 		for(Cell c: cells) {
-			arrangement[c.getRow()][c.getCol()] = helper.getEncoding(c.getState());
+			arrangement[c.getRow()][c.getCol()] = c;
 		}
 		return arrangement;
+	}
+	
+	public List<int[]> getPossibleNeighbors(int row, int col) {
+		return nCalc.calcNeighborLocations(row, col);
 	}
 }

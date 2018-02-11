@@ -14,6 +14,12 @@ public abstract class NeighborCalculator {
 		includesDiagonals = diag;
 		isToroidal = torus;
 	}
+	public void setRowLength(int row) {
+		gridRowLength = row;
+	}
+	public void setColLength(int col) {
+		gridColLength = col;
+	}
 	public abstract List<int[]> calcNeighborLocations(int row, int col);
 	public boolean isValid(int row, int col) {
 		return row >= 0 && row < gridRowLength && col >= 0 && col < gridColLength;

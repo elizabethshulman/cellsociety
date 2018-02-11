@@ -1,7 +1,10 @@
 package fileInfoExtractorVariants;
 
+import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
@@ -16,6 +19,15 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
+	@Override
+	public void addDefaultGlobals(Map<String,Double> globals) {
+		if(!globals.containsKey("sharkBreedTime"))
+			globals.put("sharkBreedTime", 5.0);
+		if(!globals.containsKey("fishBreedTime"))
+			globals.put("sharkBreedTime", 5.0);
+		if(!globals.containsKey("sharkStarveTime"))
+			globals.put("sharkBreedTime", 5.0);
+	}
 
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
@@ -29,13 +41,16 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 	}
 
 	@Override
-	public String getEncoding(int state) {
-		switch(state)
-		{
-			case 2: return "S";
-			case 1: return "F";
-			default: return "E";
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
+		String s;
+		switch(cell.getState()) {
+			case 2: s = "S";
+			case 1: s = "F";
+			default: s = "E";
 		}
+		myWriter.writeAttribute("state", s);
+		
 	}
+
 
 }

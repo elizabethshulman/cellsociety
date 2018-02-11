@@ -1,7 +1,10 @@
 package fileInfoExtractorVariants;
 
+import java.util.Map;
+
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import cellVariants.SegregationCell;
@@ -16,6 +19,10 @@ public class SegregationFIE implements FileInfoExtractor {
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
+	public void addDefaultGlobals(Map<String,Double> globals) {
+		if(!globals.containsKey("satisfactionThreshold"))
+			globals.put("satisfactionThreshold", 0.5);
+	}
 
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead, String shape) throws XMLStreamException {
@@ -28,13 +35,16 @@ public class SegregationFIE implements FileInfoExtractor {
 	}
 
 	@Override
-	public String getEncoding(int state) {
-		switch(state)
-		{
-			case 2: return "B";
-			case 1: return "R";
-			default: return "E";
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
+		String s;
+		switch(cell.getState()) {
+			case 2: s = "B";
+			case 1: s = "R";
+			default: s = "E";
 		}
+		myWriter.writeAttribute("state", s);
+		
 	}
+
 
 }

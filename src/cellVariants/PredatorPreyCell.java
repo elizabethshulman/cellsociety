@@ -34,9 +34,9 @@ public class PredatorPreyCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Color.rgb(14, 25, 54));
-		statesAndColors.put(1, Color.rgb(68, 139, 165));
-		statesAndColors.put(2, Color.rgb(137, 0, 0));
+		myStatesAndColors.put(0, Color.rgb(14, 25, 54));
+		myStatesAndColors.put(1, Color.rgb(68, 139, 165));
+		myStatesAndColors.put(2, Color.rgb(137, 0, 0));
 	}
 	
 	public void increaseSharkEnergy() {

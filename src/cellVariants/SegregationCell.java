@@ -10,8 +10,8 @@ public class SegregationCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Color.rgb(195, 224, 229));
-		statesAndColors.put(1, Color.rgb(3, 35, 37));
-		statesAndColors.put(2, Color.rgb(1, 59, 57));
+		myStatesAndColors.put(0, Color.rgb(195, 224, 229));
+		myStatesAndColors.put(1, Color.rgb(3, 35, 37));
+		myStatesAndColors.put(2, Color.rgb(1, 59, 57));
 	}
 }

@@ -53,15 +53,7 @@ public class Sidebar {
 		textAndComponent(myResources.getString("EdgeType"), buildEdgeBox(resources));
 		textAndComponent(myResources.getString("NeighborType"), buildNeighborOptions(resources));
 
-		myRowsSlider.setOnMouseReleased(e -> {
-			graph.adjustRows((int) myRowsSlider.getValue());
-			myEngine.updateDIY();
-		});
-
-		myColsSlider.setOnMouseReleased(e -> {
-			graph.adjustCols((int) myColsSlider.getValue());
-			myEngine.updateDIY();
-		});
+		setSliders(graph);
 	}
 
 	private void textAndComponent(String text, Node node) {
@@ -95,6 +87,7 @@ public class Sidebar {
 			@Override
 			public void changed(ObservableValue<? extends String> ov, String old_val, String new_val) {
 				myEngine.loadSimulation(new File(myConversions.get(new_val)));
+				myEngine.updateDIY();
 			}
 		});
 	}
@@ -152,6 +145,7 @@ public class Sidebar {
 				
 				String curr_sim = mySimBox.getSelectionModel().getSelectedItem().toString();
 				myEngine.loadSimulation(new File(myConversions.get(curr_sim)));
+				myEngine.updateDIY();
 			}
 		});
 
@@ -206,10 +200,6 @@ public class Sidebar {
 			}
 		});
 		return temp;
-	}
-	
-	private void setSliderVals(int num_rows, int num_cols) {	
-		
 	}
 	
 	public void setSliders(Graph graph) {

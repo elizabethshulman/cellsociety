@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.xml.stream.XMLStreamException;
 
+import cellVariants.Cell;
 import cellVariants.CellFactory;
 import graphVariants.Graph;
 import javafx.animation.KeyFrame;
@@ -168,12 +169,17 @@ public class Engine {
 	private void setupDIY() {
 		File file = new File("data/simulations/default/life/life_square.xml");
 		loadSimulation(file);
+		
+		updateDIY();
 
 		mySidebar = new Sidebar(myResources, this, myGraph);
 		myVis.addSidebar(mySidebar);
 	}
 	
 	public void updateDIY() {
+		for (Cell c : myGraph.getCells()) {
+			c.setRandom();
+		}
 		myVis.updateGraphOnly(myGraph);
 	}
 

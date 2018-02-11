@@ -4,9 +4,10 @@ Cell Society README.md
 #### Ben Hubsch, Andrew Yeung, Elizabeth Shulman
 
 1/25/18 - 2/15/18
-Hours worked: 125
+Hours worked: 125  
 
----
+
+
 ## Roles
 #### Ben Hubsch:  
 Handled components related to, broadly speaking, visualization
@@ -15,9 +16,10 @@ Handled components related to, broadly speaking, visualization
 Responsible for writing and processing XML files
 
 #### Elizabeth Shulman:  
-Implemented simulation-specific rules for cell and grid updates
+Implemented simulation-specific rules for cell and grid updates  
 
----
+
+
 ## Resources Used
 * [Open Closed Principle](https://www2.cs.duke.edu/courses/compsci308/spring18/readings/ocp.pdf)
 * [Why Java Interfaces Are So Very Cool](https://www2.cs.duke.edu/courses/compsci308/spring18/readings/java_garage_ch17.pdf)
@@ -28,7 +30,7 @@ Implemented simulation-specific rules for cell and grid updates
 *  George Bernard
 *  Ashka Stephen  
 
----
+
 ## Using the Program
 *  File used to start: Main
 *  Known bugs:
@@ -43,9 +45,9 @@ Implemented simulation-specific rules for cell and grid updates
     *  gameoflife2.xml
     *  fire3_triangle.xml
     *  predatorprey3.xml
-    *  segregation2.xml  
+    *  segregation2.xml    
 
----
+
 ## Design Decisions and Assumptions
 #### Within Rules:
 *  Rock-Paper-Scissors
@@ -54,9 +56,9 @@ Implemented simulation-specific rules for cell and grid updates
     *  To accomodate non-rectangular cell shapes, the orientation element of this simulation was disregarded. Instead, an ant's next location was selected by prioritizing pheromone levels.
 #### Within XML:
 *  Random Distributions
-    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.  
+    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.   
     
----
+
 ## Impressions of the Assignment
 *  We felt this project was adequately-sized as an introduction to teamwork in a programming setting.
 *  The only feedback we had was that the second sprint felt considerably more difficult and time-intensive than the first.

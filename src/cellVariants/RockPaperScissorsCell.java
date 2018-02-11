@@ -1,14 +1,12 @@
 package cellVariants;
 
-import java.util.Random;
-
 public class RockPaperScissorsCell extends Cell{
 
 	private int health;
 	
-	public RockPaperScissorsCell(int st, String shape) {
+	public RockPaperScissorsCell(int st, int gradient, String shape) {
 		super(st, shape);
-		health = new Random().nextInt(10);
+		health = gradient;
 	}
 
 	@Override
@@ -17,8 +15,6 @@ public class RockPaperScissorsCell extends Cell{
 		statesAndImages.put(1, buildCellImage(getShapeType() + "/sharkred.png"));
 		statesAndImages.put(2, buildCellImage(getShapeType() + "/forestgreen.png"));
 		statesAndImages.put(3, buildCellImage(getShapeType() + "/lightteal.png"));
-		
-		///ADD STATESANDCOLORS FOR GRAPH
 	}
 
 	public void increaseHealth() {
@@ -38,5 +34,4 @@ public class RockPaperScissorsCell extends Cell{
 	public int getHealth() {
 		return health;
 	}
-
 }

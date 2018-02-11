@@ -49,19 +49,19 @@ public class ForagingCell extends Cell {
 		return antsHere;
 	}
 	
-	public double getHomePheromoneLevels() {
+	public double getHomePheromones() {
 		return homePheromoneLevels;
 	}
 
-	public void setHomePheromoneLevels(double homePheromoneLevels) {
+	public void setHomePheromones(double homePheromoneLevels) {
 		this.homePheromoneLevels = homePheromoneLevels;
 	}
 	
-	public double getFoodPheromoneLevels() {
+	public double getFoodPheromones() {
 		return foodPheromoneLevels;
 	}
 
-	public void setFoodPheromoneLevels(double foodPheromoneLevels) {
+	public void setFoodPheromones(double foodPheromoneLevels) {
 		this.foodPheromoneLevels = foodPheromoneLevels;
 	}
 

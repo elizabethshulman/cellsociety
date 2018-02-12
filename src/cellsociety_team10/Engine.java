@@ -171,7 +171,7 @@ public class Engine {
 			mySidebar.setSliders(myGraph);
 		}
 		
-		myVis.changeHeaderText(createHeaderText(myGraph.getTitle(), myGraph.getAuthor()));
+		myVis.changeHeaderText(createHeaderText(myFileProcessor.getTitle(), myFileProcessor.getAuthor()));
 		myVis.visualizeGraph(myGraph);
 		myStage.setScene(myVis.getScene());
 	}
@@ -181,13 +181,13 @@ public class Engine {
 		File file = new File("data/simulations/default/Game of Life.xml");
 		loadSimulation(file);
 		
-		updateDIY();
+		randomizeDIY();
 
 		mySidebar = new Sidebar(myResources, this, myGraph);
 		myVis.addSidebar(mySidebar);
 	}
 	
-	public void updateDIY() {
+	public void randomizeDIY() {
 		for (Cell c : myGraph.getCells()) {
 			c.setRandom();
 		}
@@ -202,8 +202,15 @@ public class Engine {
 		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
+		
+		myGraph.resetIsDead();
+		
+		resetAnimation();
+		
+		randomizeDIY();
+		
 		myVis.reset(false);
-		myAnimation.stop();
+		
 		myGraph.updateGraph();
 		myVis.visualizeGraph(myGraph);
 	}

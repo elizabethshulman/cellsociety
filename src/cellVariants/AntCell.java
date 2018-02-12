@@ -1,8 +1,8 @@
 package cellVariants;
 
-public class AntCell{
+public class AntCell {
 
-	private ForagingCell home;						//when to set home cell? ask andrew about constructor
+	private ForagingCell home;						
 	private boolean holdingFood = false;
 	
 	public AntCell(ForagingCell homeCell) {
@@ -16,9 +16,9 @@ public class AntCell{
 		home.getAntsHere().add(this);
 		
 		if(home.isNest()) {
-			holdingFood = false;						//no reason to track amount of food at home?
+			holdingFood = false;						
 		} else if(home.isFoodSource()) {
-			holdingFood = true;						//need a hasFoodItem()?
+			holdingFood = true;						
 		}
 	}
 	

@@ -29,7 +29,7 @@ public class ForagingCell extends Cell {
 	public ForagingCell(int st) {
 		super(st);								//when to set state=nest or obstacle -> ask andrew?
 		antsHere = new ArrayList<AntCell>();
-		if(4<=st || st<=6) {
+		if(4<=st && st<=6) {
 			antsHere.add(new AntCell(this));
 		}
 	}

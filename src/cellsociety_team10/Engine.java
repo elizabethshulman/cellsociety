@@ -144,7 +144,6 @@ public class Engine {
 			myFileProcessor = new FileProcessor(file);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
 			alert.show();
 			return false;

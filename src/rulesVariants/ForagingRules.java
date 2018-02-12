@@ -10,8 +10,13 @@ import cellVariants.Cell;
 import cellVariants.ForagingCell;
 import rulesVariants.RulesVariantsManagers.AntManager;
 
-
-//remove suppress warnings??
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This class manages the logic of the Foraging Ants simulation. Its primary purpose
+ * is to take in a graph, apply the Foraging Ants rules, and return an updated graph.
+ */
 public class ForagingRules extends Rules {
 
 	private Map<ForagingCell, List<ForagingCell>> tempEnvironment;
@@ -21,6 +26,14 @@ public class ForagingRules extends Rules {
 		manager = new AntManager();
 	}
 
+	
+	/**
+	 * This method applies the rules of the Foraging simulation to the graph. This
+	 * entails directing ants on the field toward the nest or food source, and 
+	 * leaving pheromones along the way for direction.
+	 * 
+	 * @param g		This is the simulation's current graph.
+	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
@@ -42,6 +55,11 @@ public class ForagingRules extends Rules {
 		return returnGraph;
 	}
 	
+	/**
+	 * This method is responsible for directing the ant.
+	 * 
+	 * @param ant	This is the ant moving.
+	 */
 	private void antForage(AntCell ant) {
 		if(ant.hasFoodItem()) {
 			manager.returnToNest(ant, tempEnvironment);
@@ -50,6 +68,13 @@ public class ForagingRules extends Rules {
 		}
 	}
 
+	
+	/**
+	 * This method is responsible for updating the state each ForagingCell in the simulation
+	 * according to whether or not it holds ants.
+	 * 
+	 * @param tempEnvironment	This is the current graph, cast with ForagingCells.
+	 */
 	private void updateEnvironmentStates(Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			if(c.getState()<3 && c.getAntsHere().size()>0) {
@@ -60,6 +85,11 @@ public class ForagingRules extends Rules {
 		}
 	}
 
+	/**
+	 * This method is responsible for adding and removing ants from their home cells.
+	 * 
+	 * @param movingHomes This is a list of the ants that have changed location this step.
+	 */
 	private void updateAntHomes(List<AntCell> movingHomes) {
 		for(AntCell ant:movingHomes) {
 			ant.getPreviousHome().getAntsHere().remove(ant);

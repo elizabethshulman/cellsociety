@@ -2,7 +2,7 @@ package cellVariants;
 
 public class AntCell {
 
-	private ForagingCell home;						
+	private ForagingCell home;			
 	private boolean holdingFood = false;
 	
 	public AntCell(ForagingCell homeCell) {

@@ -34,7 +34,6 @@ public class AntManager {
 	}
 	
 	private ForagingCell nextStepHome(AntCell c, List<ForagingCell> neighbors) {
-
 		double maxNeighboringLevel = 0;
 		ForagingCell nextStop=null;
 		Collections.shuffle(neighbors);
@@ -45,11 +44,9 @@ public class AntManager {
 				maxNeighboringLevel=neighbor.getHomePheromones();
 			}
 		} 
-		
 		if(nextStop == null && neighbors!=null) {
 			nextStop = neighbors.get(0);
-		}
-		
+		}	
 		return nextStop;
 	}
 	

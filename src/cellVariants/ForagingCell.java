@@ -27,8 +27,11 @@ public class ForagingCell extends Cell {
 	private double MAX_PHEROMONE_LEVEL = 1000;
 	
 	public ForagingCell(int st) {
-		super(st);								//when to set state=nest or obstacle -> ask andrew?
-		setState(st);
+		super(st);
+		antsHere = new ArrayList<>();
+		if(4 <= st) {
+			AntCell a = new AntCell(this);
+		}
 	}
 
 	@Override
@@ -64,11 +67,15 @@ public class ForagingCell extends Cell {
 	@SuppressWarnings("unused")
 	@Override 
 	public void setState(int st) {
-		super.setState(st);
-		antsHere = new ArrayList<AntCell>();
-		if(4<=st && st<=6) {
+		if(myState < 3 && 4<=st) {
 			AntCell a = new AntCell(this);
 		}
+		else if(myState >= 4 && st <= 3)
+			antsHere = new ArrayList<>();
+		super.setState(st);
+	}
+	public void originalSetState(int st) {
+		super.setState(st);
 	}
 	public void increaseFoodPheromones(double diff) {
 		foodPheromoneLevel+=diff;

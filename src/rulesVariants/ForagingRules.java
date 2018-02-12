@@ -31,16 +31,12 @@ public class ForagingRules extends Rules {
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempEnvironment = new HashMap(g);
 		for(ForagingCell c:tempEnvironment.keySet()) {
-			if(c.getState()<3 && c.getAntsHere().size()>0) {
-				c.setState(c.getState()+4);
-			} else if (c.getState()>3 && c.getAntsHere().isEmpty()) {
-				c.setState(c.getState()-4);
-			}
 			List<AntCell> currentants = c.getAntsHere();
 			for(AntCell ant:currentants) {
 				antForage(ant);
 			}
 		}
+		updateEnvironmentStates(tempEnvironment);
 		Map<Cell, List<Cell>> returnGraph = new HashMap(tempEnvironment);
 		return returnGraph;
 	}
@@ -53,5 +49,15 @@ public class ForagingRules extends Rules {
 		} else{
 			manager.findFoodSource(ant, tempEnvironment);
 		}		
+	}
+	
+	private void updateEnvironmentStates(Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
+		for(ForagingCell c:tempEnvironment.keySet()) {
+			if(c.getState()<3 && c.getAntsHere().size()>0) {
+				c.setState(c.getState()+4);
+			} else if (c.getState()>3 && c.getAntsHere().isEmpty()) {
+				c.setState(c.getState()-4);
+			}
+		}
 	}
 }

@@ -1,6 +1,18 @@
 package cellVariants;
 
+/**
+ * @author benhubsch
+ * 
+ * A factory for creating Cell objects.
+ */
 public class CellFactory {
+	
+	/**
+	 * Creates a new Cell object.
+	 *
+	 * @param type
+	 * @return Cell
+	 */
 	public Cell createCell(String type) {
 		switch(type) {
 		case "GameOfLife": 

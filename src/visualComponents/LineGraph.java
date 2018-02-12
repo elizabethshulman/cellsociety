@@ -4,13 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cellVariants.Cell;
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
+/**
+ * @author benhubsch
+ * 
+ * This class handles the display of the LineChart object which appears at the top of the
+ * visualization when a simulation is running. It charts the number of cells of a given
+ * type over the life of the simulation.
+ */
 public class LineGraph {
 	
 	private Map<Integer, XYChart.Series<Number, Number>> mySeries = new HashMap<Integer, XYChart.Series<Number, Number>>();
@@ -18,6 +25,9 @@ public class LineGraph {
 	private LineChart<Number, Number> myLineChart;
 	private VBox myVBox;
 	
+	/**
+	 * Instantiates a new LineGraph object.
+	 */
 	public LineGraph() {
 		NumberAxis xAxis = new NumberAxis();
 		xAxis.setId("axis");
@@ -30,10 +40,21 @@ public class LineGraph {
 		myVBox.getChildren().add(myLineChart);
 	}
 	
+	/**
+	 * Gets the VBox object.
+	 *
+	 * @return VBox
+	 */
 	public VBox getLineChart() {
 		return myVBox;
 	}
 	
+	/**
+	 * This function creates a map of states to their count.
+	 *
+	 * @param g
+	 * @return Map<Integer,Integer>
+	 */
 	private Map<Integer, Integer> countStates(Graph g) {
 		Map<Integer, Integer> type_count = new HashMap<Integer, Integer>();
 		
@@ -45,6 +66,10 @@ public class LineGraph {
 		return type_count;
 	}
 	
+	/**
+	 * Sets the visibility of the LineChart so that it isn't displayed
+	 * before the simulation has begun running.
+	 */
 	private void setVisibility() {
 		if (myIteration > 0) {
 			myLineChart.setVisible(true);
@@ -53,6 +78,11 @@ public class LineGraph {
 		}
 	}
 	
+	/**
+	 * Adds the new (state, count) tuple-coordinates to the LineChart object.
+	 *
+	 * @param g the g
+	 */
 	public void addCoordinates(Graph g) {
 		setVisibility();
 		
@@ -75,6 +105,9 @@ public class LineGraph {
 		myIteration += 1;
 	}
 	
+	/**
+	 * Resets the chart at the end of a simulation.
+	 */
 	public void resetChart() {
 		myLineChart.getData().clear();
 		mySeries.clear();

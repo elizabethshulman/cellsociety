@@ -53,9 +53,9 @@ public class ForagingRules extends Rules {
 	private void updateEnvironmentStates(Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			if(c.getState()<3 && c.getAntsHere().size()>0) {
-				c.setState(c.getState()+4);
+				c.originalSetState(c.getState()+4);
 			} else if (c.getState()>3 && c.getAntsHere().isEmpty()) {
-				c.setState(c.getState()-4);
+				c.originalSetState(c.getState()-4);
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 package visualComponents;
 
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.scene.shape.Polygon;
 
 /**

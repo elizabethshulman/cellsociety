@@ -1,5 +1,7 @@
-//the FileProcessor is responsible for reading/writing files and saving general information about the file during the simulation.
-//author: Andrew Yeung
+/**
+ * the FileProcessor is responsible for reading/writing files and saving general information about the file during the simulation.
+ * author: Andrew Yeung
+ */
 package cellsociety_team10;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -53,11 +55,20 @@ public class FileProcessor {
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 		readFile();
 	}
-	// returns shape of cells
+	/**
+	 * Returns the shape of Cells. Options are Hexagon, Square, and Triangle.
+	 * @return the shape of Cells currently in use
+	 */
 	public String getCellShape() {
 		return cellShape;
 	}
-	//sets shape of cells and resets hashmap to reflect changes
+	/**
+	 * Sets the shape of the cells and resets the CellMap to reflect changes
+	 * @param shape The shape of Cells. Options other than Hexagon, Square, and Triangle will throw an IllegalArgumentException
+	 * passed from the method createNCalc().
+	 * @see createNCalc()
+	 * @see refreshMap()
+	 */
 	protected void setCellShape(String shape) {
 		cellShape = shape;
 		createNCalc();
@@ -202,7 +213,7 @@ public class FileProcessor {
 		}
 	}
 	//convert Cell grid to hashmap
-	private void createCellMap(Cell[][] cellArray)
+	public void createCellMap(Cell[][] cellArray)
 	{
 		gridRowCount = cellArray.length;
 		gridColCount = cellArray[0].length;
@@ -225,6 +236,13 @@ public class FileProcessor {
 		}
 	}
 	// save current state of grid as formatted XML
+	/**
+	 * 
+	 * @param cells
+	 * @param file
+	 * @throws FileNotFoundException
+	 * @throws XMLStreamException
+	 */
 	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
 		ByteArrayOutputStream temp = new ByteArrayOutputStream();
 		myWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(temp);
@@ -312,10 +330,6 @@ public class FileProcessor {
 			arrangement[c.getRow()][c.getCol()] = c;
 		}
 		return arrangement;
-	}
-	//return neighbor calculator for use elsewhere
-	public NeighborCalculator getNeighborCalc() {
-		return nCalc;
 	}
 	//create neighborCalculator relevant to current cell shape
 	public void createNCalc() {

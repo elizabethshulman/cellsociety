@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ResourceBundle;
 
 import cellsociety_team10.Engine;
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,8 +21,6 @@ import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 /**
- * The Class Sidebar.
- *
  * @author benhubsch
  * 
  * The Class Sidebar handles all of the customization options in the DIY segment of 

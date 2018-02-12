@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import cellVariants.Cell;
 import cellVariants.CellFactory;
-import graphVariants.Graph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -20,10 +19,19 @@ import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
 
+/**
+ * @author benhubsch
+ * @author Elizabeth Shulman
+ * @author Andrew Yeung
+ * 
+ * This class handles the high-level logic and coordination between the various
+ * components of the simulation. It is the highest class in our class hierarchy.
+ */
 public class Engine {
 	private static final double ANIM_RATE = 2.5;
 	private static final int MILLISECOND_DELAY = 500;
 	private static final String SIM_FOLDER = "data/simulations/";
+	private static final String DEFAULT_DIY = "data/simulations/default/Game of Life.xml";
 	private static final String LANGUAGE = "English";
 
 	private ResourceBundle myResources;
@@ -39,6 +47,13 @@ public class Engine {
 	private Sidebar mySidebar;
 	private FileProcessor myFileProcessor;
 
+	/**
+	 * This function is the entry point into the significant portion of the simulation
+	 * and initializes many of the important components that will later be called to
+	 * perform microservices.
+	 *
+	 * @param stage This is the application's stage.
+	 */
 	public void initializeSimulation(Stage stage) {
 		myStage = stage;
 
@@ -78,6 +93,9 @@ public class Engine {
 		myStage.show();
 	}
 
+	/**
+	 * Resets the animation after a simulation ends.
+	 */
 	private void resetAnimation() {
 		myAnimation.stop();
 		myAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -85,6 +103,10 @@ public class Engine {
 		myAnimation.setRate(ANIM_RATE);
 	}
 
+	/**
+	 * This is the loop that powers the iteration to iteration grid change that
+	 * is central to the application's logic.
+	 */
 	private void step() {
 		if (myGraph.isDead()) {
 			myAnimation.pause();
@@ -97,25 +119,40 @@ public class Engine {
 		myStage.setScene(myVis.getScene());
 	}
 
+	/**
+	 * Pauses the animation.
+	 */
 	private void pause() {
 		myAnimation.pause();
 	}
 
+	/**
+	 * Plays the animation.
+	 */
 	private void play() {
 		myAnimation.play();
 	}
 
+	/**
+	 * Ends the animation.
+	 */
 	private void end() {
 		myAnimation.stop();
 		myStage.setScene(myStartScene);
 		myVis.reset(true);
 	}
 
+	/**
+	 * Allows the user to step through the animation one iteration at a time.
+	 */
 	private void next() {
 		myAnimation.pause();
 		step();
 	}
 	
+	/**
+	 * Saves the current grid state of a simulation to a file.
+	 */
 	private void save() {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
@@ -130,6 +167,11 @@ public class Engine {
 		}
 	}
 
+	/**
+	 * Allows the user to pick a simulation to run from an initial configuration file.
+	 *
+	 * @param directory The directory to which the FileChooser should open by default.
+	 */
 	private void showFileChooser(String directory) {
 		String source = SIM_FOLDER + directory;
 		myFileChooser.setInitialDirectory(new File(source));
@@ -139,6 +181,12 @@ public class Engine {
 		}
 	}
 	
+	/**
+	 * Initializes the FileProcessor.
+	 *
+	 * @param file
+	 * @return Boolean
+	 */
 	private Boolean initFileProcessor(File file) {
 		try {
 			myFileProcessor = new FileProcessor(file);
@@ -150,6 +198,12 @@ public class Engine {
 		}
 	}
 
+	/**
+	 * Instantiates a simulation given a file, and also ensures that the components
+	 * are properly configured to run a simulation.
+	 *
+	 * @param file
+	 */
 	public void loadSimulation(File file) {
 		Boolean success = initFileProcessor(file);
 		if (! success) {
@@ -171,8 +225,12 @@ public class Engine {
 	}
 
 
+	/**
+	 * Set's up the interface for the DIY portion of the simulation, should the user
+	 * choose to click on it.
+	 */
 	private void setupDIY() {
-		File file = new File("data/simulations/default/Game of Life.xml");
+		File file = new File(DEFAULT_DIY);
 		loadSimulation(file);
 		
 		randomizeDIY();
@@ -181,6 +239,9 @@ public class Engine {
 		myVis.addSidebar(mySidebar);
 	}
 	
+	/**
+	 * Randomize the initial cell state configuration given a new DIY simulation load.
+	 */
 	public void randomizeDIY() {
 		for (Cell c : myGraph.getCells()) {
 			c.setRandom();
@@ -188,24 +249,38 @@ public class Engine {
 		myVis.updateGraphOnly(myGraph);
 	}
 
+	/**
+	 * Creates the header text for a given simulation.
+	 *
+	 * @param title The title of the simulation.
+	 * @param author The author of the simulation.
+	 * @return String
+	 */
 	private String createHeaderText(String title, String author) {
 		return String.format("%s %s %s", title, myResources.getString("By"), author);
 	}
 	
+	/**
+	 * This function updates the current visualization settings given a dynamic change by
+	 * a user in DIY mode.
+	 *
+	 * @param shape The shape that needs to be displayed.
+	 * @param isDiagonal The kind of neighbors that need to be considered.
+	 * @param isToroidal The kind of dimension that we're dealing with.
+	 */
 	public void updateSettings(String shape, boolean isDiagonal, boolean isToroidal) {
 		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
-		
 		myGraph.resetIsDead();
 		
 		resetAnimation();
-		
+		myGraph.updateGraph();
 		randomizeDIY();
 		
 		myVis.reset(false);
 		
-		myGraph.updateGraph();
+		
 		myVis.visualizeGraph(myGraph);
 	}
 }

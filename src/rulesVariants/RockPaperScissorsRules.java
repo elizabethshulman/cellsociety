@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.RockPaperScissorsCell;
@@ -47,4 +48,18 @@ public class RockPaperScissorsRules extends Rules {
 		nowDead.setState(winner.getState());
 		nowDead.setHealth(winner.getHealth() - 1);
 	}
+	
+	@Override
+	protected void updateDeath(Map<Cell, List<Cell>> gameboard) {
+		Set<Cell> cellSet = gameboard.keySet();
+		Cell[] cellArray = cellSet.toArray(new Cell[0]);
+		int sampleState = cellArray[0].getState();
+		dead=true;
+		for(Cell c:cellArray) {
+			if(c.getState()!=sampleState) {
+				dead=false;
+				return;
+			}
+		}
+	}	
 }

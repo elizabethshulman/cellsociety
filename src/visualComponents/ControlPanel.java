@@ -14,6 +14,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
+/**
+ * @author benhubsch
+ * 
+ * The ControlPanel class builds the part of the UI that appears at the bottom of the
+ * screen containing components that control the simulation. It depends on the Timeline
+ * passed in from Engine in order to set the animation rate depending on the position
+ * of the slider.
+ */
 public class ControlPanel {
 	private static final String PLAY = "play.png";
 	private static final String PAUSE = "pause.png";
@@ -31,6 +39,17 @@ public class ControlPanel {
 	private Button myStopButton;
 	private Button mySaveButton;
 
+	
+	/**
+	 * Instantiates a new ControlPanel object.
+	 *
+	 * @param animation This 
+	 * @param play_handler
+	 * @param pause_handler
+	 * @param stop_handler
+	 * @param next_handler
+	 * @param save_handler
+	 */
 	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myAnimation = animation;
 
@@ -42,6 +61,15 @@ public class ControlPanel {
 		myVBox.getChildren().addAll(hb_top, myButtonBox);
 	}
 
+	/**
+	 * Bottom H box.
+	 *
+	 * @param play_handler the play handler
+	 * @param pause_handler the pause handler
+	 * @param stop_handler the stop handler
+	 * @param next_handler the next handler
+	 * @param save_handler the save handler
+	 */
 	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myButtonBox = new HBox();
 		myButtonBox.setId("control-panel-bottom");
@@ -55,6 +83,11 @@ public class ControlPanel {
 				mySaveButton);
 	}
 
+	/**
+	 * Top H box.
+	 *
+	 * @return HBox
+	 */
 	private HBox topHBox() {
 		HBox hb_top = new HBox();
 		hb_top.setId("control-panel-top");
@@ -103,6 +136,13 @@ public class ControlPanel {
 		return hb_top;
 	}
 
+	/**
+	 * Make button.
+	 *
+	 * @param filename the filename
+	 * @param click_action the click action
+	 * @return Button
+	 */
 	private Button makeButton(String filename, EventHandler<MouseEvent> click_action) {
 		ImageView image_view = Helper.generateImageView(filename, 20);
 
@@ -113,18 +153,34 @@ public class ControlPanel {
 		return temp;
 	}
 
+	/**
+	 * Gets the VBox object.
+	 *
+	 * @return VBox
+	 */
 	public VBox getVBox() {
 		return myVBox;
 	}
 
+	/**
+	 * Sets the iteration.
+	 *
+	 * @param iteration the new iteration
+	 */
 	public void setIteration(int iteration) {
 		myIterationCount.setText("Iteration Count: " + Integer.toString(iteration));
 	}
 
+	/**
+	 * Reset slider.
+	 */
 	public void resetSlider() {
 		mySlider.setValue((MAX_SLIDER + MIN_SLIDER) / 2);
 	}
 
+	/**
+	 * Disable buttons.
+	 */
 	public void disableButtons() {
 		for (Node curr : myButtonBox.getChildren()) {
 			if (curr != myStopButton && curr != mySaveButton) {
@@ -133,6 +189,9 @@ public class ControlPanel {
 		}
 	}
 
+	/**
+	 * Enable buttons.
+	 */
 	public void enableButtons() {
 		for (Node curr : myButtonBox.getChildren()) {
 			curr.setId("control");

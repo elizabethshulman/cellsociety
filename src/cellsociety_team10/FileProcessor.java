@@ -1,3 +1,5 @@
+//the FileProcessor is responsible for reading/writing files and saving general information about the file during the simulation.
+//author: Andrew Yeung
 package cellsociety_team10;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -51,17 +53,21 @@ public class FileProcessor {
 		myParser = xmlif.createXMLStreamReader(new FileInputStream(file));
 		readFile();
 	}
+	// returns shape of cells
 	public String getCellShape() {
 		return cellShape;
 	}
+	//sets shape of cells and resets hashmap to reflect changes
 	protected void setCellShape(String shape) {
 		cellShape = shape;
 		createNCalc();
 		refreshMap();
 	}
+	//returns type of simulation
 	public String getType() {
 		return myType;
 	}
+	//updates type of simulation
 	protected void setType(String type) {
 		myType = type;
 		try {
@@ -71,40 +77,51 @@ public class FileProcessor {
 			throw new IllegalArgumentException("Simulation type argument is invalid");
 		}
 	}
+	// returns author
 	public String getAuthor() {
 		return author;
 	}
+	// sets author
 	protected void setAuthor(String s) {
 		author = s;
 	}
+	// returns title
 	public String getTitle() {
 		return title;
 	}
+	// returns list of global variables
 	public Map<String,Double> getGlobalVars() {
 		return new HashMap<>(globalVars);
 	}
+	// updates global variables
 	protected void setGlobalVars(Map<String,Double> map) {
 		globalVars = map;
 	}
+	// returns map of cells to neighbors
 	public Map<Cell,List<Cell>> getCellGrid() {
 		return cellGrid;
 	}
+	//returns number of rows in simulation
 	public int getRowCount(){
 		return gridRowCount;
 	}
+	//returns number of cols in simulation
+	public int getColCount() {
+		return gridColCount;
+	}
+	//sets dimensions of simulation
 	public void setRowsAndCols(int row, int col){
 		gridRowCount = row;
 		nCalc.setRowLength(row);
 		gridColCount = col;
 		nCalc.setColLength(col);
 	}
-	public int getColCount() {
-		return gridColCount;
-	}
+	//changes border settings and refreshes map to reflect changes
 	protected void setBorders(boolean b) {
 		isToroidal = b;
 		refreshMap();
 		}
+	// sets neighbor settings and refreshes map to reflect changes
 	protected void setNeighbors(boolean b) {
 		isDiagonal = b;
 		refreshMap();
@@ -136,6 +153,7 @@ public class FileProcessor {
 		}
 		while(xmlEvent != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("header"));
 	}
+	//read global variables from File
 	private void readGlobalVars() throws XMLStreamException {
 		globalVars = new HashMap<>();
 		int xml;
@@ -149,7 +167,7 @@ public class FileProcessor {
 		while(xml != XMLStreamConstants.END_ELEMENT || !myParser.getLocalName().equals("global_vars"));
 		helper.addDefaultGlobals(globalVars);
 	}
-	//Creates 2D array based on information from file
+	//Creates 2D array of Cells based on information from file
 	private void readCells() throws XMLStreamException {
 		ArrayList<ArrayList<Cell>> newGrid = new ArrayList<>();
 		ArrayList<Cell> newRow = new ArrayList<>();
@@ -206,7 +224,7 @@ public class FileProcessor {
 			}
 		}
 	}
-
+	// save current state of grid as formatted XML
 	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
 		ByteArrayOutputStream temp = new ByteArrayOutputStream();
 		myWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(temp);
@@ -228,6 +246,7 @@ public class FileProcessor {
 			throw new FileNotFoundException("Unable to correctly format file.");
 		}
 	}
+	//write file header
 	private void writeHeader() throws XMLStreamException {
 		myWriter.writeStartElement("header");
 		myWriter.writeStartElement("simtype");
@@ -241,6 +260,7 @@ public class FileProcessor {
 		myWriter.writeEndElement();
 		myWriter.writeEndElement();
 	}
+	//write global variables
 	private void writeGlobalVars() throws XMLStreamException {
 		myWriter.writeStartElement("global_vars");
 		for(String s: globalVars.keySet()) {
@@ -250,6 +270,7 @@ public class FileProcessor {
 		}
 		myWriter.writeEndElement();
 	}
+	//write grid to XML file
 	private void writeGrid(Cell[][] stateGrid) throws XMLStreamException {
 		myWriter.writeStartElement("grid");
 		writeGridHeader();
@@ -263,7 +284,7 @@ public class FileProcessor {
 		}
 		myWriter.writeEndElement();
 	}
-	
+	//write grid attributes to XML file
 	private void writeGridHeader() throws XMLStreamException {
 
 		myWriter.writeStartElement("cellShape");
@@ -284,7 +305,7 @@ public class FileProcessor {
 			myWriter.writeCharacters("finite");
 		myWriter.writeEndElement();
 	}
-	
+	//create 2D array from Map of Cells
 	public Cell[][] createStateGrid(Set<Cell> cells) {
 		Cell[][] arrangement = new Cell[gridRowCount][gridColCount];
 		for(Cell c: cells) {
@@ -292,10 +313,11 @@ public class FileProcessor {
 		}
 		return arrangement;
 	}
-	
+	//return neighbor calculator for use elsewhere
 	public NeighborCalculator getNeighborCalc() {
 		return nCalc;
 	}
+	//create neighborCalculator relevant to current cell shape
 	public void createNCalc() {
 		try {
 			String className = "neighborCalculatorVariants." + cellShape + "NeighborCalculator";
@@ -304,6 +326,7 @@ public class FileProcessor {
 			throw new IllegalArgumentException("Cell shape parameter is invalid.");
 		}
 	}
+	//refresh map of cells to reflect any changes 
 	public void refreshMap() {
 		Cell[][] current = createStateGrid(cellGrid.keySet());
 		createCellMap(current);

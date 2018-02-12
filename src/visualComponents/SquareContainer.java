@@ -3,11 +3,23 @@ package visualComponents;
 import graphVariants.Graph;
 import javafx.scene.shape.Polygon;
 
+/**
+ * @author benhubsch
+ * 
+ * The Class SquareContainer.
+ */
 public class SquareContainer extends Container {
+	
+	/**
+	 * Instantiates a new square container.
+	 */
 	public SquareContainer() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see visualComponents.Container#drawGraph(graphVariants.Graph)
+	 */
 	@Override
 	protected void drawGraph(Graph g) {
 		double width = Container.GRID_SIZE / g.getCols();
@@ -33,6 +45,19 @@ public class SquareContainer extends Container {
 		}
 	}
 
+	/**
+	 * Generate square based on the 4 points represented by (a_i, b_i) tuples.
+	 *
+	 * @param a_1
+	 * @param b_1
+	 * @param a_2
+	 * @param b_2
+	 * @param a_3
+	 * @param b_3
+	 * @param a_4
+	 * @param b_4
+	 * @return Polygon
+	 */
 	private Polygon generateSquare(double a_1, double b_1, double a_2, double b_2, double a_3, double b_3, double a_4, double b_4) {
 		Polygon square = new Polygon();
 		square.getPoints().addAll(new Double[]{

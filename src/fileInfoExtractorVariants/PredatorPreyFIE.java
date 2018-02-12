@@ -1,6 +1,7 @@
-//implements file reading and writing for Predator Prey Simulation
-//author: Andrew
-
+/**
+ * implements file reading and writing for PredatorPrey simulation
+ * @author Andrew
+ */
 package fileInfoExtractorVariants;
 
 import java.util.Map;
@@ -13,20 +14,24 @@ import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
 
 public class PredatorPreyFIE implements FileInfoExtractor{
-	//reads in breeding and starving times for the simulation
-	//throws error if invalid global variable of invalid variable value is found
+	/**
+	 * reads in breeding and starving times from the file
+	 * throws an exception if times are not positive integers
+	 */
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().matches("fishBreedTime|sharkBreedTime|sharkStarveTime")) {
 			xmlRead.next();
 			double d =  Double.parseDouble(xmlRead.getText());
-			if(d % 1 != 0.0)
+			if(d % 1 != 0.0 || d < 0)
 				throw new XMLStreamException("Noninteger global variable specified");
 			return d;
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
-	//add default breeding/starving variables as neccessary
+	/**
+	 * Individually adds breeding and starving times if they are absent from the file
+	 */
 	@Override
 	public void addDefaultGlobals(Map<String,Double> globals) {
 		if(!globals.containsKey("sharkBreedTime"))
@@ -36,7 +41,10 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 		if(!globals.containsKey("sharkStarveTime"))
 			globals.put("sharkStarveTime", 5.0);
 	}
-	//read in cell state and return correct cell
+	/**
+	 * gets Cell state letter (E = empty, F = fish, S = shark) and returns appropriate cell
+	 * throws exception if an invalid state is specified
+	 */
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
@@ -47,7 +55,9 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
 		}
 	}
-	//formats cell state and writes cell state to file
+	/**
+	 * Writes state to file with the same state convention as the file reading
+	 */
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		String s;

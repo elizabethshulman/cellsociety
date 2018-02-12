@@ -9,7 +9,7 @@
    </global_vars>
    <grid>
    <cellShape>Square</cellShape>
-   	<neighbors>orthogonal</neighbors>
+   	<neighbors>adjacent</neighbors>
    	<borders>finite</borders>
       <row>
          <cell state="2" />

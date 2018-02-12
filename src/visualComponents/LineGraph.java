@@ -53,7 +53,6 @@ public class LineGraph {
 		}
 	}
 	
-	
 	public void addCoordinates(Graph g) {
 		setVisibility();
 		

@@ -127,7 +127,6 @@ public class Sidebar {
 				String filename = DEFAULT_DIR + new_val + ".xml";
 				myEngine.loadSimulation(new File(filename));
 				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
-				myEngine.updateDIY();
 			}
 		});
 	}
@@ -190,7 +189,6 @@ public class Sidebar {
 				myCurrShape = selectedRadioButton.getGraphic().getUserData().toString();
 				
 				myEngine.updateSettings(myCurrShape, isDiagonal, isToroidal);
-				myEngine.updateDIY();
 			}
 		});
 
@@ -212,7 +210,6 @@ public class Sidebar {
 		rb1.setSelected(true);
 		RadioButton rb2 = createRadioButton("4dir.png", "adjacent", DIR_SIZE);
 		rb2.setId("radio");
-
 
 		ToggleGroup toggleGroup = new ToggleGroup();
 		rb1.setToggleGroup(toggleGroup);
@@ -287,12 +284,12 @@ public class Sidebar {
 	public void setSliders(Graph graph) {
 		myRowsSlider.setOnMouseReleased(e -> {
 			graph.adjustRows((int) myRowsSlider.getValue());
-			myEngine.updateDIY();
+			myEngine.updateSettings(myCurrShape, isToroidal, isDiagonal);
 		});
 
 		myColsSlider.setOnMouseReleased(e -> {
 			graph.adjustCols((int) myColsSlider.getValue());
-			myEngine.updateDIY();
+			myEngine.updateSettings(myCurrShape, isToroidal, isDiagonal);
 		});
 		
 		myRowsSlider.setValue(graph.getRows());

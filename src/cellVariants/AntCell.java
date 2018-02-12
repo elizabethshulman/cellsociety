@@ -8,6 +8,7 @@ public class AntCell extends Cell {
 	public AntCell(int st, ForagingCell homeCell) {
 		super(st);
 		home = homeCell;
+		home.getAntsHere().add(this);
 	}
 
 	@Override

@@ -21,11 +21,11 @@ public class RockPaperScissorsRules extends Rules {
 		for(RockPaperScissorsCell c:tempGameField.keySet()) {
 			Collections.shuffle(tempGameField.get(c));
 			RockPaperScissorsCell neighbor = tempGameField.get(c).get(0);
-			if(c.getState()==0) {
-				killCell(c,neighbor);
+			if(neighbor.getState()==0) {
+				killCell(neighbor,c);
 			}
-			else if(neighbor.beats(c)) {
-				victoryLossAct(neighbor, c);		
+			else if(c.beats(neighbor)) {
+				victoryLossAct(c, neighbor);		
 			}
 			
 		}

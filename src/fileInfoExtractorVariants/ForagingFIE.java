@@ -31,7 +31,7 @@ public class ForagingFIE implements FileInfoExtractor{
 		if(xmlRead.getAttributeCount() > 1) {
 			int numAnts = Integer.parseInt(xmlRead.getAttributeValue(1));
 			for(int x = 0; x < numAnts; x++) {
-				AntCell a = new AntCell(0,c);
+				AntCell a = new AntCell(c);
 			}
 		}
 		return c;

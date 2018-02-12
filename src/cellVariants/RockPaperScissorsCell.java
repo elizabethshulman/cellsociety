@@ -7,9 +7,9 @@ import javafx.scene.paint.Color;
 
 public class RockPaperScissorsCell extends Cell{
 	private static Color BLACK = Color.rgb(0,0,0);
-	private static Color NAVY = Color.rgb(3, 35, 87);
-	private static Color FOREST_GREEN = Color.rgb(0, 70, 25);
-	private static Color GRASS_GREEN = Color.rgb(68, 139, 65);
+	private static Color LAVENDER = Color.rgb(184, 179, 233);
+	private static Color DUSTYROSE = Color.rgb(217, 153, 185);
+	private static Color PALERED = Color.rgb(209, 123, 136);
 
 	private int health;
 	
@@ -21,9 +21,9 @@ public class RockPaperScissorsCell extends Cell{
 	@Override
 	protected void buildHashMap() {
 		myStatesAndColors.put(0, BLACK);
-		myStatesAndColors.put(1, NAVY);
-		myStatesAndColors.put(2, FOREST_GREEN);
-		myStatesAndColors.put(3, GRASS_GREEN);
+		myStatesAndColors.put(1, LAVENDER);
+		myStatesAndColors.put(2, DUSTYROSE);
+		myStatesAndColors.put(3, PALERED);
 	}
 
 	public boolean beats(RockPaperScissorsCell neighbor) {

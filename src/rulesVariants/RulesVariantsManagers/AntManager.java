@@ -59,7 +59,7 @@ public class AntManager {
 			}
 		} 
 		ForagingCell nextStop = null;
-		if(moveOptions!=null) {
+		if(!moveOptions.isEmpty()) {
 			double maxNeighboringLevel = 0;
 			for(ForagingCell option:moveOptions) {
 				if(option.getFoodPheromones()>maxNeighboringLevel) {

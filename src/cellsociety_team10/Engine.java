@@ -111,7 +111,6 @@ public class Engine {
 	private void end() {
 		myAnimation.stop();
 		myStage.setScene(myStartScene);
-		myStage.setWidth(Visualization.SCREEN_WIDTH);
 		myVis.reset(true);
 	}
 

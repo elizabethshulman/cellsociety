@@ -31,6 +31,11 @@ public class ForagingRules extends Rules {
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempEnvironment = new HashMap(g);
 		for(ForagingCell c:tempEnvironment.keySet()) {
+			if(c.getState()<3 && c.getAntsHere().size()>0) {
+				c.setState(c.getState()+4);
+			} else if (c.getState()>3 && c.getAntsHere().isEmpty()) {
+				c.setState(c.getState()-4);
+			}
 			for(AntCell ant:c.getAntsHere()) {
 				antForage(ant);
 			}

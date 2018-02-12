@@ -10,7 +10,6 @@ public class AntCell {
 		home.getAntsHere().add(this);
 	}
 
-
 	public void move(ForagingCell nextStop) {
 		home.getAntsHere().remove(this);
 		home = nextStop;

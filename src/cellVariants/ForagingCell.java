@@ -29,6 +29,9 @@ public class ForagingCell extends Cell {
 	public ForagingCell(int st) {
 		super(st);								//when to set state=nest or obstacle -> ask andrew?
 		antsHere = new ArrayList<AntCell>();
+		if(4<=st || st<=6) {
+			antsHere.add(new AntCell(this));
+		}
 	}
 
 	@Override
@@ -40,7 +43,6 @@ public class ForagingCell extends Cell {
 		myStatesAndColors.put(4, FIREANT);		//foraging cell holding ants
 		myStatesAndColors.put(5, DARKNEST);		//nest with ants
 		myStatesAndColors.put(6, DARKFOOD);		//foodsource with ants
-		myStatesAndColors.put(7, BLACK);			//obstacle with ants
 	}
 
 	

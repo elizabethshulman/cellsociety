@@ -45,4 +45,8 @@ public abstract class Rules {
 	public boolean simulationIsDead() {
 		return dead;
 	}
+	
+	public void resetDead() {
+		dead = false;
+	}
 }

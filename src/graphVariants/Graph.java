@@ -146,4 +146,8 @@ public class Graph {
 	public String getCellShape() {
 		return myFileProcessor.getCellShape();
 	}
+	
+	public void resetIsDead() {
+		myRules.resetDead();
+	}
 }

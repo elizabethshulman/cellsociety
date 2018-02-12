@@ -203,6 +203,8 @@ public class Engine {
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
 		
+		myGraph.resetIsDead();
+		
 		resetAnimation();
 		
 		randomizeDIY();

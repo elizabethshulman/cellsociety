@@ -43,12 +43,12 @@ public class ControlPanel {
 	/**
 	 * Instantiates a new ControlPanel object.
 	 *
-	 * @param animation This 
-	 * @param play_handler
-	 * @param pause_handler
-	 * @param stop_handler
-	 * @param next_handler
-	 * @param save_handler
+	 * @param animation This is the animation that advances the simulation.
+	 * @param play_handler This is an event handler on the Play button.
+	 * @param pause_handler This is an event handler on the Pause button.
+	 * @param stop_handler This is an event handler on the Stop button.
+	 * @param next_handler This is an event handler on the Next button.
+	 * @param save_handler This is an event handler on the Save button.
 	 */
 	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myAnimation = animation;
@@ -62,13 +62,13 @@ public class ControlPanel {
 	}
 
 	/**
-	 * Bottom H box.
+	 * This function arranges the buttons on the bottom row of the ControlPanel.
 	 *
-	 * @param play_handler the play handler
-	 * @param pause_handler the pause handler
-	 * @param stop_handler the stop handler
-	 * @param next_handler the next handler
-	 * @param save_handler the save handler
+	 * @param play_handler This is an event handler on the Play button.
+	 * @param pause_handler This is an event handler on the Pause button.
+	 * @param stop_handler This is an event handler on the Stop button.
+	 * @param next_handler This is an event handler on the Next button.
+	 * @param save_handler This is an event handler on the Save button.
 	 */
 	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myButtonBox = new HBox();
@@ -84,7 +84,7 @@ public class ControlPanel {
 	}
 
 	/**
-	 * Top H box.
+	 * This function arranges the buttons on the top row of the ControlPanel.
 	 *
 	 * @return HBox
 	 */
@@ -137,7 +137,7 @@ public class ControlPanel {
 	}
 
 	/**
-	 * Make button.
+	 * This is a helper function that creates a button with an image on it.
 	 *
 	 * @param filename the filename
 	 * @param click_action the click action

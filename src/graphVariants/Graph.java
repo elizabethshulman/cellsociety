@@ -13,13 +13,6 @@ import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 import visualComponents.ContainerFactory;
 
-
-/**
- * 
- *	Constructor takes in initial grid & ruleset
- *	Stores cell/neighbor map
- *
- */
 public class Graph {
 
 	private Map<Cell, List<Cell>> currentGrid;

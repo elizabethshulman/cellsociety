@@ -2,18 +2,20 @@ package cellVariants;
 
 public class AntCell {
 
-	private ForagingCell home;			
+	private ForagingCell home;
+	private ForagingCell previoushome = null;
 	private boolean holdingFood = false;
+	private boolean movedThisTurn = false;
 	
-	public AntCell(ForagingCell homeCell) {
+	public AntCell(ForagingCell homeCell) {	
 		home = homeCell;
 		home.getAntsHere().add(this);
 	}
 
 	public void move(ForagingCell nextStop) {
-		home.getAntsHere().remove(this);
+		previoushome = home;
 		home = nextStop;
-		home.getAntsHere().add(this);
+		movedThisTurn = true;
 		
 		if(home.isNest()) {
 			holdingFood = false;						
@@ -26,8 +28,19 @@ public class AntCell {
 		return home;
 	}
 
+	public ForagingCell getPreviousHome() {
+		return previoushome;
+	}
+	
 	public boolean hasFoodItem() {
 		return holdingFood;
 	}
-
+	
+	public void resetMovedThisTurn() {
+		movedThisTurn=false;
+	}
+	
+	public boolean hasMovedThisTurn() {
+		return movedThisTurn;
+	}
 }

@@ -26,6 +26,7 @@ public class ForagingCell extends Cell {
 	private double foodPheromoneLevel = 0;				
 	private double MAX_PHEROMONE_LEVEL = 1000;
 	
+	@SuppressWarnings("unused")
 	public ForagingCell(int st) {
 		super(st);
 		antsHere = new ArrayList<>();

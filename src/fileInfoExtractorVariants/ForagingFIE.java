@@ -1,5 +1,7 @@
-//implements file reading and writing for foraging ant simulation
-//author: Andrew
+/**
+ * implements file reading and writing for foraging ant simulation
+ * @author Andrew
+ */
 package fileInfoExtractorVariants;
 
 import java.util.Map;
@@ -13,16 +15,24 @@ import cellVariants.Cell;
 import cellVariants.ForagingCell;
 
 public class ForagingFIE implements FileInfoExtractor{
-	//no global variables: throw exception if called
+	/**
+	 * No global variables exist for this simulation; if this is called, throws an exception
+	 */
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		throw new XMLStreamException("Invalid global variables in file");
 	}
-	//no global variables: do nothing
+	/**
+	 * No global variables exist for this simulation; does nothing if called
+	 */
 	@Override
 	public void addDefaultGlobals(Map<String,Double> globals) {}
 	
 	//create ForagingCell and add ants if necessary
+	/**
+	 * Reads in a cell: 0 = empty, 1 = nest, 2 = food, 3 = obstacle
+	 * Reads nonzero # of ants if attribute exists; assumed zero otherwise
+	 */
 	@SuppressWarnings("unused")
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -41,7 +51,9 @@ public class ForagingFIE implements FileInfoExtractor{
 		else{c = new ForagingCell(val);}
 		return c;
 	}
-	//write cell state to file and write number of ants if nonzero
+	/**
+	 * Writes cell state to file and writes nonzero number of ants as attribute if necessary
+	 */
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		myWriter.writeAttribute("state", Integer.toString(cell.getState()));

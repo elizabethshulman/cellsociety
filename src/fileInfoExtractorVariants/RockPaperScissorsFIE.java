@@ -1,5 +1,8 @@
-//implements rock paper scissors file reading and writing 
-//author: Andrew
+/**
+ * implements file reading and writing for RockPaperScissors simulation
+ * @author Andrew
+ */
+
 package fileInfoExtractorVariants;
 
 import java.util.Map;
@@ -12,16 +15,23 @@ import cellVariants.Cell;
 import cellVariants.RockPaperScissorsCell;
 
 public class RockPaperScissorsFIE implements FileInfoExtractor{
-	//no global variables: throws errors
+	/**
+	 * No global variables exist for this simulation; if this is called, throws an exception
+	 */
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		throw new XMLStreamException("Invalid global variables in file");
 	}
-	//no global variables: do nothing
+	/**
+	 * No global variables exist for this simulation; does nothing if called
+	 */
 	@Override
 	public void addDefaultGlobals(Map<String, Double> globals) {
 	}
-	//read cell state and health from the file
+	/**
+	 * Reads state from file: 0 = empty, 1-3 = different colors
+	 * Reads in a gradient for nonempty cells
+	 */
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
@@ -33,7 +43,10 @@ public class RockPaperScissorsFIE implements FileInfoExtractor{
 		int gradient = Integer.parseInt(xmlRead.getAttributeValue(1));
 		return new RockPaperScissorsCell(val, gradient);
 	}
-	//write cell state and health to the file
+	/**
+	 * Writes state to file
+	 * If cell is not empty, writes the gradient value as well
+	 */
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		myWriter.writeAttribute("state", Integer.toString(cell.getState()));

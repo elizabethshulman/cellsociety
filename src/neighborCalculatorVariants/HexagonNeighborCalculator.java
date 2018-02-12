@@ -1,3 +1,7 @@
+/**
+ * Handles neighbor calculation for hexagonal grids
+ * @author Andrew
+ */
 package neighborCalculatorVariants;
 
 import java.util.ArrayList;
@@ -8,7 +12,10 @@ public class HexagonNeighborCalculator extends NeighborCalculator {
 	public HexagonNeighborCalculator(int numRows, int numCols, boolean isDiagonal, boolean isTorus) {
 		super(numRows, numCols, isDiagonal, isTorus);
 	}
-
+	/**
+	 * Returns the neighboring coordinates for the hexagonal cell. Ignores the isDiagonal parameter
+	 * Up to 6 neighbors exist for a hexagonal cell 
+	 */
 	@Override
 	public List<int[]> calcNeighborLocations(int row, int col) {
 		ArrayList<int[]> neighborLocs = new ArrayList<>();

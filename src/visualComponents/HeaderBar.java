@@ -4,6 +4,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 /**
+ * @author benhubsch
+ * 
  * The Class HeaderBar is a simple object that displays the file title and author to the
  * user.
  */

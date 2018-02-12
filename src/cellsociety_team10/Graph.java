@@ -18,7 +18,8 @@ import visualComponents.ContainerFactory;
  * @author Elizabeth Shulman
  * 
  * This class handles all of the logic on an iteration to iteration basis for a given simulation.
- * It depends heavily on the 
+ * It has a reasonably heavy dependency on FileProcessor myFileProcessor, which Graph uses in the
+ * constructor and in updating the grid on dynamic changes in DIY mode from the user.
  */
 public class Graph {
 
@@ -34,9 +35,9 @@ public class Graph {
 	/**
 	 * Instantiates a new Graph object.
 	 *
-	 * @param file_processor the file processor
-	 * @param rules_factory the rules factory
-	 * @param cell_factory the cell factory
+	 * @param file_processor
+	 * @param rules_factory
+	 * @param cell_factory
 	 */
 	public Graph(FileProcessor file_processor, RulesFactory rules_factory, CellFactory cell_factory) {
 		myCellFactory = cell_factory;
@@ -50,9 +51,10 @@ public class Graph {
 	}
 	
 	/**
-	 * Adjust rows.
+	 * This function adjusts the number of rows on the visualization when the user sets
+	 * them dynamically in DIY mode.
 	 *
-	 * @param new_rows the new rows
+	 * @param new_rows The number of new rows.
 	 */
 	public void adjustRows(int new_rows) {
 		Set<Cell> cells = new HashSet<Cell>(currentGrid.keySet());
@@ -83,9 +85,10 @@ public class Graph {
 	}
 	
 	/**
-	 * Adjust cols.
+	 * This function adjusts the number of columns on the visualization when the user sets
+	 * them dynamically in DIY mode.
 	 *
-	 * @param new_cols the new cols
+	 * @param new_cols The number of new columns.
 	 */
 	public void adjustCols(int new_cols) {
 		Set<Cell> cells = new HashSet<Cell>(currentGrid.keySet());
@@ -115,6 +118,10 @@ public class Graph {
 		myFileProcessor.createCellMap(newGrid);
 	}
 
+	/**
+	 * This function updates the Graph with the latest settings that the user
+	 * enables dynamically in DIY mode. 
+	 */
 	public void updateGraph() {
 		currentGrid = myFileProcessor.getCellGrid();
 		numRows = myFileProcessor.getRowCount();
@@ -122,7 +129,7 @@ public class Graph {
 	}
 	
 	/**
-	 * Builds the next grid.
+	 * Builds the next iteration of the grid given the appropriate rules set.
 	 */
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);
@@ -133,7 +140,6 @@ public class Graph {
 	 *
 	 * @return Set<Cell>
 	 */
-	//GETTERS
 	public Set<Cell> getCells() {
 		return currentGrid.keySet();
 	}
@@ -149,7 +155,7 @@ public class Graph {
 	}
 	
 	/**
-	 * Gets the int object.
+	 * Gets the number of rows for this simulation.
 	 *
 	 * @return int
 	 */
@@ -158,7 +164,7 @@ public class Graph {
 	}
 	
 	/**
-	 * Gets the int object.
+	 * Gets the number of columns for this simulation.
 	 *
 	 * @return int
 	 */
@@ -167,18 +173,19 @@ public class Graph {
 	}
 
 	/**
-	 * Checks if is dead.
+	 * Checks if the simulation has reached its conclusion, which is used
+	 * to stop the animation and disable buttons.
 	 *
-	 * @return true, if is dead
+	 * @return true, if is concluded
 	 */
 	public boolean isDead() {
 		return myRules.simulationIsDead();
 	}
 	
 	/**
-	 * Gets the String object.
+	 * Gets the String object representing the color for a given state.
 	 *
-	 * @param state the state
+	 * @param state
 	 * @return String
 	 */
 	public String getCorrectColor(int state) {
@@ -196,7 +203,7 @@ public class Graph {
 	}
 	
 	/**
-	 * Reset is dead.
+	 * Reset the rules so that a simulation can be re-run after concluding.
 	 */
 	public void resetIsDead() {
 		myRules.resetDead();

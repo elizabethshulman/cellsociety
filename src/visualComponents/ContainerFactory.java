@@ -1,6 +1,8 @@
 package visualComponents;
 
 /**
+ * @author benhubsch
+ * 
  * A factory for creating Container objects.
  */
 public class ContainerFactory {

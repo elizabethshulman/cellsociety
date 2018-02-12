@@ -3,6 +3,7 @@ package rulesVariants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import cellVariants.Cell;
 
@@ -29,7 +30,17 @@ public abstract class Rules {
 	}
 	
 	//check for simulation death & update boolean
-	protected void updateDeath(Map<Cell, List<Cell>> g) {		
+	protected void updateDeath(Map<Cell, List<Cell>> ocean) {
+		Set<Cell> cellSet = ocean.keySet();
+		Cell[] cellArray = cellSet.toArray(new Cell[0]);
+		int sampleState = cellArray[0].getState();
+		dead=true;
+		for(Cell c:cellArray) {
+			if(c.getState()!=sampleState) {
+				dead=false;
+				return;
+			}
+		}
 	}
 
 	//true if cell needs to change state, false if otherwise

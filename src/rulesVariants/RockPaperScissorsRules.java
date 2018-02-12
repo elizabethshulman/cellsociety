@@ -31,6 +31,7 @@ public class RockPaperScissorsRules extends Rules {
 			
 		}
 		Map<Cell, List<Cell>> returnGraph = new HashMap(tempGameField);
+		updateDeath(returnGraph);
 		return returnGraph;
 	}
 
@@ -47,19 +48,5 @@ public class RockPaperScissorsRules extends Rules {
 			return;
 		nowDead.setState(winner.getState());
 		nowDead.setHealth(winner.getHealth() - 1);
-	}
-	
-	@Override
-	protected void updateDeath(Map<Cell, List<Cell>> gameboard) {
-		Set<Cell> cellSet = gameboard.keySet();
-		Cell[] cellArray = cellSet.toArray(new Cell[0]);
-		int sampleState = cellArray[0].getState();
-		dead=true;
-		for(Cell c:cellArray) {
-			if(c.getState()!=sampleState) {
-				dead=false;
-				return;
-			}
-		}
 	}	
 }

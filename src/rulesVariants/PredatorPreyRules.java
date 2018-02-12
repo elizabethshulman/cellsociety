@@ -63,17 +63,4 @@ public class PredatorPreyRules extends Rules {
 		}
 	}
 		
-	@Override 
-	protected void updateDeath(Map<Cell, List<Cell>> ocean) {
-		Set<Cell> cellSet = ocean.keySet();
-		Cell[] cellArray = cellSet.toArray(new Cell[0]);
-		int sampleState = cellArray[0].getState();
-		dead=true;
-		for(Cell c:cellArray) {
-			if(c.getState()!=sampleState) {
-				dead=false;
-				return;
-			}
-		}
-	}	
 }

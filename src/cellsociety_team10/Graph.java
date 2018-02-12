@@ -1,4 +1,4 @@
-package graphVariants;
+package cellsociety_team10;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,13 @@ import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 import visualComponents.ContainerFactory;
 
+/**
+ * @author benhubsch
+ * @author Elizabeth Shulman
+ * 
+ * This class handles all of the logic on an iteration to iteration basis for a given simulation.
+ * It depends heavily on the 
+ */
 public class Graph {
 
 	private Map<Cell, List<Cell>> currentGrid;
@@ -24,6 +31,13 @@ public class Graph {
 	private CellFactory myCellFactory;
 	
 	
+	/**
+	 * Instantiates a new Graph object.
+	 *
+	 * @param file_processor the file processor
+	 * @param rules_factory the rules factory
+	 * @param cell_factory the cell factory
+	 */
 	public Graph(FileProcessor file_processor, RulesFactory rules_factory, CellFactory cell_factory) {
 		myCellFactory = cell_factory;
 		myFileProcessor = file_processor;
@@ -35,6 +49,11 @@ public class Graph {
 		numCols = myFileProcessor.getColCount();
 	}
 	
+	/**
+	 * Adjust rows.
+	 *
+	 * @param new_rows the new rows
+	 */
 	public void adjustRows(int new_rows) {
 		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
 		myFileProcessor.setRowsAndCols(new_rows, numCols);
@@ -61,6 +80,11 @@ public class Graph {
 		numRows = new_rows;
 	}
 	
+	/**
+	 * Adjust cols.
+	 *
+	 * @param new_cols the new cols
+	 */
 	public void adjustCols(int new_cols) {
 		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
 		myFileProcessor.setRowsAndCols(numRows, new_cols);
@@ -87,6 +111,12 @@ public class Graph {
 		numCols = new_cols;
 	}
 	
+	/**
+	 * Find and add neighbors.
+	 *
+	 * @param cell the cell
+	 * @param neighbor_calc the neighbor calc
+	 */
 	private void findAndAddNeighbors(Cell cell, NeighborCalculator neighbor_calc) {
 		List<int[]> l = neighbor_calc.calcNeighborLocations(cell.getRow(), cell.getCol());
 		List<Cell> neighbors = new ArrayList<>();
@@ -102,44 +132,91 @@ public class Graph {
 			currentGrid.get(possible).add(cell);
 		}
 	}
+	
+	/**
+	 * Update graph.
+	 */
 	public void updateGraph() {
 		currentGrid = myFileProcessor.getCellGrid();
 	}
 	
+	/**
+	 * Builds the next grid.
+	 */
 	public void buildNextGrid() {
 		currentGrid = myRules.applyGraphRules(currentGrid);
 	}
 	
+	/**
+	 * Gets the Set<Cell> object.
+	 *
+	 * @return Set<Cell>
+	 */
 	//GETTERS
 	public Set<Cell> getCells() {
 		return currentGrid.keySet();
 	}
 	
+	/**
+	 * Gets the List<Cell> object.
+	 *
+	 * @param c the c
+	 * @return List<Cell>
+	 */
 	public List<Cell> getNeighbors(Cell c) {
 		return currentGrid.get(c);
 	}
 	
+	/**
+	 * Gets the int object.
+	 *
+	 * @return int
+	 */
 	public int getRows() {
 		return numRows;
 	}
 	
+	/**
+	 * Gets the int object.
+	 *
+	 * @return int
+	 */
 	public int getCols() {
 		return numCols;
 	}
 
+	/**
+	 * Checks if is dead.
+	 *
+	 * @return true, if is dead
+	 */
 	public boolean isDead() {
 		return myRules.simulationIsDead();
 	}
 	
+	/**
+	 * Gets the String object.
+	 *
+	 * @param state the state
+	 * @return String
+	 */
 	public String getCorrectColor(int state) {
 		Cell cell = currentGrid.keySet().iterator().next();
 		return cell.getCorrespondingColor(state);
 	}
 	
+	/**
+	 * Gets the String object.
+	 *
+	 * @return String
+	 */
 	public String getCellShape() {
 		return myFileProcessor.getCellShape();
 	}
 	
+	/**
+	 * Reset is dead.
+	 */
 	public void resetIsDead() {
 		myRules.resetDead();
 	}

@@ -1,33 +1,16 @@
 package visualComponents;
 
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * 
- * @author Ben Hubsch
+ * @author benhubsch
  * 
  * This class serves static functions that are used throughout the program. All of
  * these functions are called many times in nearly every class. 
  *
  */
 public class Helper {
-	/**
-	 * This is a convenient helper function that adds a Node to a Group.
-	 * @param root This is the Group that we are attaching a Node to.
-	 * @param n This is the Node that is being attached to a Group for display
-	 * on screen.
-	 */
-	public static void addToRoot(Group root, Node n) {
-		root.getChildren().add(n);
-	}
-	
-	public static Image generateImage(String filename) {
-		return new Image(filename);
-	}
-
 	/**
 	 * This is a helper function that generates ImageView objects.
 	 * @param filename This is the string that specifies which image to generate. 

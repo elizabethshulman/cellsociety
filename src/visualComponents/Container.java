@@ -1,7 +1,7 @@
 package visualComponents;
 
 import cellVariants.Cell;
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.scene.Group;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;

@@ -1,7 +1,17 @@
 package visualComponents;
 
+/**
+ * A factory for creating Container objects.
+ */
 public class ContainerFactory {
-	public Container create(String shape) {
+	
+	/**
+	 * Creates the Container object.
+	 *
+	 * @param shape
+	 * @return Container
+	 */
+	public Container createContainer(String shape) {
 		switch(shape) {
 			case "Triangle": 
 				return new TriangleContainer();

@@ -1,6 +1,6 @@
 package visualComponents;
 
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -60,7 +60,7 @@ public class Visualization {
 	 * Cell shapes. 
 	 */
 	private void setupContainer(Graph g) {
-		myVisualContainer = myContainerFactory.create(g.getCellShape());
+		myVisualContainer = myContainerFactory.createContainer(g.getCellShape());
 
 		VBox center = new VBox();
 		center.getChildren().add(myLineGraph.getLineChart());

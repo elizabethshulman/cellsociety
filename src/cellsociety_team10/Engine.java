@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 import cellVariants.Cell;
 import cellVariants.CellFactory;
-import graphVariants.Graph;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;

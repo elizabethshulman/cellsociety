@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cellVariants.Cell;
-import graphVariants.Graph;
+import cellsociety_team10.Graph;
 import javafx.scene.Node;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -12,6 +12,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 
 /**
+ * @author benhubsch
+ * 
  * This class handles the display of the LineChart object which appears at the top of the
  * visualization when a simulation is running. It charts the number of cells of a given
  * type over the life of the simulation.
@@ -48,9 +50,9 @@ public class LineGraph {
 	}
 	
 	/**
-	 * Count states.
+	 * This function creates a map of states to their count.
 	 *
-	 * @param g the g
+	 * @param g
 	 * @return Map<Integer,Integer>
 	 */
 	private Map<Integer, Integer> countStates(Graph g) {
@@ -65,7 +67,8 @@ public class LineGraph {
 	}
 	
 	/**
-	 * Sets the visibility.
+	 * Sets the visibility of the LineChart so that it isn't displayed
+	 * before the simulation has begun running.
 	 */
 	private void setVisibility() {
 		if (myIteration > 0) {
@@ -76,7 +79,7 @@ public class LineGraph {
 	}
 	
 	/**
-	 * Adds the coordinates.
+	 * Adds the new (state, count) tuple-coordinates to the LineChart object.
 	 *
 	 * @param g the g
 	 */
@@ -103,7 +106,7 @@ public class LineGraph {
 	}
 	
 	/**
-	 * Reset chart.
+	 * Resets the chart at the end of a simulation.
 	 */
 	public void resetChart() {
 		myLineChart.getData().clear();

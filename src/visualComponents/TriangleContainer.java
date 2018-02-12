@@ -3,11 +3,23 @@ package visualComponents;
 import graphVariants.Graph;
 import javafx.scene.shape.Polygon;
 
+/**
+ * @author benhubsch
+ * 
+ * The Class TriangleContainer.
+ */
 public class TriangleContainer extends Container {
+	
+	/**
+	 * Instantiates a new triangle container.
+	 */
 	public TriangleContainer() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see visualComponents.Container#drawGraph(graphVariants.Graph)
+	 */
 	@Override
 	protected void drawGraph(Graph g) {
 		double width;
@@ -62,6 +74,17 @@ public class TriangleContainer extends Container {
 		}
 	}
 	
+	/**
+	 * Generate the 3 points of a triangle based on (a_i, b_i) tuples.
+	 *
+	 * @param a_1
+	 * @param b_1
+	 * @param a_2
+	 * @param b_2
+	 * @param a_3
+	 * @param b_3
+	 * @return Polygon
+	 */
 	private Polygon generateTriangle(double a_1, double b_1, double a_2, double b_2, double a_3, double b_3) {
 		Polygon triangle = new Polygon();
 		triangle.getPoints().addAll(new Double[]{

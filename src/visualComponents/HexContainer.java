@@ -3,11 +3,23 @@ package visualComponents;
 import graphVariants.Graph;
 import javafx.scene.shape.Polygon;
 
+/**
+ * @author benhubsch
+ * 
+ * The Class HexContainer.
+ */
 public class HexContainer extends Container {
+	
+	/**
+	 * Instantiates a new Hexagon container.
+	 */
 	public HexContainer() {
 		super();
 	}
 
+	/* (non-Javadoc)
+	 * @see visualComponents.Container#drawGraph(graphVariants.Graph)
+	 */
 	@Override
 	protected void drawGraph(Graph g) {
 		double height = (Container.GRID_SIZE / (g.getRows() + 0.5)) / 2.0;
@@ -44,6 +56,23 @@ public class HexContainer extends Container {
 		}
 	}
 
+	/**
+	 * Generate Hexagon based on 6 points defined by an (a_i, b_i) tuple.
+	 *
+	 * @param a_1
+	 * @param b_1
+	 * @param a_2
+	 * @param b_2
+	 * @param a_3
+	 * @param b_3
+	 * @param a_4
+	 * @param b_4
+	 * @param a_5
+	 * @param b_5
+	 * @param a_6
+	 * @param b_6
+	 * @return Polygon
+	 */
 	private Polygon generateHex(double a_1, double b_1, double a_2, double b_2, double a_3, double b_3, double a_4, double b_4, double a_5, double b_5, double a_6, double b_6) {
 		Polygon hex = new Polygon();
 		hex.getPoints().addAll(new Double[]{

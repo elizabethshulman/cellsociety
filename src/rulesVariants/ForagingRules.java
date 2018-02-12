@@ -32,8 +32,8 @@ public class ForagingRules extends Rules {
 		tempEnvironment = new HashMap(g);
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			List<AntCell> currentants = c.getAntsHere();
-			for(AntCell ant:currentants) {
-				antForage(ant);
+			for(int x = currentants.size() - 1; x > 0; x--) {
+				antForage(currentants.get(x));
 			}
 		}
 		updateEnvironmentStates(tempEnvironment);

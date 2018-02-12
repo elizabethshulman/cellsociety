@@ -1,6 +1,7 @@
 package cellsociety_team10;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -8,7 +9,6 @@ import java.util.Set;
 import cellVariants.Cell;
 import cellVariants.CellFactory;
 import cellsociety_team10.FileProcessor;
-import neighborCalculatorVariants.NeighborCalculator;
 import rulesVariants.Rules;
 import rulesVariants.RulesFactory;
 import visualComponents.ContainerFactory;
@@ -55,7 +55,7 @@ public class Graph {
 	 * @param new_rows the new rows
 	 */
 	public void adjustRows(int new_rows) {
-		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
+		Set<Cell> cells = new HashSet<Cell>(currentGrid.keySet());
 		myFileProcessor.setRowsAndCols(new_rows, numCols);
 		if (new_rows > numRows) {
 			for (int r=numRows; r < new_rows; r++) {
@@ -63,7 +63,7 @@ public class Graph {
 					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
-					findAndAddNeighbors(cell, neighbor_calc);
+					cells.add(cell);
 				}
 			}
 		} else {
@@ -74,10 +74,12 @@ public class Graph {
 				}
 			}
 			for (Cell cell : toBeRemoved) {
-				currentGrid.remove(cell);
+				cells.remove(cell);
 			}
 		}
 		numRows = new_rows;
+		Cell[][] newGrid = myFileProcessor.createStateGrid(cells);
+		myFileProcessor.createCellMap(newGrid);
 	}
 	
 	/**
@@ -86,7 +88,7 @@ public class Graph {
 	 * @param new_cols the new cols
 	 */
 	public void adjustCols(int new_cols) {
-		NeighborCalculator neighbor_calc = myFileProcessor.getNeighborCalc();
+		Set<Cell> cells = new HashSet<Cell>(currentGrid.keySet());
 		myFileProcessor.setRowsAndCols(numRows, new_cols);
 		if (new_cols > numCols) {
 			for (int r=0; r < numRows; r++) {
@@ -94,7 +96,7 @@ public class Graph {
 					Cell cell = myCellFactory.createCell(myFileProcessor.getType());
 					cell.setRow(r);
 					cell.setCol(c);
-					findAndAddNeighbors(cell, neighbor_calc);
+					cells.add(cell);
 				}
 			}
 		} else {
@@ -105,39 +107,18 @@ public class Graph {
 				}
 			}
 			for (Cell cell : toBeRemoved) {
-				currentGrid.remove(cell);
+				cells.remove(cell);
 			}
 		}
 		numCols = new_cols;
+		Cell[][] newGrid = myFileProcessor.createStateGrid(cells);
+		myFileProcessor.createCellMap(newGrid);
 	}
-	
-	/**
-	 * Find and add neighbors.
-	 *
-	 * @param cell the cell
-	 * @param neighbor_calc the neighbor calc
-	 */
-	private void findAndAddNeighbors(Cell cell, NeighborCalculator neighbor_calc) {
-		List<int[]> l = neighbor_calc.calcNeighborLocations(cell.getRow(), cell.getCol());
-		List<Cell> neighbors = new ArrayList<>();
-		for (int[] pair : l) {
-			for (Cell possible : getCells()) {
-				if (possible.getRow() == pair[0] && possible.getCol() == pair[1]) {
-					neighbors.add(possible);
-				}
-			}
-		}
-		currentGrid.put(cell, neighbors);
-		for (Cell possible : neighbors) {
-			currentGrid.get(possible).add(cell);
-		}
-	}
-	
-	/**
-	 * Update graph.
-	 */
+
 	public void updateGraph() {
 		currentGrid = myFileProcessor.getCellGrid();
+		numRows = myFileProcessor.getRowCount();
+		numCols = myFileProcessor.getColCount();
 	}
 	
 	/**

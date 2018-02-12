@@ -195,16 +195,15 @@ public class Engine {
 		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
-		
 		myGraph.resetIsDead();
 		
 		resetAnimation();
-		
+		myGraph.updateGraph();
 		randomizeDIY();
 		
 		myVis.reset(false);
 		
-		myGraph.updateGraph();
+		
 		myVis.visualizeGraph(myGraph);
 	}
 }

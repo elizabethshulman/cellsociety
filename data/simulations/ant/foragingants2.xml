@@ -8,11 +8,29 @@
    <global_vars>
    </global_vars>
    <grid>
-   <cellShape>Square</cellShape>
+   <cellShape>Hexagon</cellShape>
    	<neighbors>adjacent</neighbors>
    	<borders>finite</borders>
       <row>
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="2" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="2" />
+         <cell state="0" />
+      </row>
+      <row>
          <cell state="2" />
          <cell state="0" />
          <cell state="0" />
@@ -29,9 +47,29 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-      </row>
-      <row>
          <cell state="2" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -73,11 +111,11 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -90,25 +128,6 @@
       <row>
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="3" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -118,113 +137,17 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
       </row>
       <row>
          <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
          <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
          <cell state="3" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="3" />
-      </row>
-      <row>
-         <cell state="0" />
-         <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
          <cell state="3" />
          <cell state="3" />
          <cell state="0" />
@@ -232,18 +155,22 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
       </row>
       <row>
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -251,11 +178,8 @@
          <cell state="0" />
          <cell state="3" />
          <cell state="3" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
-         <cell state="0" />
+         <cell state="3" />
+         <cell state="3" />
          <cell state="3" />
       </row>
       <row>
@@ -263,11 +187,30 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
-         <cell state="3" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -300,6 +243,62 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" numAnts ="10"/>
+         <cell state="0" numAnts ="10"/>
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />
@@ -314,10 +313,11 @@
          <cell state="0" />
          <cell state="0" />
          <cell state="0" numAnts ="10"/>
+         <cell state="0" numAnts ="10"/>
       </row>
       <row>
-         <cell state="0" />
-         <cell state="0" />
+         <cell state="1" numAnts = "10"/>
+         <cell state="0" numAnts = "10"/>
          <cell state="0" />
          <cell state="0" />
          <cell state="0" />

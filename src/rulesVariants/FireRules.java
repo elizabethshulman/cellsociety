@@ -24,8 +24,6 @@ public class FireRules extends Rules {
 		probCatchFire = map.get("probCatchFire")*100.0;	
 	}
 	
-	
-
 	@Override
 	/**
 	 * This method indicates whether or not a cell needs to change its state
@@ -49,7 +47,6 @@ public class FireRules extends Rules {
 		}
 		return false;
 	}
-	
 
 	@Override
 	/**
@@ -67,7 +64,6 @@ public class FireRules extends Rules {
 		}
 	}
 	
-
 	@Override
 	/**
 	 * This method indicates the fire has ceased burning.

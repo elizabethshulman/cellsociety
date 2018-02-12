@@ -2,6 +2,16 @@ package cellVariants;
 
 import javafx.scene.paint.Color;
 
+/**
+ * @author elizabethshulman
+ *
+ * This extension of cell contains the colors relevant to a segregation simulation,
+ * plus the values and methods inherited from Cell.
+ * Its states are as follows:
+ * 		0: empty space
+ * 		1: group A
+ * 		2: group B
+ */
 public class SegregationCell extends Cell {
 	private static Color MAROON = Color.rgb(128, 0, 0);
 	private static Color NAVY = Color.rgb(3, 35, 87);

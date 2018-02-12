@@ -101,7 +101,7 @@ public class Visualization {
 	/**
 	 * Gets the scene.
 	 *
-	 * @return the scene
+	 * @return Scene
 	 */
 	public Scene getScene() {
 		return myScene;

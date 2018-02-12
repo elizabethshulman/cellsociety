@@ -28,7 +28,7 @@ public class AntManager {
 	public void findFoodSource(AntCell c, Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		ForagingCell nextStop = nextStepFood(c, tempEnvironment.get(c.getHome()));
 		if(nextStop!=null) {
-			dropHomePheromones(c, tempEnvironment.get(c.getHome()));																					
+			dropHomePheromones(c, tempEnvironment.get(c.getHome()));		
 			c.move(nextStop);
 		}
 	}

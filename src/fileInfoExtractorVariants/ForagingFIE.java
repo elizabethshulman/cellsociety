@@ -9,7 +9,6 @@ import javax.xml.stream.XMLStreamWriter;
 import cellVariants.AntCell;
 import cellVariants.Cell;
 import cellVariants.ForagingCell;
-import cellVariants.RockPaperScissorsCell;
 
 public class ForagingFIE implements FileInfoExtractor{
 
@@ -29,7 +28,7 @@ public class ForagingFIE implements FileInfoExtractor{
 			throw new XMLStreamException("Invalid Foraging Ant cell type.");
 		}
 		ForagingCell c = new ForagingCell(val);
-		if(val == 1) {
+		if(xmlRead.getAttributeCount() > 1) {
 			int numAnts = Integer.parseInt(xmlRead.getAttributeValue(1));
 			for(int x = 0; x < numAnts; x++) {
 				AntCell a = new AntCell(0,c);
@@ -41,9 +40,9 @@ public class ForagingFIE implements FileInfoExtractor{
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		myWriter.writeAttribute("state", Integer.toString(cell.getState()));
-		if(cell.getState() == 1)
+		int numAnts = ((ForagingCell) cell).getAntsHere().size();
+		if(numAnts > 0)
 			myWriter.writeAttribute("numAnts", Integer.toString(((ForagingCell) cell).getAntsHere().size()));	
-		
 	}
 
 }

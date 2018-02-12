@@ -203,6 +203,7 @@ public class Engine {
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);
 		myVis.reset(false);
+		myAnimation.stop();
 		myGraph.updateGraph();
 		myVis.visualizeGraph(myGraph);
 	}

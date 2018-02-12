@@ -35,12 +35,17 @@ public class ForagingRules extends Rules {
 		ArrayList<AntCell> movingHomes = new ArrayList<AntCell>();
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			List<AntCell> currentants = c.getAntsHere();
+<<<<<<< HEAD
 			for(AntCell ant:currentants) {
 				antForage(ant);
 				if(ant.hasMovedThisTurn()) {
 					movingHomes.add(ant);
 					ant.resetMovedThisTurn();
 				}
+=======
+			for(int x = currentants.size() - 1; x > 0; x--) {
+				antForage(currentants.get(x));
+>>>>>>> 08206cb26b3852c9ca11bad80bcdabbdb322a4a7
 			}
 		}
 		

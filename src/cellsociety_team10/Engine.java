@@ -1,10 +1,7 @@
 package cellsociety_team10;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ResourceBundle;
-
-import javax.xml.stream.XMLStreamException;
 
 import cellVariants.Cell;
 import cellVariants.CellFactory;
@@ -125,11 +122,8 @@ public class Engine {
 			try {
 				myFileProcessor.setRowsAndCols(myGraph.getRows(), myGraph.getCols());
 				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
-				alert.show();
-			} catch (XMLStreamException ee) {
-				Alert alert = new Alert(AlertType.ERROR, ee.getLocalizedMessage());
 				alert.show();
 			}
 			

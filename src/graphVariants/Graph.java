@@ -129,6 +129,7 @@ public class Graph {
 	public int getRows() {
 		return numRows;
 	}
+	
 	public int getCols() {
 		return numCols;
 	}
@@ -146,6 +147,7 @@ public class Graph {
 	
 	public String getCorrectColor(int state) {
 		Cell cell = currentGrid.keySet().iterator().next();
+		System.out.println(myFileProcessor.getType());
 		return cell.getCorrespondingColor(state);
 	}
 	

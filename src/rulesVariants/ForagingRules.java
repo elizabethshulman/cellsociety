@@ -16,47 +16,42 @@ public class ForagingRules extends Rules {
 
 	private Map<ForagingCell, List<ForagingCell>> tempEnvironment;
 	private AntManager manager;
-	
-	
-	
-	
+
+
+
+
 	public ForagingRules(Map<String, Double> specificationsMap) {
 		manager = new AntManager();
 	}
-	
-	
-	
-	
+
+
+
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempEnvironment = new HashMap(g);
-		
+
 		ArrayList<AntCell> movingHomes = new ArrayList<AntCell>();
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			List<AntCell> currentants = c.getAntsHere();
-<<<<<<< HEAD
 			for(AntCell ant:currentants) {
 				antForage(ant);
 				if(ant.hasMovedThisTurn()) {
 					movingHomes.add(ant);
 					ant.resetMovedThisTurn();
 				}
-=======
-			for(int x = currentants.size() - 1; x > 0; x--) {
-				antForage(currentants.get(x));
->>>>>>> 08206cb26b3852c9ca11bad80bcdabbdb322a4a7
 			}
 		}
-		
+
 		updateAntHomes(movingHomes);
 		updateEnvironmentStates(tempEnvironment);
 		Map<Cell, List<Cell>> returnGraph = new HashMap(tempEnvironment);
 		return returnGraph;
 	}
 
-	
-	
+
+
 	private void antForage(AntCell ant) {
 		if(ant.hasFoodItem()) {
 			manager.returnToNest(ant, tempEnvironment);
@@ -64,7 +59,7 @@ public class ForagingRules extends Rules {
 			manager.findFoodSource(ant, tempEnvironment);
 		}
 	}
-	
+
 	private void updateEnvironmentStates(Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		for(ForagingCell c:tempEnvironment.keySet()) {
 			if(c.getState()<3 && c.getAntsHere().size()>0) {
@@ -74,7 +69,7 @@ public class ForagingRules extends Rules {
 			}
 		}
 	}
-	
+
 	private void updateAntHomes(List<AntCell> movingHomes) {
 		for(AntCell ant:movingHomes) {
 			ant.getPreviousHome().getAntsHere().remove(ant);

@@ -10,7 +10,11 @@ import cellVariants.Cell;
 /**
  * 
  * @author elizabethshulman
- *	Assuming 0 for empty, 1 & 2 for groups A and B
+ * 
+ * This class manages the logic for the Segregation simulation. Its primary purpose
+ * is to take in a graph, account for cell self-segregation, check if the cells are
+ * satisfied, then return the updated simulation graph. It assumes states 0 for empty, 
+ * 1 & 2 for groups A and B.
  */
 public class SegregationRules extends Rules {
 
@@ -20,12 +24,13 @@ public class SegregationRules extends Rules {
 		satisfactionThreshold = map.get("satisfactionThreshold");
 	}
 	
+
+	@Override
 	/**
 	 * Update graph according to two-party rules of segregation
 	 * @param g 		graph to update
-	 * @return g, modified graph
+	 * @return g 	modified graph
 	 */
-	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		List<Cell> needChange = new ArrayList<>();
 		List<Cell> emptyCells = new ArrayList<>();
@@ -48,10 +53,12 @@ public class SegregationRules extends Rules {
 		return g;
 	}
 	
-	/**
-	 * Returns true if cell needs to change position, as its neighbors are too different
-	 */
+
 	@Override
+	/**
+	 * This method checks if a cell needs to change position, as its neighbors are too different from itself.
+	 * @return boolean indicating dissatisfaction
+	 */
 	protected Boolean dissatisfied(int state, List<Cell> neighbors) {
 		if(state==0) {
 			return false;
@@ -72,12 +79,16 @@ public class SegregationRules extends Rules {
 	}
 	
 	@Override
+	/**
+	 * This method checks if all cells are satisfied with their position.
+	 */
 	protected void updateDeath(Map<Cell, List<Cell>> g) {
 		dead=true;
 	}
 	
 	/**
-	 * Move dissatisfied cell to an empty cell
+	 * Move dissatisfied cell to an empty cell.
+	 * 
 	 * @param empty		List of empty cells
 	 * @param changing	List of cells that are dissatisfied with their location
 	 */

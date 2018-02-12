@@ -8,7 +8,13 @@ import java.util.Map;
 import cellVariants.AntCell;
 import cellVariants.ForagingCell;
 
-
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This class contains the methods necessary for implementing the Foraging Ants simulation-specific
+ * logic. It is primarily used in ForagingRules.
+ */
 public class AntManager {
 
 	
@@ -17,6 +23,11 @@ public class AntManager {
 	public AntManager() {
 	}
 	
+	/**
+	 * Sends an ant en route to nest by following home pheromones
+	 * @param c					ant currently moving
+	 * @param tempEnvironment	current simulation grid
+	 */
 	public void returnToNest(AntCell c, Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		ForagingCell nextStop = nextStepHome(c, tempEnvironment.get(c.getHome()));
 		if(nextStop!=null) {
@@ -25,6 +36,11 @@ public class AntManager {
 		}
 	}
 
+	/**
+	 * Sends an ant en route to food source by following food source pheromones
+	 * @param c					ant currently moving
+	 * @param tempEnvironment	current simulation grid
+	 */
 	public void findFoodSource(AntCell c, Map<ForagingCell, List<ForagingCell>> tempEnvironment) {
 		ForagingCell nextStop = nextStepFood(c, tempEnvironment.get(c.getHome()));
 		if(nextStop!=null) {
@@ -33,6 +49,12 @@ public class AntManager {
 		}
 	}
 	
+	/**
+	 * Determines the next cell to which an ant will move, in the direction of the home nest
+	 * @param c			ant cell moving
+	 * @param neighbors	cells surrounding ant c
+	 * @return the next cell ant c will move to
+	 */
 	private ForagingCell nextStepHome(AntCell c, List<ForagingCell> neighbors) {
 		double maxNeighboringLevel = 0;
 		ForagingCell nextStop=null;
@@ -43,15 +65,19 @@ public class AntManager {
 				nextStop=neighbor;
 				maxNeighboringLevel=neighbor.getHomePheromones();
 			}
-		} 
-		if(nextStop == null && neighbors!=null) {
+		} if(nextStop == null && neighbors!=null) {
 			nextStop = neighbors.get(0);
 		}
 		return nextStop;
 	}
 	
+	/**
+	 * Determines the next cell to which an ant will move, in the direction of food
+	 * @param c			ant cell moving
+	 * @param neighbors	cells surrounding ant c
+	 * @return the next cell ant c will move to
+	 */
 	private ForagingCell nextStepFood(AntCell c, List<ForagingCell> neighbors) {
-		
 		ArrayList<ForagingCell> moveOptions = new ArrayList<ForagingCell>();
 		for(ForagingCell neighbor:neighbors) {
 			if(!neighbor.isObstacle() && neighbor.getAntsHere().size()<TOO_MANY_ANTS) {
@@ -74,7 +100,11 @@ public class AntManager {
 		return nextStop;
 	}
 	
-	
+	/**
+	 * Releases pheromones leading the way to food
+	 * @param c			ant cell leaving pheromones
+	 * @param neighbors	cells surrounding ant cell c
+	 */
 	private void dropFoodPheromones(AntCell c, List<ForagingCell> neighbors) {
 		ForagingCell home = c.getHome();
 		if(home.isFoodSource()) {
@@ -93,6 +123,11 @@ public class AntManager {
 		}
 	}
 	
+	/**
+	 * Releases pheromones leading the way to an ant's nest
+	 * @param c			ant cell leaving pheromones
+	 * @param neighbors	cells surrounding ant cell c
+	 */
 	private void dropHomePheromones(AntCell c, List<ForagingCell> neighbors) {
 		ForagingCell home = c.getHome();
 		if(home.isNest()) {

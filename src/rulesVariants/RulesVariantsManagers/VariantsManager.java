@@ -5,6 +5,14 @@ import java.util.Map;
 
 import cellVariants.PredatorPreyCell;
 
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This is an abstract helper class for the PredatorPrey simulation. It handles
+ * PredatorPrey-specific logic relevant to both sharks and fish. It is extended by
+ * PredatorManager and PreyManager classes.
+ */
 public abstract class VariantsManager {
 	protected Map<PredatorPreyCell, List<PredatorPreyCell>> ocean;
 	
@@ -12,6 +20,10 @@ public abstract class VariantsManager {
 		ocean = currentgraph;
 	}
 	
+	/**
+	 * Responds to reproductive values stored in cell by reproducing if necessary.
+	 * @param c		cell with potential to reproduce
+	 */
 	protected void handleReproduction(PredatorPreyCell c) {
 		if(c.getReproduce()==true) {
 			c.setReproduce(false);
@@ -22,5 +34,10 @@ public abstract class VariantsManager {
 		}
 	}
 	
+	/**
+	 * Determines where cell's next location should be
+	 * @param c		cell seeking movement
+	 * @return reference to cell c's next location in the graph
+	 */
 	protected abstract PredatorPreyCell whereToMove(PredatorPreyCell c); 
 }

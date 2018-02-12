@@ -2,6 +2,17 @@ package cellVariants;
 
 import javafx.scene.paint.Color;
 
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This class contains values relevant to the PredatorPrey simulation,
+ * as well as the default values and methods inherited from Cell.
+ * Its states are as follows:
+ * 		0: empty
+ * 		1: fish
+ * 		2: shark
+ */
 public class PredatorPreyCell extends Cell {
 	private static Color NAVY = Color.rgb(3, 35, 87);
 	private static Color MIDBLUE = Color.rgb(68, 139, 165);
@@ -13,11 +24,6 @@ public class PredatorPreyCell extends Cell {
 	private boolean movedThisTurn;
 	
 	public PredatorPreyCell(int st) {
-		/*
-		 * 0: Empty
-		 * 1: Fish
-		 * 2: Shark
-		 */
 		super(st);
 		reproductiveTime=0;
 		sharkEnergy=0;
@@ -27,7 +33,6 @@ public class PredatorPreyCell extends Cell {
 	@Override
 	public void setState(int state) {
 		myState = state;
-		
 		if(myState == 0) {
 			reproductiveTime=0;
 			reproduce=false;

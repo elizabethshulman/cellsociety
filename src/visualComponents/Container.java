@@ -66,7 +66,8 @@ public abstract class Container {
 	}
 	
 	/**
-	 * This function draws the graph. It is left 
+	 * This function draws the graph. Given that each shape has a different way to
+	 * draw the grid, the implementation is delegated to the subclasses.
 	 *
 	 * @param g
 	 */

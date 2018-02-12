@@ -138,20 +138,16 @@ public class Graph {
 		return myRules.simulationIsDead();
 	}
 	
-	public String getTitle() {
-		return myFileProcessor.getTitle();
-	}
-	public String getAuthor() {
-		return myFileProcessor.getAuthor();
-	}
-	
 	public String getCorrectColor(int state) {
 		Cell cell = currentGrid.keySet().iterator().next();
-		System.out.println(myFileProcessor.getType());
 		return cell.getCorrespondingColor(state);
 	}
 	
 	public String getCellShape() {
 		return myFileProcessor.getCellShape();
+	}
+	
+	public void resetIsDead() {
+		myRules.resetDead();
 	}
 }

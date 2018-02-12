@@ -202,7 +202,7 @@ public class FileProcessor {
 		}
 	}
 	//convert Cell grid to hashmap
-	private void createCellMap(Cell[][] cellArray)
+	public void createCellMap(Cell[][] cellArray)
 	{
 		gridRowCount = cellArray.length;
 		gridColCount = cellArray[0].length;
@@ -312,10 +312,6 @@ public class FileProcessor {
 			arrangement[c.getRow()][c.getCol()] = c;
 		}
 		return arrangement;
-	}
-	//return neighbor calculator for use elsewhere
-	public NeighborCalculator getNeighborCalc() {
-		return nCalc;
 	}
 	//create neighborCalculator relevant to current cell shape
 	public void createNCalc() {

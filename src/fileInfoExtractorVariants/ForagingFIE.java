@@ -30,13 +30,15 @@ public class ForagingFIE implements FileInfoExtractor{
 		if(val < 0 || val > 3) {
 			throw new XMLStreamException("Invalid Foraging Ant cell type.");
 		}
-		ForagingCell c = new ForagingCell(val);
+		ForagingCell c;
 		if(xmlRead.getAttributeCount() > 1) {
+			c = new ForagingCell(val + 4);
 			int numAnts = Integer.parseInt(xmlRead.getAttributeValue(1));
-			for(int x = 0; x < numAnts; x++) {
+			for(int x = 0; x < numAnts - 1; x++) {
 				AntCell a = new AntCell(c);
 			}
 		}
+		else{c = new ForagingCell(val);}
 		return c;
 	}
 	//write cell state to file and write number of ants if nonzero

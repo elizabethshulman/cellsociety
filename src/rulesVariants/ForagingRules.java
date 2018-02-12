@@ -36,7 +36,8 @@ public class ForagingRules extends Rules {
 			} else if (c.getState()>3 && c.getAntsHere().isEmpty()) {
 				c.setState(c.getState()-4);
 			}
-			for(AntCell ant:c.getAntsHere()) {
+			List<AntCell> currentants = c.getAntsHere();
+			for(AntCell ant:currentants) {
 				antForage(ant);
 			}
 		}

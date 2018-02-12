@@ -20,6 +20,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
+/**
+ * The Class Sidebar.
+ *
+ * @author benhubsch
+ * 
+ * The Class Sidebar handles all of the customization options in the DIY segment of 
+ * the application, representing all the choices so that the user may modify a given
+ * simulation dynamically. It is instantiated in Engine and passed to Visualization,
+ * where it is displayed to the user on-screen in a larger window.
+ */
 public class Sidebar {
 	public static final double WIDTH = 200;
 	private static final double MIN_SLIDER = 4;
@@ -38,6 +48,14 @@ public class Sidebar {
 	private Slider myColsSlider;
 	private Engine myEngine;
 
+	/**
+	 * Instantiates a new Sidebar.
+	 *
+	 * @param resources The ResourceBundle that is used for displaying text.
+	 * @param engine The application's main Engine component.
+	 * @param graph The graph that holds information about the current cell
+	 * state. 
+	 */
 	public Sidebar(ResourceBundle resources, Engine engine, Graph graph) {
 		myEngine = engine;
 		myVBox.setId("sidebar");
@@ -57,6 +75,13 @@ public class Sidebar {
 		setSliders(graph);
 	}
 
+	/**
+	 * This function simply bundles text with some components, which is useful because
+	 * every component comes with a text prompt.
+	 *
+	 * @param text The text to be displayed.
+	 * @param node The node that the text accompanies.
+	 */
 	private void textAndComponent(String text, Node node) {
 		VBox pair = new VBox();
 		pair.setId("pairing");
@@ -71,10 +96,20 @@ public class Sidebar {
 		myVBox.getChildren().add(pair);
 	}
 
+	/**
+	 * Gets the VBox.
+	 *
+	 * @return VBox
+	 */
 	public VBox getVBox() {
 		return myVBox;
 	}
 	
+	/**
+	 * Builds the simulation dropdown box.
+	 *
+	 * @param resources The ResourceBundle that is used for displaying text.
+	 */
 	private void buildSimBox(ResourceBundle resources) {
 		ObservableList<String> sim_options = FXCollections.observableArrayList(
 				resources.getString("LifeButton"),
@@ -97,6 +132,13 @@ public class Sidebar {
 		});
 	}
 
+
+	/**
+	 * Builds the edge box.
+	 *
+	 * @param resources The ResourceBundle that is used for displaying text.
+	 * @return ComboBox<String> The edge selection box.
+	 */
 	private ComboBox<String> buildEdgeBox(ResourceBundle resources) {
 		ObservableList<String> edge_options = FXCollections.observableArrayList(
 				resources.getString("FiniteEdge"),
@@ -117,6 +159,13 @@ public class Sidebar {
 		return combo;
 	}
 	
+
+	/**
+	 * Builds the shape options.
+	 *
+	 * @param resources The ResourceBundle that is used for displaying text.
+	 * @return HBox The container for the shape toggle box.
+	 */
 	private HBox buildShapeOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("shape-hbox");
@@ -148,7 +197,13 @@ public class Sidebar {
 		hbox.getChildren().addAll(rb1, rb2, rb3);
 		return hbox;
 	}
-
+	
+	/**
+	 * Builds the options for the edge toggle box.
+	 *
+	 * @param resources The ResourceBundle that is used for displaying text.
+	 * @return HBox The container for the neighbor toggle group.
+	 */
 	private HBox buildNeighborOptions(ResourceBundle resources) {
 		HBox hbox = new HBox();
 		hbox.setId("edge-hbox");
@@ -179,13 +234,27 @@ public class Sidebar {
 		return hbox;
 	}
 
-	private RadioButton createRadioButton(String filename, String shape, double size) {
+	/**
+	 * Creates the radio button.
+	 *
+	 * @param filename The filename of the .png file
+	 * @param keyword The keyword used to identify the object later 
+	 * @param size Desired size of the grahic
+	 * @return RadioButton The RadioButton object
+	 */
+	private RadioButton createRadioButton(String filename, String keyword, double size) {
 		RadioButton temp = new RadioButton();
 		temp.setGraphic(Helper.generateImageView(filename, size));
-		temp.getGraphic().setUserData(shape);
+		temp.getGraphic().setUserData(keyword);
 		return temp;
 	}
 
+	/**
+	 * Creates the slider.
+	 *
+	 * @param beginning_val The value that the slider will start at.
+	 * @return Slider The Slider object used for sizing. 
+	 */
 	private Slider createSlider(int beginning_val) {
 		Slider temp = new Slider(MIN_SLIDER, MAX_SLIDER, beginning_val);
 		temp.getStyleClass().add("axis");
@@ -210,6 +279,11 @@ public class Sidebar {
 		return temp;
 	}
 	
+	/**
+	 * Sets the sliders.
+	 *
+	 * @param graph
+	 */
 	public void setSliders(Graph graph) {
 		myRowsSlider.setOnMouseReleased(e -> {
 			graph.adjustRows((int) myRowsSlider.getValue());

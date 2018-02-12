@@ -19,6 +19,7 @@ public class ControlPanel {
 	private static final String PAUSE = "pause.png";
 	private static final String STOP = "stop.png";
 	private static final String NEXT = "next.png";
+	private static final String SAVE = "save.png";
 	private static final double MIN_SLIDER = 0;
 	private static final double MAX_SLIDER = 100;
 
@@ -26,29 +27,32 @@ public class ControlPanel {
 	private Text myIterationCount;
 	private Timeline myAnimation;
 	private Slider mySlider;
-	private HBox buttonBox;
+	private HBox myButtonBox;
 	private Button myStopButton;
+	private Button mySaveButton;
 
-	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
+	public ControlPanel(Timeline animation, EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
 		myAnimation = animation;
 
 		myVBox = new VBox();
 		myVBox.setId("control-panel-overall");
 
 		HBox hb_top = topHBox();
-		bottomHBox(play_handler, pause_handler, stop_handler, next_handler);
-		myVBox.getChildren().addAll(hb_top, buttonBox);
+		bottomHBox(play_handler, pause_handler, stop_handler, next_handler, save_handler);
+		myVBox.getChildren().addAll(hb_top, myButtonBox);
 	}
 
-	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler) {
-		buttonBox = new HBox();
-		buttonBox.setId("control-panel-bottom");
+	private void bottomHBox(EventHandler<MouseEvent> play_handler, EventHandler<MouseEvent> pause_handler, EventHandler<MouseEvent> stop_handler, EventHandler<MouseEvent> next_handler, EventHandler<MouseEvent> save_handler) {
+		myButtonBox = new HBox();
+		myButtonBox.setId("control-panel-bottom");
 
 		myStopButton = makeButton(STOP, stop_handler);
-		buttonBox.getChildren().addAll(makeButton(PLAY, play_handler),
+		mySaveButton = makeButton(SAVE, save_handler);
+		myButtonBox.getChildren().addAll(makeButton(PLAY, play_handler),
 				makeButton(PAUSE, pause_handler),
 				myStopButton,
-				makeButton(NEXT, next_handler));
+				makeButton(NEXT, next_handler),
+				mySaveButton);
 	}
 
 	private HBox topHBox() {
@@ -68,7 +72,6 @@ public class ControlPanel {
 
 		mySlider = new Slider(MIN_SLIDER, MAX_SLIDER, (MAX_SLIDER + MIN_SLIDER) / 2);		
 		mySlider.getStyleClass().add("axis");
-
 		mySlider.setShowTickLabels(true);
 		mySlider.setLabelFormatter(new StringConverter<Double>() {
 			@Override
@@ -123,15 +126,15 @@ public class ControlPanel {
 	}
 
 	public void disableButtons() {
-		for (Node curr : buttonBox.getChildren()) {
-			if (curr != myStopButton) {
+		for (Node curr : myButtonBox.getChildren()) {
+			if (curr != myStopButton && curr != mySaveButton) {
 				curr.setId("control_disabled");
 			}
 		}
 	}
 
 	public void enableButtons() {
-		for (Node curr : buttonBox.getChildren()) {
+		for (Node curr : myButtonBox.getChildren()) {
 			curr.setId("control");
 		}
 	}

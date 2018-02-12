@@ -1,69 +1,59 @@
 package visualComponents;
 
 import graphVariants.Graph;
-import javafx.geometry.Insets;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.shape.Polygon;
 
 public class HexContainer extends Container {
-	public static final int test_value = 5;
-	public static final ImageView baseline = Helper.generateImageView("hex1.png");
-	public static final double height = Container.GRID_SIZE.doubleValue() / test_value * 0.75;
-	
-	
-	private double side_length = Helper.generateImageView("hex1.png", height).getBoundsInLocal().getWidth() / 2;
-	private double useful = 1 / Math.tan(Math.PI / 6);
-	
 	public HexContainer() {
 		super();
-		myDisplay.setId("container-display-borderless");
 	}
 
 	@Override
-	public void setGraphDisplay(Graph g) {
-		myDisplay.getChildren().clear();
-		ImageView[][] graph_grid = buildImageView();
-		for (int r=0; r < test_value; r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, test_value));
-		}
-	}
-	
-	protected HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols) {
-		HBox row = new HBox();
-		for (int c=0; c < num_cols; c++) {
-			row.getChildren().add(graph_grid[r][c]);
-		}
-		double padding = - height / 4 - 0.5;
-		if (r % 2 == 1) {
-			row.setPadding(new Insets(padding, 0, padding, getOffset()));
-		} else {
-			row.setPadding(new Insets(padding, 0, padding, 0));
-		}
-		row.setSpacing(side_length);
-		return row;
-	}
-	
-	private double getOffset() {
-		return height / 2 * useful - 0.5;
-	}
+	protected void drawGraph(Graph g) {
+		double height = (Container.GRID_SIZE / (g.getRows() + 0.5)) / 2.0;
+		double length = (2.0 * height) / Math.sqrt(3.0);
+		double inset = Math.sqrt(Math.pow(length, 2) - Math.pow(height, 2));
 
-	private ImageView[][] buildImageView() {
-		ImageView[][] temp = new ImageView[test_value][test_value];
-		for (int r=0; r < test_value; r++) {
-			for (int c=0; c < test_value; c++) {
-				if (c % 2 == 1) {
-					temp[r][c] = Helper.generateImageView("hex1.png", height);
+		double row_offset = 0;
+		double col_offset = 0;
+		for (int r=0; r < g.getRows(); r++) {
+			for (int c=0; c < g.getCols(); c++) {
+				Polygon p = generateHex(
+						col_offset, row_offset + height,
+						col_offset + inset, row_offset + height * 2,
+						col_offset + inset + length, row_offset + height * 2,
+						col_offset + length + 2 * inset, row_offset + height,
+						col_offset + inset + length, row_offset,
+						col_offset + inset, row_offset
+						);
+				if (c % 2 == 0) {
+					row_offset += height;
 				} else {
-					temp[r][c] = Helper.generateImageView("hex2.png", height);
+					row_offset -= height;
 				}
+				myDisplay.getChildren().add(p);
+				myPolygonArr[r][c] = p;
+				col_offset += inset + length;
+			}
+			col_offset = 0;
+			if (g.getCols() % 2 == 1) {
+				row_offset += height;
+			} else {
+				row_offset += height * 2;
 			}
 		}
-		
-		return temp;
-	}
-	
-	protected double calcShapeHeight(int num_cols) {
-		return height;
 	}
 
+	private Polygon generateHex(double a_1, double b_1, double a_2, double b_2, double a_3, double b_3, double a_4, double b_4, double a_5, double b_5, double a_6, double b_6) {
+		Polygon hex = new Polygon();
+		hex.getPoints().addAll(new Double[]{
+				a_1, b_1,
+				a_2, b_2,
+				a_3, b_3,
+				a_4, b_4,
+				a_5, b_5,
+				a_6, b_6});
+
+		return hex;
+	}
 }

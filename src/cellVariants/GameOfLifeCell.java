@@ -1,9 +1,10 @@
 package cellVariants;
 
-import visualComponents.Helper;
+import javafx.scene.paint.Color;
 
 public class GameOfLifeCell extends Cell {
-	
+	private static Color NAVY = Color.rgb(3, 35, 87);
+	private static Color TURQUOISE = Color.rgb(1, 159, 157);
 
 	public GameOfLifeCell(int st) {
 		super(st);
@@ -11,7 +12,7 @@ public class GameOfLifeCell extends Cell {
 	
 	@Override
 	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("darkblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
+		myStatesAndColors.put(0, NAVY);
+		myStatesAndColors.put(1, TURQUOISE);
 	}
 }

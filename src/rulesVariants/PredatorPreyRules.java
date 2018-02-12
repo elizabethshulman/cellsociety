@@ -1,6 +1,5 @@
 package rulesVariants;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,8 +7,8 @@ import java.util.Set;
 
 import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
-import rulesVariants.PredatorPreyHelper.PredatorManager;
-import rulesVariants.PredatorPreyHelper.PreyManager;
+import rulesVariants.RulesVariantsManagers.PredatorManager;
+import rulesVariants.RulesVariantsManagers.PreyManager;
 
 public class PredatorPreyRules extends Rules {
 
@@ -26,6 +25,7 @@ public class PredatorPreyRules extends Rules {
 		sharkStarveTime = map.get("sharkStarveTime");
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<Cell, List<Cell>> applyGraphRules(Map<Cell, List<Cell>> g) {
 		tempOcean = new HashMap(g);

@@ -1,54 +1,69 @@
 package cellVariants;
 
 import java.util.HashMap;
+import java.util.Random;
 
-import javafx.scene.image.ImageView;
-import visualComponents.Helper;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 
 public abstract class Cell {
 
-	protected int state;
-	protected HashMap<Integer, ImageView> statesAndColors;
-	private int row;
-	private int col;
-	
+	protected int myState;
+	protected HashMap<Integer, Color> myStatesAndColors = new HashMap<>();
+	private int myRow;
+	private int myCol;
+
 	public Cell(int st) {
-		state = st;
-		statesAndColors = new HashMap<>();
+		myState = st;
 		buildHashMap();
 	}
 
-	protected void buildHashMap() {
-		statesAndColors.put(0, Helper.generateImageView("darkblue.png"));
-		statesAndColors.put(1, Helper.generateImageView("midblue.png"));
-		statesAndColors.put(2, Helper.generateImageView("lightblue.png"));
+	protected abstract void buildHashMap();
+	
+	public Color getColor() {
+		return myStatesAndColors.get(myState);
 	}
-
+	
+	public void nextColor(Polygon polygon) {
+		myState = (myState + 1) % myStatesAndColors.size();
+		polygon.setFill(myStatesAndColors.get(myState));
+		setState(myState);
+	}
+	
 	public int getRow() {
-		return row;
+		return myRow;
 	}
 
 	public void setRow(int r) {
-		row = r;
+		myRow = r;
 	}
 
 	public int getCol() {
-		return col;
+		return myCol;
 	}
 
 	public void setCol(int c) {
-		col = c;
+		myCol = c;
 	}
 	
 	public int getState() {
-		return state;
+		return myState;
 	}
 	
-	public void setState(int st) {
-		state = st;
+	public void setState(int state) {
+		myState = state;
 	}
 	
-	public ImageView getImageView() {
-		return statesAndColors.get(state);
+	public String getCorrespondingColor(int state) {
+		Color color = myStatesAndColors.get(state);
+		return String.format("rgb(%s, %s, %s)", rgbS(color.getRed()), rgbS(color.getGreen()), rgbS(color.getBlue()));
+	}
+	
+	private String rgbS(Double d) {
+		return String.valueOf((int) (d * 255));
+	}
+	
+	public void setRandom() {
+		setState(new Random().nextInt(myStatesAndColors.keySet().size()));
 	}
 }

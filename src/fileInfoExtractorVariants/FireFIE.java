@@ -1,23 +1,31 @@
 package fileInfoExtractorVariants;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 import cellVariants.FireCell;
 
-public final class FireFIE extends FileInfoExtractor {
+public final class FireFIE implements FileInfoExtractor {
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().equals("probCatchFire")) {
 			xmlRead.next();
-			return Double.parseDouble(xmlRead.getText());
+			double d = Double.parseDouble(xmlRead.getText());
+			if(d < 0 || d > 1)
+				throw new XMLStreamException("Fire catching probability has invalid value.");
+			return d;
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
+	}
+	@Override
+	public void addDefaultGlobals(Map<String,Double> globals) {
+		if(!globals.containsKey("probCatchFire"))
+			globals.put("probCatchFire", 0.5);
 	}
 
 	@Override
@@ -28,17 +36,10 @@ public final class FireFIE extends FileInfoExtractor {
 		}
 		return new FireCell(val);
 	}
+
 	@Override
-	public List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength) {
-		ArrayList<int[]> neighborCoordinates = new ArrayList<>();
-		for(int a = row - 1; a <= row + 1; a++) {
-			for(int b = col - 1; b <= col + 1; b++) {
-				if(isValidGridLocation(a,b,gridRowLength,gridColLength) && (a == row ^ b == col)) { 
-					neighborCoordinates.add(new int[]{a,b});
-				}
-			}
-		}
-		return neighborCoordinates;
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
+		myWriter.writeAttribute("state", Integer.toString(cell.getState()));
 	}
 
 }

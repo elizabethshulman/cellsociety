@@ -23,6 +23,10 @@ public class Helper {
 	public static void addToRoot(Group root, Node n) {
 		root.getChildren().add(n);
 	}
+	
+	public static Image generateImage(String filename) {
+		return new Image(filename);
+	}
 
 	/**
 	 * This is a helper function that generates ImageView objects.

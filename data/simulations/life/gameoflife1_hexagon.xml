@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simulation>
+   <header>
+      <simtype>GameOfLife</simtype>
+      <author>Andrew Yeung</author>
+      <title>Conway's Game of Life</title>
+   </header>
+   <global_vars>
+   </global_vars>
+   <grid>
+   <cellShape>Hexagon</cellShape>
+   	<neighbors>adjacent</neighbors>
+   	<borders>finite</borders>
+      <row>
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+      </row>
+      <row>
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="0" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="1" />
+         <cell state="0" />
+         <cell state="0" />
+      </row>
+   </grid>
+</simulation>

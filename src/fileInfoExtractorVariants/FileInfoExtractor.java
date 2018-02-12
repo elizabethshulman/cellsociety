@@ -1,17 +1,16 @@
 package fileInfoExtractorVariants;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
 
 import cellVariants.Cell;
 
-public abstract class FileInfoExtractor {
-	public abstract Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException;
-	public abstract Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException;
-	public abstract List<int[]> calcNeighborLocations(int row, int col, int gridRowLength, int gridColLength);
-	protected boolean isValidGridLocation(int row, int col, int gridRowLength, int gridColLength) {
-		return row >= 0 && row < gridRowLength && col >= 0 && col < gridColLength;
-	}
+public interface FileInfoExtractor {
+	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException;
+	public void addDefaultGlobals(Map<String,Double> globals);
+	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException;
+	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException;
 }

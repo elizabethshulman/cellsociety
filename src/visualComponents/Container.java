@@ -1,51 +1,75 @@
 package visualComponents;
 
-import java.math.BigDecimal;
-
 import cellVariants.Cell;
 import graphVariants.Graph;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.Group;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Polygon;
 
+/**
+ * @author benhubsch
+ * 
+ * The Class Container, which is an abstract class that holds the visual graph
+ * objects themselves. Visualization centers it on the page, and all it needs is
+ * the Graph object to run.
+ */
 public abstract class Container {
-	public static final BigDecimal GRID_SIZE = new BigDecimal(400);
+	public static final double GRID_SIZE = 350.0;
 	
-	protected VBox myVBox;
-	protected VBox myDisplay;
+	protected VBox myVBox = new VBox();
+	protected Group myDisplay  = new Group();
+	protected Polygon[][] myPolygonArr;
 	
+	/**
+	 * Instantiates a new container.
+	 */
 	public Container() {
-		myDisplay = new VBox();
-		
-		myVBox = new VBox();
 		myVBox.setId("container-vbox");
 		myVBox.getChildren().add(myDisplay);
 	}
 	
+	/**
+	 * Gets the container.
+	 *
+	 * @return VBox
+	 */
 	public VBox getContainer() {
 		return myVBox;
 	};
 	
+	/**
+	 * Sets the graph display, drawing it on screen and setting all the
+	 * click handlers for changing color.
+	 *
+	 * @param g
+	 */
 	public void setGraphDisplay(Graph g) {
 		myDisplay.getChildren().clear();
-		ImageView[][] graph_grid = mapToGrid(g);
-		for (int r=0; r < g.getRows(); r++) {
-			myDisplay.getChildren().add(buildGraphRow(graph_grid, r, g.getCols()));
+		myPolygonArr = new Polygon[g.getRows()][g.getCols()];
+		drawGraph(g);
+		setColorAndClick(g);
+	}
+	
+	/**
+	 * Sets the color of an object on click.
+	 *
+	 * @param g
+	 */
+	protected void setColorAndClick(Graph g) {
+		for (Cell cell : g.getCells()) {
+			int r = cell.getRow();
+			int c = cell.getCol();
+			Polygon match = myPolygonArr[r][c];
+			match.setFill(cell.getColor());
+			match.setOnMouseClicked(e -> cell.nextColor(match));
 		}
 	}
 	
-	private ImageView[][] mapToGrid(Graph g) {
-		ImageView[][] curr_grid = new ImageView[g.getRows()][g.getCols()];
-		for (Cell curr : g.getCells()) {
-			ImageView curr_image_view = curr.getImageView();
-			curr_image_view.setPreserveRatio(true);
-			curr_image_view.setFitHeight(calcShapeHeight(g.getCols()));
-			curr_grid[curr.getRow()][curr.getCol()] = curr_image_view;
-		}
-		return curr_grid;
-	}
-	
-	protected abstract double calcShapeHeight(int num_cols);
-	
-	protected abstract HBox buildGraphRow(ImageView[][] graph_grid, int r, int num_cols);
+	/**
+	 * This function draws the graph. Given that each shape has a different way to
+	 * draw the grid, the implementation is delegated to the subclasses.
+	 *
+	 * @param g
+	 */
+	protected abstract void drawGraph(Graph g);
 }

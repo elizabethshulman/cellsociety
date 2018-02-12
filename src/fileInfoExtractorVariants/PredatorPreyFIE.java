@@ -1,3 +1,6 @@
+//implements file reading and writing for Predator Prey Simulation
+//author: Andrew
+
 package fileInfoExtractorVariants;
 
 import java.util.Map;
@@ -10,7 +13,8 @@ import cellVariants.Cell;
 import cellVariants.PredatorPreyCell;
 
 public class PredatorPreyFIE implements FileInfoExtractor{
-
+	//reads in breeding and starving times for the simulation
+	//throws error if invalid global variable of invalid variable value is found
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
 		if(xmlRead.getLocalName().matches("fishBreedTime|sharkBreedTime|sharkStarveTime")) {
@@ -22,6 +26,7 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 		}
 		throw new XMLStreamException("Invalid global variables in file.");
 	}
+	//add default breeding/starving variables as neccessary
 	@Override
 	public void addDefaultGlobals(Map<String,Double> globals) {
 		if(!globals.containsKey("sharkBreedTime"))
@@ -31,7 +36,7 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 		if(!globals.containsKey("sharkStarveTime"))
 			globals.put("sharkStarveTime", 5.0);
 	}
-
+	//read in cell state and return correct cell
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		switch(xmlRead.getAttributeValue(0))
@@ -42,7 +47,7 @@ public class PredatorPreyFIE implements FileInfoExtractor{
 			default: throw new XMLStreamException("Invalid Predator-Prey cell type.");
 		}
 	}
-
+	//formats cell state and writes cell state to file
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		String s;

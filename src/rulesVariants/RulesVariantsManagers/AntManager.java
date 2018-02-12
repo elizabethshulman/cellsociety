@@ -46,7 +46,7 @@ public class AntManager {
 		} 
 		if(nextStop == null && neighbors!=null) {
 			nextStop = neighbors.get(0);
-		}	
+		}
 		return nextStop;
 	}
 	

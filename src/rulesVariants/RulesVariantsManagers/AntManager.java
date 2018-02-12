@@ -89,7 +89,7 @@ public class AntManager {
 					maxNearby = n.getFoodPheromones();
 				}
 			}
-			double diff = maxNearby-5-home.getFoodPheromones();
+			double diff = maxNearby-2-home.getFoodPheromones();
 			if(diff>0) {
 				home.increaseFoodPheromones(diff);
 			}
@@ -107,7 +107,7 @@ public class AntManager {
 					maxNearby = n.getHomePheromones();
 				}
 			}
-			double diff = maxNearby-5-home.getHomePheromones();
+			double diff = maxNearby-2-home.getHomePheromones();
 			if(diff>0) {
 				home.increaseHomePheromones(diff);
 			}

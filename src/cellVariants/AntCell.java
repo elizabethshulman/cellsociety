@@ -1,20 +1,13 @@
 package cellVariants;
 
-public class AntCell extends Cell {
+public class AntCell{
 
 	private ForagingCell home;						//when to set home cell? ask andrew about constructor
 	private boolean holdingFood = false;
 	
-	public AntCell(int st, ForagingCell homeCell) {
-		super(st);
+	public AntCell(ForagingCell homeCell) {
 		home = homeCell;
 		home.getAntsHere().add(this);
-	}
-
-	@Override
-	protected void buildHashMap() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void move(ForagingCell nextStop) {

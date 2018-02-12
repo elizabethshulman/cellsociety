@@ -19,7 +19,7 @@ public class ForagingCell extends Cell {
 	private List<AntCell> antsHere;
 	private double homePheromoneLevel = 0;				//max levels specified in AntManager
 	private double foodPheromoneLevel = 0;				
-	private double MAX_PHEROMONE_LEVEL = 50;
+	private double MAX_PHEROMONE_LEVEL = 1000;
 	
 	public ForagingCell(int st) {
 		super(st);								//when to set state=nest or obstacle -> ask andrew?

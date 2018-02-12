@@ -7,14 +7,25 @@ import java.util.List;
 
 import cellVariants.PredatorPreyCell;
 
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This class contains fish/prey-specific logic necessary for the PredatorPrey simulation.
+ * It is primarily used in PredatorPreyRules, and it is an extension of the 
+ * PredatorPrey helper class VariantsManager.
+ */
 public class PreyManager extends VariantsManager {
 	
 	public PreyManager(HashMap<PredatorPreyCell, List<PredatorPreyCell>> currentgraph) {
 		super(currentgraph);
 	}
 	
+	/**
+	 * This method handles fish movement across the current simulation graph.
+	 * @param c		fish moving
+	 */
 	public void moveFish(PredatorPreyCell c) {
-
 		PredatorPreyCell cellToMoveTo = whereToMove(c);
 		if(c.equals(cellToMoveTo)) {
 			return;
@@ -24,6 +35,12 @@ public class PreyManager extends VariantsManager {
 		handleReproduction(c);
 	}
 	
+	/**
+	 * This method determines where the given cell will move to next, per the fish-specific rules.
+	 * 
+	 * @param c		fish moving
+	 * @return 		next cell location for the fish
+	 */
 	protected PredatorPreyCell whereToMove(PredatorPreyCell c){
 		ArrayList<PredatorPreyCell> emptyOptions = new ArrayList<>();
 		for(PredatorPreyCell n : ocean.get(c)) {

@@ -115,6 +115,7 @@ public class Visualization {
 	 */
 	public void reset(boolean backToHome) {
 		if (backToHome) {
+			myStage.setWidth(SCREEN_WIDTH);
 			myBorderPane.setLeft(null);
 		}
 		myVisualContainer = null;
@@ -122,7 +123,7 @@ public class Visualization {
 		myControlPanel.resetSlider();
 		myControlPanel.enableButtons();
 		myLineGraph.resetChart();
-		myStage.setWidth(SCREEN_WIDTH);
+		
 		centerOnScreen();
 	}
 

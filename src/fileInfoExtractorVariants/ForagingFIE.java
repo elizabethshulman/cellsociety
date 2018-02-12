@@ -6,10 +6,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
+import cellVariants.AntCell;
 import cellVariants.Cell;
+import cellVariants.ForagingCell;
 import cellVariants.RockPaperScissorsCell;
 
-public class RockPaperScissorsFIE implements FileInfoExtractor{
+public class ForagingFIE implements FileInfoExtractor{
 
 	@Override
 	public Double getGlobalVar(XMLStreamReader xmlRead) throws XMLStreamException {
@@ -17,26 +19,31 @@ public class RockPaperScissorsFIE implements FileInfoExtractor{
 	}
 
 	@Override
-	public void addDefaultGlobals(Map<String, Double> globals) {
-	}
+	public void addDefaultGlobals(Map<String,Double> globals) {}
 
+	@SuppressWarnings("unused")
 	@Override
 	public Cell getCell(XMLStreamReader xmlRead) throws XMLStreamException {
 		int val = Integer.parseInt(xmlRead.getAttributeValue(0));
 		if(val < 0 || val > 3) {
-			throw new XMLStreamException("Invalid Rock Paper Scissors cell type.");
+			throw new XMLStreamException("Invalid Foraging Ant cell type.");
 		}
-		if(val == 0)
-			return new RockPaperScissorsCell(val, 0);
-		int gradient = Integer.parseInt(xmlRead.getAttributeValue(1));
-		return new RockPaperScissorsCell(val, gradient);
+		ForagingCell c = new ForagingCell(val);
+		if(val == 1) {
+			int numAnts = Integer.parseInt(xmlRead.getAttributeValue(1));
+			for(int x = 0; x < numAnts; x++) {
+				AntCell a = new AntCell(0,c);
+			}
+		}
+		return c;
 	}
 
 	@Override
 	public void writeCell(XMLStreamWriter myWriter, Cell cell) throws XMLStreamException {
 		myWriter.writeAttribute("state", Integer.toString(cell.getState()));
-		if(cell.getState() != 0)
-			myWriter.writeAttribute("gradient", Integer.toString(((RockPaperScissorsCell) cell).getHealth()));	
+		if(cell.getState() == 1)
+			myWriter.writeAttribute("numAnts", Integer.toString(((ForagingCell) cell).getAntsHere().size()));	
+		
 	}
 
 }

@@ -31,7 +31,8 @@ public abstract class Rules {
 			if(dissatisfied(c.getState(), g.get(c))) {
 				needChange.add(c);
 			}
-		} for(Cell toAct : needChange) {
+		} 
+		for(Cell toAct : needChange) {
 			act(toAct);
 		}
 		updateDeath(g);

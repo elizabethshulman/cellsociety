@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * to things that comprise the interface, like the ControlPanel, HeaderBar, and LineGraph.
  */
 public class Visualization {
-	
+	private static final double SIDEBAR_WIDTH = 200;
 	private static final double SCREEN_WIDTH = 700;
 	private static final double SCREEN_HEIGHT = 750;
 	private static final String CSS_STRING = "main.css";
@@ -142,7 +142,7 @@ public class Visualization {
 	 * @param sidebar
 	 */
 	public void addSidebar(Sidebar sidebar) {
-		myStage.setWidth(SCREEN_WIDTH + Sidebar.WIDTH);
+		myStage.setWidth(SCREEN_WIDTH + SIDEBAR_WIDTH);
 		myBorderPane.setLeft(sidebar.getVBox());
 		centerOnScreen();
 	}

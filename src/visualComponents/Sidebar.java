@@ -29,7 +29,6 @@ import javafx.util.StringConverter;
  * where it is displayed to the user on-screen in a larger window.
  */
 public class Sidebar {
-	public static final double WIDTH = 200;
 	private static final double MIN_SLIDER = 4;
 	private static final double MAX_SLIDER = 40;
 	private static final double SHAPE_SIZE = 20;

@@ -280,7 +280,6 @@ public class Engine {
 		
 		myVis.reset(false);
 		
-		
 		myVis.visualizeGraph(myGraph);
 	}
 }

@@ -80,8 +80,7 @@ public class Graph {
 			}
 		}
 		numRows = new_rows;
-		Cell[][] newGrid = myFileProcessor.createStateGrid(cells);
-		myFileProcessor.createCellMap(newGrid);
+		updateGraph(cells);
 	}
 	
 	/**
@@ -114,18 +113,16 @@ public class Graph {
 			}
 		}
 		numCols = new_cols;
-		Cell[][] newGrid = myFileProcessor.createStateGrid(cells);
-		myFileProcessor.createCellMap(newGrid);
+		updateGraph(cells);
 	}
 
 	/**
 	 * This function updates the Graph with the latest settings that the user
 	 * enables dynamically in DIY mode. 
 	 */
-	public void updateGraph() {
-		currentGrid = myFileProcessor.getCellGrid();
-		numRows = myFileProcessor.getRowCount();
-		numCols = myFileProcessor.getColCount();
+	public void updateGraph(Set<Cell> cells) {
+		Cell[][] cellGrid = new GridConverter().createStateGrid(cells, numRows, numCols);
+		currentGrid = myFileProcessor.getMapConverter().generateMapFromGrid(cellGrid);
 	}
 	
 	/**

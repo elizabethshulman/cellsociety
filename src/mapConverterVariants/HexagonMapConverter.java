@@ -1,24 +1,26 @@
 /**
- * Handles neighbor calculation for hexagonal grids
- * @author Andrew
+ * Handles map conversion for hexagonal grids
+ * @author Andrew Yeung
  */
-package neighborCalculatorVariants;
+package mapConverterVariants;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HexagonNeighborCalculator extends NeighborCalculator {
+import cellVariants.Cell;
 
-	public HexagonNeighborCalculator(int numRows, int numCols, boolean isDiagonal, boolean isTorus) {
-		super(numRows, numCols, isDiagonal, isTorus);
+public class HexagonMapConverter extends MapConverter {
+
+	public HexagonMapConverter(boolean isDiagonal, boolean isTorus) {
+		super(isDiagonal, isTorus);
 	}
 	/**
 	 * Returns the neighboring coordinates for the hexagonal cell. Ignores the isDiagonal parameter
 	 * Up to 6 neighbors exist for a hexagonal cell 
 	 */
 	@Override
-	public List<int[]> calcNeighborLocations(int row, int col) {
-		ArrayList<int[]> neighborLocs = new ArrayList<>();
+	public List<Cell> calcNeighbors(int row, int col) {
+		ArrayList<Cell> neighborLocs = new ArrayList<>();
 		int shift_constant = 2* (col % 2) - 1;
 		for(int x = row - 1; x <= row + 1; x++)
 		{

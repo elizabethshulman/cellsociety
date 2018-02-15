@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -31,7 +30,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import cellVariants.Cell;
 import fileInfoExtractorVariants.FileInfoExtractor;
-import neighborCalculatorVariants.NeighborCalculator;
+import mapConverterVariants.MapConverter;
+import mapConverterVariants.MapConverterFactory;
 
 public class FileProcessor {
 	
@@ -48,7 +48,7 @@ public class FileProcessor {
 	private boolean isToroidal;
 	private boolean isDiagonal;
 	private String cellShape;
-	private NeighborCalculator nCalc;
+	private MapConverter nCalc;
 	/**
 	 * Creates a new FileProcessor from the specified file
 	 * @param file the input file
@@ -76,8 +76,7 @@ public class FileProcessor {
 	 */
 	protected void setCellShape(String shape) {
 		cellShape = shape;
-		createNCalc();
-		refreshMap();
+		refreshMapConverter();
 	}
 	/**
 	 * Returns the type of simulation as a String
@@ -157,9 +156,7 @@ public class FileProcessor {
 	 */
 	public void setRowsAndCols(int row, int col){
 		gridRowCount = row;
-		nCalc.setRowLength(row);
 		gridColCount = col;
-		nCalc.setColLength(col);
 	}
 	/**
 	 * Sets toroidal borders in the simulation and updates the map to reflect changes
@@ -167,7 +164,7 @@ public class FileProcessor {
 	 */
 	protected void setBorders(boolean b) {
 		isToroidal = b;
-		refreshMap();
+		refreshMapConverter();
 		}
 	/**
 	 * Sets neighbors to either consider orthogonal or adjacent neighbors. Has no functional effect on Hexagonal grids.
@@ -175,7 +172,10 @@ public class FileProcessor {
 	 */
 	protected void setNeighbors(boolean b) {
 		isDiagonal = b;
-		refreshMap();
+		refreshMapConverter();
+	}
+	public MapConverter getMapConverter() {
+		return new MapConverterFactory().createMapConverter(cellShape, isToroidal, isDiagonal);
 	}
 	/**
 	 * reads information from the File associated with this object
@@ -258,54 +258,41 @@ public class FileProcessor {
 				  				break;
 				  	case "grid":
 				  		Cell[][] cellArray = newGrid.stream().map(i -> i.toArray(new Cell[0])).toArray(Cell[][]::new);
-				  		createCellMap(cellArray);
+				  		processCompletedGrid(cellArray);
 				  		return;
 				  }
 			  }
 		}
+		
 	}
-	/**
-	 * Converts a 2D array of Cells into a Map of Cells to their neighbors
-	 * @param cellArray the 2D grid of cells
-	 */
-	public void createCellMap(Cell[][] cellArray)
-	{
-		gridRowCount = cellArray.length;
-		gridColCount = cellArray[0].length;
-		cellGrid = new HashMap<>();
-		ArrayList<Cell> neighbors;
-		createNCalc();
-		for(int x = 0; x < cellArray.length; x++) {
-			for(int y = 0; y < cellArray[x].length; y++) {
-				neighbors = new ArrayList<>();
-				Cell toAdd = cellArray[x][y];
-				toAdd.setRow(x);
-				toAdd.setCol(y);
-				List<int[]> neighborIndices = nCalc.calcNeighborLocations(x,y);
-				for(int a = 0; a < neighborIndices.size(); a++)
-				{
-					neighbors.add(cellArray[neighborIndices.get(a)[0]][neighborIndices.get(a)[1]]);
-				}
-				cellGrid.put(toAdd, neighbors);
-			}
-		}
+	private void processCompletedGrid(Cell[][] grid) {
+		gridRowCount = grid.length;
+  		gridColCount = grid[0].length;
+  		for(int a = 0; a < gridRowCount; a++)
+  			for(int b = 0; b < gridColCount; b++) {
+  				grid[a][b].setRow(a);
+  				grid[a][b].setCol(b);
+  			}
+  		refreshMapConverter();
+  		cellGrid = nCalc.generateMapFromGrid(grid);
 	}
+	
 	/**
-	 * Saves the corret
+	 * Saves the state of the grid and variables to a file
 	 * @param cells
 	 * @param file
 	 * @throws FileNotFoundException if file is invalid
 	 * @throws XMLStreamException if FileProcessor parameters are missing
 	 * @throws TransformerException if attempts to format the XML file fail
 	 */
-	public void saveGridState(Set<Cell> cells, File file) throws FileNotFoundException, XMLStreamException {
+	public void saveGridState(Cell[][] cells, File file) throws FileNotFoundException, XMLStreamException {
 		ByteArrayOutputStream temp = new ByteArrayOutputStream();
 		myWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(temp);
 		myWriter.writeStartDocument();
 		myWriter.writeStartElement("simulation");
 		writeHeader();
 		writeGlobalVars();
-		writeGrid(createStateGrid(cells));
+		writeGrid(cells);
 		myWriter.writeEndElement();
 		myWriter.writeEndDocument();
 		myWriter.close();
@@ -372,7 +359,6 @@ public class FileProcessor {
 	 * @throws XMLStreamException if grid specs are null
 	 */
 	private void writeGridHeader() throws XMLStreamException {
-
 		myWriter.writeStartElement("cellShape");
 		myWriter.writeCharacters(cellShape);
 		myWriter.writeEndElement();
@@ -391,35 +377,12 @@ public class FileProcessor {
 			myWriter.writeCharacters("finite");
 		myWriter.writeEndElement();
 	}
-	/**
-	 * Creates a 2D array from a Set of Cells
-	 * @param cells a set of all the cells in the grid
-	 * @return 2D array corresponding to state of simulation
-	 */
-	public Cell[][] createStateGrid(Set<Cell> cells) {
-		Cell[][] arrangement = new Cell[gridRowCount][gridColCount];
-		for(Cell c: cells) {
-			arrangement[c.getRow()][c.getCol()] = c;
-		}
-		return arrangement;
-	}
+	
 	/**
 	 * Creates the neighborCalculator relevant to the shape of cells in the simulation
 	 * @throws IllegalArgumentException if cell shape is invalid
 	 */
-	public void createNCalc() {
-		try {
-			String className = "neighborCalculatorVariants." + cellShape + "NeighborCalculator";
-			nCalc = (NeighborCalculator) Class.forName(className).getConstructor(int.class,int.class,boolean.class,boolean.class).newInstance(gridRowCount,gridColCount,isDiagonal, isToroidal);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("Cell shape parameter is invalid.");
-		}
-	}
-	/**
-	 * refreshes the map to reflect any grid specification changes
-	 */
-	public void refreshMap() {
-		Cell[][] current = createStateGrid(cellGrid.keySet());
-		createCellMap(current);
+	private void refreshMapConverter() {
+		nCalc = new MapConverterFactory().createMapConverter(cellShape, isToroidal, isDiagonal);
 	}
 }

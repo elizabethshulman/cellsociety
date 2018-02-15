@@ -11,7 +11,7 @@ import cellsociety_team10.Graph;
  * the implementation side. These are the basic methods that a UI class must implement.
  *
  */
-public interface Visualizer {
+public interface IVisualizer {
 	/**
 	 * This method is called after every iteration of the animation in order to perform
 	 * the required steps necessary for displaying one sequence of the animation on the

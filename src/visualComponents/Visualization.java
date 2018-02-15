@@ -49,7 +49,7 @@ import javafx.stage.Stage;
  * the class easier to read and digest.
  * 
  */
-public class Visualization implements Visualizer {
+public class Visualization implements IVisualizer {
 	private static final double SIDEBAR_WIDTH = 200;
 	private static final double SCREEN_WIDTH = 700;
 	private static final double SCREEN_HEIGHT = 750;

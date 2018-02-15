@@ -18,7 +18,7 @@ import visualComponents.ControlPanel;
 import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
-import visualComponents.Visualizer;
+import visualComponents.IVisualizer;
 
 /**
  * @author benhubsch
@@ -38,7 +38,7 @@ public class Engine {
 	private ResourceBundle myResources;
 	private Timeline myAnimation;        
 	private Graph myGraph;
-	private Visualizer myVis;
+	private IVisualizer myVis;
 	private Scene myStartScene;
 	private Stage myStage;
 	private FileChooser myFileChooser;

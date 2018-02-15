@@ -120,8 +120,8 @@ public class Visualization implements Visualizer {
 	}
 
 	/**
-	 * Adds a Sidebar object to the user's application window if the
-	 * user enters DIY mode.
+	 * Adds a Sidebar object to the user's application window if the user enters 
+	 * DIY mode.
 	 *
 	 * @param sidebar A Sidebar object with buttons wired appropriately.
 	 */
@@ -135,7 +135,8 @@ public class Visualization implements Visualizer {
 	 * application. It updates the graph without incrementing the iteration count
 	 * or handling the animation.
 	 *
-	 * @param g
+	 * @param g This Graph object (and the API that it exposes) can be used in any way
+	 * to build the desired updated image by myVisualContainer.
 	 */
 	public void updateGraph(Graph g) {
 		myVisualContainer.setGraphDisplay(g);
@@ -145,7 +146,8 @@ public class Visualization implements Visualizer {
 	 * This method is called from inside step() and manages a single iteration of
 	 * the simulation.
 	 *
-	 * @param g
+	 * @param g This Graph object is used to seed the UI with information about the 
+	 * current state of the simulation.
 	 */
 	public void visualize(Graph g) {
 		if (myVisualContainer == null) {

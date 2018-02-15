@@ -267,7 +267,7 @@ public class Engine {
 	 * @param isDiagonal The kind of neighbors that need to be considered.
 	 * @param isToroidal The kind of dimension that we're dealing with.
 	 */
-	public void updateSettings(String shape, boolean isDiagonal, boolean isToroidal) {
+	public void updateSettings(String shape, boolean isToroidal, boolean isDiagonal) {
 		myFileProcessor.setCellShape(shape);
 		myFileProcessor.setBorders(isToroidal);
 		myFileProcessor.setNeighbors(isDiagonal);

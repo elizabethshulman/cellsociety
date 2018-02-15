@@ -74,7 +74,7 @@ public class ForagingCell extends Cell {
 	@SuppressWarnings("unused")
 	@Override 
 	/**
-	 * This methood sets the state of a cell according to whether or not it contains ants,
+	 * This method sets the state of a cell according to whether or not it contains ants,
 	 * is a nest, is an obstacle, or is a food source.
 	 */
 	public void setState(int st) {

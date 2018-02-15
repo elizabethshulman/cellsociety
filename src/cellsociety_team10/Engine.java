@@ -157,8 +157,8 @@ public class Engine {
 		File saved_file = myFileChooser.showSaveDialog(myStage);
 		if (saved_file != null) {
 			try {
-				myFileProcessor.setRowsAndCols(myGraph.getRows(), myGraph.getCols());
-				myFileProcessor.saveGridState(myGraph.getCells(), saved_file);
+				Cell[][] grid = new GridConverter().createStateGrid(myGraph.getCells(), myGraph.getRows(), myGraph.getCols());
+				myFileProcessor.saveGridState(grid, saved_file);
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.ERROR, e.getLocalizedMessage());
 				alert.show();
@@ -274,7 +274,7 @@ public class Engine {
 		myGraph.resetIsDead();
 		
 		resetAnimation();
-		myGraph.updateGraph();
+		myGraph.updateGraph(myGraph.getCells());
 		randomizeDIY();
 		
 		myVis.reset(false);

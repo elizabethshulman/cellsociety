@@ -1,5 +1,6 @@
 package visualComponents;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -10,7 +11,7 @@ import javafx.scene.text.Text;
  * user.
  */
 public class HeaderBar {
-	private HBox hbox;
+	private HBox myHBox;
 	private Text sim_text;
 
 	/**
@@ -27,12 +28,12 @@ public class HeaderBar {
 	 * @param sim_type
 	 */
 	public HeaderBar(String sim_type) {
-		hbox = new HBox();
-		hbox.setId("header");
+		myHBox = new HBox();
+		myHBox.setId("header");
 		
 		sim_text = new Text(sim_type);
 		sim_text.setId("title-text");
-		hbox.getChildren().add(sim_text);
+		myHBox.getChildren().add(sim_text);
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class HeaderBar {
 	 * @return HBox
 	 */
 	public HBox getHBox() {
-		return hbox;
+		return myHBox;
 	}
 	
 	/**
@@ -51,5 +52,9 @@ public class HeaderBar {
 	 */
 	public void setHeader(String header) {
 		sim_text.setText(header);
+	}
+	
+	public void setPane(BorderPane border_pane) {
+		border_pane.setTop(myHBox);
 	}
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -31,6 +32,7 @@ public class ControlPanel {
 	private static final double MIN_SLIDER = 0;
 	private static final double MAX_SLIDER = 100;
 
+	private int myIteration = -1;
 	private VBox myVBox;
 	private Text myIterationCount;
 	private Timeline myAnimation;
@@ -163,15 +165,6 @@ public class ControlPanel {
 	}
 
 	/**
-	 * Sets the iteration.
-	 *
-	 * @param iteration the new iteration
-	 */
-	public void setIteration(int iteration) {
-		myIterationCount.setText("Iteration Count: " + Integer.toString(iteration));
-	}
-
-	/**
 	 * Reset slider.
 	 */
 	public void resetSlider() {
@@ -196,5 +189,20 @@ public class ControlPanel {
 		for (Node curr : myButtonBox.getChildren()) {
 			curr.setId("control");
 		}
+	}
+	
+	public void setPane(BorderPane border_pane) {
+		border_pane.setBottom(myVBox);
+	}
+	
+	public void incrementIteration() {
+		myIteration += 1;
+		myIterationCount.setText("Iteration Count: " + Integer.toString(myIteration));
+	}
+	
+	public void reset() {
+		resetSlider();
+		enableButtons();
+		myIteration = -1;
 	}
 }

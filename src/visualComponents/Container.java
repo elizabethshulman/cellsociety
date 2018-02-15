@@ -27,16 +27,7 @@ public abstract class Container {
 		myVBox.setId("container-vbox");
 		myVBox.getChildren().add(myDisplay);
 	}
-	
-	/**
-	 * Gets the container.
-	 *
-	 * @return VBox
-	 */
-	public VBox getContainer() {
-		return myVBox;
-	};
-	
+
 	/**
 	 * Sets the graph display, drawing it on screen and setting all the
 	 * click handlers for changing color.
@@ -72,4 +63,8 @@ public abstract class Container {
 	 * @param g
 	 */
 	protected abstract void drawGraph(Graph g);
+
+	public void addToVBox(VBox center) {
+		center.getChildren().add(myVBox);
+	}
 }

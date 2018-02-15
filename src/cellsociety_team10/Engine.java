@@ -18,6 +18,7 @@ import visualComponents.ControlPanel;
 import visualComponents.Sidebar;
 import visualComponents.StartPage;
 import visualComponents.Visualization;
+import visualComponents.Visualizer;
 
 /**
  * @author benhubsch
@@ -37,7 +38,7 @@ public class Engine {
 	private ResourceBundle myResources;
 	private Timeline myAnimation;        
 	private Graph myGraph;
-	private Visualization myVis;
+	private Visualizer myVis;
 	private Scene myStartScene;
 	private Stage myStage;
 	private FileChooser myFileChooser;
@@ -115,8 +116,7 @@ public class Engine {
 			return;
 		}
 		myGraph.buildNextGrid();
-		myVis.visualizeGraph(myGraph);
-		myStage.setScene(myVis.getScene());
+		myVis.visualize(myGraph);
 	}
 
 	/**
@@ -219,9 +219,8 @@ public class Engine {
 			mySidebar.setSliders(myGraph);
 		}
 		
-		myVis.changeHeaderText(createHeaderText(myFileProcessor.getTitle(), myFileProcessor.getAuthor()));
-		myVis.visualizeGraph(myGraph);
-		myStage.setScene(myVis.getScene());
+		myVis.changeName(createHeaderText(myFileProcessor.getTitle(), myFileProcessor.getAuthor()));
+		myVis.visualize(myGraph);
 	}
 
 
@@ -246,7 +245,7 @@ public class Engine {
 		for (Cell c : myGraph.getCells()) {
 			c.setRandom();
 		}
-		myVis.updateGraphOnly(myGraph);
+		myVis.updateGraph(myGraph);
 	}
 
 	/**
@@ -280,6 +279,6 @@ public class Engine {
 		
 		myVis.reset(false);
 		
-		myVis.visualizeGraph(myGraph);
+		myVis.visualize(myGraph);
 	}
 }

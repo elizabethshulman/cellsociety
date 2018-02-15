@@ -15,6 +15,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -94,12 +95,10 @@ public class Sidebar {
 	}
 
 	/**
-	 * Gets the VBox.
-	 *
-	 * @return VBox
+	 * Sets the Sidebar's visual object to the left side of the BorderPane object.
 	 */
-	public VBox getVBox() {
-		return myVBox;
+	public void setPane(BorderPane border_pane) {
+		border_pane.setLeft(myVBox);
 	}
 	
 	/**

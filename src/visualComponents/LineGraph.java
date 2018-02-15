@@ -39,16 +39,7 @@ public class LineGraph {
 		myVBox = new VBox();
 		myVBox.getChildren().add(myLineChart);
 	}
-	
-	/**
-	 * Gets the VBox object.
-	 *
-	 * @return VBox
-	 */
-	public VBox getLineChart() {
-		return myVBox;
-	}
-	
+
 	/**
 	 * This function creates a map of states to their count.
 	 *
@@ -108,9 +99,13 @@ public class LineGraph {
 	/**
 	 * Resets the chart at the end of a simulation.
 	 */
-	public void resetChart() {
+	public void reset() {
 		myLineChart.getData().clear();
 		mySeries.clear();
 		myIteration = 0;
+	}
+
+	public void addToVBox(VBox center) {
+		center.getChildren().add(myLineChart);
 	}
 }

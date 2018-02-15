@@ -2,6 +2,8 @@
  * Handles map conversion for hexagonal grids
  * @author Andrew Yeung
  */
+//The shift constant represents whether the column is odd or even.
+// Column odd/even parity affects the relation of the rows/cols corresponding to neighbors to the given cell.
 package mapConverterVariants;
 
 import java.util.ArrayList;

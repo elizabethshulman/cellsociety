@@ -16,7 +16,7 @@ Handled components related to, broadly speaking, visualization
 Responsible for writing and processing XML files
 
 #### Elizabeth Shulman:  
-Implemented simulation-specific rules for cell and grid updates  
+Implemented simulation-specific rules for cell and grid structure, state changes, and interactions
 
 
 

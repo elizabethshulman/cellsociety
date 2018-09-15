@@ -57,9 +57,4 @@ Implemented simulation-specific rules for cell and grid updates
     
 #### Within XML:
 *  Random Distributions
-    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.   
-    
-
-## Impressions of the Assignment
-*  We felt this project was adequately-sized as an introduction to teamwork in a programming setting.
-*  The only feedback we had was that the second sprint felt considerably more difficult and time-intensive than the first.
+    *  All XML files will be for specific states only. There will be a "make custom grid" option that allows for random distributions.  
